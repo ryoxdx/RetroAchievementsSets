@@ -1,0 +1,71 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "diff",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cruncheevos", "diff", "${file}"],
+      "envFile": "${fileDirname}/.env",
+      "env": {
+        "FORCE_COLOR": "1"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "save",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cruncheevos", "save", "${file}"],
+      "envFile": "${fileDirname}/.env",
+      "env": {
+        "FORCE_COLOR": "1"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "diff-save",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cruncheevos", "diff-save", "${file}"],
+      "envFile": "${fileDirname}/.env",
+      "env": {
+        "FORCE_COLOR": "1"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "fetch",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cruncheevos", "fetch", "${file}"],
+      "envFile": "${fileDirname}/.env",
+      "env": {
+        "FORCE_COLOR": "1"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "generate",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cruncheevos", "generate", "${file}"],
+      "envFile": "${fileDirname}/.env",
+      "env": {
+        "FORCE_COLOR": "1"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "rich-save",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cruncheevos", "rich-save", "${file}"],
+      "envFile": "${fileDirname}/.env",
+      "env": {
+        "FORCE_COLOR": "1"
+      }
+    }
+  ]
+}
