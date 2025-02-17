@@ -661,4 +661,35 @@ set.addAchievement({
   ),
 });
 
+set.addAchievement({
+  title: 'Boxer Spirit',
+  description: 'Win a Tournament race using the Porsche 911 Carrera.',
+  points: 25,
+  conditions: multiRegionalConditions((c) =>
+    $(
+      c.regionCheck,
+      c.isNotReplay,
+      c.raceTypeIs.tournament,
+      c.playerVehicleIs.porsche,
+      c.raceWon,
+    ),
+  ),
+});
+
+set.addAchievement({
+  title: 'Rotary Reign',
+  description: 'Win a race against The Pack using the Mazda RX-7.',
+  points: 25,
+  conditions: multiRegionalConditions((c) =>
+    $(
+      c.regionCheck,
+      c.isNotReplay,
+      c.raceTypeIs.race,
+      c.playerVehicleIs.rotary,
+      c.opponentVehicleIs.thePack,
+      c.raceWon,
+    ),
+  ),
+});
+
 export default set;
