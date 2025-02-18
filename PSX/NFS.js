@@ -25,6 +25,30 @@ const set = new AchievementSet({
 
 const records = [
   {
+    id: 'city1',
+    trackId: 'city',
+    name: 'City (Segment 1)',
+    segment: 1,
+    bestTime: 0x1cb6,
+    points: 3,
+  },
+  {
+    id: 'city2',
+    trackId: 'city',
+    name: 'City (Segment 2)',
+    segment: 2,
+    bestTime: 0x1e46,
+    points: 3,
+  },
+  {
+    id: 'city3',
+    trackId: 'city',
+    name: 'City (Segment 3)',
+    segment: 3,
+    bestTime: 0x2d56,
+    points: 3,
+  },
+  {
     id: 'city',
     trackId: 'city',
     name: 'City',
@@ -33,12 +57,60 @@ const records = [
     points: 10,
   },
   {
+    id: 'coastal1',
+    trackId: 'coastal',
+    name: 'Coastal (Segment 1)',
+    segment: 1,
+    bestTime: 0x235e,
+    points: 3,
+  },
+  {
+    id: 'coastal2',
+    trackId: 'coastal',
+    name: 'Coastal (Segment 2)',
+    segment: 2,
+    bestTime: 0x2666,
+    points: 3,
+  },
+  {
+    id: 'coastal3',
+    trackId: 'coastal',
+    name: 'Coastal (Segment 3)',
+    segment: 3,
+    bestTime: 0x2cec,
+    points: 3,
+  },
+  {
     id: 'coastal',
     trackId: 'coastal',
     name: 'Coastal',
     bestTime: 0x770a,
     topSpeed: 0xbc,
     points: 10,
+  },
+  {
+    id: 'alpine1',
+    trackId: 'alpine',
+    name: 'Alpine (Segment 1)',
+    segment: 1,
+    bestTime: 0x25c6,
+    points: 3,
+  },
+  {
+    id: 'alpine2',
+    trackId: 'alpine',
+    name: 'Alpine (Segment 2)',
+    segment: 2,
+    bestTime: 0x3528,
+    points: 3,
+  },
+  {
+    id: 'alpine3',
+    trackId: 'alpine',
+    name: 'Alpine (Segment 3)',
+    segment: 3,
+    bestTime: 0x3922,
+    points: 3,
   },
   {
     id: 'alpine',
@@ -451,6 +523,13 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   const isLastSegment = $.one(['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 2]);
 
   // prettier-ignore
+  const segmentIs = {
+    1: $.one(['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 0]),
+    2: $.one(['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 1]),
+    3: $.one(['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 2]),
+  };
+
+  // prettier-ignore
   const bestTimeSprintBeaten = $(
     ['', 'Mem', '32bit', addresses.totalTimeSprint, '!=', 'Delta', '32bit', addresses.totalTimeSprint],
     ['', 'Mem', '32bit', addresses.totalTimeSprint, '<', 'Value', '', record ?? 0],
@@ -512,6 +591,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     bestLapBeaten,
     hasRaced,
     isLastSegment,
+    segmentIs,
   };
 };
 
@@ -929,8 +1009,12 @@ for (const r of records) {
           c.isNotReplay,
           c.hasRaced,
           c.recordTrack,
-          c.circuitLengthIs[r.circuitLength?.toLowerCase()] ?? c.isLastSegment,
-          r.circuitLength ? c.bestTimeCircuitBeaten : c.bestTimeSprintBeaten,
+          c.circuitLengthIs[r.circuitLength?.toLowerCase()] ??
+            c.segmentIs[r.segment] ??
+            c.isLastSegment,
+          r.circuitLength || r.segment
+            ? c.bestTimeCircuitBeaten
+            : c.bestTimeSprintBeaten,
         ),
       1,
       '',
