@@ -16,17 +16,174 @@ import {
 
 /** @typedef {'japan' | 'italy' | 'usa'} CarCountry */
 
+/** @typedef {'city' | 'coastal' | 'alpine' | 'rustySprings' | 'autumnValley' | 'vertigoRidge' | 'lostVegas'} Track */
+
 const set = new AchievementSet({
   gameId: 5330,
   title: 'Road & Track Presents: The Need for Speed',
 });
 
+const records = [
+  {
+    id: 'city',
+    trackId: 'city',
+    name: 'City',
+    bestTime: 0x6c84,
+    topSpeed: 0xc9,
+    points: 10,
+  },
+  {
+    id: 'coastal',
+    trackId: 'coastal',
+    name: 'Coastal',
+    bestTime: 0x770a,
+    topSpeed: 0xbc,
+    points: 10,
+  },
+  {
+    id: 'alpine',
+    trackId: 'alpine',
+    name: 'Alpine',
+    bestTime: 0x94f8,
+    topSpeed: 0xb7,
+    points: 10,
+  },
+  {
+    id: 'rustySpringsQ',
+    trackId: 'rustySprings',
+    name: 'Rusty Springs',
+    circuitLength: 'Quick',
+    bestTime: 0x2642,
+    topSpeed: 0x9f,
+    bestLap: 0x8f4,
+    points: 3,
+  },
+  {
+    id: 'rustySpringsN',
+    trackId: 'rustySprings',
+    name: 'Rusty Springs',
+    circuitLength: 'Normal',
+    bestTime: 0x4bca,
+    points: 5,
+  },
+  {
+    id: 'rustySpringsE',
+    trackId: 'rustySprings',
+    name: 'Rusty Springs',
+    circuitLength: 'Endurance',
+    bestTime: 0x906c,
+    points: 10,
+  },
+  {
+    id: 'autumnValleyQ',
+    trackId: 'autumnValley',
+    name: 'Autumn Valley',
+    circuitLength: 'Quick',
+    bestTime: 0x2944,
+    topSpeed: 0xaa,
+    bestLap: 0x1416,
+    points: 3,
+  },
+  {
+    id: 'autumnValleyN',
+    trackId: 'autumnValley',
+    name: 'Autumn Valley',
+    circuitLength: 'Normal',
+    bestTime: 0x7416,
+    points: 5,
+  },
+  {
+    id: 'autumnValleyE',
+    trackId: 'autumnValley',
+    name: 'Autumn Valley',
+    circuitLength: 'Endurance',
+    bestTime: 0xe670,
+    points: 10,
+  },
+  {
+    id: 'vertigoRidgeQ',
+    trackId: 'vertigoRidge',
+    name: 'Vertigo Ridge',
+    circuitLength: 'Quick',
+    bestTime: 0x30e4,
+    topSpeed: 0x8f,
+    bestLap: 0x1704,
+    points: 3,
+  },
+  {
+    id: 'vertigoRidgeN',
+    trackId: 'vertigoRidge',
+    name: 'Vertigo Ridge',
+    circuitLength: 'Normal',
+    bestTime: 0x8e98,
+    points: 5,
+  },
+  {
+    id: 'vertigoRidgeE',
+    trackId: 'vertigoRidge',
+    name: 'Vertigo Ridge',
+    circuitLength: 'Endurance',
+    bestTime: 0x11754,
+    points: 10,
+  },
+  {
+    id: 'lostVegasQ',
+    trackId: 'lostVegas',
+    name: 'Lost Vegas',
+    circuitLength: 'Quick',
+    bestTime: 0x3d50,
+    topSpeed: 0xc9,
+    bestLap: 0xe46,
+    points: 3,
+  },
+  {
+    id: 'lostVegasN',
+    trackId: 'lostVegas',
+    name: 'Lost Vegas',
+    circuitLength: 'Normal',
+    bestTime: 0x76aa,
+    points: 5,
+  },
+  {
+    id: 'lostVegasE',
+    trackId: 'lostVegas',
+    name: 'Lost Vegas',
+    circuitLength: 'Endurance',
+    bestTime: 0xed30,
+    points: 10,
+  },
+];
+
+/**
+ * @param {number} time
+ */
+const formatTimeString = (time) => {
+  const minutes = new Date((time * 100) / 6).getMinutes();
+  const seconds = new Date((time * 100) / 6)
+    .getSeconds()
+    .toString()
+    .padStart(2, '0');
+  const deciseconds = Math.floor(
+    new Date((time * 100) / 6).getMilliseconds() / 100,
+  );
+  return `${minutes}:${seconds}.${deciseconds}`;
+};
+
+/**
+ * @param {number} speed
+ */
+const formatSpeedString = (speed) => {
+  return `${speed} MPH (${Math.floor((speed + 1) * 1.60934) - 1} km/h)`;
+};
+
 /**
  * @param {Region} region
- * @param {number} [permutation]
+ * @param {number} permutation
  * @param {CarCountry} [carCountry]
+ * @param {Track} [track]
+ * @param {number} [record]
  */
-const codeFor = (region, permutation, carCountry) => {
+const codeFor = (region, permutation, carCountry, track, record) => {
   /**
    * @param {number} address
    */
@@ -34,9 +191,16 @@ const codeFor = (region, permutation, carCountry) => {
     return region === 'ntsc' ? address : address + 0x120;
   };
 
+  /**
+   * @param {number} address
+   */
+  const altOffset = (address) => {
+    return region === 'ntsc' ? address : address + 0x118;
+  };
+
   const addresses = {
     serial: 0x9e18,
-    racing: offset(0xdb54c),
+    racing: altOffset(0xdb54c),
     twoPlayer: offset(0x10d1c0),
     track: offset(0x10d1ad),
     raceType: offset(0x10d1bc),
@@ -56,7 +220,12 @@ const codeFor = (region, permutation, carCountry) => {
     raceTime: offset(0xf64cc),
     startingLine: offset(0x10c9f4),
     gameplayMods: offset(0x10d1c4),
-    loadedMenuString: offset(0x1fec90),
+    loadedMenuString: 0x1fec90,
+    totalTimeSprint: offset(0x1048c4),
+    totalTimeCircuit: 0x1fff34,
+    topSpeed: 0x1fff3c,
+    bestLap: 0x1fff44,
+    segment: offset(0xf8405),
   };
 
   // prettier-ignore
@@ -139,6 +308,13 @@ const codeFor = (region, permutation, carCountry) => {
 
   // prettier-ignore
   const isRacing = $.one(['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 1]);
+
+  // prettier-ignore
+  const hasRaced = $(
+    ['ResetIf', 'Mem', '32bit', addresses.serial, '=', 'Value', '', 0],
+    ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 0, 1],
+    ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 1, 1],
+  );
 
   let possibleVehicles = [];
 
@@ -225,6 +401,12 @@ const codeFor = (region, permutation, carCountry) => {
   };
 
   // prettier-ignore
+  const raceFinished = $(
+    ['', 'Delta', '8bit', addresses.raceFinished, '=', 'Value', '', 0],
+    ['', 'Mem', '8bit', addresses.raceFinished, '=', 'Value', '', 1],
+  );
+
+  // prettier-ignore
   const raceFinishedTrigger = $(
     ['Trigger', 'Delta', '8bit', addresses.raceFinished, '=', 'Value', '', 0],
     ['Trigger', 'Mem', '8bit', addresses.raceFinished, '=', 'Value', '', 1],
@@ -263,6 +445,35 @@ const codeFor = (region, permutation, carCountry) => {
   // prettier-ignore
   const menuNotLoaded = $.one(['', 'Mem', '32bit', addresses.loadedMenuString, '!=', 'Value', '', 0x6f726463]);
 
+  const recordTrack = trackIs[`${track}`];
+
+  // prettier-ignore
+  const isLastSegment = $.one(['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 2]);
+
+  // prettier-ignore
+  const bestTimeSprintBeaten = $(
+    ['', 'Mem', '32bit', addresses.totalTimeSprint, '!=', 'Delta', '32bit', addresses.totalTimeSprint],
+    ['', 'Mem', '32bit', addresses.totalTimeSprint, '<', 'Value', '', record ?? 0],
+  );
+
+  // prettier-ignore
+  const bestTimeCircuitBeaten = $(
+    ['', 'Mem', '32bit', addresses.totalTimeCircuit, '!=', 'Delta', '32bit', addresses.totalTimeCircuit],
+    ['', 'Mem', '32bit', addresses.totalTimeCircuit, '<', 'Value', '', record ?? 0],
+  );
+
+  // prettier-ignore
+  const topSpeedBeaten = $(
+    ['', 'Mem', '32bit', addresses.topSpeed, '!=', 'Delta', '32bit', addresses.topSpeed],
+    ['', 'Mem', '32bit', addresses.topSpeed, '>', 'Value', '', record ?? 0],
+  );
+
+  // prettier-ignore
+  const bestLapBeaten = $(
+    ['', 'Mem', '32bit', addresses.bestLap, '!=', 'Delta', '32bit', addresses.bestLap],
+    ['', 'Mem', '32bit', addresses.bestLap, '<', 'Value', '', record ?? 0],
+  );
+
   return {
     addresses,
     regionCheck,
@@ -284,6 +495,7 @@ const codeFor = (region, permutation, carCountry) => {
     circuitLengthIs,
     isNoMercy,
     player,
+    raceFinished,
     raceFinishedTrigger,
     notInMenus,
     resetIfInMenus,
@@ -293,6 +505,13 @@ const codeFor = (region, permutation, carCountry) => {
     playerLeadingTrigger,
     machineGunCheck,
     menuNotLoaded,
+    recordTrack,
+    bestTimeSprintBeaten,
+    bestTimeCircuitBeaten,
+    topSpeedBeaten,
+    bestLapBeaten,
+    hasRaced,
+    isLastSegment,
   };
 };
 
@@ -301,20 +520,26 @@ const codeFor = (region, permutation, carCountry) => {
  * @param {number} [options]
  * @param {CarCountry} [carCountry]
  * @param {boolean} [singleOptions]
+ * @param {Track} [track]
+ * @param {number} [record]
  */
 const multiRegionalConditions = (
   cb,
   options = 1,
   carCountry,
   singleOptions,
+  track,
+  record,
 ) => {
   let groups = { core: '1=1' };
 
   const permutations = singleOptions ? options : options ** 2;
 
   for (let i = 1; i <= permutations; i++) {
-    groups[`alt${i}`] = cb(codeFor('ntsc', i, carCountry));
-    groups[`alt${i + permutations}`] = cb(codeFor('pal', i, carCountry));
+    groups[`alt${i}`] = cb(codeFor('ntsc', i, carCountry, track, record));
+    groups[`alt${i + permutations}`] = cb(
+      codeFor('pal', i, carCountry, track, record),
+    );
   }
 
   return groups;
@@ -691,5 +916,81 @@ set.addAchievement({
     ),
   ),
 });
+
+for (const r of records) {
+  set.addAchievement({
+    title: `Record Breaker: ${r.name}${r.circuitLength ? ` (${r.circuitLength})` : ''}`,
+    description: `Beat the ${r.name}${r.circuitLength ? ` (${r.circuitLength})` : ''} best time record of ${formatTimeString(r.bestTime)}.`,
+    points: r.points,
+    conditions: multiRegionalConditions(
+      (c) =>
+        $(
+          c.regionCheck,
+          c.isNotReplay,
+          c.hasRaced,
+          c.recordTrack,
+          c.circuitLengthIs[r.circuitLength?.toLowerCase()] ?? c.isLastSegment,
+          r.circuitLength ? c.bestTimeCircuitBeaten : c.bestTimeSprintBeaten,
+        ),
+      1,
+      '',
+      true,
+      r.trackId,
+      r.bestTime,
+    ),
+  });
+}
+
+for (const r of records) {
+  if (!r.topSpeed) {
+    continue;
+  }
+  set.addAchievement({
+    title: `Speed Demon: ${r.name}`,
+    description: `Beat the ${r.name} top speed record of ${formatSpeedString(r.topSpeed)}.`,
+    points: 5,
+    conditions: multiRegionalConditions(
+      (c) =>
+        $(
+          c.regionCheck,
+          c.isNotReplay,
+          c.hasRaced,
+          c.recordTrack,
+          c.topSpeedBeaten,
+        ),
+      1,
+      '',
+      true,
+      r.trackId,
+      r.topSpeed,
+    ),
+  });
+}
+
+for (const r of records) {
+  if (!r.bestLap) {
+    continue;
+  }
+  set.addAchievement({
+    title: `Hot Lap: ${r.name}`,
+    description: `Beat the ${r.name} best lap time record of ${formatTimeString(r.bestLap)}.`,
+    points: 10,
+    conditions: multiRegionalConditions(
+      (c) =>
+        $(
+          c.regionCheck,
+          c.isNotReplay,
+          c.hasRaced,
+          c.recordTrack,
+          c.bestLapBeaten,
+        ),
+      1,
+      '',
+      true,
+      r.trackId,
+      r.bestLap,
+    ),
+  });
+}
 
 export default set;
