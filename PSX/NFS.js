@@ -505,7 +505,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     ['AndNext', 'Delta', '16bit', addresses.startingLine, '=', 'Value', '', 0x0200],
     ['AndNext', 'Mem', '16bit', addresses.startingLine, '=', 'Value', '', 0x02ff, 1],
     ['AndNext', 'Mem', '32bit', addresses.gear, '<', 'Value', '', 0xffffffff],
-    ['ResetIf', 'Mem', '32bit', addresses.raceTime, '<', 'Value', '', 0x258, 1],
+    ['ResetIf', 'Mem', '32bit', addresses.raceTime, '<', 'Value', '', 0x258],
   );
 
   // prettier-ignore
