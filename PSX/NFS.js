@@ -936,7 +936,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Italian Face-Off',
   description:
-    'Use an Italian car to beat another Italian car in a Head to Head on Alpine',
+    'Use an Italian car to beat another Italian car in a Head to Head on Alpine. Using the machine gun is not allowed.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
