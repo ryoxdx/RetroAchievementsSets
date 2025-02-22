@@ -245,7 +245,7 @@ const formatTimeString = (time) => {
  * @param {number} speed
  */
 const formatSpeedString = (speed) => {
-  return `${speed} MPH (${Math.floor((speed + 1) * 1.60934) - 1} km/h)`;
+  return `${speed + 1} MPH (${Math.floor((speed + 1) * 1.60934)} km/h)`;
 };
 
 /**
@@ -1031,7 +1031,7 @@ for (const r of records) {
   }
   set.addAchievement({
     title: `Speed Demon: ${r.name}`,
-    description: `Beat the ${r.name} top speed record of ${formatSpeedString(r.topSpeed)}.`,
+    description: `Reach ${formatSpeedString(r.topSpeed)} on ${r.name} and beat the top speed record.`,
     points: 5,
     conditions: multiRegionalConditions(
       (c) =>
