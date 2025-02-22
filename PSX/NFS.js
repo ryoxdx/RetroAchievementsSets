@@ -779,7 +779,7 @@ set.addAchievement({
 });
 
 set.addAchievement({
-  title: 'Not Quite Le Mans',
+  title: '[VOID] Not Quite Le Mans',
   description:
     'Win a race on endurance mode against The Pack. Using the Warrior is not allowed.',
   points: 5,
@@ -839,7 +839,7 @@ set.addAchievement({
 });
 
 set.addAchievement({
-  title: 'The Old Ways',
+  title: '[VOID] The Old Ways',
   description:
     'Using a RWD car, win a Head to Head race in Rally mode against an AWD car. Using the Warrior or the machine gun is not allowed.',
   points: 3,
@@ -861,7 +861,7 @@ set.addAchievement({
 });
 
 set.addAchievement({
-  title: 'Catch Up Is Off',
+  title: '[VOID] Catch Up Is Off',
   description:
     'Win a "No Mercy" Head to Head race using the same car as your opponent. Using the machine gun is not allowed.',
   points: 4,
@@ -1031,7 +1031,7 @@ for (const r of records) {
   }
   set.addAchievement({
     title: `Speed Demon: ${r.name}`,
-    description: `Reach ${formatSpeedString(r.topSpeed)} on ${r.name} and beat the top speed record.`,
+    description: `Reach a speed of ${formatSpeedString(r.topSpeed)} on ${r.name} to beat the top speed record.`,
     points: 5,
     conditions: multiRegionalConditions(
       (c) =>
