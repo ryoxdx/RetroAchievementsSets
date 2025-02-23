@@ -298,6 +298,9 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     topSpeed: 0x1fff3c,
     bestLap: 0x1fff44,
     segment: offset(0xf8405),
+    totalTimeSegment1: 0x1fff54,
+    totalTimeSegment2: 0x1fff58,
+    totalTimeSegment3: 0x1fff5c,
   };
 
   // prettier-ignore
@@ -553,6 +556,26 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     ['', 'Mem', '32bit', addresses.bestLap, '<', 'Value', '', record ?? 0],
   );
 
+  // prettier-ignore
+  const bestTimeSegmentChanged = {
+    1: $.one(['', 'Mem', '32bit', addresses.totalTimeSegment1, '!=', 'Delta', '32bit', addresses.totalTimeSegment1]),
+    2: $.one(['', 'Mem', '32bit', addresses.totalTimeSegment2, '!=', 'Delta', '32bit', addresses.totalTimeSegment2]),
+    3: $.one(['', 'Mem', '32bit', addresses.totalTimeSegment3, '!=', 'Delta', '32bit', addresses.totalTimeSegment3]),
+  };
+
+  // prettier-ignore
+  const bestTimeSegmentLast = {
+    1: $.one(['Measured', 'Mem', '32bit', addresses.totalTimeSegment1]),
+    2: $.one(['Measured', 'Mem', '32bit', addresses.totalTimeSegment2]),
+    3: $.one(['Measured', 'Mem', '32bit', addresses.totalTimeSegment3]),
+  };
+
+  // prettier-ignore
+  const bestLapChanged = $.one(['', 'Mem', '32bit', addresses.bestLap, '!=', 'Delta', '32bit', addresses.bestLap]);
+
+  // prettier-ignore
+  const bestLapLast = $.one(['Measured', 'Mem', '32bit', addresses.bestLap]);
+
   return {
     addresses,
     regionCheck,
@@ -589,6 +612,10 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     bestTimeCircuitBeaten,
     topSpeedBeaten,
     bestLapBeaten,
+    bestTimeSegmentChanged,
+    bestTimeSegmentLast,
+    bestLapChanged,
+    bestLapLast,
     hasRaced,
     isLastSegment,
     segmentIs,
@@ -1074,6 +1101,42 @@ for (const r of records) {
       r.trackId,
       r.bestLap,
     ),
+  });
+}
+
+for (const r of records) {
+  if (!r.segment && !r.bestLap) {
+    continue;
+  }
+  set.addLeaderboard({
+    title: r.name,
+    description: `Best ${r.bestLap ? 'Lap' : 'Time'}`,
+    lowerIsBetter: true,
+    type: 'TIME',
+    conditions: {
+      start: multiRegionalConditions(
+        (c) =>
+          $(
+            c.regionCheck,
+            c.isNotReplay,
+            c.hasRaced,
+            c.recordTrack,
+            r.segment && c.segmentIs[r.segment],
+            r.bestLap ? c.bestLapChanged : c.bestTimeSegmentChanged[r.segment],
+          ),
+        1,
+        '',
+        true,
+        r.trackId,
+      ),
+      cancel: '0=1',
+      submit: '1=1',
+      value: {
+        core: r.bestLap
+          ? codeFor('ntsc', 1).bestLapLast.toString()
+          : codeFor('ntsc', 1).bestTimeSegmentLast[r.segment].toString(),
+      },
+    },
   });
 }
 
