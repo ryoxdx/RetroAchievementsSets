@@ -1120,6 +1120,7 @@ for (const r of records) {
             c.regionCheck,
             c.isNotReplay,
             c.hasRaced,
+            c.player.notUsingWarrior,
             c.recordTrack,
             r.segment && c.segmentIs[r.segment],
             r.bestLap ? c.bestLapChanged : c.bestTimeSegmentChanged[r.segment],
