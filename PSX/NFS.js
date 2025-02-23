@@ -3,6 +3,7 @@ import {
   define as $,
   ConditionBuilder,
   Condition,
+  RichPresence,
 } from '@cruncheevos/core';
 
 /**
@@ -520,6 +521,9 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   // prettier-ignore
   const menuNotLoaded = $.one(['', 'Mem', '32bit', addresses.loadedMenuString, '!=', 'Value', '', 0x6f726463]);
 
+  // prettier-ignore
+  const menuLoaded = $.one(['', 'Mem', '32bit', addresses.loadedMenuString, '=', 'Value', '', 0x6f726463]);
+
   const recordTrack = trackIs[`${track}`];
 
   // prettier-ignore
@@ -576,6 +580,16 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   // prettier-ignore
   const bestLapLast = $.one(['Measured', 'Mem', '32bit', addresses.bestLap]);
 
+  // prettier-ignore
+  const playerMeasured = {
+    car: $.one(['Measured', 'Mem', '8bit', addresses.playerVehicle]),
+    track: $.one(['Measured', 'Mem', '8bit', addresses.track]),
+    mode: $.one(['Measured', 'Mem', '8bit', addresses.raceType]),
+    circuitLength: $.one(['Measured', 'Mem', '8bit', addresses.circuitLength]),
+    segment: $.one(['Measured', 'Mem', '8bit', addresses.segment]),
+    isCircuit: $.one(['Measured', 'Mem', '8bit', addresses.track, '>=', 'Value', '', 3]),
+  };
+
   return {
     addresses,
     regionCheck,
@@ -607,6 +621,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     playerLeadingTrigger,
     machineGunCheck,
     menuNotLoaded,
+    menuLoaded,
     recordTrack,
     bestTimeSprintBeaten,
     bestTimeCircuitBeaten,
@@ -619,6 +634,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     hasRaced,
     isLastSegment,
     segmentIs,
+    playerMeasured,
   };
 };
 
@@ -1112,7 +1128,7 @@ for (const r of records) {
     title: r.name,
     description: `Best ${r.bestLap ? 'Lap' : 'Time'}`,
     lowerIsBetter: true,
-    type: 'TIME',
+    type: 'FRAMES',
     conditions: {
       start: multiRegionalConditions(
         (c) =>
@@ -1140,5 +1156,94 @@ for (const r of records) {
     },
   });
 }
+
+export const rich = RichPresence({
+  lookupDefaultParameters: { keyFormat: 'hex' },
+  lookup: {
+    Car: {
+      values: {
+        0x00: 'Toyota SUPRA TURBO',
+        0x01: 'Lamborghini DIABLO VT',
+        0x02: 'Porsche 911 CARRERA',
+        0x03: 'Chevrolet CORVETTE ZR-1',
+        0x04: 'Ferrari 512TR',
+        0x05: 'Dodge VIPER RT/10',
+        0x06: 'Acura NSX',
+        0x07: 'Mazda RX-7',
+        0x0b: 'Warrior',
+      },
+    },
+    Track: {
+      values: {
+        0x00: 'City',
+        0x01: 'Coastal',
+        0x02: 'Alpine',
+        0x03: 'Rusty Springs',
+        0x04: 'Autumn Valley',
+        0x05: 'Vertigo Ridge',
+        0x06: 'Lost Vegas',
+      },
+    },
+    Mode: {
+      values: {
+        0x00: 'Time Trial',
+        0x01: 'Head to Head',
+        0x02: 'Single Race',
+        0x03: 'Tournament',
+      },
+    },
+    CircuitLength: {
+      values: {
+        0x00: 'Quick',
+        0x01: 'Normal',
+        0x02: 'Endurance',
+      },
+    },
+    Segment: {
+      values: {
+        0x00: 'Segment 1',
+        0x01: 'Segment 2',
+        0x02: 'Segment 3',
+      },
+    },
+  },
+  displays: ({ lookup }) => {
+    /** @param {Region} region */
+    function displayForRegion(region) {
+      const c = codeFor(region, 1);
+
+      const car = lookup.Car.at($(c.playerMeasured.car));
+      const track = lookup.Track.at($(c.playerMeasured.track));
+      const mode = lookup.Mode.at($(c.playerMeasured.mode));
+      const circuitLength = lookup.CircuitLength.at(
+        $(c.playerMeasured.circuitLength),
+      );
+      const segment = lookup.Segment.at($(c.playerMeasured.segment));
+
+      return /** @type Array<[ConditionBuilder, string]> */ ([
+        [
+          $(
+            c.regionCheck,
+            c.hasRaced,
+            c.menuNotLoaded,
+            c.playerMeasured.isCircuit,
+          ),
+          `Driving the ${car} in a ${mode} on ${track} (${circuitLength})`,
+        ],
+        [
+          $(c.regionCheck, c.hasRaced, c.menuNotLoaded),
+          `Driving the ${car} in a ${mode} on ${track} (${segment})`,
+        ],
+        [$(c.regionCheck, c.menuLoaded), `Player is in the menus`],
+      ]);
+    }
+
+    return [
+      ...displayForRegion('ntsc'),
+      ...displayForRegion('pal'),
+      'Playing Road & Track Presents: The Need for Speed',
+    ];
+  },
+});
 
 export default set;
