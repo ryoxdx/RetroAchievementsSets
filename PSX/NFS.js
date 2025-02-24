@@ -1136,6 +1136,8 @@ for (const r of records) {
             c.regionCheck,
             c.isNotReplay,
             c.hasRaced,
+            c.isNotTwoPlayer,
+            c.trackModeIs.normal,
             c.player.notUsingWarrior,
             c.recordTrack,
             r.segment && c.segmentIs[r.segment],
