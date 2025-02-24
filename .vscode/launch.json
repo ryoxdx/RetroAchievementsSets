@@ -37,28 +37,6 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "fetch",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["cruncheevos", "fetch", "${file}"],
-      "envFile": "${fileDirname}/.env",
-      "env": {
-        "FORCE_COLOR": "1"
-      }
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "generate",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["cruncheevos", "generate", "${file}"],
-      "envFile": "${fileDirname}/.env",
-      "env": {
-        "FORCE_COLOR": "1"
-      }
-    },
-    {
-      "type": "node",
-      "request": "launch",
       "name": "rich-save",
       "runtimeExecutable": "npx",
       "runtimeArgs": ["cruncheevos", "rich-save", "${file}"],
