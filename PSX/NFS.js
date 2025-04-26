@@ -31,7 +31,7 @@ const records = [
     name: 'City (Segment 1)',
     segment: 1,
     bestTime: 0x1cb6,
-    points: 3,
+    points: 5,
   },
   {
     id: 'city2',
@@ -39,7 +39,7 @@ const records = [
     name: 'City (Segment 2)',
     segment: 2,
     bestTime: 0x1e46,
-    points: 3,
+    points: 5,
   },
   {
     id: 'city3',
@@ -47,7 +47,7 @@ const records = [
     name: 'City (Segment 3)',
     segment: 3,
     bestTime: 0x2d56,
-    points: 3,
+    points: 5,
   },
   {
     id: 'city',
@@ -55,7 +55,7 @@ const records = [
     name: 'City',
     bestTime: 0x6c84,
     topSpeed: 0xc9,
-    points: 10,
+    points: 4,
   },
   {
     id: 'coastal1',
@@ -63,7 +63,7 @@ const records = [
     name: 'Coastal (Segment 1)',
     segment: 1,
     bestTime: 0x235e,
-    points: 3,
+    points: 5,
   },
   {
     id: 'coastal2',
@@ -71,7 +71,7 @@ const records = [
     name: 'Coastal (Segment 2)',
     segment: 2,
     bestTime: 0x2666,
-    points: 3,
+    points: 5,
   },
   {
     id: 'coastal3',
@@ -79,7 +79,7 @@ const records = [
     name: 'Coastal (Segment 3)',
     segment: 3,
     bestTime: 0x2cec,
-    points: 3,
+    points: 5,
   },
   {
     id: 'coastal',
@@ -87,7 +87,7 @@ const records = [
     name: 'Coastal',
     bestTime: 0x770a,
     topSpeed: 0xbc,
-    points: 10,
+    points: 4,
   },
   {
     id: 'alpine1',
@@ -95,7 +95,7 @@ const records = [
     name: 'Alpine (Segment 1)',
     segment: 1,
     bestTime: 0x25c6,
-    points: 3,
+    points: 5,
   },
   {
     id: 'alpine2',
@@ -103,7 +103,7 @@ const records = [
     name: 'Alpine (Segment 2)',
     segment: 2,
     bestTime: 0x3528,
-    points: 3,
+    points: 5,
   },
   {
     id: 'alpine3',
@@ -111,7 +111,7 @@ const records = [
     name: 'Alpine (Segment 3)',
     segment: 3,
     bestTime: 0x3922,
-    points: 3,
+    points: 5,
   },
   {
     id: 'alpine',
@@ -119,7 +119,7 @@ const records = [
     name: 'Alpine',
     bestTime: 0x94f8,
     topSpeed: 0xb7,
-    points: 10,
+    points: 4,
   },
   {
     id: 'rustySpringsQ',
@@ -834,7 +834,7 @@ set.addAchievement({
   title: '[VOID] Not Quite Le Mans',
   description:
     'Win a race on endurance mode against The Pack. Using the Warrior is not allowed.',
-  points: 5,
+  points: 0,
   conditions: multiRegionalConditions((c) =>
     $(
       c.regionCheck,
@@ -895,7 +895,7 @@ set.addAchievement({
   title: '[VOID] The Old Ways',
   description:
     'Using a RWD car, win a Head to Head race in Rally mode against an AWD car. Using the Warrior or the machine gun is not allowed.',
-  points: 3,
+  points: 0,
   conditions: multiRegionalConditions((c) =>
     $(
       c.regionCheck,
@@ -918,7 +918,7 @@ set.addAchievement({
   title: '[VOID] Catch Up Is Off',
   description:
     'Win a "No Mercy" Head to Head race using the same car as your opponent. Using the machine gun is not allowed.',
-  points: 4,
+  points: 0,
   conditions: multiRegionalConditions(
     (c) =>
       $(
@@ -1097,7 +1097,7 @@ for (const r of records) {
   set.addAchievement({
     title: `Speed Demon: ${r.name}`,
     description: `Reach a speed of ${formatSpeedString(r.topSpeed)} on ${r.name} to beat the top speed record.`,
-    points: 5,
+    points: 3,
     conditions: multiRegionalConditions(
       (c) =>
         $(
