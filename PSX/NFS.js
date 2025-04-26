@@ -538,7 +538,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
 
   // prettier-ignore
   const bestTimeSprintBeaten = $(
-    ['', 'Mem', '32bit', addresses.totalTimeSprint, '!=', 'Delta', '32bit', addresses.totalTimeSprint],
+    ['', 'Mem', '32bit', addresses.totalTimeSprint, '>', 'Delta', '32bit', addresses.totalTimeSprint],
     ['', 'Mem', '32bit', addresses.totalTimeSprint, '<', 'Value', '', record ?? 0],
   );
 
