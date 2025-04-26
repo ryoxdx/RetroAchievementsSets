@@ -943,7 +943,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'JDM Showdown',
   description:
-    'Use a Japanese car to beat another Japanese car in a Head to Head on City. Using the machine gun is not allowed.',
+    'Use a Japanese car to beat another Japanese car in a Head to Head on City. Rally mode or using the machine gun is not allowed.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
@@ -955,6 +955,7 @@ set.addAchievement({
         c.menuNotLoaded,
         c.raceTypeIs.headToHead,
         c.trackIs.city,
+        c.trackModeIs.normal,
         c.faceOffPlayerVehicle,
         c.faceOffOpponentVehicle,
         c.hasRaced,
@@ -968,7 +969,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'American Battle',
   description:
-    'Use an American car to beat another American car in a Head to Head on Coastal. Using the machine gun is not allowed.',
+    'Use an American car to beat another American car in a Head to Head on Coastal. Rally mode or using the machine gun is not allowed.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
@@ -980,6 +981,7 @@ set.addAchievement({
         c.menuNotLoaded,
         c.raceTypeIs.headToHead,
         c.trackIs.coastal,
+        c.trackModeIs.normal,
         c.faceOffPlayerVehicle,
         c.faceOffOpponentVehicle,
         c.hasRaced,
@@ -993,7 +995,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Italian Face-Off',
   description:
-    'Use an Italian car to beat another Italian car in a Head to Head on Alpine. Using the machine gun is not allowed.',
+    'Use an Italian car to beat another Italian car in a Head to Head on Alpine. Rally mode or using the machine gun is not allowed.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
@@ -1005,6 +1007,7 @@ set.addAchievement({
         c.menuNotLoaded,
         c.raceTypeIs.headToHead,
         c.trackIs.alpine,
+        c.trackModeIs.normal,
         c.faceOffPlayerVehicle,
         c.faceOffOpponentVehicle,
         c.hasRaced,
@@ -1042,13 +1045,15 @@ set.addAchievement({
 
 set.addAchievement({
   title: 'Rotary Reign',
-  description: 'Win a race against The Pack using the Mazda RX-7.',
+  description:
+    'Win a race against The Pack using the Mazda RX-7. Rally mode is not allowed.',
   points: 25,
   conditions: multiRegionalConditions((c) =>
     $(
       c.regionCheck,
       c.isNotReplay,
       c.raceTypeIs.race,
+      c.trackModeIs.normal,
       c.playerVehicleIs.rotary,
       c.opponentVehicleIs.thePack,
       c.hasRaced,
