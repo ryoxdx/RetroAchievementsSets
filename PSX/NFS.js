@@ -1021,7 +1021,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Dirty Fast',
   description: 'Reach a speed of 280 MPH (450 km/h).',
-  points: 25,
+  points: 10,
   conditions: multiRegionalConditions((c) =>
     $(c.regionCheck, c.isNotReplay, c.isRacing, c.isDirtyFast),
   ),
