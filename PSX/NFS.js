@@ -357,6 +357,9 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   const isLunarSprings = $.one(['', 'Mem', '8bit', addresses.lunarSprings, '=', 'Value', '', 1]);
 
   // prettier-ignore
+  const isNotLunarSprings = $.one(['', 'Mem', '8bit', addresses.lunarSprings, '=', 'Value', '', 0]);
+
+  // prettier-ignore
   const playerVehicleIs = {
     supra: $.one(['', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 0]),
     diablo: $.one(['', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 1]),
@@ -601,6 +604,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     raceWon,
     raceWonTrigger,
     isLunarSprings,
+    isNotLunarSprings,
     playerVehicleIs,
     opponentVehicleIs,
     isRacing,
@@ -800,6 +804,7 @@ set.addAchievement({
       c.raceTypeIs.race,
       c.trackIs.rustySprings,
       c.trackModeIs.rally,
+      c.isNotLunarSprings,
       c.player.notUsingWarrior,
       c.opponentVehicleIs.thePack,
       c.hasRaced,
