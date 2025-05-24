@@ -1298,17 +1298,17 @@ export const rich = RichPresence({
         [
           $(
             c.regionCheck,
-            c.hasRaced,
+            c.isRacing,
             c.menuNotLoaded,
             c.playerMeasured.isCircuit,
           ),
-          `Driving the ${car} in a ${mode} on ${track} (${circuitLength})`,
+          `Driving the ${car} in a ${mode} on ${track} - ${circuitLength}`,
         ],
         [
-          $(c.regionCheck, c.hasRaced, c.menuNotLoaded),
-          `Driving the ${car} in a ${mode} on ${track} (${segment})`,
+          $(c.regionCheck, c.isRacing, c.menuNotLoaded),
+          `Driving the ${car} in a ${mode} on ${track} - ${segment}`,
         ],
-        [$(c.regionCheck, c.menuLoaded), `Player is in the menus`],
+        [$(c.regionCheck, c.menuLoaded), `Navigating the menus`],
       ]);
     }
 
