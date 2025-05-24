@@ -27,30 +27,37 @@ const set = new AchievementSet({
 const records = [
   {
     id: 'city1',
+    achievementId: 499911,
+    leaderboardId: 126390,
     trackId: 'city',
-    name: 'City (Segment 1)',
+    name: 'City',
     segment: 1,
     bestTime: 0x1cb6,
     points: 5,
   },
   {
     id: 'city2',
+    achievementId: 499912,
+    leaderboardId: 126391,
     trackId: 'city',
-    name: 'City (Segment 2)',
+    name: 'City',
     segment: 2,
     bestTime: 0x1e46,
     points: 5,
   },
   {
     id: 'city3',
+    achievementId: 499913,
+    leaderboardId: 126392,
     trackId: 'city',
-    name: 'City (Segment 3)',
+    name: 'City',
     segment: 3,
     bestTime: 0x2d56,
     points: 5,
   },
   {
     id: 'city',
+    achievementId: 499914,
     trackId: 'city',
     name: 'City',
     bestTime: 0x6c84,
@@ -59,30 +66,37 @@ const records = [
   },
   {
     id: 'coastal1',
+    achievementId: 499915,
+    leaderboardId: 126393,
     trackId: 'coastal',
-    name: 'Coastal (Segment 1)',
+    name: 'Coastal',
     segment: 1,
     bestTime: 0x235e,
     points: 5,
   },
   {
     id: 'coastal2',
+    achievementId: 499916,
+    leaderboardId: 126394,
     trackId: 'coastal',
-    name: 'Coastal (Segment 2)',
+    name: 'Coastal',
     segment: 2,
     bestTime: 0x2666,
     points: 5,
   },
   {
     id: 'coastal3',
+    achievementId: 499917,
+    leaderboardId: 126395,
     trackId: 'coastal',
-    name: 'Coastal (Segment 3)',
+    name: 'Coastal',
     segment: 3,
     bestTime: 0x2cec,
     points: 5,
   },
   {
     id: 'coastal',
+    achievementId: 499918,
     trackId: 'coastal',
     name: 'Coastal',
     bestTime: 0x770a,
@@ -91,30 +105,37 @@ const records = [
   },
   {
     id: 'alpine1',
+    achievementId: 499919,
+    leaderboardId: 126396,
     trackId: 'alpine',
-    name: 'Alpine (Segment 1)',
+    name: 'Alpine',
     segment: 1,
     bestTime: 0x25c6,
     points: 5,
   },
   {
     id: 'alpine2',
+    achievementId: 499920,
+    leaderboardId: 126397,
     trackId: 'alpine',
-    name: 'Alpine (Segment 2)',
+    name: 'Alpine',
     segment: 2,
     bestTime: 0x3528,
     points: 5,
   },
   {
     id: 'alpine3',
+    achievementId: 499921,
+    leaderboardId: 126398,
     trackId: 'alpine',
-    name: 'Alpine (Segment 3)',
+    name: 'Alpine',
     segment: 3,
     bestTime: 0x3922,
     points: 5,
   },
   {
     id: 'alpine',
+    achievementId: 499922,
     trackId: 'alpine',
     name: 'Alpine',
     bestTime: 0x94f8,
@@ -123,6 +144,8 @@ const records = [
   },
   {
     id: 'rustySpringsQ',
+    achievementId: 499923,
+    leaderboardId: 126399,
     trackId: 'rustySprings',
     name: 'Rusty Springs',
     circuitLength: 'Quick',
@@ -133,6 +156,7 @@ const records = [
   },
   {
     id: 'rustySpringsN',
+    achievementId: 499924,
     trackId: 'rustySprings',
     name: 'Rusty Springs',
     circuitLength: 'Normal',
@@ -141,6 +165,7 @@ const records = [
   },
   {
     id: 'rustySpringsE',
+    achievementId: 499925,
     trackId: 'rustySprings',
     name: 'Rusty Springs',
     circuitLength: 'Endurance',
@@ -149,6 +174,8 @@ const records = [
   },
   {
     id: 'autumnValleyQ',
+    achievementId: 499926,
+    leaderboardId: 126400,
     trackId: 'autumnValley',
     name: 'Autumn Valley',
     circuitLength: 'Quick',
@@ -159,6 +186,7 @@ const records = [
   },
   {
     id: 'autumnValleyN',
+    achievementId: 499927,
     trackId: 'autumnValley',
     name: 'Autumn Valley',
     circuitLength: 'Normal',
@@ -167,6 +195,7 @@ const records = [
   },
   {
     id: 'autumnValleyE',
+    achievementId: 499928,
     trackId: 'autumnValley',
     name: 'Autumn Valley',
     circuitLength: 'Endurance',
@@ -175,6 +204,8 @@ const records = [
   },
   {
     id: 'vertigoRidgeQ',
+    achievementId: 499929,
+    leaderboardId: 126401,
     trackId: 'vertigoRidge',
     name: 'Vertigo Ridge',
     circuitLength: 'Quick',
@@ -185,6 +216,7 @@ const records = [
   },
   {
     id: 'vertigoRidgeN',
+    achievementId: 499930,
     trackId: 'vertigoRidge',
     name: 'Vertigo Ridge',
     circuitLength: 'Normal',
@@ -193,6 +225,7 @@ const records = [
   },
   {
     id: 'vertigoRidgeE',
+    achievementId: 499931,
     trackId: 'vertigoRidge',
     name: 'Vertigo Ridge',
     circuitLength: 'Endurance',
@@ -201,6 +234,8 @@ const records = [
   },
   {
     id: 'lostVegasQ',
+    achievementId: 499932,
+    leaderboardId: 126402,
     trackId: 'lostVegas',
     name: 'Lost Vegas',
     circuitLength: 'Quick',
@@ -211,6 +246,7 @@ const records = [
   },
   {
     id: 'lostVegasN',
+    achievementId: 499933,
     trackId: 'lostVegas',
     name: 'Lost Vegas',
     circuitLength: 'Normal',
@@ -219,6 +255,7 @@ const records = [
   },
   {
     id: 'lostVegasE',
+    achievementId: 499934,
     trackId: 'lostVegas',
     name: 'Lost Vegas',
     circuitLength: 'Endurance',
@@ -247,6 +284,13 @@ const formatTimeString = (time) => {
  */
 const formatSpeedString = (speed) => {
   return `${speed + 1} MPH (${Math.floor((speed + 1) * 1.60934)} km/h)`;
+};
+
+/**
+ * @param {number} segment
+ */
+const formatSegmentString = (segment) => {
+  return ['first', 'second', 'third'][segment - 1];
 };
 
 /**
@@ -794,7 +838,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Ancient Civilization',
   description:
-    'Win a race on Oasis Springs against The Pack. Using the Warrior is not allowed.',
+    'Win a race on Oasis Springs against The Pack without using the Warrior.',
   points: 3,
   conditions: multiRegionalConditions((c) =>
     $(
@@ -816,7 +860,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Low Gravity',
   description:
-    'Bring a car to a race on the Moon and win against The Pack. Using the Warrior is not allowed.',
+    'Bring a car to a race on the Moon and win against The Pack without using the Warrior.',
   points: 3,
   conditions: multiRegionalConditions((c) =>
     $(
@@ -858,7 +902,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Do You Know How Fast You Were Going?',
   description:
-    'Get a speeding ticket and still be in first place at the next finish line. Using the Warrior is not allowed.',
+    'Get a speeding ticket and still be in first place at the next finish line without using the Warrior.',
   points: 5,
   conditions: multiRegionalConditions((c) =>
     $(
@@ -948,7 +992,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'JDM Showdown',
   description:
-    'Use a Japanese car to beat another Japanese car in a Head to Head on City. Rally mode or using the machine gun is not allowed.',
+    'Use a Japanese car to beat another Japanese car in a Head to Head on City without using Rally mode or the machine gun.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
@@ -974,7 +1018,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'American Battle',
   description:
-    'Use an American car to beat another American car in a Head to Head on Coastal. Rally mode or using the machine gun is not allowed.',
+    'Use an American car to beat another American car in a Head to Head on Coastal without using Rally mode or the machine gun.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
@@ -1000,7 +1044,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Italian Face-Off',
   description:
-    'Use an Italian car to beat another Italian car in a Head to Head on Alpine. Rally mode or using the machine gun is not allowed.',
+    'Use an Italian car to beat another Italian car in a Head to Head on Alpine without using Rally mode or the machine gun.',
   points: 5,
   conditions: multiRegionalConditions(
     (c) =>
@@ -1051,7 +1095,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Rotary Reign',
   description:
-    'Win a race against The Pack using the Mazda RX-7. Rally mode is not allowed.',
+    'Win a race against The Pack using the Mazda RX-7 without using Rally mode.',
   points: 25,
   conditions: multiRegionalConditions((c) =>
     $(
@@ -1069,8 +1113,9 @@ set.addAchievement({
 
 for (const r of records) {
   set.addAchievement({
-    title: `Record Breaker: ${r.name}${r.circuitLength ? ` (${r.circuitLength})` : ''}`,
-    description: `Beat the ${r.name}${r.circuitLength ? ` (${r.circuitLength})` : ''} best time record of ${formatTimeString(r.bestTime)}.`,
+    id: r.achievementId,
+    title: `Record Breaker: ${r.name}${r.circuitLength ? ` - ${r.circuitLength}` : r.segment ? ` - Segment ${r.segment}` : ''}`,
+    description: `Beat ${r.circuitLength ? `the ${r.circuitLength} version of ` : r.segment ? `the ${formatSegmentString(r.segment)} segment of ` : ''}${r.name} in under ${formatTimeString(r.bestTime)}.`,
     points: r.points,
     conditions: multiRegionalConditions(
       (c) =>
@@ -1152,8 +1197,9 @@ for (const r of records) {
     continue;
   }
   set.addLeaderboard({
-    title: r.name,
-    description: `Best ${r.bestLap ? 'Lap' : 'Time'}`,
+    id: r.leaderboardId,
+    title: `${r.name}${r.segment ? ` - Segment ${r.segment}` : ''}`,
+    description: `Fastest time to finish ${r.bestLap ? 'a lap' : 'the segment'} without using the Warrior.`,
     lowerIsBetter: true,
     type: 'FRAMES',
     conditions: {
