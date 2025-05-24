@@ -1071,7 +1071,7 @@ set.addAchievement({
   description: 'Reach a speed of 280 MPH (450 km/h).',
   points: 10,
   conditions: multiRegionalConditions((c) =>
-    $(c.regionCheck, c.isNotReplay, c.isRacing, c.isDirtyFast),
+    $(c.regionCheck, c.isRacing, c.isDirtyFast),
   ),
 });
 
