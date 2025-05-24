@@ -350,8 +350,8 @@ const codeFor = (region, permutation, carCountry, track, record) => {
 
   // prettier-ignore
   const regionCheck = $(
-    region === 'ntsc' && ['', 'Mem', '32bit', addresses.serial, '=', 'Value', '', 0x554c535c],
-    region === 'pal' && ['', 'Mem', '32bit', addresses.serial, '=', 'Value', '', 0x454c535c],
+    region === 'ntsc' && ['PauseIf', 'Mem', '32bit', addresses.serial, '!=', 'Value', '', 0x554c535c],
+    region === 'pal' && ['PauseIf', 'Mem', '32bit', addresses.serial, '!=', 'Value', '', 0x454c535c],
   );
 
   // prettier-ignore
