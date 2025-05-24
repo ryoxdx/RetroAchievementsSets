@@ -438,6 +438,44 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 1, 1],
   );
 
+  // prettier-ignore
+  const japanesePlayerVehicle = $(
+    ['OrNext', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 0],
+    ['OrNext', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 6],
+    ['', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 7],
+  );
+
+  // prettier-ignore
+  const japaneseOpponentVehicle = $(
+    ['OrNext', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 0],
+    ['OrNext', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 6],
+    ['', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 7],
+  );
+
+  // prettier-ignore
+  const americanPlayerVehicle = $(
+    ['OrNext', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 3],
+    ['', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 5],
+  );
+
+  // prettier-ignore
+  const americanOpponentVehicle = $(
+    ['OrNext', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 3],
+    ['', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 5],
+  );
+
+  // prettier-ignore
+  const italianPlayerVehicle = $(
+    ['OrNext', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 1],
+    ['', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 4],
+  );
+
+  // prettier-ignore
+  const italianOpponentVehicle = $(
+    ['OrNext', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 1],
+    ['', 'Mem', '8bit', addresses.opponentVehicle, '=', 'Value', '', 4],
+  );
+
   let possibleVehicles = [];
 
   switch (carCountry) {
@@ -462,17 +500,6 @@ const codeFor = (region, permutation, carCountry, track, record) => {
         'rotary',
       ];
   }
-
-  const faceOffPlayerVehicle =
-    playerVehicleIs[
-      possibleVehicles[
-        (permutation > possibleVehicles.length
-          ? permutation > possibleVehicles.length * 2
-            ? possibleVehicles.length
-            : possibleVehicles.length - (possibleVehicles.length - 2)
-          : 1) - 1
-      ]
-    ];
 
   const faceOffOpponentVehicle =
     opponentVehicleIs[
@@ -651,7 +678,6 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     playerVehicleIs,
     opponentVehicleIs,
     isRacing,
-    faceOffPlayerVehicle,
     faceOffOpponentVehicle,
     faceOffPlayerVehicleSameAsOpponent,
     isDirtyFast,
@@ -682,6 +708,12 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     isLastSegment,
     segmentIs,
     playerMeasured,
+    japanesePlayerVehicle,
+    japaneseOpponentVehicle,
+    americanPlayerVehicle,
+    americanOpponentVehicle,
+    italianPlayerVehicle,
+    italianOpponentVehicle,
   };
 };
 
@@ -993,24 +1025,21 @@ set.addAchievement({
   description:
     'Use a Japanese car to beat another Japanese car in a Head to Head on City without using Rally mode or the machine gun.',
   points: 5,
-  conditions: multiRegionalConditions(
-    (c) =>
-      $(
-        c.regionCheck,
-        c.isNotReplay,
-        c.isNotTwoPlayer,
-        c.machineGunCheck,
-        c.menuNotLoaded,
-        c.raceTypeIs.headToHead,
-        c.trackIs.city,
-        c.trackModeIs.normal,
-        c.faceOffPlayerVehicle,
-        c.faceOffOpponentVehicle,
-        c.hasRaced,
-        c.raceWonTrigger,
-      ),
-    3,
-    'japan',
+  conditions: multiRegionalConditions((c) =>
+    $(
+      c.regionCheck,
+      c.isNotReplay,
+      c.isNotTwoPlayer,
+      c.machineGunCheck,
+      c.menuNotLoaded,
+      c.raceTypeIs.headToHead,
+      c.trackIs.city,
+      c.trackModeIs.normal,
+      c.japanesePlayerVehicle,
+      c.japaneseOpponentVehicle,
+      c.hasRaced,
+      c.raceWonTrigger,
+    ),
   ),
 });
 
@@ -1019,24 +1048,21 @@ set.addAchievement({
   description:
     'Use an American car to beat another American car in a Head to Head on Coastal without using Rally mode or the machine gun.',
   points: 5,
-  conditions: multiRegionalConditions(
-    (c) =>
-      $(
-        c.regionCheck,
-        c.isNotReplay,
-        c.isNotTwoPlayer,
-        c.machineGunCheck,
-        c.menuNotLoaded,
-        c.raceTypeIs.headToHead,
-        c.trackIs.coastal,
-        c.trackModeIs.normal,
-        c.faceOffPlayerVehicle,
-        c.faceOffOpponentVehicle,
-        c.hasRaced,
-        c.raceWonTrigger,
-      ),
-    2,
-    'usa',
+  conditions: multiRegionalConditions((c) =>
+    $(
+      c.regionCheck,
+      c.isNotReplay,
+      c.isNotTwoPlayer,
+      c.machineGunCheck,
+      c.menuNotLoaded,
+      c.raceTypeIs.headToHead,
+      c.trackIs.coastal,
+      c.trackModeIs.normal,
+      c.americanPlayerVehicle,
+      c.americanOpponentVehicle,
+      c.hasRaced,
+      c.raceWonTrigger,
+    ),
   ),
 });
 
@@ -1045,24 +1071,21 @@ set.addAchievement({
   description:
     'Use an Italian car to beat another Italian car in a Head to Head on Alpine without using Rally mode or the machine gun.',
   points: 5,
-  conditions: multiRegionalConditions(
-    (c) =>
-      $(
-        c.regionCheck,
-        c.isNotReplay,
-        c.isNotTwoPlayer,
-        c.machineGunCheck,
-        c.menuNotLoaded,
-        c.raceTypeIs.headToHead,
-        c.trackIs.alpine,
-        c.trackModeIs.normal,
-        c.faceOffPlayerVehicle,
-        c.faceOffOpponentVehicle,
-        c.hasRaced,
-        c.raceWonTrigger,
-      ),
-    2,
-    'italy',
+  conditions: multiRegionalConditions((c) =>
+    $(
+      c.regionCheck,
+      c.isNotReplay,
+      c.isNotTwoPlayer,
+      c.machineGunCheck,
+      c.menuNotLoaded,
+      c.raceTypeIs.headToHead,
+      c.trackIs.alpine,
+      c.trackModeIs.normal,
+      c.italianPlayerVehicle,
+      c.italianOpponentVehicle,
+      c.hasRaced,
+      c.raceWonTrigger,
+    ),
   ),
 });
 
