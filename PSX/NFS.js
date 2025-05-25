@@ -1260,12 +1260,12 @@ export const rich = RichPresence({
   lookup: {
     Car: {
       values: {
-        0x00: 'Toyota SUPRA TURBO',
-        0x01: 'Lamborghini DIABLO VT',
-        0x02: 'Porsche 911 CARRERA',
-        0x03: 'Chevrolet CORVETTE ZR-1',
-        0x04: 'Ferrari 512TR',
-        0x05: 'Dodge VIPER RT/10',
+        0x00: 'Toyota Supra Turbo',
+        0x01: 'Lamborghini Diablo VT',
+        0x02: 'Porsche 911 Carrera',
+        0x03: 'Chevrolet Corvette ZR-1',
+        0x04: 'Ferrari 512 TR',
+        0x05: 'Dodge Viper RT/10',
         0x06: 'Acura NSX',
         0x07: 'Mazda RX-7',
         0x0b: 'Warrior',
