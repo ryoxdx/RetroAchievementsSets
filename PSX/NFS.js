@@ -434,6 +434,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
 
   // prettier-ignore
   const hasRaced = $(
+    ['ResetIf', 'Mem', '32bit', addresses.loadedMenuString, '=', 'Value', '', 0x6f726463],
     ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 0, 1],
     ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 1, 1],
   );
