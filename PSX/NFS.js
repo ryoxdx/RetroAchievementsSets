@@ -1290,20 +1290,6 @@ export const rich = RichPresence({
         0x03: 'Tournament',
       },
     },
-    CircuitLength: {
-      values: {
-        0x00: 'Quick',
-        0x01: 'Normal',
-        0x02: 'Endurance',
-      },
-    },
-    Segment: {
-      values: {
-        0x00: 'Segment 1',
-        0x01: 'Segment 2',
-        0x02: 'Segment 3',
-      },
-    },
   },
   displays: ({ lookup }) => {
     /** @param {Region} region */
@@ -1313,10 +1299,6 @@ export const rich = RichPresence({
       const car = lookup.Car.at($(c.playerMeasured.car));
       const track = lookup.Track.at($(c.playerMeasured.track));
       const mode = lookup.Mode.at($(c.playerMeasured.mode));
-      const circuitLength = lookup.CircuitLength.at(
-        $(c.playerMeasured.circuitLength),
-      );
-      const segment = lookup.Segment.at($(c.playerMeasured.segment));
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
@@ -1326,11 +1308,11 @@ export const rich = RichPresence({
             c.menuNotLoaded,
             c.playerMeasured.isCircuit,
           ),
-          `Driving the ${car} in a ${mode} on ${track} - ${circuitLength}`,
+          `Driving the ${car} in a ${mode} on ${track}`,
         ],
         [
           $(c.regionCheck, c.isRacing, c.menuNotLoaded),
-          `Driving the ${car} in a ${mode} on ${track} - ${segment}`,
+          `Driving the ${car} in a ${mode} on ${track}`,
         ],
         [$(c.regionCheck, c.menuLoaded), `Navigating the menus`],
       ]);
