@@ -440,6 +440,12 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   );
 
   // prettier-ignore
+  const hasRacedRich = $(
+    ['ResetIf', 'Mem', '32bit', addresses.loadedMenuString, '=', 'Value', '', 0x6f726463],
+    ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 1, 1],
+  );
+
+  // prettier-ignore
   const japanesePlayerVehicle = $(
     ['OrNext', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 0],
     ['OrNext', 'Mem', '8bit', addresses.playerVehicle, '=', 'Value', '', 6],
@@ -706,6 +712,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     bestLapChanged,
     bestLapLast,
     hasRaced,
+    hasRacedRich,
     isLastSegment,
     segmentIs,
     playerMeasured,
@@ -1302,16 +1309,7 @@ export const rich = RichPresence({
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
-          $(
-            c.regionCheck,
-            c.isRacing,
-            c.menuNotLoaded,
-            c.playerMeasured.isCircuit,
-          ),
-          `Driving the ${car} in a ${mode} on ${track}`,
-        ],
-        [
-          $(c.regionCheck, c.isRacing, c.menuNotLoaded),
+          $(c.regionCheck, c.hasRacedRich, c.menuNotLoaded),
           `Driving the ${car} in a ${mode} on ${track}`,
         ],
         [$(c.regionCheck, c.menuLoaded), `Navigating the menus`],
