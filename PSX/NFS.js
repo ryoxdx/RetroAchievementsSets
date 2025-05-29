@@ -331,11 +331,12 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     noMercy: offset(0x10d2d5),
     policeAttention: offset(0x1067a0),
     position: offset(0xdc538),
-    raceFinished: offset(0xdc410),
+    raceMusicFinished: offset(0xdc410),
     menu: offset(0xdc41c),
-    gear: offset(0x11aedc),
+    gearPointer: altOffset(0x0bcac8),
+    gearPointerOffset: 0x3e0,
     raceTime: offset(0xf64cc),
-    startingLine: offset(0x10c9f4),
+    startingLine: offset(0x10c990),
     gameplayMods: offset(0x10d1c4),
     loadedMenuString: 0x1fec90,
     totalTimeSprint: offset(0x1048c4),
@@ -440,7 +441,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   );
 
   // prettier-ignore
-  const hasRacedRich = $(
+  const hasRacedNoMenu = $(
     ['ResetIf', 'Mem', '32bit', addresses.loadedMenuString, '=', 'Value', '', 0x6f726463],
     ['', 'Mem', '8bit', addresses.racing, '=', 'Value', '', 1, 1],
   );
@@ -558,14 +559,12 @@ const codeFor = (region, permutation, carCountry, track, record) => {
 
   // prettier-ignore
   const raceFinished = $(
-    ['', 'Delta', '8bit', addresses.raceFinished, '=', 'Value', '', 0],
-    ['', 'Mem', '8bit', addresses.raceFinished, '=', 'Value', '', 1],
+    ['', 'Mem', '32bit', addresses.totalTimeCircuit, '!=', 'Delta', '32bit', addresses.totalTimeCircuit],
   );
 
   // prettier-ignore
   const raceFinishedTrigger = $(
-    ['Trigger', 'Delta', '8bit', addresses.raceFinished, '=', 'Value', '', 0],
-    ['Trigger', 'Mem', '8bit', addresses.raceFinished, '=', 'Value', '', 1],
+    ['Trigger', 'Mem', '32bit', addresses.totalTimeCircuit, '!=', 'Delta', '32bit', addresses.totalTimeCircuit],
   );
 
   // prettier-ignore
@@ -588,7 +587,8 @@ const codeFor = (region, permutation, carCountry, track, record) => {
   const fiveSecondsInNeutral = $(
     ['AndNext', 'Delta', '16bit', addresses.startingLine, '=', 'Value', '', 0x0200],
     ['AndNext', 'Mem', '16bit', addresses.startingLine, '=', 'Value', '', 0x02ff, 1],
-    ['AndNext', 'Mem', '32bit', addresses.gear, '<', 'Value', '', 0xffffffff],
+    ['AddAddress', 'Mem', '24bit', addresses.gearPointer],
+    ['AndNext', 'Mem', '32bit', addresses.gearPointerOffset, '<', 'Value', '', 0xffffffff],
     ['ResetIf', 'Mem', '32bit', addresses.raceTime, '<', 'Value', '', 0x258],
   );
 
@@ -712,7 +712,7 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     bestLapChanged,
     bestLapLast,
     hasRaced,
-    hasRacedRich,
+    hasRacedNoMenu,
     isLastSegment,
     segmentIs,
     playerMeasured,
@@ -952,7 +952,7 @@ set.addAchievement({
       c.player.notUsingWarrior,
       c.player.hasTicket,
       c.player.isFirst,
-      c.notInMenus,
+      c.hasRacedNoMenu,
       c.raceFinishedTrigger,
     ),
   ),
@@ -969,10 +969,9 @@ set.addAchievement({
       c.isNotReplay,
       c.raceTypeIs.tournament,
       c.raceTimerIsFiveSecondsOrMore,
-      c.notInMenus,
-      c.resetIfInMenus,
       c.pauseUntilStartingRace,
       c.fiveSecondsInNeutral,
+      c.hasRacedNoMenu,
       c.playerLeadingTrigger,
       c.raceFinishedTrigger,
     ),
@@ -1045,7 +1044,7 @@ set.addAchievement({
       c.trackModeIs.normal,
       c.japanesePlayerVehicle,
       c.japaneseOpponentVehicle,
-      c.hasRaced,
+      c.hasRacedNoMenu,
       c.raceWonTrigger,
     ),
   ),
@@ -1068,7 +1067,7 @@ set.addAchievement({
       c.trackModeIs.normal,
       c.americanPlayerVehicle,
       c.americanOpponentVehicle,
-      c.hasRaced,
+      c.hasRacedNoMenu,
       c.raceWonTrigger,
     ),
   ),
@@ -1091,7 +1090,7 @@ set.addAchievement({
       c.trackModeIs.normal,
       c.italianPlayerVehicle,
       c.italianOpponentVehicle,
-      c.hasRaced,
+      c.hasRacedNoMenu,
       c.raceWonTrigger,
     ),
   ),
@@ -1309,7 +1308,7 @@ export const rich = RichPresence({
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
-          $(c.regionCheck, c.hasRacedRich, c.menuNotLoaded),
+          $(c.regionCheck, c.hasRacedNoMenu, c.menuNotLoaded),
           `Driving the ${car} in a ${mode} on ${track}`,
         ],
         [$(c.regionCheck, c.menuLoaded), `Navigating the menus`],
