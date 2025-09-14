@@ -331,6 +331,8 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     noMercy: offset(0x10d2d5),
     policeAttention: offset(0x1067a0),
     position: offset(0xdc538),
+    finishPosition: offset(0xdc408),
+    segmentFinishPosition: offset(0x0dc4ec),
     raceMusicFinished: offset(0xdc410),
     menu: offset(0xdc41c),
     gearPointer: altOffset(0x0bcac8),
@@ -385,6 +387,40 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     normal: $.one(['', 'Mem', '8bit', addresses.trackMode, '=', 'Value', '', 0]),
     rally: $.one(['', 'Mem', '8bit', addresses.trackMode, '=', 'Value', '', 1]),
   };
+
+  // prettier-ignore
+  const raceFinishedOverall = {
+    circuit: $.one(['', 'Mem', '32bit', addresses.totalTimeCircuit, '!=', 'Delta', '32bit', addresses.totalTimeCircuit]),
+    segmented: $(
+      ['', 'Mem', '32bit', addresses.totalTimeSprint, '>', 'Delta', '32bit', addresses.totalTimeSprint],
+      ['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 2],
+    ),
+  };
+
+  // prettier-ignore
+  const raceFinishedOverallTrigger = {
+    circuit: $.one(['Trigger', 'Mem', '32bit', addresses.totalTimeCircuit, '!=', 'Delta', '32bit', addresses.totalTimeCircuit]),
+    segmented: $(['Trigger', 'Mem', '32bit', addresses.totalTimeSprint, '>', 'Delta', '32bit', addresses.totalTimeSprint], ['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 2]),
+  };
+
+  // prettier-ignore
+  const raceFinishedOverallTypes = {
+    circuit: $(
+      ['', 'Mem', '32bit', addresses.totalTimeCircuit, '!=', 'Delta', '32bit', addresses.totalTimeCircuit],
+      ['PauseIf', 'Mem', '8bit', addresses.track, '<=', 'Value', '', 2],
+    ),
+    segmented: $(
+      ['', 'Mem', '32bit', addresses.totalTimeSprint, '>', 'Delta', '32bit', addresses.totalTimeSprint],
+      ['', 'Mem', '8bit', addresses.segment, '=', 'Value', '', 2],
+      ['PauseIf', 'Mem', '8bit', addresses.track, '>', 'Value', '', 2],
+    ),
+  };
+
+  const raceFinishedOverallByType =
+    raceFinishedOverallTypes[permutation % 2 === 0 ? 'circuit' : 'segmented'];
+
+  // prettier-ignore
+  const raceWonOverall = $.one(['', 'Mem', '8bit', addresses.finishPosition, '=', 'Value', '', 0]);
 
   // prettier-ignore
   const raceWon = $(
@@ -680,6 +716,10 @@ const codeFor = (region, permutation, carCountry, track, record) => {
     trackModeIs,
     raceWon,
     raceWonTrigger,
+    raceFinishedOverall,
+    raceFinishedOverallTrigger,
+    raceFinishedOverallByType,
+    raceWonOverall,
     isLunarSprings,
     isNotLunarSprings,
     playerVehicleIs,
@@ -767,7 +807,8 @@ set.addAchievement({
       c.trackIs.city,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.segmented,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -784,7 +825,8 @@ set.addAchievement({
       c.trackIs.coastal,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.segmented,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -801,7 +843,8 @@ set.addAchievement({
       c.trackIs.alpine,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.segmented,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -818,7 +861,8 @@ set.addAchievement({
       c.trackIs.rustySprings,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.circuit,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -835,7 +879,8 @@ set.addAchievement({
       c.trackIs.autumnValley,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.circuit,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -852,7 +897,8 @@ set.addAchievement({
       c.trackIs.vertigoRidge,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.circuit,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -869,7 +915,8 @@ set.addAchievement({
       c.trackIs.lostVegas,
       c.raceTypeIs.tournament,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.circuit,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -891,7 +938,8 @@ set.addAchievement({
       c.player.notUsingWarrior,
       c.opponentVehicleIs.thePack,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.circuit,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -913,7 +961,8 @@ set.addAchievement({
       c.player.notUsingWarrior,
       c.opponentVehicleIs.thePack,
       c.hasRaced,
-      c.raceWon,
+      c.raceFinishedOverall.circuit,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -1045,7 +1094,8 @@ set.addAchievement({
       c.japanesePlayerVehicle,
       c.japaneseOpponentVehicle,
       c.hasRacedNoMenu,
-      c.raceWonTrigger,
+      c.raceFinishedOverallTrigger.segmented,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -1068,7 +1118,8 @@ set.addAchievement({
       c.americanPlayerVehicle,
       c.americanOpponentVehicle,
       c.hasRacedNoMenu,
-      c.raceWonTrigger,
+      c.raceFinishedOverallTrigger.segmented,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -1091,7 +1142,8 @@ set.addAchievement({
       c.italianPlayerVehicle,
       c.italianOpponentVehicle,
       c.hasRacedNoMenu,
-      c.raceWonTrigger,
+      c.raceFinishedOverallTrigger.segmented,
+      c.raceWonOverall,
     ),
   ),
 });
@@ -1109,15 +1161,20 @@ set.addAchievement({
   title: 'Boxer Spirit',
   description: 'Win a Tournament race using the Porsche 911 Carrera.',
   points: 25,
-  conditions: multiRegionalConditions((c) =>
-    $(
-      c.regionCheck,
-      c.isNotReplay,
-      c.raceTypeIs.tournament,
-      c.playerVehicleIs.porsche,
-      c.hasRaced,
-      c.raceWon,
-    ),
+  conditions: multiRegionalConditions(
+    (c) =>
+      $(
+        c.regionCheck,
+        c.isNotReplay,
+        c.raceTypeIs.tournament,
+        c.playerVehicleIs.porsche,
+        c.hasRaced,
+        c.raceFinishedOverallByType,
+        c.raceWonOverall,
+      ),
+    2,
+    '',
+    true,
   ),
 });
 
@@ -1126,17 +1183,22 @@ set.addAchievement({
   description:
     'Win a race against The Pack using the Mazda RX-7 without using Rally mode.',
   points: 25,
-  conditions: multiRegionalConditions((c) =>
-    $(
-      c.regionCheck,
-      c.isNotReplay,
-      c.raceTypeIs.race,
-      c.trackModeIs.normal,
-      c.playerVehicleIs.rotary,
-      c.opponentVehicleIs.thePack,
-      c.hasRaced,
-      c.raceWon,
-    ),
+  conditions: multiRegionalConditions(
+    (c) =>
+      $(
+        c.regionCheck,
+        c.isNotReplay,
+        c.raceTypeIs.race,
+        c.trackModeIs.normal,
+        c.playerVehicleIs.rotary,
+        c.opponentVehicleIs.thePack,
+        c.hasRaced,
+        c.raceFinishedOverallByType,
+        c.raceWonOverall,
+      ),
+    2,
+    '',
+    true,
   ),
 });
 
