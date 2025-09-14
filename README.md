@@ -4,4 +4,4 @@ This is a repository for poorly coded achievement sets made with [cruncheevos](h
 
 Needs an `RACACHE` env with the absolute path to the directory containing the RACache directory e.g.:
 
-RACACHE=/path/to/directory
+`RACACHE=/path/to/directory`
