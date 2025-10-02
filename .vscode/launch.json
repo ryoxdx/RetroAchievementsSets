@@ -5,7 +5,7 @@
       "type": "node",
       "request": "launch",
       "name": "diff",
-      "runtimeExecutable": "npx",
+      "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "diff", "${file}"],
       "envFile": "${fileDirname}/.env",
       "env": {
@@ -16,7 +16,7 @@
       "type": "node",
       "request": "launch",
       "name": "save",
-      "runtimeExecutable": "npx",
+      "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "save", "${file}"],
       "envFile": "${fileDirname}/.env",
       "env": {
@@ -27,7 +27,7 @@
       "type": "node",
       "request": "launch",
       "name": "diff-save",
-      "runtimeExecutable": "npx",
+      "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "diff-save", "${file}"],
       "envFile": "${fileDirname}/.env",
       "env": {
@@ -38,8 +38,8 @@
       "type": "node",
       "request": "launch",
       "name": "rich-save",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["cruncheevos", "rich-save", "${file}"],
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": ["cruncheevos", "rich-save", "--force-rewrite", "${file}"],
       "envFile": "${fileDirname}/.env",
       "env": {
         "FORCE_COLOR": "1"
