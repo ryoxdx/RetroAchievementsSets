@@ -27,10 +27,26 @@ const codeFor = (permutation) => {
     carInfoPointer: 0x6bf9f8,
     careerPointer: 0x6c57e0,
     inRaceDayPointer: 0x6cc9b8,
+    saveFilePointer: 0x6cec98,
     ingamePointer: 0x6d3bb8,
     loadedRaceDayPointer: 0x6d3f88,
     completionPointer: 0x6d3fcc,
+    gameStartedPointer: 0x704eec,
   };
+
+  // prettier-ignore
+  const gameIs = {
+    booted: $.one(['', 'Mem', '32bit', addresses.gameStartedPointer, '!=', 'Value', '', 0]),
+    started: $(
+      ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
+      ['', 'Mem', '32bit', 0x57c, '=', 'Value', '', 1],
+    ),
+    loadedIn: $(
+      ['AddAddress', 'Mem', '32bit', addresses.saveFilePointer],
+      ['AddAddress', 'Mem', '32bit', 0x10],
+      ['', 'Mem', '32bit', 0x100, '=', 'Value', '', 1],
+    ),
+  }
 
   // prettier-ignore
   const playerIs = {
@@ -78,6 +94,7 @@ const codeFor = (permutation) => {
 
   return {
     addresses,
+    gameIs,
     playerIs,
     playerMeasured,
     cash,
@@ -281,11 +298,23 @@ export const rich = RichPresence({
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
-          $(c.playerIs.inRaceDay, c.playerIs.racing),
+          $(
+            c.gameIs.booted,
+            c.gameIs.loadedIn,
+            c.playerIs.inRaceDay,
+            c.playerIs.racing,
+          ),
           `[${org}] ${day} | ${car} (${mode})`,
         ],
-        [$(c.playerIs.inRaceDay), `[${org}] ${day} | $${cash}`],
-        [$(c.playerIs.notInRaceDay), `Navigating the menus | $${cash}`],
+        [
+          $(c.gameIs.booted, c.gameIs.loadedIn, c.playerIs.inRaceDay),
+          `[${org}] ${day} | $${cash}`,
+        ],
+        [
+          $(c.gameIs.booted, c.gameIs.loadedIn, c.playerIs.notInRaceDay),
+          `Navigating the menus | $${cash}`,
+        ],
+        [$(c.gameIs.booted, c.gameIs.started), `Navigating the menus`],
       ]);
     };
 
