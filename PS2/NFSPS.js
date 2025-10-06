@@ -4,7 +4,14 @@ import {
   ConditionBuilder,
   Condition,
   RichPresence,
+  orNext,
 } from '@cruncheevos/core';
+
+import {
+  raceDays,
+  progressionAchievements,
+  optionalBossAchievements,
+} from './NFSPSUtils.js';
 
 /**
  * @template T
@@ -23,20 +30,31 @@ const set = new AchievementSet({
  */
 const codeFor = (permutation) => {
   const addresses = {
-    raceDayPointer: 0x6a8c28,
-    carInfoPointer: 0x6bf9f8,
+    carStatsPointer: 0x6a8c28,
+    carModelPointer: 0x6bf9f8,
+    markerPointer: 0x6c5160,
     careerPointer: 0x6c57e0,
     inRaceDayPointer: 0x6cc9b8,
+    settingsPointer: 0x6cec78,
     saveFilePointer: 0x6cec98,
+    speedPointer: 0x6cf670,
+    sectorShootoutPointer: 0x6d3b4c,
     ingamePointer: 0x6d3bb8,
+    eventSummaryPointer: 0x6d3f40,
+    recordsPointer: 0x6d3f6c,
     loadedRaceDayPointer: 0x6d3f88,
     completionPointer: 0x6d3fcc,
+    eventCompletionPointer: 0x6d3fe8,
+    currentHeatPointer: 0x6e028c,
+    gripLevelPointer: 0x6e13b0,
+    carLotPointer: 0x6e7e48,
+    menuCarPointer: 0x704358,
     gameStartedPointer: 0x704eec,
   };
 
   // prettier-ignore
   const gameIs = {
-    booted: $.one(['', 'Mem', '32bit', addresses.gameStartedPointer, '!=', 'Value', '', 0]),
+    booted: $.one(['PauseIf', 'Mem', '32bit', addresses.gameStartedPointer, '=', 'Value', '', 0]),
     started: $(
       ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
       ['', 'Mem', '32bit', 0x57c, '=', 'Value', '', 1],
@@ -73,7 +91,7 @@ const codeFor = (permutation) => {
   // prettier-ignore
   const playerMeasured = {
     car: $(
-      ['AddAddress', 'Mem', '32bit', addresses.carInfoPointer],
+      ['AddAddress', 'Mem', '32bit', addresses.carModelPointer],
       ['Measured', 'Mem', '32bit', 0x28],
     ),
     mode: $(
@@ -92,14 +110,278 @@ const codeFor = (permutation) => {
     ),
   };
 
+  // prettier-ignore
+  const codeEntryDetection = $(
+    ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+    ['', 'Mem', '32bit', 0x468, '=', 'Value', '', 0],
+  );
+
+  // prettier-ignore
+  const currentRaceDay = (id) => $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['AddAddress', 'Mem', '32bit', 0x0],
+    ['', 'Mem', '32bit', 0x10, '=', 'Value', '', id],
+  );
+
+  // prettier-ignore
+  const heatWon = $(
+    ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['', 'Mem', '32bit', 0x5c, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['', 'Delta', 'Bit2', 0x68, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['', 'Mem', 'Bit2', 0x68, '=', 'Value', '', 1],
+  );
+
+  // prettier-ignore
+  const raceDayDominated = $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Delta', 'Bit3', 0x18, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Mem', 'Bit3', 0x18, '=', 'Value', '', 1],
+  );
+
+  // prettier-ignore
+  const raceDayWon = $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Delta', 'Bit2', 0x18, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Mem', 'Bit2', 0x18, '=', 'Value', '', 1],
+  );
+
+  // prettier-ignore
+  const raceDayWonTrigger = $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Delta', 'Bit2', 0x18, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['Trigger', 'Mem', 'Bit2', 0x18, '=', 'Value', '', 1],
+  );
+
+  // prettier-ignore
+  const raceDayStarted = (id) => $(
+    ['AddAddress', 'Mem', '32bit', addresses.inRaceDayPointer],
+    ['AndNext', 'Mem', '32bit', 0x8, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['AddAddress', 'Mem', '32bit', 0x0],
+    ['AndNext', 'Mem', '32bit', 0x10, '=', 'Value', '', id],
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Mem', '32bit', 0x50, '=', 'Value', '', 0, 1],
+  );
+
+  // prettier-ignore
+  const kingReset = $(
+    ['AddAddress', 'Mem', '32bit', addresses.settingsPointer],
+    ['AddAddress', 'Mem', '32bit', 0x8],
+    ['ResetIf', 'Mem', '32bit', 0x140, '!=', 'Value', '', 2],
+  );
+
+  // prettier-ignore
+  const raceDayReset = $(
+    ['AddAddress', 'Mem', '32bit', addresses.inRaceDayPointer],
+    ['ResetIf', 'Mem', '32bit', 0x8, '=', 'Value', '', 0],
+  );
+
+  // prettier-ignore
+  const ryoRaceDayReset = $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['AddAddress', 'Mem', '32bit', 0x0],
+    ['AndNext', 'Mem', '32bit', 0x10, '!=', 'Value', '', raceDays.SNevada],
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['AddAddress', 'Mem', '32bit', 0x0],
+    ['ResetIf', 'Mem', '32bit', 0x10, '!=', 'Value', '', raceDays.STokyo],
+  );
+
+  // prettier-ignore
+  const allKingsDefeated = $(
+    ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+    ['AddAddress', 'Mem', '32bit', 0x4],
+    ['AndNext', 'Mem', 'Bit2', 0x510, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+    ['AddAddress', 'Mem', '32bit', 0x4],
+    ['AndNext', 'Mem', 'Bit2', 0x204, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+    ['AddAddress', 'Mem', '32bit', 0x4],
+    ['AndNext', 'Mem', 'Bit2', 0x294, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+    ['AddAddress', 'Mem', '32bit', 0x4],
+    ['AndNext', 'Mem', 'Bit2', 0x3c0, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+    ['AddAddress', 'Mem', '32bit', 0x4],
+    ['', 'Mem', 'Bit2', 0x4e0, '=', 'Value', '', 1],
+  );
+
   return {
     addresses,
     gameIs,
     playerIs,
     playerMeasured,
     cash,
+    codeEntryDetection,
+    currentRaceDay,
+    heatWon,
+    raceDayDominated,
+    raceDayWon,
+    raceDayWonTrigger,
+    raceDayStarted,
+    kingReset,
+    raceDayReset,
+    ryoRaceDayReset,
+    allKingsDefeated,
   };
 };
+
+const c = codeFor(1);
+
+// set.addAchievement({
+//   title: 'Straight From the Streets',
+//   description:
+//     'Receive 6 Repair Markers and 2 Totaled Markers for having played previous Need for Speed™ titles.',
+//   points: 1,
+//   type: 'missable',
+//   conditions: $(),
+// });
+
+set.addAchievement({
+  title: 'D-Day',
+  description:
+    'Win the race at Chicago Airfield and qualify for Battle Machine.',
+  points: 1,
+  type: 'progression',
+  conditions: $(
+    c.gameIs.booted,
+    c.codeEntryDetection,
+    c.playerIs.inRaceDay,
+    c.playerIs.racing,
+    c.currentRaceDay(raceDays.DDay),
+    c.heatWon,
+  ),
+});
+
+for (const achievement of progressionAchievements) {
+  set.addAchievement({
+    title: achievement.title,
+    description: achievement.description,
+    points: achievement.points,
+    type: 'progression',
+    conditions: $(
+      c.gameIs.booted,
+      c.codeEntryDetection,
+      c.playerIs.inRaceDay,
+      c.currentRaceDay(achievement.raceDay),
+      c.raceDayDominated,
+    ),
+  });
+}
+
+set.addAchievement({
+  title: 'My Man, Ryan Cooper!',
+  description: 'Defeat Ryo Watanabe and become the new Showdown King.',
+  points: 25,
+  type: 'win_condition',
+  conditions: $(
+    c.gameIs.booted,
+    c.codeEntryDetection,
+    c.playerIs.inRaceDay,
+    c.currentRaceDay(raceDays.STokyo),
+    c.raceDayWon,
+  ),
+});
+
+set.addAchievement({
+  title: 'The Real Showdown King',
+  description: 'Defeat Ryo Watanabe in one sitting using King Assist.',
+  points: 25,
+  type: 'missable',
+  conditions: $(
+    c.gameIs.booted,
+    c.codeEntryDetection,
+    c.raceDayStarted(raceDays.SNevada),
+    c.currentRaceDay(raceDays.STokyo),
+    c.raceDayWonTrigger,
+    c.kingReset,
+    c.ryoRaceDayReset,
+  ),
+});
+
+for (const achievementGroup of optionalBossAchievements) {
+  set.addAchievement({
+    title: achievementGroup.intro.title,
+    description: achievementGroup.intro.description,
+    points: 3,
+    conditions: $(
+      c.gameIs.booted,
+      c.codeEntryDetection,
+      c.playerIs.inRaceDay,
+      orNext(
+        c.currentRaceDay(achievementGroup.intro.raceDays[0]),
+        c.currentRaceDay(achievementGroup.intro.raceDays[1]),
+        c.currentRaceDay(achievementGroup.intro.raceDays[2]),
+      ),
+      c.raceDayDominated,
+    ),
+  });
+  set.addAchievement({
+    title: achievementGroup.win.title,
+    description: achievementGroup.win.description,
+    points: 10,
+    conditions: $(
+      c.gameIs.booted,
+      c.codeEntryDetection,
+      c.playerIs.inRaceDay,
+      c.currentRaceDay(achievementGroup.win.raceDay),
+      c.raceDayWon,
+    ),
+  });
+  set.addAchievement({
+    title: achievementGroup.king.title,
+    description: achievementGroup.king.description,
+    points: 25,
+    type: 'missable',
+    conditions: $(
+      c.gameIs.booted,
+      c.codeEntryDetection,
+      c.raceDayStarted(achievementGroup.king.raceDay),
+      c.currentRaceDay(achievementGroup.king.raceDay),
+      c.raceDayWonTrigger,
+      c.kingReset,
+      c.raceDayReset,
+    ),
+  });
+}
+
+set.addAchievement({
+  title: 'The Street King',
+  description: 'Defeat all 5 Kings and become the Street King.',
+  points: 25,
+  conditions: $(
+    c.gameIs.booted,
+    c.codeEntryDetection,
+    c.allKingsDefeated,
+    c.playerIs.inRaceDay,
+    orNext(
+      c.currentRaceDay(raceDays.GEWillowSpringsII),
+      c.currentRaceDay(raceDays.RSInfineonII),
+      c.currentRaceDay(raceDays.NBAutopolisII),
+      c.currentRaceDay(raceDays.NCNevadaHighwayII),
+      c.currentRaceDay(raceDays.STokyo),
+    ),
+    c.raceDayWon,
+  ),
+});
 
 export const rich = RichPresence({
   format: {

@@ -1,0 +1,99 @@
+[PH: Need for Speed: ProStreet]
+
+# 1) Synopsis
+
+| | |
+|-|-|
+|Set Difficulty|8/10|
+|Approximate time to master|30h|
+|Minimum numbers of playthroughs needed|1|
+|Number of missable achievements|9|
+|Does difficulty affect achievements?|Yes|
+|Hardest achievement of the set|[PH: Almost Easy (10)]|
+
+Say goodbye to the streets. In Need for Speed: ProStreet you assume the role of Ryan Cooper, a former street racer entering the world of organized track racing. As you climb the ranks of the various racing organizations, you will have win and dominate the many Race Day events while you earn the right to challenge the Showdown King and the Kings of each individual racing discipline. Defeating all of the Kings earns you the title of Street King.
+
+# 2) Things to Know
+
+- All 5 bosses have missable achievements related to King Assist as their events are not repeatable: [PH: The Real Showdown King], [PH: The Real Grip King], [PH: The Real Drag King], [PH: The Real Drift King], and [PH: The Real Speed King]. Make sure to select King Assist before challenging them and don't reset the game or choose a different event while doing each boss.
+
+- Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements: [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand]. You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to complete a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once.
+
+- Entering any code will void all achievements on that career save file.
+
+# 3) Roadmap
+
+### Stage 1: Main Story (PH: points)
+
+In this stage you will progress through the story at your own pace, while grabbing any optional or challenge achievements you want on the way. Make sure to have **both** a [Need for Speed: Most Wanted](https://retroachievements.org/game/7788) (any version) and [Need for Speed: Carbon](https://retroachievements.org/game/7790) (any version) save file on your memory card before creating your career save file to unlock [PH: Straight From the Streets] achievement. [PH: The Real Showdown King] is the only other missable achievement in this section.
+
+|Title (Points)|Description|Type|
+|-|-|-|
+|[PH: Straight From the Streets]|Receive 6 Repair Markers and 2 Totaled Markers for having played previous Need for Speed™ titles.|Missable|
+|[PH: D-Day]|Win the race at Chicago Airfield and qualify for Battle Machine.|Progression|
+|[PH: The Big Time]|Dominate Challenge: Nevada and receive a Drag car as your reward.|Progression|
+|[PH: Going Global]|Dominate Showdown: Chicago and qualify for React Team Sessions.|Progression|
+|[PH: Big in Japan]|Dominate Challenge: Autopolis and receive a Drift car as your reward.|Progression|
+|[PH: On Fire]|Dominate Showdown: Autopolis and qualify for Super Promotion.|Progression|
+|[PH: No Limits]|Dominate Challenge: Autobahnring and receive a Speed car as your reward.|Progression|
+|[PH: The Final Showdown]|Dominate Showdown: Autobahnring and earn a chance to challenge The Showdown King.|Progression|
+|[PH: My Man, Ryan Cooper!]|Defeat Ryo Watanabe and become the new Showdown King.|Win Condition|
+|[PH: The Real Showdown King]|Defeat Ryo Watanabe in one sitting using King Assist.|Missable|
+
+### Stage 2: Optional Bosses (PH: points)
+
+In this stage you will complete Race Days belonging to the specialized racing organizations on your way to each 4 optional bosses. These bosses are not required to complete the main path but they are part of the path to 100% completion. They are unlocked by beating 10 track records in each of the 4 disciplines: Grip, Drag, Drift, and Speed. Each boss has an associated missable achievement as their events are not repeatable: [PH: The Real Grip King], [PH: The Real Drag King], [PH: The Real Drift King], and [PH: The Real Speed King].
+
+|Title (Points)|Description|Type|
+|-|-|-|
+|[PH: Close to the Apex]|Dominate your first Race Day in the G Effect Organization.||
+|[PH: Ray Krieger]|Defeat Ray Krieger and become the new Grip King.||
+|[PH: The Real Grip King]|Defeat Ray Krieger in one sitting using King Assist.|Missable|
+|[PH: The Perfect Shift]|Dominate your first Race Day in the Rogue Speed Organization.||
+|[PH: Karol Monroe]|Defeat Karol Monroe and become the new Drag King.||
+|[PH: The Real Drag King]|Defeat Karol Monroe in one sitting using King Assist.|Missable|
+|[PH: Smooth Transitions]|Dominate your first Race Day in the Noise Bomb Organization.||
+|[PH: Aki Kimura]|Defeat Aki Kimura and become the new Drift King.||
+|[PH: The Real Drift King]|Defeat Aki Kimura in one sitting using King Assist.|Missable|
+|[PH: Edge of Control]|Dominate your first Race Day in the Nitrocide Organization.||
+|[PH: Nate Denver	Optional]|Defeat Nate Denver and become the new Speed King.||
+|[PH: The Real Speed King]|Defeat Nate Denver in one sitting using King Assist.|Missable|
+|[PH: The Street King]|Defeat all 5 Kings and become the Street King.||
+
+### Stage 3: 100% Completion (PH: points)
+
+In this stage you will complete any remaining tasks needed for 100% completion. This involves dominating every race day in addition to the requirements of the previous stages.
+
+|Title (Points)|Description|Type|
+|-|-|-|
+|[PH: Big Racing]|Dominate Challenge: Texas and receive a Grip car as your reward.||
+|[PH: Through the Mountains]|Dominate Challenge: Ebisu and receive a Speed car as your reward.||
+|[PH: Battle Machine Domination]|Dominate all Race Days in the Battle Machine Organization.||
+|[PH: React Team Sessions Domination]|Dominate all Race Days in the React Team Sessions Organization.||
+|[PH: Super Promotion Domination]|Dominate all Race Days in the Super Promotion Organization.||
+|[PH: G Effect Domination]|Dominate all Race Days in the G Effect Organization.||
+|[PH: Rogue Speed Domination]|Dominate all Race Days in the Rogue Speed Organization.||
+|[PH: Noise Bomb Domination]|Dominate all Race Days in the Noise Bomb Organization.||
+|[PH: Nitrocide Domination]|Dominate all Race Days in the Nitrocide Organization.||
+
+### Stage 4: Challenges (PH: points)
+
+In this stage you will go above and beyond what the game asks from you by completing many challenges, some are mode specific, others are car specific. Some of them are simple and will certainly be acquired automatically by the time you're in the later stages of the game, others can be quite difficult, so be prepared to spend some time on them. [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand] are missable as you need to keep the cars earned from challenges with their pre-tuned blueprints intact.
+
+|Title (Points)|Description|Type|
+|-|-|-|
+|[PH: Battle Machine Mastery]|Beat the record score in all Race Days in the Battle Machine Organization.||
+|[PH: React Team Sessions Mastery]|Beat the record score in all Race Days in the React Team Sessions Organization.||
+|[PH: Super Promotion Mastery]|Beat the record score in all Race Days in the Super Promotion Organization.||
+|[PH: G Effect Mastery]|Beat the record score in all Race Days in the G Effect Organization.||
+|[PH: Rogue Speed Mastery]|Beat the record score in all Race Days in the Rogue Speed Organization.||
+|[PH: Noise Bomb Mastery]|Beat the record score in all Race Days in the Noise Bomb Organization.||
+|[PH: Nitrocide Mastery]|Beat the record score in all Race Days in the Nitrocide Organization.||
+
+***
+
+## Step 1: Story | **Total points: 999**
+
+Here is where you list the achievements and a guide for each. If multiple achievements are similar to each other and don't need a separate guide, feel free to put multiple achievement blocks below each other with a description after the final one.
+
+For achievement blocks, please copy the one you prefer from [this page](https://github.com/RetroAchievements/guides/wiki/Achievement-Code-Blocks), or use this [generator](https://raguides-template-generator.vercel.app/) to convert all achievements of a set.
