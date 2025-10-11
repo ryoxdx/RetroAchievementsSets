@@ -9,17 +9,17 @@
 |Minimum numbers of playthroughs needed|1|
 |Number of missable achievements|9|
 |Does difficulty affect achievements?|Yes|
-|Hardest achievement of the set|[PH: Almost Easy (10)]|
+|Hardest achievement of the set|[PH: Out of Control (25)]|
 
-Say goodbye to the streets. In Need for Speed: ProStreet you assume the role of Ryan Cooper, a former street racer entering the world of organized track racing. As you climb the ranks of the various racing organizations, you will have win and dominate the many Race Day events while you earn the right to challenge the Showdown King and the Kings of each individual racing discipline. Defeating all of the Kings earns you the title of Street King.
+Say goodbye to the streets. In Need for Speed: ProStreet you assume the role of Ryan Cooper, a former street racer entering the world of organized track racing. As you climb the ranks of the various racing organizations, you will have to win and dominate the many Race Day events while you earn the right to challenge the Showdown King and the Kings of each individual racing discipline. Defeating all of the Kings earns you the title of Street King.
 
 # 2) Things to Know
 
 - All 5 bosses have missable achievements related to King Assist as their events are not repeatable: [PH: The Real Showdown King], [PH: The Real Grip King], [PH: The Real Drag King], [PH: The Real Drift King], and [PH: The Real Speed King]. Make sure to select King Assist before challenging them and don't reset the game or choose a different event while doing each boss.
 
-- Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements: [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand]. You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to complete a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once.
+- Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements: [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand]. You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to enter a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once. As with the boss related achievements, make sure to select King Assist before starting the Race Day and don't reset the game before dominating.
 
-- Entering any code will void all achievements on that career save file.
+- Entering any code will void all achievements, if saved it'll persist forever on that career save file.
 
 # 3) Roadmap
 
@@ -78,7 +78,7 @@ In this stage you will complete any remaining tasks needed for 100% completion. 
 
 ### Stage 4: Challenges (PH: points)
 
-In this stage you will go above and beyond what the game asks from you by completing many challenges, some are mode specific, others are car specific. Some of them are simple and will certainly be acquired automatically by the time you're in the later stages of the game, others can be quite difficult, so be prepared to spend some time on them. [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand] are missable as you need to keep the cars earned from challenges with their pre-tuned blueprints intact.
+In this stage you will go above and beyond what the game asks from you by completing many challenges, some are mode specific, others are car specific. Some of them are simple and will probably be acquired automatically by the time you're in the later stages of the game, others can be quite difficult, so be prepared to spend some time on them. [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand] are missable as you need to keep the cars earned from challenges with their pre-tuned blueprints intact.
 
 |Title (Points)|Description|Type|
 |-|-|-|

@@ -7,7 +7,7 @@
       "name": "diff",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "diff", "${file}"],
-      "envFile": "${fileDirname}/.env",
+      "envFile": "${fileDirname}/../.env",
       "env": {
         "FORCE_COLOR": "1"
       }
@@ -18,7 +18,7 @@
       "name": "save",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "save", "${file}"],
-      "envFile": "${fileDirname}/.env",
+      "envFile": "${fileDirname}/../.env",
       "env": {
         "FORCE_COLOR": "1"
       }
@@ -29,7 +29,7 @@
       "name": "diff-save",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "diff-save", "${file}"],
-      "envFile": "${fileDirname}/.env",
+      "envFile": "${fileDirname}/../.env",
       "env": {
         "FORCE_COLOR": "1"
       }
@@ -40,7 +40,7 @@
       "name": "rich-save",
       "runtimeExecutable": "yarn",
       "runtimeArgs": ["cruncheevos", "rich-save", "--force-rewrite", "${file}"],
-      "envFile": "${fileDirname}/.env",
+      "envFile": "${fileDirname}/../.env",
       "env": {
         "FORCE_COLOR": "1"
       }

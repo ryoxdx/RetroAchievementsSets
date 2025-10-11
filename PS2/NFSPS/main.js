@@ -11,7 +11,7 @@ import {
   raceDays,
   progressionAchievements,
   optionalBossAchievements,
-} from './NFSPSUtils.js';
+} from './constants.js';
 
 /**
  * @template T
