@@ -2,7 +2,6 @@ import {
   AchievementSet,
   define as $,
   ConditionBuilder,
-  Condition,
   RichPresence,
   orNext,
 } from '@cruncheevos/core';
@@ -18,6 +17,7 @@ import {
   carModels,
   trackIds,
   tracksWithRecords,
+  timeTrialAchievements,
 } from './constants.js';
 
 /**
@@ -1100,7 +1100,7 @@ for (const achievement of showdownChallengeAchievements) {
   set.addAchievement({
     title: achievement.title,
     description: `Dominate Showdown: ${achievement.showdown} in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.`,
-    points: 25,
+    points: achievement.points,
     conditions: $(
       c.gameIs.booted,
       c.codeEntryDetection,
@@ -1237,7 +1237,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Cooked to Perfection',
   description: 'Reach max grip bonus in a Drag mode event.',
-  points: 3,
+  points: 4,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1269,7 +1269,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Eleven Second Car',
   description: 'Finish a 1/2 mile Drag race in under 11 seconds.',
-  points: 25,
+  points: 10,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1302,7 +1302,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Steady Hands',
   description: 'Win a Speed mode event with no damage to your car.',
-  points: 3,
+  points: 2,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1335,7 +1335,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Granny Shifting, Not Double Clutching Like You Should',
   description: 'Finish a 1/4 mile Drag race in under 8 seconds using Clutch.',
-  points: 10,
+  points: 5,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1354,7 +1354,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'More Is Enough',
   description: 'Maintain a Wheelie over a full 1/4 mile (402.3 m, 1,320 ft).',
-  points: 10,
+  points: 5,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1421,7 +1421,7 @@ set.addAchievement({
   title: 'Ryan Is Gonna Be Running Three Honda Civics',
   description:
     "Dominate a multi-discipline Race Day to which you've brought nothing but Honda Civics.",
-  points: 5,
+  points: 4,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1466,7 +1466,7 @@ set.addAchievement({
   title: 'Eleanor',
   description:
     "Achieve a lap time under 60 seconds in a race on the Horse Thief Mile at Willow Springs using a Shelby GT500 '67.",
-  points: 5,
+  points: 4,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1529,7 +1529,7 @@ set.addAchievement({
   title: 'Homologation Special',
   description:
     'Break a track record on a Nevada Grip mode race with a dirt section using a stock Ford Escort RS Cosworth.',
-  points: 5,
+  points: 3,
   conditions: getStockRecordGroups(
     $(
       c.gameIs.booted,
@@ -1593,7 +1593,7 @@ set.addAchievement({
   title: 'Donkey Kong?',
   description:
     'Score at least 10,000 points on a single Drift round using a Nissan 350Z (Z33).',
-  points: 10,
+  points: 5,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1630,7 +1630,7 @@ set.addAchievement({
   title: 'Track Certified',
   description:
     'Break a track record in a Mondello Park GP Circuit Time Attack using any BMW M3.',
-  points: 3,
+  points: 2,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
@@ -1653,7 +1653,7 @@ set.addAchievement({
   title: 'Blackjack',
   description:
     'Break a track record in any Nevada Highway Speed mode event using any Chevrolet Corvette.',
-  points: 3,
+  points: 2,
   conditions: getRecordGroups(
     $(
       c.gameIs.booted,
@@ -1675,7 +1675,7 @@ set.addAchievement({
   title: 'NASCAR Street Series',
   description:
     'Break a track record in a Texas World Speedway Oval Circuit event using a Ford Mustang.',
-  points: 3,
+  points: 2,
   conditions: getRecordGroups(
     $(
       c.gameIs.booted,
@@ -1694,7 +1694,7 @@ set.addAchievement({
   title: 'Boxer Spirit',
   description:
     'Break a track record in any Ebisu Time Attack event using a Subaru Impreza WRX STI with no power or nitrous upgrades.',
-  points: 5,
+  points: 4,
   conditions: getStockPowerRecordGroups(
     $(
       c.gameIs.booted,
@@ -1709,22 +1709,23 @@ set.addAchievement({
   ),
 });
 
-set.addAchievement({
-  title: 'Slingshot, Engage',
-  description:
-    'Achieve a lap time under 30 seconds in a race on the Oval Circuit at Texas World Speedway.',
-  points: 10,
-  conditions: $(
-    c.gameIs.booted,
-    c.codeEntryDetection,
-    c.playerIs.inRaceDay,
-    c.isCareerRaceDay,
-    orNext(...tracksWithRecords.texasOval.map(({ id }) => c.currentTrack(id))),
-    c.playerIs.racing,
-    c.isNotPracticeMode,
-    c.bestLapUnderTime(30.0),
-  ),
-});
+for (const achievement of timeTrialAchievements) {
+  set.addAchievement({
+    title: achievement.title,
+    description: `Beat a lap time of ${achievement.timeString} in a race on the ${achievement.location}.`,
+    points: 10,
+    conditions: $(
+      c.gameIs.booted,
+      c.codeEntryDetection,
+      c.playerIs.inRaceDay,
+      c.isCareerRaceDay,
+      orNext(...achievement.tracks.map((id) => c.currentTrack(id))),
+      c.playerIs.racing,
+      c.isNotPracticeMode,
+      c.bestLapUnderTime(achievement.time),
+    ),
+  });
+}
 
 export const rich = RichPresence({
   format: {

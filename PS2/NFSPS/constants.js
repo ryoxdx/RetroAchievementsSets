@@ -255,18 +255,21 @@ export const showdownChallengeAchievements = [
     title: 'When Life Gives You Lemons...',
     recordTitle: 'Escape',
     showdown: 'Chicago',
+    points: 10,
     raceDay: raceDays.SChicago,
   },
   {
     title: '...Make Lemonade...',
     recordTitle: 'Draw Japan',
     showdown: 'Autopolis',
+    points: 25,
     raceDay: raceDays.SAutopolis,
   },
   {
     title: '...And Start a Lemonade Stand',
     recordTitle: 'A Blast Beat',
     showdown: 'Autobahnring',
+    points: 25,
     raceDay: raceDays.SAutobahnring,
   },
 ];
@@ -364,7 +367,13 @@ export const carModels = {
 
 export const trackIds = {
   horseThiefMile: [0xff587df1, 0x2314660f],
-  bigWillow: [],
+  bigWillow: [0x214d30ad, 0x68264064],
+  portland: [0x304c872e, 0xeb2a6a41, 0x1c1a1a19],
+  mondello: [
+    0x23669d79, 0x4cd616ea, 0x599ad6b5, 0xa8bfcc70, 0xe4ed8462, 0x4a554c08,
+  ],
+  autopolis: [0xab2ce429, 0x4d06cb43, 0x87f0215a],
+  infineon: [0x3c5278d3, 0x958b2800],
 };
 
 export const tracksWithRecords = {
@@ -425,3 +434,48 @@ export const tracksWithRecords = {
   ],
   ebisuTimeAttack: [{ id: 0x9a10ac71, record: 8480 }],
 };
+
+export const timeTrialAchievements = [
+  {
+    title: 'The Fastest Car in the West',
+    location: 'GP Circuit at Willow Springs',
+    time: 55.0,
+    timeString: '0:55.00',
+    tracks: trackIds.bigWillow,
+  },
+  {
+    title: 'The Fastest Road in the Pacific Northwest',
+    location: 'GP Circuit at Portland International Raceway',
+    time: 48.0,
+    timeString: '0:48.00',
+    tracks: trackIds.portland,
+  },
+  {
+    title: 'Holiday in Ireland',
+    location: 'GP Circuit at Mondello Park',
+    time: 80.0,
+    timeString: '1:20.00',
+    tracks: trackIds.mondello,
+  },
+  {
+    title: 'Super Street',
+    location: 'GP Circuit at Autopolis',
+    time: 80.0,
+    timeString: '1:20.00',
+    tracks: trackIds.autopolis,
+  },
+  {
+    title: 'In the Sonoma Desert',
+    location: 'GP Circuit at Infineon',
+    time: 60.0,
+    timeString: '1:00.00',
+    tracks: trackIds.infineon,
+  },
+  {
+    title: 'Slingshot, Engage',
+    location: 'Oval Circuit at Texas World Speedway',
+    time: 30.0,
+    timeString: '0:30.00',
+    tracks: tracksWithRecords.texasOval.map((track) => track.id),
+  },
+];
