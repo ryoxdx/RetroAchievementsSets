@@ -1116,6 +1116,7 @@ for (const achievement of showdownChallengeAchievements) {
     title: achievement.title,
     description: `Dominate Showdown: ${achievement.showdown} in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.`,
     points: achievement.points,
+    type: 'missable',
     conditions: $(
       c.gameIs.booted,
       c.codeEntryDetection,
