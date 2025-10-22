@@ -1747,7 +1747,7 @@ for (const leaderboard of raceDayLeaderboards) {
     title: `${leaderboard.org} - ${leaderboard.day}`,
     description: `Highest Race Day score.`,
     lowerIsBetter: false,
-    type: 'SCORE',
+    type: 'VALUE',
     conditions: {
       start: $(
         c.gameIs.booted,
