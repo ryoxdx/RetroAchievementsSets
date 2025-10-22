@@ -567,6 +567,9 @@ const codeFor = () => {
     ['AddHits', 'Mem', 'Float', 0x474, '>=', 'Float', '', 246.0],
     ['Measured%', 'Value', '', 0, '=', 'Value', '', 1, 600],
     ['PauseIf', 'Mem', '32bit', addresses.speedPointer, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['ResetIf', 'Mem', '32bit', 0x138, '=', 'Value', '', 0],
   );
 
   const currentSpeedIsAboveControlThreshholdReset = $(
