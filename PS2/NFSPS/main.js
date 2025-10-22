@@ -1991,12 +1991,41 @@ export const rich = RichPresence({
             c.gameIs.loadedIn,
             c.playerIs.inRaceDay,
             c.playerIs.racing,
+            c.currentRaceDay(raceDays.DDay),
+          ),
+          `[${org}] ${day} | ${car} (Grip)`,
+        ],
+        [
+          $(
+            c.gameIs.booted,
+            c.gameIs.loadedIn,
+            c.playerIs.inRaceDay,
+            c.playerIs.racing,
+            c.isCareerRaceDay,
           ),
           `[${org}] ${day} | ${car} (${mode}${modeLoaner})`,
         ],
         [
-          $(c.gameIs.booted, c.gameIs.loadedIn, c.playerIs.inRaceDay),
+          $(
+            c.gameIs.booted,
+            c.gameIs.loadedIn,
+            c.playerIs.inRaceDay,
+            c.playerIs.racing,
+          ),
+          `[${org}] ${day} | ${car}`,
+        ],
+        [
+          $(
+            c.gameIs.booted,
+            c.gameIs.loadedIn,
+            c.playerIs.inRaceDay,
+            c.isCareerRaceDay,
+          ),
           `[${org}] ${day} | $${cash}`,
+        ],
+        [
+          $(c.gameIs.booted, c.gameIs.loadedIn, c.playerIs.inRaceDay),
+          `[${org}] ${day}`,
         ],
         [
           $(c.gameIs.booted, c.gameIs.loadedIn, c.playerIs.notInRaceDay),
