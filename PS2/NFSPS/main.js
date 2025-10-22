@@ -18,6 +18,7 @@ import {
   trackIds,
   tracksWithRecords,
   timeTrialAchievements,
+  raceDayLeaderboards,
 } from './constants.js';
 
 /**
@@ -820,6 +821,18 @@ const codeFor = () => {
       ['', 'Value', '', 0, '>=', 'Value', '', record],
     );
 
+  const raceDayScoreChanged = $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['', 'Mem', '32bit', 0x1c, '>', 'Delta', '32bit', 0x1c],
+  );
+
+  const raceDayScoreMeasured = $(
+    ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+    ['AddAddress', 'Mem', '32bit', 0x30],
+    ['Measured', 'Mem', '32bit', 0x1c],
+  );
+
   return {
     addresses,
     gameIs,
@@ -876,6 +889,8 @@ const codeFor = () => {
     bestLapUnderTime,
     currentTrack,
     trackRecordBeaten,
+    raceDayScoreChanged,
+    raceDayScoreMeasured,
   };
 };
 
@@ -1724,6 +1739,32 @@ for (const achievement of timeTrialAchievements) {
       c.isNotPracticeMode,
       c.bestLapUnderTime(achievement.time),
     ),
+  });
+}
+
+for (const leaderboard of raceDayLeaderboards) {
+  set.addLeaderboard({
+    title: `${leaderboard.org} - ${leaderboard.day}`,
+    description: `Highest Race Day score.`,
+    lowerIsBetter: false,
+    type: 'SCORE',
+    conditions: {
+      start: $(
+        c.gameIs.booted,
+        c.codeEntryDetection,
+        c.playerIs.inRaceDay,
+        c.isCareerRaceDay,
+        c.currentRaceDay(leaderboard.raceDayId),
+        c.playerIs.racing,
+        c.isNotPracticeMode,
+        c.raceDayScoreChanged,
+      ),
+      cancel: '0=1',
+      submit: '1=1',
+      value: {
+        core: c.raceDayScoreMeasured,
+      },
+    },
   });
 }
 
