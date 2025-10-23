@@ -29,53 +29,53 @@ Say goodbye to the streets. In [Need for Speed: ProStreet](https://retroachievem
 
 In this stage you will progress through the story at your own pace, while grabbing any optional or challenge achievements you want on the way. [The Real Showdown King (25)](#the-real-showdown-king) is the only missable achievement in this section.
 
-| Title (Points)                                         | Description                                                                       | Type          |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------- |
-| [D-Day (1)](#d-day)                                    | Win the race at Chicago Airfield and qualify for Battle Machine.                  | Progression   |
-| [The Big Time (3)](#the-big-time)                      | Dominate Challenge: Nevada and receive a Drag car as your reward.                 | Progression   |
-| [Going Global (5)](#going-global)                      | Dominate Showdown: Chicago and qualify for React Team Sessions.                   | Progression   |
-| [Big in Japan (5)](#big-in-japan)                      | Dominate Challenge: Autopolis and receive a Drift car as your reward.             | Progression   |
-| [On Fire (10)](#on-fire)                               | Dominate Showdown: Autopolis and qualify for Super Promotion.                     | Progression   |
-| [No Limits (10)](#no-limits)                           | Dominate Challenge: Autobahnring and receive a Speed car as your reward.          | Progression   |
-| [The Final Showdown (10)](#the-final-showdown)         | Dominate Showdown: Autobahnring and earn a chance to challenge The Showdown King. | Progression   |
-| [My Man, Ryan Cooper! (25)](#my-man-ryan-cooper)       | Defeat Ryo Watanabe and become the new Showdown King.                             | Win Condition |
-| [The Real Showdown King (25)](#the-real-showdown-king) | Defeat Ryo Watanabe in one sitting using King Assist.                             | Missable      |
+| Badge                                                                           | Title (Points)                                         | Description                                                                       | Type          |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------- |
+| ![D-Day](https://media.retroachievements.org/Badge/628415.png)                  | [D-Day (1)](#d-day)                                    | Win the race at Chicago Airfield and qualify for Battle Machine.                  | Progression   |
+| ![The Big Time](https://media.retroachievements.org/Badge/628416.png)           | [The Big Time (3)](#the-big-time)                      | Dominate Challenge: Nevada and receive a Drag car as your reward.                 | Progression   |
+| ![Going Global](https://media.retroachievements.org/Badge/628417.png)           | [Going Global (5)](#going-global)                      | Dominate Showdown: Chicago and qualify for React Team Sessions.                   | Progression   |
+| ![Big in Japan](https://media.retroachievements.org/Badge/628418.png)           | [Big in Japan (5)](#big-in-japan)                      | Dominate Challenge: Autopolis and receive a Drift car as your reward.             | Progression   |
+| ![On Fire](https://media.retroachievements.org/Badge/628419.png)                | [On Fire (10)](#on-fire)                               | Dominate Showdown: Autopolis and qualify for Super Promotion.                     | Progression   |
+| ![No Limits](https://media.retroachievements.org/Badge/628420.png)              | [No Limits (10)](#no-limits)                           | Dominate Challenge: Autobahnring and receive a Speed car as your reward.          | Progression   |
+| ![The Final Showdown](https://media.retroachievements.org/Badge/628421.png)     | [The Final Showdown (10)](#the-final-showdown)         | Dominate Showdown: Autobahnring and earn a chance to challenge The Showdown King. | Progression   |
+| ![My Man, Ryan Cooper!](https://media.retroachievements.org/Badge/628422.png)   | [My Man, Ryan Cooper! (25)](#my-man-ryan-cooper)       | Defeat Ryo Watanabe and become the new Showdown King.                             | Win Condition |
+| ![The Real Showdown King](https://media.retroachievements.org/Badge/628423.png) | [The Real Showdown King (25)](#the-real-showdown-king) | Defeat Ryo Watanabe in one sitting using King Assist.                             | Missable      |
 
 ### Stage 2: Optional Bosses (117 points)
 
 In this stage you will complete Race Days belonging to the specialized racing organizations on your way to each 4 optional bosses. These bosses are not required to complete the main path but they are part of the path to 100% completion. They are unlocked by beating 10 track records in each of the 4 disciplines: Grip, Drag, Drift, and Speed. Each boss has an associated missable achievement as their events are not repeatable: [The Real Grip King (10)](#the-real-grip-king), [The Real Drag King (10)](#the-real-drag-king), [The Real Drift King (10)](#the-real-drift-king), and [The Real Speed King (10)](#the-real-speed-king).
 
-| Title (Points)                                   | Description                                                   | Type     |
-| ------------------------------------------------ | ------------------------------------------------------------- | -------- |
-| [Close to the Apex (3)](#close-to-the-apex)      | Dominate your first Race Day in the G Effect Organization.    |          |
-| [Ray Krieger (10)](#ray-krieger)                 | Defeat Ray Krieger and become the new Grip King.              |          |
-| [The Real Grip King (10)](#the-real-grip-king)   | Defeat Ray Krieger in one sitting using King Assist.          | Missable |
-| [The Perfect Shift (3)](#the-perfect-shift)      | Dominate your first Race Day in the Rogue Speed Organization. |          |
-| [Karol Monroe (10)](#karol-monroe)               | Defeat Karol Monroe and become the new Drag King.             |          |
-| [The Real Drag King (10)](#the-real-drag-king)   | Defeat Karol Monroe in one sitting using King Assist.         | Missable |
-| [Smooth Transitions (3)](#smooth-transitions)    | Dominate your first Race Day in the Noise Bomb Organization.  |          |
-| [Aki Kimura (10)](#aki-kimura)                   | Defeat Aki Kimura and become the new Drift King.              |          |
-| [The Real Drift King (10)](#the-real-drift-king) | Defeat Aki Kimura in one sitting using King Assist.           | Missable |
-| [Edge of Control (3)](#edge-of-control)          | Dominate your first Race Day in the Nitrocide Organization.   |          |
-| [Nate Denver (10)](#nate-denver)                 | Defeat Nate Denver and become the new Speed King.             |          |
-| [The Real Speed King (10)](#the-real-speed-king) | Defeat Nate Denver in one sitting using King Assist.          | Missable |
-| [The Street King (25)](#the-street-king)         | Defeat all 5 Kings and become the Street King.                |          |
+| Badge                                                                        | Title (Points)                                   | Description                                                   | Type     |
+| ---------------------------------------------------------------------------- | ------------------------------------------------ | ------------------------------------------------------------- | -------- |
+| ![Close to the Apex](https://media.retroachievements.org/Badge/628424.png)   | [Close to the Apex (3)](#close-to-the-apex)      | Dominate your first Race Day in the G Effect Organization.    |          |
+| ![Ray Krieger](https://media.retroachievements.org/Badge/628425.png)         | [Ray Krieger (10)](#ray-krieger)                 | Defeat Ray Krieger and become the new Grip King.              |          |
+| ![The Real Grip King](https://media.retroachievements.org/Badge/628426.png)  | [The Real Grip King (10)](#the-real-grip-king)   | Defeat Ray Krieger in one sitting using King Assist.          | Missable |
+| ![The Perfect Shift](https://media.retroachievements.org/Badge/628427.png)   | [The Perfect Shift (3)](#the-perfect-shift)      | Dominate your first Race Day in the Rogue Speed Organization. |          |
+| ![Karol Monroe](https://media.retroachievements.org/Badge/628428.png)        | [Karol Monroe (10)](#karol-monroe)               | Defeat Karol Monroe and become the new Drag King.             |          |
+| ![The Real Drag King](https://media.retroachievements.org/Badge/628429.png)  | [The Real Drag King (10)](#the-real-drag-king)   | Defeat Karol Monroe in one sitting using King Assist.         | Missable |
+| ![Smooth Transitions](https://media.retroachievements.org/Badge/628430.png)  | [Smooth Transitions (3)](#smooth-transitions)    | Dominate your first Race Day in the Noise Bomb Organization.  |          |
+| ![Aki Kimura](https://media.retroachievements.org/Badge/628431.png)          | [Aki Kimura (10)](#aki-kimura)                   | Defeat Aki Kimura and become the new Drift King.              |          |
+| ![The Real Drift King](https://media.retroachievements.org/Badge/628432.png) | [The Real Drift King (10)](#the-real-drift-king) | Defeat Aki Kimura in one sitting using King Assist.           | Missable |
+| ![Edge of Control](https://media.retroachievements.org/Badge/628433.png)     | [Edge of Control (3)](#edge-of-control)          | Dominate your first Race Day in the Nitrocide Organization.   |          |
+| ![Nate Denver](https://media.retroachievements.org/Badge/628434.png)         | [Nate Denver (10)](#nate-denver)                 | Defeat Nate Denver and become the new Speed King.             |          |
+| ![The Real Speed King](https://media.retroachievements.org/Badge/628435.png) | [The Real Speed King (10)](#the-real-speed-king) | Defeat Nate Denver in one sitting using King Assist.          | Missable |
+| ![The Street King](https://media.retroachievements.org/Badge/628436.png)     | [The Street King (25)](#the-street-king)         | Defeat all 5 Kings and become the Street King.                |          |
 
 ### Stage 3: 100% Completion (125 points)
 
 In this stage you will complete any remaining tasks needed for 100% completion. This involves dominating every race day in addition to the requirements of the previous stages. Domination of the Race Days in the specific race disciplines organizations (G Effect, Rogue Speed, Noise Bomb and Nitrocide) also includes beating the Kings related to them.
 
-| Title (Points)                                                         | Description                                                       | Type |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ---- |
-| [Big Racing (5)](#big-racing)                                          | Dominate Challenge: Texas and receive a Grip car as your reward.  |      |
-| [Through the Mountains (5)](#through-the-mountains)                    | Dominate Challenge: Ebisu and receive a Speed car as your reward. |      |
-| [Battle Machine Domination (25)](#battle-machine-domination)           | Dominate all Race Days in the Battle Machine Organization.        |      |
-| [React Team Sessions Domination (25)](#react-team-sessions-domination) | Dominate all Race Days in the React Team Sessions Organization.   |      |
-| [Super Promotion Domination (25)](#super-promotion-domination)         | Dominate all Race Days in the Super Promotion Organization.       |      |
-| [G Effect Domination (10)](#g-effect-domination)                       | Dominate all Race Days in the G Effect Organization.              |      |
-| [Rogue Speed Domination (10)](#rogue-speed-domination)                 | Dominate all Race Days in the Rogue Speed Organization.           |      |
-| [Noise Bomb Domination (10)](#noise-bomb-domination)                   | Dominate all Race Days in the Noise Bomb Organization.            |      |
-| [Nitrocide Domination (10)](#nitrocide-domination)                     | Dominate all Race Days in the Nitrocide Organization.             |      |
+| Badge                                                                                   | Title (Points)                                                         | Description                                                       | Type |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------- | ---- |
+| ![Big Racing](https://media.retroachievements.org/Badge/628437.png)                     | [Big Racing (5)](#big-racing)                                          | Dominate Challenge: Texas and receive a Grip car as your reward.  |      |
+| ![Through the Mountains](https://media.retroachievements.org/Badge/628438.png)          | [Through the Mountains (5)](#through-the-mountains)                    | Dominate Challenge: Ebisu and receive a Speed car as your reward. |      |
+| ![Battle Machine Domination](https://media.retroachievements.org/Badge/628439.png)      | [Battle Machine Domination (25)](#battle-machine-domination)           | Dominate all Race Days in the Battle Machine Organization.        |      |
+| ![React Team Sessions Domination](https://media.retroachievements.org/Badge/628440.png) | [React Team Sessions Domination (25)](#react-team-sessions-domination) | Dominate all Race Days in the React Team Sessions Organization.   |      |
+| ![Super Promotion Domination](https://media.retroachievements.org/Badge/628441.png)     | [Super Promotion Domination (25)](#super-promotion-domination)         | Dominate all Race Days in the Super Promotion Organization.       |      |
+| ![G Effect Domination](https://media.retroachievements.org/Badge/628442.png)            | [G Effect Domination (10)](#g-effect-domination)                       | Dominate all Race Days in the G Effect Organization.              |      |
+| ![Rogue Speed Domination](https://media.retroachievements.org/Badge/628443.png)         | [Rogue Speed Domination (10)](#rogue-speed-domination)                 | Dominate all Race Days in the Rogue Speed Organization.           |      |
+| ![Noise Bomb Domination](https://media.retroachievements.org/Badge/628444.png)          | [Noise Bomb Domination (10)](#noise-bomb-domination)                   | Dominate all Race Days in the Noise Bomb Organization.            |      |
+| ![Nitrocide Domination](https://media.retroachievements.org/Badge/628445.png)           | [Nitrocide Domination (10)](#nitrocide-domination)                     | Dominate all Race Days in the Nitrocide Organization.             |      |
 
 ### Stage 4: Challenges (651 points)
 
@@ -83,64 +83,66 @@ In this stage you will go above and beyond what the game asks from you by comple
 
 Click on each achievement for more details.
 
-| Title (Points)                                                                                                     | Description                                                                                                                                      | Type |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---- |
-| [When Life Gives You Lemons... (10)](#when-life-gives-you-lemons)                                                  | Dominate Showdown: Chicago in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.      |      |
-| [...Make Lemonade... (25)](#make-lemonade)                                                                         | Dominate Showdown: Autopolis in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.    |      |
-| [...And Start a Lemonade Stand (25)](#and-start-a-lemonade-stand)                                                  | Dominate Showdown: Autobahnring in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King. |      |
-| [Almost Easy (25)](#almost-easy)                                                                                   | Dominate a Challenge Race Day in one sitting by completing at most half of the events in it using King assist.                                   |      |
-| [Escape (10)](#escape)                                                                                             | Beat the record score in Showdown: Chicago.                                                                                                      |      |
-| [Draw Japan (10)](#draw-japan)                                                                                     | Beat the record score in Showdown: Autopolis.                                                                                                    |      |
-| [A Blast Beat (10)](#a-blast-beat)                                                                                 | Beat the record score in Showdown: Autobahnring.                                                                                                 |      |
-| [Battle Machine Mastery (50)](#battle-machine-mastery)                                                             | Beat the record score in all Race Days in the Battle Machine Organization.                                                                       |      |
-| [React Team Sessions Mastery (50)](#react-team-sessions-mastery)                                                   | Beat the record score in all Race Days in the React Team Sessions Organization.                                                                  |      |
-| [Super Promotion Mastery (50)](#super-promotion-mastery)                                                           | Beat the record score in all Race Days in the Super Promotion Organization.                                                                      |      |
-| [G Effect Mastery (25)](#g-effect-mastery)                                                                         | Beat the record score in all Race Days in the G Effect Organization.                                                                             |      |
-| [Rogue Speed Mastery (25)](#rogue-speed-mastery)                                                                   | Beat the record score in all Race Days in the Rogue Speed Organization.                                                                          |      |
-| [Noise Bomb Mastery (25)](#noise-bomb-mastery)                                                                     | Beat the record score in all Race Days in the Noise Bomb Organization.                                                                           |      |
-| [Nitrocide Mastery (25)](#nitrocide-mastery)                                                                       | Beat the record score in all Race Days in the Nitrocide Organization.                                                                            |      |
-| [Challenge Mastery: Nevada (5)](#challenge-mastery-nevada)                                                         | Beat all individual event records in Challenge: Nevada.                                                                                          |      |
-| [Challenge Mastery: Texas (10)](#challenge-mastery-texas)                                                          | Beat all individual event records in Challenge: Texas.                                                                                           |      |
-| [Challenge Mastery: Autopolis (10)](#challenge-mastery-autopolis)                                                  | Beat all individual event records in Challenge: Autopolis.                                                                                       |      |
-| [Challenge Mastery: Ebisu (25)](#challenge-mastery-ebisu)                                                          | Beat all individual event records in Challenge: Ebisu.                                                                                           |      |
-| [Challenge Mastery: Autobahnring (25)](#challenge-mastery-autobahnring)                                            | Beat all individual event records in Challenge: Autobahnring.                                                                                    |      |
-| [Sliding Scale (10)](#sliding-scale)                                                                               | Score at least 100,000 points in a single Race Day.                                                                                              |      |
-| [Clean Racer (2)](#clean-racer)                                                                                    | Win a Grip mode event with no damage to your car.                                                                                                |      |
-| [Power Player (3)](#power-player)                                                                                  | Dominate all sectors of a Sector Shootout event at the same time.                                                                                |      |
-| [Cooked to Perfection (4)](#cooked-to-perfection)                                                                  | Reach max grip bonus in a Drag mode event.                                                                                                       |      |
-| [Ten Second Car (3)](#ten-second-car)                                                                              | Finish a 1/4 mile Drag race in under 10 seconds.                                                                                                 |      |
-| [Eleven Second Car (10)](#eleven-second-car)                                                                       | Finish a 1/2 mile Drag race in under 11 seconds.                                                                                                 |      |
-| [Watch My Feet (3)](#watch-my-feet)                                                                                | Score at least 3,000 points in a single Drift round.                                                                                             |      |
-| [Steady Hands (2)](#steady-hands)                                                                                  | Win a Speed mode event with no damage to your car.                                                                                               |      |
-| [Restless (10)](#restless)                                                                                         | Score at least 5,000 points on a Sector Shootout event.                                                                                          |      |
-| [Granny Shifting, Not Double Clutching Like You Should (5)](#granny-shifting-not-double-clutching-like-you-should) | Finish a 1/4 mile Drag race in under 8 seconds using Clutch.                                                                                     |      |
-| [More Is Enough (5)](#more-is-enough)                                                                              | Maintain a Wheelie over a full 1/4 mile (402.3 m, 1,320 ft).                                                                                     |      |
-| [Fancy Footwork (10)](#fancy-footwork)                                                                             | Score at least 15,000 points on a single Drift round using King Assist.                                                                          |      |
-| [Out of Control (25)](#out-of-control)                                                                             | Maintain a speed of 396 km/h (246 MPH) or higher for at least 10s in a Speed mode event on Nevada Highway and then win the event.                |      |
-| [Ryan Is Gonna Be Running Three Honda Civics (4)](#ryan-is-gonna-be-running-three-honda-civics)                    | Dominate a multi-discipline Race Day to which you've brought nothing but Honda Civics.                                                           |      |
-| [The Legendary Hachiroku of Ebisu (10)](#the-legendary-hachiroku-of-ebisu)                                         | Score at least 8,600 points on a single Drift round in Ebisu using a stock Toyota Corolla GTS (AE86).                                            |      |
-| [Eleanor (4)](#eleanor)                                                                                            | Achieve a lap time under 60 seconds in a race on the Horse Thief Mile at Willow Springs using a Shelby GT500 '67.                                |      |
-| [Twisted Chassis (3)](#twisted-chassis)                                                                            | Win a Wheelie Competition using a Dodge Charger R/T.                                                                                             |      |
-| [Poster Boy (10)](#poster-boy)                                                                                     | Score at least 5,000 points on a single Drift round in Tokyo Dockyards using a Mazda RX-7 and King assist.                                       |      |
-| [Homologation Special (3)](#homologation-special)                                                                  | Break a track record on a Nevada Grip mode race with a dirt section using a stock Ford Escort RS Cosworth.                                       |      |
-| [Ten Minute Car (5)](#ten-minute-car)                                                                              | Finish a 1/4 mile Drag race in under 10 seconds using a Toyota Supra with no power or nitrous upgrades.                                          |      |
-| [Pogo (2)](#pogo)                                                                                                  | Break a track record in any Autobahn Speed mode event using a Volkswagen Golf GTI or R32.                                                        |      |
-| [Donkey Kong? (5)](#donkey-kong)                                                                                   | Score at least 10,000 points on a single Drift round using a Nissan 350Z (Z33).                                                                  |      |
-| [Right Out of the Show Floor (3)](#right-out-of-the-show-floor)                                                    | Break a track record in any Tokyo Time Attack event using a stock Nissan GT-R Proto.                                                             |      |
-| [Track Certified (2)](#track-certified)                                                                            | Break a track record in a Mondello Park GP Circuit Time Attack using any BMW M3.                                                                 |      |
-| [Blackjack (2)](#blackjack)                                                                                        | Break a track record in any Nevada Highway Speed mode event using any Chevrolet Corvette.                                                        |      |
-| [NASCAR Street Series (2)](#nascar-street-series)                                                                  | Break a track record in a Texas World Speedway Oval Circuit event using a Ford Mustang.                                                          |      |
-| [Boxer Spirit (4)](#boxer-spirit)                                                                                  | Break a track record in an Ebisu Time Attack event using a Subaru Impreza WRX STI with no power or nitrous upgrades.                             |      |
-| [The Fastest Car in the West (10)](#the-fastest-car-in-the-west)                                                   | Beat a lap time of 0:55.00 in a race on the GP Circuit at Willow Springs.                                                                        |      |
-| [The Fastest Road in the Pacific Northwest (10)](#the-fastest-road-in-the-pacific-northwest)                       | Beat a lap time of 0:48.00 in a race on the GP Circuit at Portland International Raceway.                                                        |      |
-| [Holiday in Ireland (10)](#holiday-in-ireland)                                                                     | Beat a lap time of 1:20.00 in a race on the GP Circuit at Mondello Park.                                                                         |      |
-| [Super Street (10)](#super-street)                                                                                 | Beat a lap time of 1:20.00 in a race on the GP Circuit at Autopolis.                                                                             |      |
-| [In the Sonoma Desert (10)](#in-the-sonoma-desert)                                                                 | Beat a lap time of 1:00.00 in a race on the GP Circuit at Infineon.                                                                              |      |
-| [Slingshot, Engage (10)](#slingshot-engage)                                                                        | Beat a lap time of 0:30.00 in a race on the Oval Circuit at Texas World Speedway.                                                                |      |
+| Badge                                                                                                          | Title (Points)                                                                                                     | Description                                                                                                                                      | Type |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ---- |
+| ![When Life Gives You Lemons...](https://media.retroachievements.org/Badge/628446.png)                         | [When Life Gives You Lemons... (10)](#when-life-gives-you-lemons)                                                  | Dominate Showdown: Chicago in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.      |      |
+| ![...Make Lemonade...](https://media.retroachievements.org/Badge/628447.png)                                   | [...Make Lemonade... (25)](#make-lemonade)                                                                         | Dominate Showdown: Autopolis in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.    |      |
+| ![...And Start a Lemonade Stand](https://media.retroachievements.org/Badge/628448.png)                         | [...And Start a Lemonade Stand (25)](#and-start-a-lemonade-stand)                                                  | Dominate Showdown: Autobahnring in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King. |      |
+| ![Almost Easy](https://media.retroachievements.org/Badge/628449.png)                                           | [Almost Easy (25)](#almost-easy)                                                                                   | Dominate a Challenge Race Day in one sitting by completing at most half of the events in it using King assist.                                   |      |
+| ![Escape](https://media.retroachievements.org/Badge/628450.png)                                                | [Escape (10)](#escape)                                                                                             | Beat the record score in Showdown: Chicago.                                                                                                      |      |
+| ![Draw Japan](https://media.retroachievements.org/Badge/628451.png)                                            | [Draw Japan (10)](#draw-japan)                                                                                     | Beat the record score in Showdown: Autopolis.                                                                                                    |      |
+| ![A Blast Beat](https://media.retroachievements.org/Badge/628452.png)                                          | [A Blast Beat (10)](#a-blast-beat)                                                                                 | Beat the record score in Showdown: Autobahnring.                                                                                                 |      |
+| ![Battle Machine Mastery](https://media.retroachievements.org/Badge/628453.png)                                | [Battle Machine Mastery (50)](#battle-machine-mastery)                                                             | Beat the record score in all Race Days in the Battle Machine Organization.                                                                       |      |
+| ![React Team Sessions Mastery](https://media.retroachievements.org/Badge/628454.png)                           | [React Team Sessions Mastery (50)](#react-team-sessions-mastery)                                                   | Beat the record score in all Race Days in the React Team Sessions Organization.                                                                  |      |
+| ![Super Promotion Mastery](https://media.retroachievements.org/Badge/628455.png)                               | [Super Promotion Mastery (50)](#super-promotion-mastery)                                                           | Beat the record score in all Race Days in the Super Promotion Organization.                                                                      |      |
+| ![G Effect Mastery](https://media.retroachievements.org/Badge/628456.png)                                      | [G Effect Mastery (25)](#g-effect-mastery)                                                                         | Beat the record score in all Race Days in the G Effect Organization.                                                                             |      |
+| ![Rogue Speed Mastery](https://media.retroachievements.org/Badge/628457.png)                                   | [Rogue Speed Mastery (25)](#rogue-speed-mastery)                                                                   | Beat the record score in all Race Days in the Rogue Speed Organization.                                                                          |      |
+| ![Noise Bomb Mastery](https://media.retroachievements.org/Badge/628458.png)                                    | [Noise Bomb Mastery (25)](#noise-bomb-mastery)                                                                     | Beat the record score in all Race Days in the Noise Bomb Organization.                                                                           |      |
+| ![Nitrocide Mastery](https://media.retroachievements.org/Badge/628459.png)                                     | [Nitrocide Mastery (25)](#nitrocide-mastery)                                                                       | Beat the record score in all Race Days in the Nitrocide Organization.                                                                            |      |
+| ![Challenge Mastery: Nevada](https://media.retroachievements.org/Badge/628460.png)                             | [Challenge Mastery: Nevada (5)](#challenge-mastery-nevada)                                                         | Beat all individual event records in Challenge: Nevada.                                                                                          |      |
+| ![Challenge Mastery: Texas](https://media.retroachievements.org/Badge/628461.png)                              | [Challenge Mastery: Texas (10)](#challenge-mastery-texas)                                                          | Beat all individual event records in Challenge: Texas.                                                                                           |      |
+| ![Challenge Mastery: Autopolis](https://media.retroachievements.org/Badge/628462.png)                          | [Challenge Mastery: Autopolis (10)](#challenge-mastery-autopolis)                                                  | Beat all individual event records in Challenge: Autopolis.                                                                                       |      |
+| ![Challenge Mastery: Ebisu](https://media.retroachievements.org/Badge/628463.png)                              | [Challenge Mastery: Ebisu (25)](#challenge-mastery-ebisu)                                                          | Beat all individual event records in Challenge: Ebisu.                                                                                           |      |
+| ![Challenge Mastery: Autobahnring](https://media.retroachievements.org/Badge/628464.png)                       | [Challenge Mastery: Autobahnring (25)](#challenge-mastery-autobahnring)                                            | Beat all individual event records in Challenge: Autobahnring.                                                                                    |      |
+| ![Sliding Scale](https://media.retroachievements.org/Badge/628465.png)                                         | [Sliding Scale (10)](#sliding-scale)                                                                               | Score at least 100,000 points in a single Race Day.                                                                                              |      |
+| ![Clean Racer](https://media.retroachievements.org/Badge/628466.png)                                           | [Clean Racer (2)](#clean-racer)                                                                                    | Win a Grip mode event with no damage to your car.                                                                                                |      |
+| ![Power Player](https://media.retroachievements.org/Badge/628467.png)                                          | [Power Player (3)](#power-player)                                                                                  | Dominate all sectors of a Sector Shootout event at the same time.                                                                                |      |
+| ![Cooked to Perfection](https://media.retroachievements.org/Badge/628468.png)                                  | [Cooked to Perfection (4)](#cooked-to-perfection)                                                                  | Reach max grip bonus in a Drag mode event.                                                                                                       |      |
+| ![Ten Second Car](https://media.retroachievements.org/Badge/628469.png)                                        | [Ten Second Car (3)](#ten-second-car)                                                                              | Finish a 1/4 mile Drag race in under 10 seconds.                                                                                                 |      |
+| ![Eleven Second Car](https://media.retroachievements.org/Badge/628470.png)                                     | [Eleven Second Car (10)](#eleven-second-car)                                                                       | Finish a 1/2 mile Drag race in under 11 seconds.                                                                                                 |      |
+| ![Watch My Feet](https://media.retroachievements.org/Badge/628471.png)                                         | [Watch My Feet (3)](#watch-my-feet)                                                                                | Score at least 3,000 points in a single Drift round.                                                                                             |      |
+| ![Steady Hands](https://media.retroachievements.org/Badge/628472.png)                                          | [Steady Hands (2)](#steady-hands)                                                                                  | Win a Speed mode event with no damage to your car.                                                                                               |      |
+| ![Restless](https://media.retroachievements.org/Badge/628473.png)                                              | [Restless (10)](#restless)                                                                                         | Score at least 5,000 points on a Sector Shootout event.                                                                                          |      |
+| ![Granny Shifting, Not Double Clutching Like You Should](https://media.retroachievements.org/Badge/628474.png) | [Granny Shifting, Not Double Clutching Like You Should (5)](#granny-shifting-not-double-clutching-like-you-should) | Finish a 1/4 mile Drag race in under 8 seconds using Clutch.                                                                                     |      |
+| ![More Is Enough](https://media.retroachievements.org/Badge/628475.png)                                        | [More Is Enough (5)](#more-is-enough)                                                                              | Maintain a Wheelie over a full 1/4 mile (402.3 m, 1,320 ft).                                                                                     |      |
+| ![Fancy Footwork](https://media.retroachievements.org/Badge/628476.png)                                        | [Fancy Footwork (10)](#fancy-footwork)                                                                             | Score at least 15,000 points on a single Drift round using King Assist.                                                                          |      |
+| ![Out of Control](https://media.retroachievements.org/Badge/628477.png)                                        | [Out of Control (25)](#out-of-control)                                                                             | Maintain a speed of 396 km/h (246 MPH) or higher for at least 10s in a Speed mode event on Nevada Highway and then win the event.                |      |
+| ![Ryan Is Gonna Be Running Three Honda Civics](https://media.retroachievements.org/Badge/628478.png)           | [Ryan Is Gonna Be Running Three Honda Civics (4)](#ryan-is-gonna-be-running-three-honda-civics)                    | Dominate a multi-discipline Race Day to which you've brought nothing but Honda Civics.                                                           |      |
+| ![The Legendary Hachiroku of Ebisu](https://media.retroachievements.org/Badge/628479.png)                      | [The Legendary Hachiroku of Ebisu (10)](#the-legendary-hachiroku-of-ebisu)                                         | Score at least 8,600 points on a single Drift round in Ebisu using a stock Toyota Corolla GTS (AE86).                                            |      |
+| ![Eleanor](https://media.retroachievements.org/Badge/628480.png)                                               | [Eleanor (4)](#eleanor)                                                                                            | Achieve a lap time under 60 seconds in a race on the Horse Thief Mile at Willow Springs using a Shelby GT500 '67.                                |      |
+| ![Twisted Chassis](https://media.retroachievements.org/Badge/628481.png)                                       | [Twisted Chassis (3)](#twisted-chassis)                                                                            | Win a Wheelie Competition using a Dodge Charger R/T.                                                                                             |      |
+| ![Poster Boy](https://media.retroachievements.org/Badge/628482.png)                                            | [Poster Boy (10)](#poster-boy)                                                                                     | Score at least 5,000 points on a single Drift round in Tokyo Dockyards using a Mazda RX-7 and King assist.                                       |      |
+| ![Homologation Special](https://media.retroachievements.org/Badge/628483.png)                                  | [Homologation Special (3)](#homologation-special)                                                                  | Break a track record on a Nevada Grip mode race with a dirt section using a stock Ford Escort RS Cosworth.                                       |      |
+| ![Ten Minute Car](https://media.retroachievements.org/Badge/628484.png)                                        | [Ten Minute Car (5)](#ten-minute-car)                                                                              | Finish a 1/4 mile Drag race in under 10 seconds using a Toyota Supra with no power or nitrous upgrades.                                          |      |
+| ![Pogo](https://media.retroachievements.org/Badge/628485.png)                                                  | [Pogo (2)](#pogo)                                                                                                  | Break a track record in any Autobahn Speed mode event using a Volkswagen Golf GTI or R32.                                                        |      |
+| ![Donkey Kong?](https://media.retroachievements.org/Badge/628486.png)                                          | [Donkey Kong? (5)](#donkey-kong)                                                                                   | Score at least 10,000 points on a single Drift round using a Nissan 350Z (Z33).                                                                  |      |
+| ![Right Out of the Show Floor](https://media.retroachievements.org/Badge/628487.png)                           | [Right Out of the Show Floor (3)](#right-out-of-the-show-floor)                                                    | Break a track record in any Tokyo Time Attack event using a stock Nissan GT-R Proto.                                                             |      |
+| ![Track Certified](https://media.retroachievements.org/Badge/628488.png)                                       | [Track Certified (2)](#track-certified)                                                                            | Break a track record in a Mondello Park GP Circuit Time Attack using any BMW M3.                                                                 |      |
+| ![Blackjack](https://media.retroachievements.org/Badge/628489.png)                                             | [Blackjack (2)](#blackjack)                                                                                        | Break a track record in any Nevada Highway Speed mode event using any Chevrolet Corvette.                                                        |      |
+| ![NASCAR Street Series](https://media.retroachievements.org/Badge/628490.png)                                  | [NASCAR Street Series (2)](#nascar-street-series)                                                                  | Break a track record in a Texas World Speedway Oval Circuit event using a Ford Mustang.                                                          |      |
+| ![Boxer Spirit](https://media.retroachievements.org/Badge/628491.png)                                          | [Boxer Spirit (4)](#boxer-spirit)                                                                                  | Break a track record in an Ebisu Time Attack event using a Subaru Impreza WRX STI with no power or nitrous upgrades.                             |      |
+| ![The Fastest Car in the West](https://media.retroachievements.org/Badge/628492.png)                           | [The Fastest Car in the West (10)](#the-fastest-car-in-the-west)                                                   | Beat a lap time of 0:55.00 in a race on the GP Circuit at Willow Springs.                                                                        |      |
+| ![The Fastest Road in the Pacific Northwest](https://media.retroachievements.org/Badge/628493.png)             | [The Fastest Road in the Pacific Northwest (10)](#the-fastest-road-in-the-pacific-northwest)                       | Beat a lap time of 0:48.00 in a race on the GP Circuit at Portland International Raceway.                                                        |      |
+| ![Holiday in Ireland](https://media.retroachievements.org/Badge/628494.png)                                    | [Holiday in Ireland (10)](#holiday-in-ireland)                                                                     | Beat a lap time of 1:20.00 in a race on the GP Circuit at Mondello Park.                                                                         |      |
+| ![Super Street](https://media.retroachievements.org/Badge/628495.png)                                          | [Super Street (10)](#super-street)                                                                                 | Beat a lap time of 1:20.00 in a race on the GP Circuit at Autopolis.                                                                             |      |
+| ![In the Sonoma Desert](https://media.retroachievements.org/Badge/628496.png)                                  | [In the Sonoma Desert (10)](#in-the-sonoma-desert)                                                                 | Beat a lap time of 1:00.00 in a race on the GP Circuit at Infineon.                                                                              |      |
+| ![Slingshot, Engage](https://media.retroachievements.org/Badge/628497.png)                                     | [Slingshot, Engage (10)](#slingshot-engage)                                                                        | Beat a lap time of 0:30.00 in a race on the Oval Circuit at Texas World Speedway.                                                                |      |
 
 # 4) Achievements
 
 ### [D-Day](https://retroachievements.org/achievement/553431)
+
+![D-Day](https://media.retroachievements.org/Badge/628415.png)
 
 `Win the race at Chicago Airfield and qualify for Battle Machine.` `[Progression]`
 
@@ -148,11 +150,15 @@ Earned upon winning the first race in Career mode.
 
 ### [The Big Time](https://retroachievements.org/achievement/553432)
 
+![The Big Time](https://media.retroachievements.org/Badge/628416.png)
+
 `Dominate Challenge: Nevada and receive a Drag car as your reward.` `[Progression]`
 
 Earned upon dominating Challenge: Nevada.
 
 ### [Going Global](https://retroachievements.org/achievement/553433)
+
+![Going Global](https://media.retroachievements.org/Badge/628417.png)
 
 `Dominate Showdown: Chicago and qualify for React Team Sessions.` `[Progression]`
 
@@ -160,11 +166,15 @@ Earned upon dominating Showdown: Chicago.
 
 ### [Big in Japan](https://retroachievements.org/achievement/553434)
 
+![Big in Japan](https://media.retroachievements.org/Badge/628418.png)
+
 `Dominate Challenge: Autopolis and receive a Drift car as your reward.` `[Progression]`
 
 Earned upon dominating Challenge: Autopolis.
 
 ### [On Fire](https://retroachievements.org/achievement/553435)
+
+![On Fire](https://media.retroachievements.org/Badge/628419.png)
 
 `Dominate Showdown: Autopolis and qualify for Super Promotion.` `[Progression]`
 
@@ -172,11 +182,15 @@ Earned upon dominating Showdown: Autopolis.
 
 ### [No Limits](https://retroachievements.org/achievement/553436)
 
+![No Limits](https://media.retroachievements.org/Badge/628420.png)
+
 `Dominate Challenge: Autobahnring and receive a Speed car as your reward.` `[Progression]`
 
 Earned upon dominating Challenge: Autobahnring.
 
 ### [The Final Showdown](https://retroachievements.org/achievement/553437)
+
+![The Final Showdown](https://media.retroachievements.org/Badge/628421.png)
 
 `Dominate Showdown: Autobahnring and earn a chance to challenge The Showdown King.` `[Progression]`
 
@@ -186,9 +200,13 @@ Earned upon dominating Showdown: Autobahnring.
 
 `Defeat Ryo Watanabe and become the new Showdown King.` `[Win Condition]`
 
+![My Man, Ryan Cooper!](https://media.retroachievements.org/Badge/628422.png)
+
 Earned upon defeating Ryo Watanabe at Showdown: Tokyo.
 
 ### [The Real Showdown King](https://retroachievements.org/achievement/553439)
+
+![The Real Showdown King](https://media.retroachievements.org/Badge/628423.png)
 
 `Defeat Ryo Watanabe in one sitting using King Assist.` `[Missable]`
 
@@ -196,11 +214,15 @@ Before challenging Ryo Watanabe at the last Showdown, make sure to enable King A
 
 ### [Close to the Apex](https://retroachievements.org/achievement/553440)
 
+![Close to the Apex](https://media.retroachievements.org/Badge/628424.png)
+
 `Dominate your first Race Day in the G Effect Organization.`
 
 Earned upon dominating your first Race Day in the G Effect Organization after unlocking it by beating 10 Grip track records.
 
 ### [Ray Krieger](https://retroachievements.org/achievement/553441)
+
+![Ray Krieger](https://media.retroachievements.org/Badge/628425.png)
 
 `Defeat Ray Krieger and become the new Grip King.`
 
@@ -208,11 +230,15 @@ Earned upon defeating Ray Krieger at the G Effect Willow Springs II Race Day.
 
 ### [The Real Grip King](https://retroachievements.org/achievement/553442)
 
+![The Real Grip King](https://media.retroachievements.org/Badge/628426.png)
+
 `Defeat Ray Krieger in one sitting using King Assist.` `[Missable]`
 
 Before challenging Ray Krieger, make sure to enable King Assist. Then, defeat him in all of his events without quitting or resetting the game.
 
 ### [The Perfect Shift](https://retroachievements.org/achievement/553443)
+
+![The Perfect Shift](https://media.retroachievements.org/Badge/628427.png)
 
 `Dominate your first Race Day in the Rogue Speed Organization.`
 
@@ -220,11 +246,15 @@ Earned upon dominating your first Race Day in the Rogue Speed Organization after
 
 ### [Karol Monroe](https://retroachievements.org/achievement/553444)
 
+![Karol Monroe](https://media.retroachievements.org/Badge/628428.png)
+
 `Defeat Karol Monroe and become the new Drag King.`
 
 Earned upon defeating Karol Monroe at the Rogue Speed Infineon II Race Day.
 
 ### [The Real Drag King](https://retroachievements.org/achievement/553445)
+
+![The Real Drag King](https://media.retroachievements.org/Badge/628429.png)
 
 `Defeat Karol Monroe in one sitting using King Assist.` `[Missable]`
 
@@ -232,11 +262,15 @@ Before challenging Karol Monroe, make sure to enable King Assist. Then, defeat h
 
 ### [Smooth Transitions](https://retroachievements.org/achievement/553446)
 
+![Smooth Transitions](https://media.retroachievements.org/Badge/628430.png)
+
 `Dominate your first Race Day in the Noise Bomb Organization.`
 
 Earned upon dominating your first Race Day in the Noise Bomb Organization after unlocking it by beating 10 Drift track records.
 
 ### [Aki Kimura](https://retroachievements.org/achievement/553447)
+
+![Aki Kimura](https://media.retroachievements.org/Badge/628431.png)
 
 `Defeat Aki Kimura and become the new Drift King.`
 
@@ -244,11 +278,15 @@ Earned upon defeating Aki Kimura at the Noise Bomb Autopolis II Race Day.
 
 ### [The Real Drift King](https://retroachievements.org/achievement/553448)
 
+![The Real Drift King](https://media.retroachievements.org/Badge/628432.png)
+
 `Defeat Aki Kimura in one sitting using King Assist.` `[Missable]`
 
 Before challenging Aki Kimura, make sure to enable King Assist. Then, defeat him in all of his events without quitting or resetting the game.
 
 ### [Edge of Control](https://retroachievements.org/achievement/553449)
+
+![Edge of Control](https://media.retroachievements.org/Badge/628433.png)
 
 `Dominate your first Race Day in the Nitrocide Organization.`
 
@@ -256,11 +294,15 @@ Earned upon dominating your first Race Day in the Nitrocide Organization after u
 
 ### [Nate Denver](https://retroachievements.org/achievement/553450)
 
+![Nate Denver](https://media.retroachievements.org/Badge/628434.png)
+
 `Defeat Nate Denver and become the new Speed King.`
 
 Earned upon defeating Nate Denver at the Nitrocide Nevada Highway II Race Day.
 
 ### [The Real Speed King](https://retroachievements.org/achievement/553451)
+
+![The Real Speed King](https://media.retroachievements.org/Badge/628435.png)
 
 `Defeat Nate Denver in one sitting using King Assist.` `[Missable]`
 
@@ -268,11 +310,15 @@ Before challenging Nate Denver, make sure to enable King Assist. Then, defeat hi
 
 ### [The Street King](https://retroachievements.org/achievement/553452)
 
+![The Street King](https://media.retroachievements.org/Badge/628436.png)
+
 `Defeat all 5 Kings and become the Street King.`
 
 Earned upon defeating all 5 Kings: Ryo Watanabe, Ray Krieger, Karol Monroe, Aki Kimura, and Nate Denver.
 
 ### [Big Racing](https://retroachievements.org/achievement/553453)
+
+![Big Racing](https://media.retroachievements.org/Badge/628437.png)
 
 `Dominate Challenge: Texas and receive a Grip car as your reward.`
 
@@ -280,11 +326,15 @@ Earned upon dominating Challenge: Texas.
 
 ### [Through the Mountains](https://retroachievements.org/achievement/553454)
 
+![Through the Mountains](https://media.retroachievements.org/Badge/628438.png)
+
 `Dominate Challenge: Ebisu and receive a Speed car as your reward.`
 
 Earned upon dominating Challenge: Ebisu.
 
 ### [Battle Machine Domination](https://retroachievements.org/achievement/553455)
+
+![Battle Machine Domination](https://media.retroachievements.org/Badge/628439.png)
 
 `Dominate all Race Days in the Battle Machine Organization.`
 
@@ -292,11 +342,15 @@ Earned upon dominating all 9 Race Days in the Battle Machine Organization.
 
 ### [React Team Sessions Domination](https://retroachievements.org/achievement/553456)
 
+![React Team Sessions Domination](https://media.retroachievements.org/Badge/628440.png)
+
 `Dominate all Race Days in the React Team Sessions Organization.`
 
 Earned upon dominating all 11 Race Days in the React Team Sessions Organization.
 
 ### [Super Promotion Domination](https://retroachievements.org/achievement/553457)
+
+![Super Promotion Domination](https://media.retroachievements.org/Badge/628441.png)
 
 `Dominate all Race Days in the Super Promotion Organization.`
 
@@ -304,11 +358,15 @@ Earned upon dominating all 13 Race Days in the Super Promotion Organization.
 
 ### [G Effect Domination](https://retroachievements.org/achievement/553458)
 
+![G Effect Domination](https://media.retroachievements.org/Badge/628442.png)
+
 `Dominate all Race Days in the G Effect Organization.`
 
 Earned upon dominating all 3 Race Days in the G Effect Organization and beating the Grip King.
 
 ### [Rogue Speed Domination](https://retroachievements.org/achievement/553459)
+
+![Rogue Speed Domination](https://media.retroachievements.org/Badge/628443.png)
 
 `Dominate all Race Days in the Rogue Speed Organization.`
 
@@ -316,17 +374,23 @@ Earned upon dominating all 3 Race Days in the Rogue Speed Organization and beati
 
 ### [Noise Bomb Domination](https://retroachievements.org/achievement/553460)
 
+![Noise Bomb Domination](https://media.retroachievements.org/Badge/628444.png)
+
 `Dominate all Race Days in the Noise Bomb Organization.`
 
 Earned upon dominating all 3 Race Days in the Noise Bomb Organization and beating the Drift King.
 
 ### [Nitrocide Domination](https://retroachievements.org/achievement/553461)
 
+![Nitrocide Domination](https://media.retroachievements.org/Badge/628445.png)
+
 `Dominate all Race Days in the Nitrocide Organization.`
 
 Earned upon dominating all 3 Race Days in the Nitrocide Organization and beating the Speed King.
 
 ### [When Life Gives You Lemons...](https://retroachievements.org/achievement/553462)
+
+![When Life Gives You Lemons...](https://media.retroachievements.org/Badge/628446.png)
 
 `Dominate Showdown: Chicago in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.` `[Missable]`
 
@@ -347,6 +411,8 @@ Here's some recommended cars for each event type:
 
 ### [...Make Lemonade...](https://retroachievements.org/achievement/553463)
 
+![...Make Lemonade...](https://media.retroachievements.org/Badge/628447.png)
+
 `Dominate Showdown: Autopolis in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.` `[Missable]`
 
 For this one you wanna get as much as possible from the drift events. In the grip events it is possible to win both with some fighting.
@@ -354,6 +420,8 @@ For this one you wanna get as much as possible from the drift events. In the gri
 See [When Life Gives You Lemons...](#when-life-gives-you-lemons) for more information and car recommendations.
 
 ### [...And Start a Lemonade Stand](https://retroachievements.org/achievement/553464)
+
+![...And Start a Lemonade Stand](https://media.retroachievements.org/Badge/628448.png)
 
 `Dominate Showdown: Autobahnring in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.` `[Missable]`
 
@@ -363,6 +431,8 @@ See [When Life Gives You Lemons...](#when-life-gives-you-lemons) for more inform
 
 ### [Almost Easy](https://retroachievements.org/achievement/553465)
 
+![Almost Easy](https://media.retroachievements.org/Badge/628449.png)
+
 `Dominate a Challenge Race Day in one sitting by completing at most half of the events in it using King assist.`
 
 This can only really be done on Challenge: Nevada or Challenge: Autobahnring as they have an even number of events that are not all Grip.
@@ -371,11 +441,15 @@ As usual, make sure to enable King Assist before starting the Race Day and don't
 
 ### [Escape](https://retroachievements.org/achievement/553466)
 
+![Escape](https://media.retroachievements.org/Badge/628450.png)
+
 `Beat the record score in Showdown: Chicago.`
 
 Record scores in Showdowns are somewhat higher than normal Race Days, but shouldn't be much harder to beat if you do well in all events.
 
 ### [Draw Japan](https://retroachievements.org/achievement/553467)
+
+![Draw Japan](https://media.retroachievements.org/Badge/628451.png)
 
 `Beat the record score in Showdown: Autopolis.`
 
@@ -383,11 +457,15 @@ See [Escape](#escape) for more information.
 
 ### [A Blast Beat](https://retroachievements.org/achievement/553468)
 
+![A Blast Beat](https://media.retroachievements.org/Badge/628452.png)
+
 `Beat the record score in Showdown: Autobahnring.`
 
 See [Escape](#escape) for more information.
 
 ### [Battle Machine Mastery](https://retroachievements.org/achievement/553469)
+
+![Battle Machine Mastery](https://media.retroachievements.org/Badge/628453.png)
 
 `Beat the record score in all Race Days in the Battle Machine Organization.`
 
@@ -395,17 +473,23 @@ Each Race Day has a preset record score to beat, they are usually quite reasonab
 
 ### [React Team Sessions Mastery](https://retroachievements.org/achievement/553470)
 
+![React Team Sessions Mastery](https://media.retroachievements.org/Badge/628454.png)
+
 `Beat the record score in all Race Days in the React Team Sessions Organization.`
 
 See [Battle Machine Mastery](#battle-machine-mastery) for more information.
 
 ### [Super Promotion Mastery](https://retroachievements.org/achievement/553471)
 
+![Super Promotion Mastery](https://media.retroachievements.org/Badge/628455.png)
+
 `Beat the record score in all Race Days in the Super Promotion Organization.`
 
 See [Battle Machine Mastery](#battle-machine-mastery) for more information.
 
 ### [G Effect Mastery](https://retroachievements.org/achievement/553472)
+
+![G Effect Mastery](https://media.retroachievements.org/Badge/628456.png)
 
 `Beat the record score in all Race Days in the G Effect Organization.`
 
@@ -415,6 +499,8 @@ See [Battle Machine Mastery](#battle-machine-mastery) for more information.
 
 ### [Rogue Speed Mastery](https://retroachievements.org/achievement/553473)
 
+![Rogue Speed Mastery](https://media.retroachievements.org/Badge/628457.png)
+
 `Beat the record score in all Race Days in the Rogue Speed Organization.`
 
 This also includes beating the Drag King, Karol Monroe. A normal defeat is enough to count towards this achievement, no need to worry about records for King races.
@@ -422,6 +508,8 @@ This also includes beating the Drag King, Karol Monroe. A normal defeat is enoug
 See [Battle Machine Mastery](#battle-machine-mastery) for more information.
 
 ### [Noise Bomb Mastery](https://retroachievements.org/achievement/553474)
+
+![Noise Bomb Mastery](https://media.retroachievements.org/Badge/628458.png)
 
 `Beat the record score in all Race Days in the Noise Bomb Organization.`
 
@@ -431,6 +519,8 @@ See [Battle Machine Mastery](#battle-machine-mastery) for more information.
 
 ### [Nitrocide Mastery](https://retroachievements.org/achievement/553475)
 
+![Nitrocide Mastery](https://media.retroachievements.org/Badge/628459.png)
+
 `Beat the record score in all Race Days in the Nitrocide Organization.`
 
 This also includes beating the Speed King, Nate Denver. A normal defeat is enough to count towards this achievement, no need to worry about records for King races.
@@ -438,6 +528,8 @@ This also includes beating the Speed King, Nate Denver. A normal defeat is enoug
 See [Battle Machine Mastery](#battle-machine-mastery) for more information.
 
 ### [Challenge Mastery: Nevada](https://retroachievements.org/achievement/553476)
+
+![Challenge Mastery: Nevada](https://media.retroachievements.org/Badge/628460.png)
 
 `Beat all individual event records in Challenge: Nevada.`
 
@@ -447,17 +539,23 @@ The recommended cars are the same as the ones in [When Life Gives You Lemons...]
 
 ### [Challenge Mastery: Texas](https://retroachievements.org/achievement/553477)
 
+![Challenge Mastery: Texas](https://media.retroachievements.org/Badge/628461.png)
+
 `Beat all individual event records in Challenge: Texas.`
 
 See [Challenge Mastery: Nevada](#challenge-mastery-nevada) for more information.
 
 ### [Challenge Mastery: Autopolis](https://retroachievements.org/achievement/553478)
 
+![Challenge Mastery: Autopolis](https://media.retroachievements.org/Badge/628462.png)
+
 `Beat all individual event records in Challenge: Autopolis.`
 
 See [Challenge Mastery: Nevada](#challenge-mastery-nevada) for more information.
 
 ### [Challenge Mastery: Ebisu](https://retroachievements.org/achievement/553479)
+
+![Challenge Mastery: Ebisu](https://media.retroachievements.org/Badge/628463.png)
 
 `Beat all individual event records in Challenge: Ebisu.`
 
@@ -467,11 +565,15 @@ See [Challenge Mastery: Nevada](#challenge-mastery-nevada) for more information.
 
 ### [Challenge Mastery: Autobahnring](https://retroachievements.org/achievement/553480)
 
+![Challenge Mastery: Autobahnring](https://media.retroachievements.org/Badge/628464.png)
+
 `Beat all individual event records in Challenge: Autobahnring.`
 
 See [Challenge Mastery: Nevada](#challenge-mastery-nevada) for more information.
 
 ### [Sliding Scale](https://retroachievements.org/achievement/553481)
+
+![Sliding Scale](https://media.retroachievements.org/Badge/628465.png)
 
 `Score at least 100,000 points in a single Race Day.`
 
@@ -481,11 +583,15 @@ Try to drift as much as possible in one long motion. Should be possible using Ki
 
 ### [Clean Racer](https://retroachievements.org/achievement/553482)
 
+![Clean Racer](https://media.retroachievements.org/Badge/628466.png)
+
 `Win a Grip mode event with no damage to your car.`
 
 Should be easy to do in any Grip event if you keep it in the gray stuff.
 
 ### [Power Player](https://retroachievements.org/achievement/553483)
+
+![Power Player](https://media.retroachievements.org/Badge/628467.png)
 
 `Dominate all sectors of a Sector Shootout event at the same time.`
 
@@ -495,6 +601,8 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 ### [Cooked to Perfection](https://retroachievements.org/achievement/553484)
 
+![Cooked to Perfection](https://media.retroachievements.org/Badge/628468.png)
+
 `Reach max grip bonus in a Drag mode event.`
 
 This tracks your grip bonus meter during the "heating tires" phase of drag events. To trigger this, you need to reach the maximum amount of grip bonus as tracked by the green meter. When you reach it, the message at the top of the screen that tracks checkpoints like 25%, 50% and 75% will say "Reached Max Grip Bonus".
@@ -503,11 +611,15 @@ The game sometimes might flash the message "Max Grip!" when you are close to the
 
 ### [Ten Second Car](https://retroachievements.org/achievement/553485)
 
+![Ten Second Car](https://media.retroachievements.org/Badge/628469.png)
+
 `Finish a 1/4 mile Drag race in under 10 seconds.`
 
 Should be fairly easy to do with most cars that have been upgraded for drag racing.
 
 ### [Eleven Second Car](https://retroachievements.org/achievement/553486)
+
+![Eleven Second Car](https://media.retroachievements.org/Badge/628470.png)
 
 `Finish a 1/2 mile Drag race in under 11 seconds.`
 
@@ -517,17 +629,23 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 ### [Watch My Feet](https://retroachievements.org/achievement/553487)
 
+![Watch My Feet](https://media.retroachievements.org/Badge/628471.png)
+
 `Score at least 3,000 points in a single Drift round.`
 
 Should be doable with pretty much any Drift car, including the ones gifted to you in Challenge: Autopolis.
 
 ### [Steady Hands](https://retroachievements.org/achievement/553488)
 
+![Steady Hands](https://media.retroachievements.org/Badge/628472.png)
+
 `Win a Speed mode event with no damage to your car.`
 
 Speed events are a bit trickier than grip races in terms of car control, but this should still be your goal in any given Speed event.
 
 ### [Restless](https://retroachievements.org/achievement/553489)
+
+![Restless](https://media.retroachievements.org/Badge/628473.png)
 
 `Score at least 5,000 points on a Sector Shootout event.`
 
@@ -537,11 +655,15 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 ### [Granny Shifting, Not Double Clutching Like You Should](https://retroachievements.org/achievement/553490)
 
+![Granny Shifting, Not Double Clutching Like You Should](https://media.retroachievements.org/Badge/628474.png)
+
 `Finish a 1/4 mile Drag race in under 8 seconds using Clutch.`
 
 Remember, you can always shift higher as long as you use the clutch. And don't use your nitrous too soon.
 
 ### [More Is Enough](https://retroachievements.org/achievement/553491)
+
+![More Is Enough](https://media.retroachievements.org/Badge/628475.png)
 
 `Maintain a Wheelie over a full 1/4 mile (402.3 m, 1,320 ft).`
 
@@ -551,6 +673,8 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 ### [Fancy Footwork](https://retroachievements.org/achievement/553492)
 
+![Fancy Footwork](https://media.retroachievements.org/Badge/628476.png)
+
 `Score at least 15,000 points on a single Drift round using King Assist.`
 
 King Assist doesn't have as much advantage in keeping cars on track over long drifts. Good places to try this on are in Ebisu, Willow Springs, Autobahnring, and Autopolis.
@@ -558,6 +682,8 @@ King Assist doesn't have as much advantage in keeping cars on track over long dr
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Out of Control](https://retroachievements.org/achievement/553493)
+
+![Out of Control](https://media.retroachievements.org/Badge/628477.png)
 
 `Maintain a speed of 396 km/h (246 MPH) or higher for at least 10s in a Speed mode event on Nevada Highway and then win the event.`
 
@@ -571,11 +697,15 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 ### [Ryan Is Gonna Be Running Three Honda Civics](https://retroachievements.org/achievement/553494)
 
+![Ryan Is Gonna Be Running Three Honda Civics](https://media.retroachievements.org/Badge/628478.png)
+
 `Dominate a multi-discipline Race Day to which you've brought nothing but Honda Civics.`
 
 With Spoon engines, T66 turbos with NOS, and a MoTeC system exhaust.
 
 ### [The Legendary Hachiroku of Ebisu](https://retroachievements.org/achievement/553495)
+
+![The Legendary Hachiroku of Ebisu](https://media.retroachievements.org/Badge/628479.png)
 
 `Score at least 8,600 points on a single Drift round in Ebisu using a stock Toyota Corolla GTS (AE86).`
 
@@ -583,11 +713,15 @@ The AE86 is a very good drift car even in stock form. Should be possible with Ki
 
 ### [Eleanor](https://retroachievements.org/achievement/553496)
 
+![Eleanor](https://media.retroachievements.org/Badge/628480.png)
+
 `Achieve a lap time under 60 seconds in a race on the Horse Thief Mile at Willow Springs using a Shelby GT500 '67.`
 
 Should be fairly simple with tier 3 upgrades and some practice. The car can misbehave a lot if you push it too hard in corners, so try to be smooth with your inputs. And make sure to use Nitrous when you can clearly see ahead.
 
 ### [Twisted Chassis](https://retroachievements.org/achievement/553497)
+
+![Twisted Chassis](https://media.retroachievements.org/Badge/628481.png)
 
 `Win a Wheelie Competition using a Dodge Charger R/T.`
 
@@ -595,11 +729,15 @@ On green, go for it.
 
 ### [Poster Boy](https://retroachievements.org/achievement/553498)
 
+![Poster Boy](https://media.retroachievements.org/Badge/628482.png)
+
 `Score at least 5,000 points on a single Drift round in Tokyo Dockyards using a Mazda RX-7 and King assist.`
 
 The RX-7 is a great drift car, but scoring 5,000 points in Tokyo Dockyards can be tough as the track is not very smooth.
 
 ### [Homologation Special](https://retroachievements.org/achievement/553499)
+
+![Homologation Special](https://media.retroachievements.org/Badge/628483.png)
 
 `Break a track record on a Nevada Grip mode race with a dirt section using a stock Ford Escort RS Cosworth.`
 
@@ -607,11 +745,15 @@ The event to do this without much trouble is the Sector Shootout in Nevada Highw
 
 ### [Ten Minute Car](https://retroachievements.org/achievement/553500)
 
+![Ten Minute Car](https://media.retroachievements.org/Badge/628484.png)
+
 `Finish a 1/4 mile Drag race in under 10 seconds using a Toyota Supra with no power or nitrous upgrades.`
 
 You can push it across the finish line, or tow it.
 
 ### [Pogo](https://retroachievements.org/achievement/553501)
+
+![Pogo](https://media.retroachievements.org/Badge/628485.png)
 
 `Break a track record in any Autobahn Speed mode event using a Volkswagen Golf GTI or R32.`
 
@@ -619,11 +761,15 @@ There's something in the air.
 
 ### [Donkey Kong?](https://retroachievements.org/achievement/553502)
 
+![Donkey Kong?](https://media.retroachievements.org/Badge/628486.png)
+
 `Score at least 10,000 points on a single Drift round using a Nissan 350Z (Z33).`
 
 Drift? What do you mean Drift?
 
 ### [Right Out of the Show Floor](https://retroachievements.org/achievement/553503)
+
+![Right Out of the Show Floor](https://media.retroachievements.org/Badge/628487.png)
 
 `Break a track record in any Tokyo Time Attack event using a stock Nissan GT-R Proto.`
 
@@ -631,11 +777,15 @@ This is possible in the Tokyo Race Days at React Team Sessions, or even against 
 
 ### [Track Certified](https://retroachievements.org/achievement/553504)
 
+![Track Certified](https://media.retroachievements.org/Badge/628488.png)
+
 `Break a track record in a Mondello Park GP Circuit Time Attack using any BMW M3.`
 
 The event to do this on is the Time Attack in the G Effect Mondello Park Race Day.
 
 ### [Blackjack](https://retroachievements.org/achievement/553505)
+
+![Blackjack](https://media.retroachievements.org/Badge/628489.png)
 
 `Break a track record in any Nevada Highway Speed mode event using any Chevrolet Corvette.`
 
@@ -643,11 +793,15 @@ The corvette is a bit unstable over the elevation changes, so try to keep it whe
 
 ### [NASCAR Street Series](https://retroachievements.org/achievement/553506)
 
+![NASCAR Street Series](https://media.retroachievements.org/Badge/628490.png)
+
 `Break a track record in a Texas World Speedway Oval Circuit event using a Ford Mustang.`
 
 Just turn left.
 
 ### [Boxer Spirit](https://retroachievements.org/achievement/553507)
+
+![Boxer Spirit](https://media.retroachievements.org/Badge/628491.png)
 
 `Break a track record in an Ebisu Time Attack event using a Subaru Impreza WRX STI with no power or nitrous upgrades.`
 
@@ -657,11 +811,15 @@ The only upgrades allowed are suspension and tires... and also brakes but they j
 
 ### [The Fastest Car in the West](https://retroachievements.org/achievement/553508)
 
+![The Fastest Car in the West](https://media.retroachievements.org/Badge/628492.png)
+
 `Beat a lap time of 0:55.00 in a race on the GP Circuit at Willow Springs.`
 
 Big Willow is a fast track, but be careful as the corners are deceptively tricky. The last corner can be done flat out if you find the right line.
 
 ### [The Fastest Road in the Pacific Northwest](https://retroachievements.org/achievement/553509)
+
+![The Fastest Road in the Pacific Northwest](https://media.retroachievements.org/Badge/628493.png)
 
 `Beat a lap time of 0:48.00 in a race on the GP Circuit at Portland International Raceway.`
 
@@ -669,11 +827,15 @@ You can cut a lot of corners through the grass here, just make sure not to overs
 
 ### [Holiday in Ireland](https://retroachievements.org/achievement/553510)
 
+![Holiday in Ireland](https://media.retroachievements.org/Badge/628494.png)
+
 `Beat a lap time of 1:20.00 in a race on the GP Circuit at Mondello Park.`
 
 This is a very technical track, smoother is faster here.
 
 ### [Super Street](https://retroachievements.org/achievement/553511)
+
+![Super Street](https://media.retroachievements.org/Badge/628495.png)
 
 `Beat a lap time of 1:20.00 in a race on the GP Circuit at Autopolis.`
 
@@ -681,11 +843,15 @@ This track is a lot about finding the right lines through the fast corners, you 
 
 ### [In the Sonoma Desert](https://retroachievements.org/achievement/553512)
 
+![In the Sonoma Desert](https://media.retroachievements.org/Badge/628496.png)
+
 `Beat a lap time of 1:00.00 in a race on the GP Circuit at Infineon.`
 
 Finding the right lines and cutting through the corners helps here, just be careful not to lose too much speed in the desert sand.
 
 ### [Slingshot, Engage](https://retroachievements.org/achievement/553513)
+
+![Slingshot, Engage](https://media.retroachievements.org/Badge/628497.png)
 
 `Beat a lap time of 0:30.00 in a race on the Oval Circuit at Texas World Speedway.`
 
@@ -770,7 +936,7 @@ For Wheeling Competitions you can use this setup instead. Parts can be applied t
 
 - Honorable mention: Pagani Zonda F (too expensive but best use for a free car marker)
 
-This is basically the same setup as the [Grip](#grip) one, with some key differences in the ride height and body.
+This is basically the same setup as the [Grip](#grip) one, with a key differences in the ride height for better soaking up of bumps.
 
 | Part       | Stage | Price      | Tunes                                                                                           |
 | ---------- | ----- | ---------- | ----------------------------------------------------------------------------------------------- |
