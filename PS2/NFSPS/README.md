@@ -19,15 +19,15 @@ Say goodbye to the streets. In [Need for Speed: ProStreet](https://retroachievem
 
 - For achievements that require records to be beaten, what's valid is the original record the game starts with and not any records you may have increased. In addition, where specific tracks are required only the normal configuration of the track is valid, not the reverse.
 
-- All 5 bosses have missable achievements related to King Assist as their events are not repeatable: [PH: The Real Showdown King], [PH: The Real Grip King], [PH: The Real Drag King], [PH: The Real Drift King], and [PH: The Real Speed King]. Make sure to select King Assist before challenging them and don't reset the game or choose a different event while doing each boss.
+- All 5 bosses have missable achievements related to King Assist as their events are not repeatable: [The Real Showdown King (25)](#the-real-showdown-king), [The Real Grip King (10)](#the-real-grip-king), [The Real Drag King (10)](#the-real-drag-king), [The Real Drift King (10)](#the-real-drift-king), and [The Real Speed King (10)](#the-real-speed-king). Make sure to select King Assist before challenging them and don't reset the game or choose a different event while doing each boss.
 
-- Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements: [PH: When Life Gives You Lemons...], [PH: ...Make Lemonade...], and [PH: ...And Start a Lemonade Stand]. You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to enter a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once. As with the boss related achievements, make sure to select King Assist before starting the Race Day and don't reset the game before dominating.
+- Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements: [When Life Gives You Lemons... (10)](#when-life-gives-you-lemons), [...Make Lemonade... (25)](#make-lemonade), and [...And Start a Lemonade Stand (25)](#and-start-a-lemonade-stand). You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to enter a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once. As with the boss related achievements, make sure to select King Assist before starting the Race Day and don't reset the game before dominating.
 
 # 3) Roadmap
 
 ### Stage 1: Main Story (94 points)
 
-In this stage you will progress through the story at your own pace, while grabbing any optional or challenge achievements you want on the way. [PH: The Real Showdown King] is the only missable achievement in this section.
+In this stage you will progress through the story at your own pace, while grabbing any optional or challenge achievements you want on the way. [The Real Showdown King (25)](#the-real-showdown-king) is the only missable achievement in this section.
 
 | Title (Points)                                         | Description                                                                       | Type          |
 | ------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------- |
@@ -539,7 +539,7 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 `Finish a 1/4 mile Drag race in under 8 seconds using Clutch.`
 
-Remember, you can always shift higher as long as you use the clutch. And don't use you nitrous too soon.
+Remember, you can always shift higher as long as you use the clutch. And don't use your nitrous too soon.
 
 ### [More Is Enough](https://retroachievements.org/achievement/553491)
 
@@ -579,7 +579,7 @@ With Spoon engines, T66 turbos with NOS, and a MoTeC system exhaust.
 
 `Score at least 8,600 points on a single Drift round in Ebisu using a stock Toyota Corolla GTS (AE86).`
 
-The AE86 is a very good drift car even in stock form. Should be possible with King Assist but Casual Assist is easier to get higher scores.
+The AE86 is a very good drift car even in stock form. Should be possible with King Assist but Casual Assist is easier to get higher scores with.
 
 ### [Eleanor](https://retroachievements.org/achievement/553496)
 
@@ -609,7 +609,7 @@ The event to do this without much trouble is the Sector Shootout in Nevada Highw
 
 `Finish a 1/4 mile Drag race in under 10 seconds using a Toyota Supra with no power or nitrous upgrades.`
 
-Or you can push it across the finish line, or tow it.
+You can push it across the finish line, or tow it.
 
 ### [Pogo](https://retroachievements.org/achievement/553501)
 
