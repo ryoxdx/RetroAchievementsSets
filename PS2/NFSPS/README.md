@@ -497,7 +497,7 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 `Reach max grip bonus in a Drag mode event.`
 
-This tracks your grip bonus meter during the "heating tires" phase of drag events. To trigger this, you need to reach the maximum amount of grip bonus as tracked by the green meter. When you reach it, the message at the top of the screen that tracks checkpoints like 25%, 50% and 75% will say "Reached Maximum Grip Bonus".
+This tracks your grip bonus meter during the "heating tires" phase of drag events. To trigger this, you need to reach the maximum amount of grip bonus as tracked by the green meter. When you reach it, the message at the top of the screen that tracks checkpoints like 25%, 50% and 75% will say "Reached Max Grip Bonus".
 
 The game sometimes might flash the message "Max Grip!" when you are close to the maximum at the end of the timer, but that does not count for this achievement if you haven't actually completely filled the green meter.
 
