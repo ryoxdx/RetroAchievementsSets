@@ -692,3 +692,24 @@ Finding the right lines and cutting through the corners helps here, just be care
 You need to maintain top speed basically around the whole oval, use nitrous in the corners to keep your speed up.
 
 # 5) Appendix I: Recommended Cars and Setups
+
+- Grip
+
+  - Best car: Porsche 911 Turbo
+
+  You can improve on this basic setup by upgrading the turbo or using Stage 4 parts, but don't upgrade the engine as the stock one is the best for the 911 Turbo. Do note that the more power upgrades you install, the less score potential you will have as the target times will lower significantly.
+
+  Drivetrain tuned to max out at 395 km/h, in speeds over that all steering is lost. You can apply this setup to other cars but the drivetrain will need to be adjusted in a case by case basis.
+
+  | Part       | Stage            | Price    | Tunes                                                                       |
+  | ---------- | ---------------- | -------- | --------------------------------------------------------------------------- |
+  | 911 Turbo  | 3                | 122,000  | N/A                                                                         |
+  | Drivetrain | 2[^1]            | 13,950\* | 0 0 0 0 0 4                                                                 |
+  | Turbo      | 3                | 22,900   | 0 **10** **10** 10 10                                                       |
+  | Suspension | 3                | 29,200   | **-10** **10** **-10** **10** **-10** **10** **-10** **-10** **10** -10 -10 |
+  | Tires      | 3                | 19,100   | -10 10 -10 10 -10 10 -10 -10 10 **-10** **-10**                             |
+  | NOS        | 3                | 26,700   | 0 10 10 **10** **10**                                                       |
+  | Body       | Stock Autosculpt | 0        | 0%                                                                          |
+  | Total      | N/A              | 233,850  | N/A                                                                         |
+
+[^1]: Install Stage 2 drivetrain, tune, then revert back to stock and the tuning will apply to the stock drivetrain, which has a better speed limit and can save you a bit of cash as well.
