@@ -714,8 +714,6 @@ The numbers in the Tunes column refer to how many "ticks" of the sliders to move
 | Body       | Stock Autosculpt | 0          | 0%                                                                                               |
 | Total      | N/A              | 233,850    | N/A                                                                                              |
 
-[^1]: Install Stage 2 drivetrain, tune, then revert back to stock and the tuning will apply to the stock drivetrain, which has a better speed limit and can save you a bit of cash as well.
-
 ### Drift
 
 - Best car: Chevrolet Camaro SS
