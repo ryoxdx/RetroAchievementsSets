@@ -491,7 +491,7 @@ Should be fairly easy to do in any Grip event if you keep it in the gray stuff.
 
 Dominating a sector depends a lot on the car and the power it outputs, if you're struggling with one specific car try lowering the power or using a different car.
 
-General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-appendix-i-recommended-cars-and-setups).
+General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Cooked to Perfection](https://retroachievements.org/achievement/553484)
 
@@ -513,7 +513,7 @@ Should be fairly easy to do with most cars that have been upgraded for drag raci
 
 This one requires a lot more optimization, you're gonna need a great Drag car fully upgraded for this one.
 
-General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-appendix-i-recommended-cars-and-setups).
+General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Watch My Feet](https://retroachievements.org/achievement/553487)
 
@@ -533,7 +533,7 @@ Speed events are a bit trickier than grip races in terms of car control, but thi
 
 This one needs a good car and good management of sector points, you need to make sure not to go to hard in the first few laps so you can keep breaking the records you set.
 
-General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-appendix-i-recommended-cars-and-setups).
+General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Granny Shifting, Not Double Clutching Like You Should](https://retroachievements.org/achievement/553490)
 
@@ -547,7 +547,7 @@ Remember, you can always shift higher as long as you use the clutch. And don't u
 
 Maintaining a wheelie is all about power and shifting correctly. You want to use a car upgraded with enough power and a Tier 3 Suspension and use nitrous when the front end starts to go down.
 
-General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-appendix-i-recommended-cars-and-setups).
+General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Fancy Footwork](https://retroachievements.org/achievement/553492)
 
@@ -555,7 +555,7 @@ General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-a
 
 King Assist doesn't have as much advantage in keeping cars on track over long drifts. Good tracks to try this on are in Ebisu, Willow Springs, Autobahnring, and Autopolis.
 
-General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-appendix-i-recommended-cars-and-setups).
+General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Out of Control](https://retroachievements.org/achievement/553493)
 
@@ -567,7 +567,7 @@ A quirk of the PS2 version of this game is that above 395 km/h (245 MPH) all ste
 
 The best place to do this is on the long straight at Nevada Highway A. Line up the car as soon as possible after the corner and then use nitrous, there should be just enough time after the 10 seconds to slow down and prepare for the corner ahead.
 
-General car recomendations are in [Appendix I: Recommended Cars and Setups](#5-appendix-i-recommended-cars-and-setups).
+General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
 ### [Ryan Is Gonna Be Running Three Honda Civics](https://retroachievements.org/achievement/553494)
 
@@ -691,25 +691,94 @@ Finding the right lines and cutting through the corners helps here, just be care
 
 You need to maintain top speed basically around the whole oval, use nitrous in the corners to keep your speed up.
 
-# 5) Appendix I: Recommended Cars and Setups
+# 5) Appendix: Recommended Cars and Setups
 
-- Grip
+### Grip
 
-  - Best car: Porsche 911 Turbo
+- Best car: Porsche 911 Turbo
 
-  You can improve on this basic setup by upgrading the turbo or using Stage 4 parts, but don't upgrade the engine as the stock one is the best for the 911 Turbo. Do note that the more power upgrades you install, the less score potential you will have as the target times will lower significantly.
+You can improve on this basic setup by upgrading the turbo or using Stage 4 parts, but don't upgrade the engine as the stock one is the best for the 911 Turbo. Do note that the more power upgrades you install, the less score potential you will have as the target times will lower significantly.
 
-  Drivetrain tuned to max out at 395 km/h, in speeds over that all steering is lost. You can apply this setup to other cars but the drivetrain will need to be adjusted in a case by case basis.
+Drivetrain tuned to max out at 395 km/h while using nitrous, in speeds over that all steering is lost. You can apply this setup to other cars but the drivetrain will need to be adjusted in a case by case basis.
 
-  | Part       | Stage            | Price    | Tunes                                                                       |
-  | ---------- | ---------------- | -------- | --------------------------------------------------------------------------- |
-  | 911 Turbo  | 3                | 122,000  | N/A                                                                         |
-  | Drivetrain | 2[^1]            | 13,950\* | 0 0 0 0 0 4                                                                 |
-  | Turbo      | 3                | 22,900   | 0 **10** **10** 10 10                                                       |
-  | Suspension | 3                | 29,200   | **-10** **10** **-10** **10** **-10** **10** **-10** **-10** **10** -10 -10 |
-  | Tires      | 3                | 19,100   | -10 10 -10 10 -10 10 -10 -10 10 **-10** **-10**                             |
-  | NOS        | 3                | 26,700   | 0 10 10 **10** **10**                                                       |
-  | Body       | Stock Autosculpt | 0        | 0%                                                                          |
-  | Total      | N/A              | 233,850  | N/A                                                                         |
+The numbers in the Tunes column refer to how many "ticks" of the sliders to move from the center (0) position, numbers are listed from top to bottom and bold numbers refer to which sliders are unlocked by that specific part. Positive numbers mean moving the slider to the right, negative numbers mean moving it to the left.
+
+| Part       | Stage            | Price      | Tunes                                                                                            |
+| ---------- | ---------------- | ---------- | ------------------------------------------------------------------------------------------------ |
+| 911 Turbo  | 3                | 122,000    | N/A                                                                                              |
+| Drivetrain | 2[^1]            | 13,950[^1] | 0 0 0 0 0 4 (Drivetrain section)                                                                 |
+| Turbo      | 3                | 22,900     | 0 **10** **10** 10 10 (Engine section)                                                           |
+| Suspension | 3                | 29,200     | **-10** **10** **-10** **10** **-10** **10** **-10** **-10** **10** -10 -10 (Suspension section) |
+| Tires      | 3                | 19,100     | -10 10 -10 10 -10 10 -10 -10 10 **-10** **-10** (Suspension section)                             |
+| NOS        | 3                | 26,700     | 0 10 10 **10** **10** (Engine section)                                                           |
+| Body       | Stock Autosculpt | 0          | 0%                                                                                               |
+| Total      | N/A              | 233,850    | N/A                                                                                              |
+
+[^1]: Install Stage 2 drivetrain, tune, then revert back to stock and the tuning will apply to the stock drivetrain, which has a better speed limit and can save you a bit of cash as well.
+
+### Drift
+
+- Best car: Chevrolet Camaro SS
+
+- Honorable mentions: Mazda RX-7, Nissan 350Z (Z33) and Toyota Corolla GTS (AE86)
+
+Drifting is all about power to maintain slides over long sections, anything that doesn't increase power is not necessary.
+
+Nitrous is optional but doesn't add much.
+
+| Part                 | Stage | Price   | Tunes                             |
+| -------------------- | ----- | ------- | --------------------------------- |
+| Camaro SS            | 1     | 40,000  | N/A                               |
+| Engine               | 3     | 47,250  | **10** 10 10 (Engine section)     |
+| Supercharger (Roots) | 3     | 18,900  | 10 **10** **10** (Engine section) |
+| Total                | N/A   | 106,150 | N/A                               |
+
+### Drag
+
+- Best car: Chevrolet Camaro SS
+
+- Honorable mention: Toyota Supra
+
+The main thing is increasing traction with the suspension and tires, as well as maximizing nitrous. Engine and forced induction make you faster but also decrease your score potential as the target times will lower significantly.
+
+Make sure to use Stage 2 suspension to avoid excessive wheeling.
+
+| Part       | Stage | Price   | Tunes                                                                            |
+| ---------- | ----- | ------- | -------------------------------------------------------------------------------- |
+| Camaro SS  | 1     | 40,000  | N/A                                                                              |
+| Drivetrain | 3     | 20,500  | -10 10 10 10 5 10 (Drivetrain section)                                           |
+| Suspension | 2     | 14,200  | **8** **8** **8** **8** **8** **8** **8** **8** **8** 10 10 (Suspension section) |
+| Tires      | 3     | 14,900  | 8 8 8 8 8 8 8 8 8 **10** **10** (Suspension section)                             |
+| NOS        | 3     | 22,050  | 0 0 0 **10** **10** (Engine section)                                             |
+| Total      | N/A   | 111,650 | N/A                                                                              |
+
+For Wheeling Competitions you can use this setup instead. Parts can be applied to pretty much any rear wheel drive car and do decently well. The starter 240SX (S13) works if you don't want to buy a car just for this.
+
+| Part       | Stage | Price   | Tunes                                                                              |
+| ---------- | ----- | ------- | ---------------------------------------------------------------------------------- |
+| Engine     | 3     | 45,000  | N/A                                                                                |
+| Turbo      | 3     | 18,000  | N/A                                                                                |
+| Suspension | 3     | 23,000  | **0** **-10** **0** **-10** **0** **-10** **0** **0** **-10** (Suspension section) |
+| Tires      | 3     | 14,200  | N/A                                                                                |
+| NOS        | 3     | 22,050  | N/A                                                                                |
+| Spoiler    | 403   | 6,000   | 100%                                                                               |
+| Total      | N/A   | 122,250 | N/A                                                                                |
+
+### Speed
+
+- Best car: Porsche 911 Turbo
+
+This is basically the same setup as the [Grip](#grip) one, with some key differences in the ride height and body.
+
+| Part       | Stage | Price      | Tunes                                                                                           |
+| ---------- | ----- | ---------- | ----------------------------------------------------------------------------------------------- |
+| 911 Turbo  | 3     | 122,000    | N/A                                                                                             |
+| Drivetrain | 2[^1] | 13,950[^1] | 0 0 0 0 0 4 (Drivetrain section)                                                                |
+| Turbo      | 3     | 22,900     | 0 **10** **10** 10 10 (Engine section)                                                          |
+| Suspension | 3     | 29,200     | **-10** **10** **-10** **10** **-10** **10** **10** **-10** **10** -10 -10 (Suspension section) |
+| Tires      | 3     | 19,100     | -10 10 -10 10 -10 10 10 -10 10 **-10** **-10** (Suspension section)                             |
+| NOS        | 3     | 26,700     | 0 10 10 **10** **10** (Engine section)                                                          |
+| Body       | Wide  | 15,000     | 100%                                                                                            |
+| Total      | N/A   | 248,850    | N/A                                                                                             |
 
 [^1]: Install Stage 2 drivetrain, tune, then revert back to stock and the tuning will apply to the stock drivetrain, which has a better speed limit and can save you a bit of cash as well.
