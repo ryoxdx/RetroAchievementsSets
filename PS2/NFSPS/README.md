@@ -365,7 +365,7 @@ See [When Life Gives You Lemons...](#when-life-gives-you-lemons) for more inform
 
 `Dominate a Challenge Race Day in one sitting by completing at most half of the events in it using King assist.`
 
-This can only really be done on Challenge: Nevada or Challenge: Autobahnring. In Nevada doing the 2 drag races with a time around 11.40s should do the trick. In Autobahnring doing the 2 Speed events and the Time Attack event is the best option.
+This can only really be done on Challenge: Nevada or Challenge: Autobahnring as they have an even number of events that are not all Grip.
 
 As usual, make sure to enable King Assist before starting the Race Day and don't reset the game before dominating.
 
@@ -483,13 +483,13 @@ Try to drift as much as possible in one long motion. Should be possible using Ki
 
 `Win a Grip mode event with no damage to your car.`
 
-Should be fairly easy to do in any Grip event if you keep it in the gray stuff.
+Should be easy to do in any Grip event if you keep it in the gray stuff.
 
 ### [Power Player](https://retroachievements.org/achievement/553483)
 
 `Dominate all sectors of a Sector Shootout event at the same time.`
 
-Dominating a sector depends a lot on the car and the power it outputs, if you're struggling with one specific car try lowering the power or using a different car.
+Dominating a sector depends a lot on the car and the parts it has equipped, if you're struggling with one specific car try lowering the power or using a different car.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
@@ -525,13 +525,13 @@ Should be doable with pretty much any Drift car, including the ones gifted to yo
 
 `Win a Speed mode event with no damage to your car.`
 
-Speed events are a bit trickier than grip races in terms of car control, but this still should be your goal in any Speed event.
+Speed events are a bit trickier than grip races in terms of car control, but this should still be your goal in any given Speed event.
 
 ### [Restless](https://retroachievements.org/achievement/553489)
 
 `Score at least 5,000 points on a Sector Shootout event.`
 
-This one needs a good car and good management of sector points, you need to make sure not to go to hard in the first few laps so you can keep breaking the records you set.
+This one needs a good car and good management of sector points, you need to make sure not to go too hard too soon so you can keep breaking the records you set.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
@@ -545,7 +545,7 @@ Remember, you can always shift higher as long as you use the clutch. And don't u
 
 `Maintain a Wheelie over a full 1/4 mile (402.3 m, 1,320 ft).`
 
-Maintaining a wheelie is all about power and shifting correctly. You want to use a car upgraded with enough power and a Tier 3 Suspension and use nitrous when the front end starts to go down.
+Maintaining a wheelie is all about power and shifting correctly. You want to use a car upgraded with enough power and a Tier 3 Suspension and use nitrous before the front end starts to go down.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
@@ -553,7 +553,7 @@ General car recomendations are in [Appendix: Recommended Cars and Setups](#5-app
 
 `Score at least 15,000 points on a single Drift round using King Assist.`
 
-King Assist doesn't have as much advantage in keeping cars on track over long drifts. Good tracks to try this on are in Ebisu, Willow Springs, Autobahnring, and Autopolis.
+King Assist doesn't have as much advantage in keeping cars on track over long drifts. Good places to try this on are in Ebisu, Willow Springs, Autobahnring, and Autopolis.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
@@ -653,13 +653,13 @@ Just turn left.
 
 The event to do this on is the Time Attack in the Super Promotion Ebisu Race Day.
 
-The only upgrades allowed are suspension and tires... and also brakes but who needs them?
+The only upgrades allowed are suspension and tires... and also brakes but they just make you slower so who needs them?
 
 ### [The Fastest Car in the West](https://retroachievements.org/achievement/553508)
 
 `Beat a lap time of 0:55.00 in a race on the GP Circuit at Willow Springs.`
 
-The Big Willow is a fast track, but be careful as the corners are deceptively tricky. The last corner can be done flat out if you find the right line.
+Big Willow is a fast track, but be careful as the corners are deceptively tricky. The last corner can be done flat out if you find the right line.
 
 ### [The Fastest Road in the Pacific Northwest](https://retroachievements.org/achievement/553509)
 
@@ -677,7 +677,7 @@ This is a very technical track, smoother is faster here.
 
 `Beat a lap time of 1:20.00 in a race on the GP Circuit at Autopolis.`
 
-This track is a lot about finding the right lines through the fast corners, you can push a lot harder than you think here.
+This track is a lot about finding the right lines through the fast corners, you can push a lot harder than you think..
 
 ### [In the Sonoma Desert](https://retroachievements.org/achievement/553512)
 
@@ -696,6 +696,8 @@ You need to maintain top speed basically around the whole oval, use nitrous in t
 ### Grip
 
 - Best car: Porsche 911 Turbo
+
+- Honorable mention: Pagani Zonda F (too expensive but best use for a free car marker)
 
 You can improve on this basic setup by upgrading the turbo or using Stage 4 parts, but don't upgrade the engine as the stock one is the best for the 911 Turbo. Do note that the more power upgrades you install, the less score potential you will have as the target times will lower significantly.
 
@@ -765,6 +767,8 @@ For Wheeling Competitions you can use this setup instead. Parts can be applied t
 ### Speed
 
 - Best car: Porsche 911 Turbo
+
+- Honorable mention: Pagani Zonda F (too expensive but best use for a free car marker)
 
 This is basically the same setup as the [Grip](#grip) one, with some key differences in the ride height and body.
 
