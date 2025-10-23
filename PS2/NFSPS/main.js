@@ -65,7 +65,7 @@ const codeFor = () => {
 
   const gameIs = {
     // prettier-ignore
-    booted: $.one(['PauseIf', 'Mem', '32bit', addresses.gameStartedPointer, '=', 'Value', '', 0]),
+    booted: $.one(['', 'Mem', '32bit', addresses.gameStartedPointer, '!=', 'Value', '', 0]),
     started: $(
       ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
       ['', 'Mem', '32bit', 0x57c, '=', 'Value', '', 1],
