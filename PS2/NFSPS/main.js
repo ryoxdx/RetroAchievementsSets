@@ -246,16 +246,16 @@ const codeFor = () => {
   const allKingsDefeated = $(
     ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
     ['AddAddress', 'Mem', '32bit', 0x4],
-    ['AndNext', 'Mem', 'Bit2', 0x510, '=', 'Value', '', 1],
+    ['', 'Mem', 'Bit2', 0x510, '=', 'Value', '', 1],
     ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
     ['AddAddress', 'Mem', '32bit', 0x4],
-    ['AndNext', 'Mem', 'Bit2', 0x204, '=', 'Value', '', 1],
+    ['', 'Mem', 'Bit2', 0x204, '=', 'Value', '', 1],
     ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
     ['AddAddress', 'Mem', '32bit', 0x4],
-    ['AndNext', 'Mem', 'Bit2', 0x294, '=', 'Value', '', 1],
+    ['', 'Mem', 'Bit2', 0x294, '=', 'Value', '', 1],
     ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
     ['AddAddress', 'Mem', '32bit', 0x4],
-    ['AndNext', 'Mem', 'Bit2', 0x3c0, '=', 'Value', '', 1],
+    ['', 'Mem', 'Bit2', 0x3c0, '=', 'Value', '', 1],
     ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
     ['AddAddress', 'Mem', '32bit', 0x4],
     ['', 'Mem', 'Bit2', 0x4e0, '=', 'Value', '', 1],
@@ -269,6 +269,34 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
       ['AddAddress', 'Mem', '32bit', 0x4],
       ['Measured', 'Mem', '32bit', offset, '=', 'Value', '', totalRaceDays],
+    );
+
+  const bossOrgMastery = (raceDayOffsets) =>
+    $(
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['AddSource', 'Delta', 'Bit4', raceDayOffsets[0]],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['AddSource', 'Delta', 'Bit4', raceDayOffsets[1]],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['AddSource', 'Delta', 'Bit4', raceDayOffsets[2]],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['', 'Delta', 'Bit2', raceDayOffsets[3], '=', 'Value', '', 3],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['AddSource', 'Mem', 'Bit4', raceDayOffsets[0]],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['AddSource', 'Mem', 'Bit4', raceDayOffsets[1]],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['AddSource', 'Mem', 'Bit4', raceDayOffsets[2]],
+      ['AddAddress', 'Mem', '32bit', addresses.completionPointer],
+      ['AddAddress', 'Mem', '32bit', 0x4],
+      ['Measured', 'Mem', 'Bit2', raceDayOffsets[3], '=', 'Value', '', 4],
     );
 
   const notPreTunedNonBossCarReset = $(
@@ -884,6 +912,7 @@ const codeFor = () => {
     ryoRaceDayReset,
     allKingsDefeated,
     orgCompletion,
+    bossOrgMastery,
     notPreTunedNonBossCarReset,
     hasCompletedARace,
     overHalfRacesReset,
@@ -1209,7 +1238,10 @@ for (const achievement of orgAchievements) {
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.orgCompletion(achievement.recordOffset, achievement.totalRaceDays),
+      !achievement.raceDayOffsets &&
+        c.orgCompletion(achievement.recordOffset, achievement.totalRaceDays),
+      achievement.raceDayOffsets &&
+        c.bossOrgMastery(achievement.raceDayOffsets),
     ),
   });
 }

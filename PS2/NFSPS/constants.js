@@ -223,6 +223,7 @@ export const orgAchievements = [
     dominationPoints: 10,
     recordOffset: 0x10,
     recordPoints: 25,
+    raceDayOffsets: [0x1b0, 0x2e8, 0x5a0, 0x510],
   },
   {
     org: 'Rogue Speed',
@@ -231,6 +232,7 @@ export const orgAchievements = [
     dominationPoints: 10,
     recordOffset: 0xd8,
     recordPoints: 25,
+    raceDayOffsets: [0x180, 0x18c, 0x3fc, 0x204],
   },
   {
     org: 'Noise Bomb',
@@ -239,6 +241,7 @@ export const orgAchievements = [
     dominationPoints: 10,
     recordOffset: 0x4c,
     recordPoints: 25,
+    raceDayOffsets: [0x1bc, 0x210, 0x558, 0x294],
   },
   {
     org: 'Nitrocide',
@@ -247,6 +250,7 @@ export const orgAchievements = [
     dominationPoints: 10,
     recordOffset: 0x38,
     recordPoints: 25,
+    raceDayOffsets: [0x258, 0x2d0, 0x420, 0x3c0],
   },
 ];
 
