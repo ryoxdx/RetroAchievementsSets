@@ -691,7 +691,7 @@ This one will require a top tier Speed car as well as some patience.
 
 A quirk of the PS2 version of this game is that above 395 km/h (245 MPH) all steering is lost, so you need to line up the car at the right spot as you're not gonna be able to turn.
 
-The best place to do this is on the long straight at Nevada Highway A. Line up the car as soon as possible after the corner and then use nitrous, there should be just enough time after the 10 seconds to slow down and prepare for the corner ahead.
+Nevada Highway has 2 long straights where this is possible. Line up the car as soon as possible after the corner and then use nitrous, there should be just enough time after the 10 seconds to slow down and prepare for the corner ahead.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
