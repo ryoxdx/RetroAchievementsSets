@@ -134,7 +134,7 @@ Click on each achievement for more details.
 | ![The Fastest Car in the West](https://media.retroachievements.org/Badge/628492.png)                           | [The Fastest Car in the West (10)](#the-fastest-car-in-the-west)                                                   | Beat a lap time of 0:55.00 in a race on the GP Circuit at Willow Springs.                                                                        |          |
 | ![The Fastest Road in the Pacific Northwest](https://media.retroachievements.org/Badge/628493.png)             | [The Fastest Road in the Pacific Northwest (10)](#the-fastest-road-in-the-pacific-northwest)                       | Beat a lap time of 0:48.00 in a race on the GP Circuit at Portland International Raceway.                                                        |          |
 | ![Holiday in Ireland](https://media.retroachievements.org/Badge/628494.png)                                    | [Holiday in Ireland (10)](#holiday-in-ireland)                                                                     | Beat a lap time of 1:20.00 in a race on the GP Circuit at Mondello Park.                                                                         |          |
-| ![Super Street](https://media.retroachievements.org/Badge/628495.png)                                          | [Super Street (10)](#super-street)                                                                                 | Beat a lap time of 1:20.00 in a race on the GP Circuit at Autopolis.                                                                             |          |
+| ![Super Street](https://media.retroachievements.org/Badge/628495.png)                                          | [Super Street (10)](#super-street)                                                                                 | Beat a lap time of 1:22.00 in a race on the GP Circuit at Autopolis.                                                                             |          |
 | ![In the Sonoma Desert](https://media.retroachievements.org/Badge/628496.png)                                  | [In the Sonoma Desert (10)](#in-the-sonoma-desert)                                                                 | Beat a lap time of 1:00.00 in a race on the GP Circuit at Infineon.                                                                              |          |
 | ![Slingshot, Engage](https://media.retroachievements.org/Badge/628497.png)                                     | [Slingshot, Engage (10)](#slingshot-engage)                                                                        | Beat a lap time of 0:30.00 in a race on the Oval Circuit at Texas World Speedway.                                                                |          |
 
@@ -837,9 +837,9 @@ This is a very technical track, smoother is faster here.
 
 ![Super Street](https://media.retroachievements.org/Badge/628495.png)
 
-`Beat a lap time of 1:20.00 in a race on the GP Circuit at Autopolis.`
+`Beat a lap time of 1:22.00 in a race on the GP Circuit at Autopolis.`
 
-This track is a lot about finding the right lines through the fast corners, you can push a lot harder than you think..
+This track is a lot about finding the right lines through the fast corners, you can push a lot harder than you think.
 
 ### [In the Sonoma Desert](https://retroachievements.org/achievement/553512)
 

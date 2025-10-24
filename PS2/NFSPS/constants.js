@@ -464,8 +464,8 @@ export const timeTrialAchievements = [
   {
     title: 'Super Street',
     location: 'GP Circuit at Autopolis',
-    time: 80.0,
-    timeString: '1:20.00',
+    time: 82.0,
+    timeString: '1:22.00',
     tracks: trackIds.autopolis,
   },
   {
