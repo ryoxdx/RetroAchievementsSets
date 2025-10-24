@@ -865,7 +865,7 @@ You need to maintain top speed basically around the whole oval, use nitrous in t
 
 - Honorable mention: Pagani Zonda F (too expensive but best use for a free car marker)
 
-You can improve on this basic setup by upgrading the turbo or using Stage 4 parts, but don't upgrade the engine as the stock one is the best for the 911 Turbo. Do note that the more power upgrades you install, the less score potential you will have as the target times will lower significantly.
+You can improve on this basic setup by using Stage 4 parts, but don't upgrade the engine as the stock one is the best for the 911 Turbo. Do note that the more power upgrades you install, the less score potential you will have as the target times will lower significantly.
 
 Drivetrain tuned to max out at 395 km/h while using nitrous, in speeds over that all steering is lost. You can apply this setup to other cars but the drivetrain will need to be adjusted in a case by case basis.
 
