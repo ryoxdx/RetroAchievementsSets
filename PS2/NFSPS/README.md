@@ -121,7 +121,7 @@ Click on each achievement for more details.
 | ![The Legendary Hachiroku of Ebisu](https://media.retroachievements.org/Badge/628479.png)                      | [The Legendary Hachiroku of Ebisu (10)](#the-legendary-hachiroku-of-ebisu)                                         | Score at least 8,600 points on a single Drift round in Ebisu using a stock Toyota Corolla GTS (AE86).                                            |          |
 | ![Eleanor](https://media.retroachievements.org/Badge/628480.png)                                               | [Eleanor (4)](#eleanor)                                                                                            | Achieve a lap time under 60 seconds in a race on the Horse Thief Mile at Willow Springs using a Shelby GT500 '67.                                |          |
 | ![Twisted Chassis](https://media.retroachievements.org/Badge/628481.png)                                       | [Twisted Chassis (3)](#twisted-chassis)                                                                            | Win a Wheelie Competition using a Dodge Charger R/T.                                                                                             |          |
-| ![Poster Boy](https://media.retroachievements.org/Badge/628482.png)                                            | [Poster Boy (10)](#poster-boy)                                                                                     | Score at least 5,000 points on a single Drift round in Tokyo Dockyards using a Mazda RX-7 and King assist.                                       |          |
+| ![Poster Boy](https://media.retroachievements.org/Badge/630251.png)                                            | [Poster Boy (10)](#poster-boy)                                                                                     | Score at least 5,000 points on a single Drift round in Tokyo Dockyards using a Mazda RX-7 and King assist.                                       |          |
 | ![Homologation Special](https://media.retroachievements.org/Badge/628483.png)                                  | [Homologation Special (3)](#homologation-special)                                                                  | Break a track record on a Nevada Grip mode race with a dirt section using a stock Ford Escort RS Cosworth.                                       |          |
 | ![Ten Minute Car](https://media.retroachievements.org/Badge/628484.png)                                        | [Ten Minute Car (5)](#ten-minute-car)                                                                              | Finish a 1/4 mile Drag race in under 10 seconds using a Toyota Supra with no power or nitrous upgrades.                                          |          |
 | ![Pogo](https://media.retroachievements.org/Badge/628485.png)                                                  | [Pogo (2)](#pogo)                                                                                                  | Break a track record in any Autobahn Speed mode event using a Volkswagen Golf GTI or R32.                                                        |          |
@@ -729,7 +729,7 @@ On green, go for it.
 
 ### [Poster Boy](https://retroachievements.org/achievement/553498)
 
-![Poster Boy](https://media.retroachievements.org/Badge/628482.png)
+![Poster Boy](https://media.retroachievements.org/Badge/630251.png)
 
 `Score at least 5,000 points on a single Drift round in Tokyo Dockyards using a Mazda RX-7 and King assist.`
 
