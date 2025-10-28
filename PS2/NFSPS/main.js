@@ -1218,7 +1218,7 @@ for (const achievement of showdownChallengeAchievements) {
   set.addAchievement({
     title: achievement.recordTitle,
     description: `Beat the record score in Showdown: ${achievement.showdown}.`,
-    points: 10,
+    points: 5,
     conditions: $(
       c.gameIs.booted,
       c.codeEntryDetection,
@@ -1269,7 +1269,7 @@ for (const achievement of challengeRaceDayAchievements) {
 set.addAchievement({
   title: 'Sliding Scale',
   description: 'Score at least 100,000 points in a single Race Day.',
-  points: 10,
+  points: 25,
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
