@@ -31,7 +31,7 @@ import {
  * @typedef {Object} TrackWithRecord
  * @property {number} id
  * @property {number} record
- * */
+ */
 
 const set = new AchievementSet({
   gameId: 2825,
@@ -592,6 +592,13 @@ const codeFor = () => {
     ['', 'Mem', 'Bit0', 0x18, '=', 'Value', '', 0],
   );
 
+  /*
+   * The AndNext/Ornext chain here is laid out in this specific order to work with any Units settings (Imperial/Metric) while avoiding using alts.
+   * Since the value in MPH is smaller than the value in km/h, we check for that last to ensure it is true even if we are using Metric.
+   * This equivalent to: (((Units = Metric AND Speed >= 396 km/h) OR Units = Imperial) AND Speed >= 246 MPH).
+   * If the first group evaluates to true, we are using Metric and the last Speed condition can also evaluate to true without affecting the end result.
+   * If the first group evaluates to false, we are using Imperial and Units = Imperial will be true and we can just look at the last Speed condition.
+   */
   const currentSpeedIsAboveControlThreshhold = $(
     ['AddAddress', 'Mem', '32bit', addresses.settingsPointer],
     ['AddAddress', 'Mem', '32bit', 0x8],
