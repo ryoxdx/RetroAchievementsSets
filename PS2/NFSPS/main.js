@@ -155,6 +155,15 @@ const codeFor = () => {
     ['', 'Mem', 'Bit2', 0x68, '=', 'Value', '', 1],
   );
 
+  const heatHadBeenWon = $(
+    ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['', 'Mem', '32bit', 0x5c, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['', 'Mem', 'Bit2', 0x68, '=', 'Value', '', 1],
+  );
+
   const raceDayDominated = $(
     ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
     ['AddAddress', 'Mem', '32bit', 0x30],
@@ -433,7 +442,7 @@ const codeFor = () => {
 
   const isCareerRaceDay = $(
     ['AddAddress', 'Mem', '32bit', addresses.careerRaceDayPointer],
-    ['', 'Mem', '32bit', 0x22c, '>', 'Value', '', 0],
+    ['', 'Mem', '32bit', 0x22c, '!=', 'Value', '', 0],
   );
 
   const isCleanRace = $(
@@ -662,7 +671,7 @@ const codeFor = () => {
     ['Trigger', 'Mem', '32bit', 0x5c, '=', 'Value', '', 1],
     ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
     ['AddAddress', 'Mem', '32bit', 0x50],
-    ['Trigger', 'Delta', 'Bit2', 0x68, '=', 'Value', '', 0],
+    ['', 'Delta', 'Bit2', 0x68, '=', 'Value', '', 0],
     ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
     ['AddAddress', 'Mem', '32bit', 0x50],
     ['Trigger', 'Mem', 'Bit2', 0x68, '=', 'Value', '', 1],
@@ -899,7 +908,6 @@ const codeFor = () => {
     cash,
     codeEntryDetection,
     currentRaceDay,
-    heatWon,
     raceDayDominated,
     raceDayDominatedTrigger,
     raceDayWon,
@@ -938,6 +946,7 @@ const codeFor = () => {
     currentSpeedIsAboveControlThreshholdReset,
     alwaysTrue,
     heatWon,
+    heatHadBeenWon,
     heatWonTrigger,
     multiHeatRaceWon,
     currentCarModel,
@@ -1273,7 +1282,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.scored100k,
   ),
@@ -1286,11 +1294,11 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.grip,
     c.isNotPracticeMode,
+    c.heatHadBeenWon,
     c.isCleanRace,
   ),
 });
@@ -1303,7 +1311,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.grip,
@@ -1319,7 +1326,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
@@ -1335,7 +1341,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
@@ -1351,7 +1356,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
@@ -1368,7 +1372,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drift,
@@ -1384,11 +1387,11 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.speed,
     c.isNotPracticeMode,
+    c.heatHadBeenWon,
     c.isCleanRace,
   ),
 });
@@ -1400,7 +1403,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.grip,
@@ -1417,7 +1419,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
@@ -1436,7 +1437,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
@@ -1454,7 +1454,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drift,
@@ -1476,7 +1475,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       measuredIf(
         orNext(
           c.currentRaceDay(raceDays.SPNevadaHighway),
@@ -1525,7 +1523,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       orNext(
         c.currentRaceDay(raceDays.RTSEbisu),
         c.currentRaceDay(raceDays.NBEbisu),
@@ -1551,7 +1548,6 @@ set.addAchievement({
     c.gameIs.booted,
     c.codeEntryDetection,
     c.playerIs.inRaceDay,
-    c.isCareerRaceDay,
     orNext(...trackIds.horseThiefMile.map((id) => c.currentTrack(id))),
     c.currentCarModel(carModels.ShelbyGT50067),
     c.playerIs.racing,
@@ -1567,7 +1563,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.currentCarModel(carModels.DodgeChallengerRT),
     c.currentRaceModeIs.drag,
@@ -1587,7 +1582,6 @@ set.addAchievement({
     c.gameIs.booted,
     c.codeEntryDetection,
     c.playerIs.inRaceDay,
-    c.isCareerRaceDay,
     orNext(
       c.currentRaceDay(raceDays.RTSTokyoDockyard),
       c.currentRaceDay(raceDays.RTSTokyoDockyardII),
@@ -1615,7 +1609,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       c.currentCarModel(carModels.FordEscortRSCosworth),
       c.playerIs.racing,
       c.isNotPracticeMode,
@@ -1633,7 +1626,6 @@ set.addAchievement({
     core: $(
       c.gameIs.booted,
       c.codeEntryDetection,
-      c.playerIs.inRaceDay,
       c.isCareerRaceDay,
       c.currentCarModel(carModels.ToyotaSupra),
       c.currentRaceModeIs.drag,
@@ -1657,7 +1649,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       orNext(
         c.currentCarModel(carModels.VolkswagenGolfGTI),
         c.currentCarModel(carModels.VolkswagenR32),
@@ -1677,7 +1668,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.playerIs.inRaceDay,
     c.isCareerRaceDay,
     c.currentCarModel(carModels.Nissan350ZZ33),
     c.playerIs.racing,
@@ -1697,7 +1687,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       c.currentCarModel(carModels.NissanGTRProto),
       c.playerIs.racing,
       c.isNotPracticeMode,
@@ -1715,7 +1704,6 @@ set.addAchievement({
     c.gameIs.booted,
     c.codeEntryDetection,
     c.playerIs.inRaceDay,
-    c.isCareerRaceDay,
     orNext(
       c.currentCarModel(carModels.BMWM3E46),
       c.currentCarModel(carModels.BMWM3E92),
@@ -1739,7 +1727,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       orNext(
         c.currentCarModel(carModels.ChevroletCorvetteC6),
         c.currentCarModel(carModels.ChevroletCorvetteZ06),
@@ -1761,7 +1748,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       orNext(c.currentCarModel(carModels.FordMustangGT)),
       c.playerIs.racing,
       c.isNotPracticeMode,
@@ -1780,7 +1766,6 @@ set.addAchievement({
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       c.currentCarModel(carModels.SubaruImprezaWRXSTI),
       c.playerIs.racing,
       c.isNotPracticeMode,
@@ -1798,7 +1783,6 @@ for (const achievement of timeTrialAchievements) {
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.isCareerRaceDay,
       orNext(...achievement.tracks.map((id) => c.currentTrack(id))),
       c.playerIs.racing,
       c.isNotPracticeMode,
@@ -1818,7 +1802,6 @@ for (const leaderboard of raceDayLeaderboards) {
         c.gameIs.booted,
         c.codeEntryDetection,
         c.playerIs.inRaceDay,
-        c.isCareerRaceDay,
         c.currentRaceDay(leaderboard.raceDayId),
         c.playerIs.racing,
         c.isNotPracticeMode,
@@ -2064,7 +2047,6 @@ export const rich = RichPresence({
           $(
             c.gameIs.booted,
             c.gameIs.loadedIn,
-            c.playerIs.inRaceDay,
             c.playerIs.racing,
             c.isCareerRaceDay,
           ),
@@ -2080,12 +2062,7 @@ export const rich = RichPresence({
           `[${org}] ${day} | ${car}`,
         ],
         [
-          $(
-            c.gameIs.booted,
-            c.gameIs.loadedIn,
-            c.playerIs.inRaceDay,
-            c.isCareerRaceDay,
-          ),
+          $(c.gameIs.booted, c.gameIs.loadedIn, c.isCareerRaceDay),
           `[${org}] ${day} | $${cash}`,
         ],
         [
