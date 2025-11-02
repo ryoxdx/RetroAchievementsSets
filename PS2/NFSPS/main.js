@@ -594,7 +594,7 @@ const codeFor = () => {
 
   /*
    * The AndNext/Ornext chain here is laid out in this specific order to work with any Units settings (Imperial/Metric) while avoiding using alts.
-   * Since the value in MPH is smaller than the value in km/h, we check for that last to ensure it is true even if we are using Metric.
+   * Since the value in MPH is smaller than the value in km/h, we check for that last to ensure it being true doesn't affect us if we are using Metric.
    * This equivalent to: (((Units = Metric AND Speed >= 396 km/h) OR Units = Imperial) AND Speed >= 246 MPH).
    * If the first group evaluates to true, we are using Metric and the last Speed condition can also evaluate to true without affecting the end result.
    * If the first group evaluates to false, we are using Imperial and Units = Imperial will be true and we can just look at the last Speed condition.
