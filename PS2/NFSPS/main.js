@@ -525,13 +525,13 @@ const codeFor = () => {
     $(
       ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
       ['AddAddress', 'Mem', '32bit', 0x50],
+      ['', 'Delta', 'Float', 0xcc, '=', 'Float', '', 0.0],
+      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+      ['AddAddress', 'Mem', '32bit', 0x50],
+      ['', 'Mem', 'Float', 0xcc, '>', 'Float', '', 0.0],
+      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+      ['AddAddress', 'Mem', '32bit', 0x50],
       ['', 'Mem', 'Float', 0xcc, '<', 'Float', '', time],
-      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
-      ['AddAddress', 'Mem', '32bit', 0x50],
-      ['', 'Delta', 'Bit2', 0x68, '=', 'Value', '', 0],
-      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
-      ['AddAddress', 'Mem', '32bit', 0x50],
-      ['', 'Mem', 'Bit2', 0x68, '=', 'Value', '', 1],
     );
 
   const isHalfMile = $(
@@ -544,13 +544,10 @@ const codeFor = () => {
     $(
       ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
       ['AddAddress', 'Mem', '32bit', 0x50],
+      ['', 'Delta', 'Float', 0xcc, '=', 'Float', '', 0.0],
+      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
+      ['AddAddress', 'Mem', '32bit', 0x50],
       ['', 'Mem', 'Float', 0xcc, '>=', 'Float', '', score],
-      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
-      ['AddAddress', 'Mem', '32bit', 0x50],
-      ['', 'Delta', 'Bit2', 0x68, '=', 'Value', '', 0],
-      ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
-      ['AddAddress', 'Mem', '32bit', 0x50],
-      ['', 'Mem', 'Bit2', 0x68, '=', 'Value', '', 1],
     );
 
   const isSectorShootout = $(
