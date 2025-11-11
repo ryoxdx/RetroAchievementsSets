@@ -97,6 +97,12 @@ const codeFor = () => {
     ['Measured', 'Mem', '32bit', 0x1e0],
   );
 
+  /**
+   * This structure is used to get a pointer to the current car slot using an index
+   * at +0x18 and some arithmetic. This is necessary because the game does not store
+   * a direct pointer to a car slot in the garage, only an index of the slot and
+   * the array of slots that starts at +0x29d0.
+   */
   const currentCarSlotMakeshiftPointer = $(
     ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
     ['Remember', 'Mem', '32bit', 0x18, '-', 'Value', '', 0x8c],
@@ -589,12 +595,20 @@ const codeFor = () => {
     ['', 'Mem', 'Bit0', 0x18, '=', 'Value', '', 0],
   );
 
-  /*
-   * The AndNext/Ornext chain here is laid out in this specific order to work with any Units settings (Imperial/Metric) while avoiding using alts.
-   * Since the value in MPH is smaller than the value in km/h, we check for that last to ensure it being true doesn't affect us if we are using Metric.
-   * This equivalent to: (((Units = Metric AND Speed >= 396 km/h) OR Units = Imperial) AND Speed >= 246 MPH).
-   * If the first group evaluates to true, we are using Metric and the last Speed condition can also evaluate to true without affecting the end result.
-   * If the first group evaluates to false, we are using Imperial and Units = Imperial will be true and we can just look at the last Speed condition.
+  /**
+   * The AndNext/Ornext chain here is laid out in this specific order to work with
+   * any Units settings (Imperial/Metric) while avoiding using alts. Since the value
+   * in MPH is smaller than the value in km/h, we check for that last to ensure it
+   * being true doesn't affect us if we are using Metric.
+   *
+   * This equivalent to:
+   * (((Units = Metric AND Speed >= 396 km/h) OR Units = Imperial) AND Speed >= 246 MPH).
+   *
+   * If the first group evaluates to true, we are using Metric and the last Speed
+   * condition will also evaluate to true without affecting the end result.
+   *
+   * If we are using Imperial, the first group evaluates to false and we can just
+   * look at the last Speed condition.
    */
   const currentSpeedIsAboveControlThreshhold = $(
     ['AddAddress', 'Mem', '32bit', addresses.settingsPointer],
