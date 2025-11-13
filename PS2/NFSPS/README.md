@@ -15,13 +15,13 @@ Say goodbye to the streets. In [Need for Speed: ProStreet](https://retroachievem
 
 # 2) Things to Know
 
-- Entering any code will void all achievements, if saved it'll persist forever on that career save file and will transfer over to any other career save you make on that same alias.
+- **Entering any code will void all achievements**, if saved it'll persist forever on that career save file and will transfer over to any other career save you make on that same alias.
 
 - For achievements that require records to be beaten, what's valid is the original record the game starts with and not any records you may have increased. In addition, where specific tracks are required only the normal configuration of the track is valid, not the reverse.
 
-- All 5 bosses have missable achievements related to King Assist as their events are not repeatable: [The Real Showdown King (25)](#the-real-showdown-king), [The Real Grip King (10)](#the-real-grip-king), [The Real Drag King (10)](#the-real-drag-king), [The Real Drift King (10)](#the-real-drift-king), and [The Real Speed King (10)](#the-real-speed-king). Make sure to select King Assist before challenging them and don't reset the game or choose a different event while doing each boss.
+- **All 5 bosses have missable achievements related to King Assist as their events are not repeatable**: [The Real Showdown King (25)](#the-real-showdown-king), [The Real Grip King (10)](#the-real-grip-king), [The Real Drag King (10)](#the-real-drag-king), [The Real Drift King (10)](#the-real-drift-king), and [The Real Speed King (10)](#the-real-speed-king). Make sure to select King Assist before challenging them and don't reset the game or choose a different event while doing each boss.
 
-- Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements: [When Life Gives You Lemons... (10)](#when-life-gives-you-lemons), [...Make Lemonade... (25)](#make-lemonade), and [...And Start a Lemonade Stand (25)](#and-start-a-lemonade-stand). You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to enter a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once. As with the boss related achievements, make sure to select King Assist before starting the Race Day and don't reset the game before dominating.
+- **Keep cars earned from Challenge Race Days with their pre-tuned blueprints intact for later achievements**: [When Life Gives You Lemons... (10)](#when-life-gives-you-lemons), [...Make Lemonade... (25)](#make-lemonade), and [...And Start a Lemonade Stand (25)](#and-start-a-lemonade-stand). You can modify other blueprints in those cars, but don't change modes or you'll lose the pre-tuned blueprints. If you don't have enough cars with pre-tuned blueprints to enter a Showdown, you'll get locked out of the related achievement as you can only earn Challenge rewards once. As with the boss related achievements, make sure to select King Assist before starting the Race Day and don't reset the game before dominating.
 
 # 3) Roadmap
 
@@ -403,7 +403,7 @@ Here's some recommended cars for each event type:
 - Grip: 350Z (Z33) from Challenge: Texas
   - For the Sector Shootout event, the 240SX (S13) has a better base score and can be used instead.
 - Drag: Cobalt SS from Challenge: Nevada
-  - This one falls off hard after the first Showdown so the best thing you can expect is usualy 3rd place
+  - This one falls off hard after the first Showdown so the best thing you can expect is usually 3rd place
 - Drift: GTO from Challenge: Autopolis
   - Slightly better than the G35 (V35) as it maintains better speed through drifts
 - Speed: Viper SRT10 from Challenge: Autobahnring
@@ -415,7 +415,7 @@ Here's some recommended cars for each event type:
 
 `Dominate Showdown: Autopolis in one sitting using King Assist and using only pre-tuned blueprints of cars that were not obtained from a King.` `[Missable]`
 
-For this one you wanna get as much as possible from the drift events. In the grip events it is possible to win both with some fighting.
+For this one you wanna get as much as possible from the drift events. It is possible to win both grip events with some effort.
 
 See [When Life Gives You Lemons...](#when-life-gives-you-lemons) for more information and car recommendations.
 
@@ -435,7 +435,7 @@ See [When Life Gives You Lemons...](#when-life-gives-you-lemons) for more inform
 
 `Dominate a Challenge Race Day in one sitting by completing at most half of the events in it using King assist.`
 
-This can only really be done on Challenge: Nevada or Challenge: Autobahnring as they have an even number of events that are not all Grip.
+This can only realistically be done on Challenge: Nevada or Challenge: Autobahnring as they have an even number of events that are not all Grip.
 
 As usual, make sure to enable King Assist before starting the Race Day and don't reset the game before dominating.
 
@@ -623,7 +623,7 @@ Should be fairly easy to do with most cars that have been upgraded for drag raci
 
 `Finish a 1/2 mile Drag race in under 11 seconds.`
 
-This one requires a lot more optimization, you're gonna need a great Drag car fully upgraded for this one.
+This one requires a lot more optimization, you're gonna need a great fully upgraded Drag car.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
@@ -667,7 +667,7 @@ Remember, you can always shift higher as long as you use the clutch. And don't u
 
 `Maintain a Wheelie over a full 1/4 mile (402.3 m, 1,320 ft).`
 
-Maintaining a wheelie is all about power and shifting correctly. You want to use a car upgraded with enough power and a Tier 3 Suspension and use nitrous before the front end starts to go down.
+Maintaining a wheelie is all about power and shifting correctly. You'll want to use a car upgraded with enough power and a Tier 3 Suspension. Use the nitrous just before the front end starts to go down.
 
 General car recomendations are in [Appendix: Recommended Cars and Setups](#5-appendix-recommended-cars-and-setups).
 
@@ -890,7 +890,7 @@ The numbers in the Tunes column refer to how many "ticks" of the sliders to move
 
 Drifting is all about power to maintain slides over long sections, anything that doesn't increase power is not necessary.
 
-Nitrous is optional but doesn't add much.
+Nitrous is optional and doesn't add much.
 
 | Part                 | Stage | Price   | Tunes                             |
 | -------------------- | ----- | ------- | --------------------------------- |
