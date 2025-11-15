@@ -150,6 +150,14 @@ const codeFor = () => {
       ['', 'Mem', '32bit', 0x10, '=', 'Value', '', id],
     );
 
+  const measuredIfCurrentRaceDay = (id) =>
+    $(
+      ['AddAddress', 'Mem', '32bit', addresses.loadedRaceDayPointer],
+      ['AddAddress', 'Mem', '32bit', 0x30],
+      ['AddAddress', 'Mem', '32bit', 0x0],
+      ['MeasuredIf', 'Mem', '32bit', 0x10, '=', 'Value', '', id],
+    );
+
   const heatWon = $(
     ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
     ['AddAddress', 'Mem', '32bit', 0x50],
@@ -447,6 +455,9 @@ const codeFor = () => {
   const emptyValueComparison = (value) =>
     $(['', 'Value', '', 0, '=', 'Value', '', value]);
 
+  const measuredEmptyValueComparison = (value) =>
+    $(['Measured', 'Value', '', 0, '=', 'Value', '', value]);
+
   const isCareerRaceDay = $(
     ['AddAddress', 'Mem', '32bit', addresses.careerRaceDayPointer],
     ['', 'Mem', '32bit', 0x22c, '!=', 'Value', '', 0],
@@ -509,7 +520,7 @@ const codeFor = () => {
     ['AddSource', 'Delta', '32bit', 0x2670],
     ['AddAddress', 'Mem', '32bit', addresses.sectorShootoutPointer],
     ['AddSource', 'Delta', '32bit', 0x2674],
-    ['', 'Value', '', 0, '!=', 'Value', '', 12],
+    ['', 'Value', '', 0, '<', 'Value', '', 12],
     ['AddAddress', 'Mem', '32bit', addresses.sectorShootoutPointer],
     ['AddSource', 'Mem', '32bit', 0x2668],
     ['AddAddress', 'Mem', '32bit', addresses.sectorShootoutPointer],
@@ -587,7 +598,7 @@ const codeFor = () => {
   const isWheelieCompetition = $(
     ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
     ['AddAddress', 'Mem', '32bit', 0x50],
-    ['', 'Mem', '32bit', 0x6c, '!=', 'Value', '', 0],
+    ['', 'Mem', 'Float', 0x6c, '!=', 'Float', '', 0.0],
   );
 
   const isNotPracticeMode = $(
@@ -625,8 +636,7 @@ const codeFor = () => {
     ['AddAddress', 'Mem', '32bit', addresses.speedPointer],
     ['AddAddress', 'Mem', '32bit', 0x74],
     ['AddAddress', 'Mem', '32bit', 0x2e4],
-    ['AddHits', 'Mem', 'Float', 0x154, '>=', 'Float', '', 246.0],
-    ['Measured%', 'Value', '', 0, '=', 'Value', '', 1, 600],
+    ['Measured%', 'Mem', 'Float', 0x154, '>=', 'Float', '', 246.0, 600],
     ['AddAddress', 'Mem', '32bit', addresses.speedPointer],
     ['PauseIf', 'Mem', '32bit', 0x74, '=', 'Value', '', 0],
     ['AddAddress', 'Mem', '32bit', addresses.speedPointer],
@@ -669,8 +679,7 @@ const codeFor = () => {
     ['AddAddress', 'Mem', '32bit', addresses.speedPointer],
     ['AddAddress', 'Mem', '32bit', 0x74],
     ['AddAddress', 'Mem', '32bit', 0x2e4],
-    ['AddHits', 'Mem', 'Float', 0x154, '>=', 'Float', '', 246.0],
-    ['PauseIf', 'Value', '', 0, '=', 'Value', '', 1, 600],
+    ['PauseIf', 'Mem', 'Float', 0x154, '>=', 'Float', '', 246.0, 600],
     ['AddAddress', 'Mem', '32bit', addresses.speedPointer],
     ['PauseIf', 'Mem', '32bit', 0x74, '=', 'Value', '', 0],
     ['AddAddress', 'Mem', '32bit', addresses.speedPointer],
@@ -698,15 +707,15 @@ const codeFor = () => {
 
   const multiHeatRaceWon = $(
     ['AddAddress', 'Mem', '32bit', addresses.eventSummaryPointer],
-    ['AddAddress', 'Mem', '32bit', 0x38],
+    ['AddAddress', 'Mem', '32bit', 0x1c],
     ['AddAddress', 'Mem', '32bit', 0x14],
     ['', 'Mem', '32bit', 0x54, '=', 'Value', '', 1],
     ['AddAddress', 'Mem', '32bit', addresses.eventSummaryPointer],
-    ['AddAddress', 'Mem', '32bit', 0x38],
+    ['AddAddress', 'Mem', '32bit', 0x1c],
     ['AddAddress', 'Mem', '32bit', 0x14],
     ['', 'Delta', 'Bit1', 0x50, '=', 'Value', '', 0],
     ['AddAddress', 'Mem', '32bit', addresses.eventSummaryPointer],
-    ['AddAddress', 'Mem', '32bit', 0x38],
+    ['AddAddress', 'Mem', '32bit', 0x1c],
     ['AddAddress', 'Mem', '32bit', 0x14],
     ['', 'Mem', 'Bit1', 0x50, '=', 'Value', '', 1],
   );
@@ -927,6 +936,7 @@ const codeFor = () => {
     cash,
     codeEntryDetection,
     currentRaceDay,
+    measuredIfCurrentRaceDay,
     raceDayDominated,
     raceDayDominatedTrigger,
     raceDayWon,
@@ -947,6 +957,7 @@ const codeFor = () => {
     hasEventRecordDelta,
     hasEventRecord,
     emptyValueComparison,
+    measuredEmptyValueComparison,
     isCareerRaceDay,
     isCleanRace,
     currentRaceModeIs,
@@ -1283,13 +1294,13 @@ for (const achievement of challengeRaceDayAchievements) {
       c.gameIs.booted,
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
-      c.currentRaceDay(achievement.raceDay),
+      c.measuredIfCurrentRaceDay(achievement.raceDay),
       ...achievement.eventOffsets.map((offset) =>
         c.hasEventRecordDelta(offset),
       ),
       c.emptyValueComparison(achievement.eventOffsets.length - 1),
       ...achievement.eventOffsets.map((offset) => c.hasEventRecord(offset)),
-      c.emptyValueComparison(achievement.eventOffsets.length),
+      c.measuredEmptyValueComparison(achievement.eventOffsets.length),
     ),
   });
 }
