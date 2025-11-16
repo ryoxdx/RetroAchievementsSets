@@ -91,6 +91,10 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.ingamePointer],
       ['', 'Mem', '32bit', 0x4, '=', 'Value', '', 1],
     ),
+    inLoaner: $(
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AndNext', 'Mem', '32bit', 0x18, '>', 'Value', '', 0xff],
+    ),
   };
 
   const cash = $(
@@ -1883,9 +1887,19 @@ export const rich = RichPresence({
             c.gameIs.booted,
             c.gameIs.loadedIn,
             c.playerIs.racing,
+            c.playerIs.inLoaner,
             c.isCareerRaceDay,
           ),
-          `[${org}] ${day} 🚗 ${car} 🏁 ${mode}${modeLoaner}`,
+          `[${org}] ${day} 🚗 ${car} 🏁 ${modeLoaner}`,
+        ],
+        [
+          $(
+            c.gameIs.booted,
+            c.gameIs.loadedIn,
+            c.playerIs.racing,
+            c.isCareerRaceDay,
+          ),
+          `[${org}] ${day} 🚗 ${car} 🏁 ${mode}`,
         ],
         [
           $(
