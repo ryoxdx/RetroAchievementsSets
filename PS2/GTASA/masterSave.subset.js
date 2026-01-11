@@ -214,6 +214,7 @@ const codeFor = () => {
   const millionaireStatus = $(
     ['', 'Delta', '32bit', addresses.cash, '<', 'Value', '', 1000000],
     ['', 'Mem', '32bit', addresses.cash, '>=', 'Value', '', 1000000],
+    ['', 'Mem', '32bit', addresses.cash, '<=', 'Value', '', 999999999],
   );
 
   const maxMuscle = $(
@@ -1025,7 +1026,7 @@ set.addAchievement({
     c.isInGame,
     c.cheatDetection,
     c.noStoryMissionsCompleted,
-    c.maxGamblingSkill,
+    c.blurglaryCompleted,
   ),
 });
 
