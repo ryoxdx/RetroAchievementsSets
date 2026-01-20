@@ -19,7 +19,8 @@ const set = new AchievementSet({
 
 const codeFor = () => {
   const addresses = {
-    currentCar: 0xbd3d3c,
+    currentCar: 0xbecc5c,
+    instantRace: 0xc376e4,
     rewardsPointer: 0xbdce70,
     ingame: 0xbdd5a8,
     gameStarted: 0xbe9528,
@@ -45,6 +46,11 @@ const codeFor = () => {
     ),
     ingameQuick: $(
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
+      ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 0],
+    ),
+    ingameInstant: $(
+      ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
+      ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
     ),
   };
 
@@ -79,7 +85,14 @@ export const rich = RichPresence({
           $(c.gameIs.started, c.playerIs.ingameCareer),
           `In Career 🚗 ${car} 💰 $${cash}`,
         ],
-        [$(c.gameIs.started, c.playerIs.ingameQuick), 'In Quick race'],
+        [
+          $(c.gameIs.started, c.playerIs.ingameInstant),
+          `In Instant Race 🚗 ${car}`,
+        ],
+        [
+          $(c.gameIs.started, c.playerIs.ingameQuick),
+          `In Quick Race 🚗 ${car}`,
+        ],
         [
           $(c.gameIs.started, c.playerIs.inMenus),
           `Navigating the menus 💰 $${cash}`,
