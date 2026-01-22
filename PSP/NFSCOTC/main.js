@@ -1056,7 +1056,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Playlist Mix Master',
   description: 'Win 5 Instant Races in a row.',
-  points: 5,
+  points: 10,
   conditions: $(c.gameIs.started, c.playerIs.ingameInstant, c.raceWon5Hits),
 });
 
@@ -1285,7 +1285,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Rolling in Paper',
   description: 'Reach $100,000.',
-  points: 5,
+  points: 3,
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
