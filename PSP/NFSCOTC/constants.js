@@ -30,6 +30,142 @@ export const richPresenceValues = {
     0x29: 'Mercedes-Benz SL65 AMG',
     0x2a: 'Pontiac Firebird',
   },
+  careerTrack: {
+    '*': 'Crew rival challenge',
+    0x00: 'Rock Quarry - Event 1',
+    0x01: 'Rock Quarry - Event 2',
+    0x02: 'Rock Quarry - Event 3',
+    0x03: 'Rock Quarry - Event 4',
+    0x04: 'Junkyard - Event 1',
+    0x05: 'Junkyard - Event 2',
+    0x06: 'Junkyard - Event 3',
+    0x07: 'Junkyard - Event 4',
+    0x08: 'Junkyard - Event 5',
+    0x09: 'Junkyard - Event 6',
+    0x0a: 'Junkyard - Event 7',
+    0x0b: 'Junkyard - Event 8',
+    0x0c: 'Junkyard - Event 9',
+    0x0d: 'Industrial - Event 1',
+    0x0e: 'Industrial - Event 2',
+    0x0f: 'Industrial - Event 3',
+    0x10: 'Industrial - Event 4',
+    0x11: 'Industrial - Event 5',
+    0x12: 'Industrial - Event 6',
+    0x13: 'Industrial - Event 7',
+    0x14: 'Industrial - Event 8',
+    0x15: 'Perimeter HWY - Event 1',
+    0x16: 'Perimeter HWY - Event 2',
+    0x17: 'Perimeter HWY - Event 3',
+    0x18: 'Perimeter HWY - Event 4',
+    0x19: 'Perimeter HWY - Event 5',
+    0x1a: 'Perimeter HWY - Event 6',
+    0x1b: 'Perimeter HWY - Event 7',
+    0x1c: 'Mountains - Event 1',
+    0x1d: 'Mountains - Event 2',
+    0x1e: 'Mountains - Event 3',
+    0x1f: 'Mountains - Event 4',
+    0x20: 'Mountains - Event 5',
+    0x21: 'Mountains - Event 6',
+    0x22: 'Mountains - Event 7',
+    0x23: 'Inner City - Event 1',
+    0x24: 'Inner City - Event 2',
+    0x25: 'Inner City - Event 3',
+    0x26: 'Inner City - Event 4',
+    0x27: 'Inner City - Event 5',
+    0x28: 'Inner City - Event 6',
+    0x29: 'Inner City - Event 7',
+    0x2a: 'Storage - Event 1',
+    0x2b: 'Storage - Event 2',
+    0x2c: 'Storage - Event 3',
+    0x2d: 'Storage - Event 4',
+    0x2e: 'Storage - Event 5',
+    0x2f: 'Storage - Event 6',
+    0x30: 'Storage - Event 7',
+    0x31: 'Storage - Event 8',
+    0x32: 'Storage - Event 9',
+    0x33: 'Storage - Event 10',
+    0x34: 'Bridges - Event 1',
+    0x35: 'Bridges - Event 2',
+    0x36: 'Bridges - Event 3',
+    0x37: 'Bridges - Event 4',
+    0x38: 'Bridges - Event 5',
+    0x39: 'Bridges - Event 6',
+    0x3a: 'Bridges - Event 7',
+    0x3b: 'Residential - Event 1',
+    0x3c: 'Residential - Event 2',
+    0x3d: 'Residential - Event 3',
+    0x3e: 'Residential - Event 4',
+    0x3f: 'Residential - Event 5',
+    0x40: 'Residential - Event 6',
+    0x41: 'Residential - Event 7',
+    0x42: 'Residential - Event 8',
+    0x43: 'Commercial City - Event 1',
+    0x44: 'Commercial City - Event 2',
+    0x45: 'Commercial City - Event 3',
+    0x46: 'Commercial City - Event 4',
+    0x47: 'Commercial City - Event 5',
+    0x48: 'Commercial City - Event 6',
+    0x49: 'Commercial City - Event 7',
+    0x4a: 'Commercial City - Event 8',
+    0x4b: 'Shipyard - Event 1',
+    0x4c: 'Shipyard - Event 2',
+    0x4d: 'Shipyard - Event 3',
+    0x4e: 'Shipyard - Event 4',
+    0x4f: 'Shipyard - Event 5',
+    0x50: 'Shipyard - Event 6',
+    0x51: 'Shipyard - Event 7',
+    0x52: 'Shipyard - Event 8',
+    0x53: 'Shipyard - Event 9',
+    0x54: 'Airport - Event 1',
+    0x55: 'Airport - Event 2',
+    0x56: 'Airport - Event 3',
+    0x57: 'Airport - Event 4',
+    0x58: 'Airport - Event 5',
+    0x59: 'Airport - Event 6',
+    0x5a: 'Airport - Event 7',
+    0x5b: 'Airport - Event 8',
+    0x5c: 'Airport - Event 9',
+    0x5d: 'Campus - Event 1',
+    0x5e: 'Campus - Event 2',
+    0x5f: 'Campus - Event 3',
+    0x60: 'Campus - Event 4',
+    0x61: 'Campus - Event 5',
+    0x62: 'Campus - Event 6',
+    0x63: 'Campus - Event 7',
+    0x64: 'Campus - Event 8',
+    0x65: 'Campus - Event 9',
+    0x66: 'High Residential - Event 1',
+    0x67: 'High Residential - Event 2',
+    0x68: 'High Residential - Event 3',
+    0x69: 'High Residential - Event 4',
+    0x6a: 'High Residential - Event 5',
+    0x6b: 'High Residential - Event 6',
+    0x6c: 'High Residential - Event 7',
+    0x6d: 'High Residential - Event 8',
+  },
+  quickTrack: {
+    0xfa1: 'Perimeter',
+    0xfa2: 'Reactor Loop',
+    0xfa3: 'Junktown Scramble',
+    0xfa4: 'Storage Run',
+    0xfa5: 'East Tunnel',
+    0xfa7: 'Inner City Run',
+    0xfaa: 'Big East HWY.',
+    0xfab: 'Urban Technical',
+    0xfac: 'Crossover',
+    0xfad: 'Factory Circuit',
+    0xfae: 'Junkyard Blitz',
+    0xfaf: 'Centrifugal',
+    0xfb0: 'Bridge City',
+    0xfb1: 'Skyscraper Circuit',
+    0xfb2: 'Two Bridge Circuit',
+    0xfb3: 'Homes and Towers',
+    0xfb4: 'South Side',
+    0xfb5: 'Figure Eight',
+    0xfb6: 'Westside Loop',
+    0xfb7: 'University Drive',
+    0xfb8: 'Giant Loop',
+  },
 };
 
 export const territories = {
@@ -543,131 +679,131 @@ export const cars = [
 
 export const escapeEvents = [
   {
-    name: 'Junkyard - Race 3',
+    name: 'Junkyard - Event 3',
     id: 0x06,
   },
   {
-    name: 'Industrial - Race 6',
+    name: 'Industrial - Event 6',
     id: 0x12,
   },
   {
-    name: 'Perimeter HWY - Race 6',
+    name: 'Perimeter HWY - Event 6',
     id: 0x1a,
   },
   {
-    name: 'Mountains -  Race 5',
+    name: 'Mountains -  Event 5',
     id: 0x20,
   },
   {
-    name: 'Inner City - Race 4',
+    name: 'Inner City - Event 4',
     id: 0x26,
   },
   {
-    name: 'Storage - Race 3',
+    name: 'Storage - Event 3',
     id: 0x2c,
   },
   {
-    name: 'Shipyard - Race 4',
+    name: 'Shipyard - Event 4',
     id: 0x4e,
   },
   {
-    name: 'Airport - Race 8',
+    name: 'Airport - Event 8',
     id: 0x5b,
   },
   {
-    name: 'Campus - Race 5',
+    name: 'Campus - Event 5',
     id: 0x61,
   },
   {
-    name: 'High Residential - Race 6',
+    name: 'High Residential - Event 6',
     id: 0x6b,
   },
   {
-    name: 'High Residential - Race 7',
+    name: 'High Residential - Event 7',
     id: 0x6c,
   },
 ];
 
 export const takedownEvents = [
   {
-    name: 'Industrial - Race 8',
+    name: 'Industrial - Event 8',
     id: 0x14,
     territoryId: 0x02,
     crew: 'Eastsiders',
     crewVinylId: 0x0914717c,
   },
   {
-    name: 'Perimeter HWY - Race 4',
+    name: 'Perimeter HWY - Event 4',
     id: 0x18,
     territoryId: 0x03,
     crew: 'Eastsiders',
     crewVinylId: 0x0914717c,
   },
   {
-    name: 'Mountains - Race 7',
+    name: 'Mountains - Event 7',
     id: 0x22,
     territoryId: 0x04,
     crew: 'Berserkers',
     crewVinylId: 0x091470ec,
   },
   {
-    name: 'Inner City - Race 7',
+    name: 'Inner City - Event 7',
     id: 0x29,
     territoryId: 0x05,
     crew: 'Berserkers',
     crewVinylId: 0x091470ec,
   },
   {
-    name: 'Storage - Race 8',
+    name: 'Storage - Event 8',
     id: 0x31,
     territoryId: 0x06,
     crew: 'Krimson Crew',
     crewVinylId: 0x0914714c,
   },
   {
-    name: 'Bridges - Race 5',
+    name: 'Bridges - Event 5',
     id: 0x38,
     territoryId: 0x07,
     crew: 'Syrens',
     crewVinylId: 0x0914720c,
   },
   {
-    name: 'Bridges - Race 6',
+    name: 'Bridges - Event 6',
     id: 0x39,
     territoryId: 0x07,
     crew: 'Syrens',
     crewVinylId: 0x0914720c,
   },
   {
-    name: 'Shipyard - Race 8',
+    name: 'Shipyard - Event 8',
     id: 0x52,
     territoryId: 0x0a,
     crew: 'Corps',
     crewVinylId: 0x0914711c,
   },
   {
-    name: 'Airport - Race 1',
+    name: 'Airport - Event 1',
     id: 0x54,
     territoryId: 0x0b,
     crew: 'Corps',
     crewVinylId: 0x0914711c,
   },
   {
-    name: 'Campus - Race 7',
+    name: 'Campus - Event 7',
     id: 0x63,
     territoryId: 0x0c,
     crew: 'Mega',
     crewVinylId: 0x091471dc,
   },
   {
-    name: 'High Residential - Race 4',
+    name: 'High Residential - Event 4',
     id: 0x69,
     territoryId: 0x0d,
     crew: 'Mega',
     crewVinylId: 0x091471dc,
   },
   {
-    name: 'High Residential - Race 5',
+    name: 'High Residential - Event 5',
     id: 0x6a,
     territoryId: 0x0d,
     crew: 'Mega',
@@ -893,14 +1029,6 @@ export const starterAchievements = [
 
 export const prestigeSprint1Events = [
   {
-    id: 0x27,
-    territoryId: 0x05,
-  },
-  {
-    id: 0x30,
-    territoryId: 0x06,
-  },
-  {
     id: 0x4c,
     territoryId: 0x0a,
   },
@@ -919,17 +1047,13 @@ export const prestigeSprint2Events = [
     id: 0x02,
     territoryId: 0x00,
   },
-  {
-    id: 0x3e,
-    territoryId: 0x08,
-  },
 ];
 
 export const prestigeCircuitAchievements = [
   {
     name: 'Perimeter',
     description:
-      'Complete a lap under 0:43 on Perimeter (Forward) in Single Race.',
+      'Complete a lap under 0:43 on Perimeter (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa1,
     lapTime: 43000 * 4,
@@ -937,7 +1061,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Reactor Loop',
     description:
-      'Complete a lap under 1:13 on Reactor Loop (Forward) in Single Race.',
+      'Complete a lap under 1:13 on Reactor Loop (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa2,
     lapTime: 73000 * 4,
@@ -945,7 +1069,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Junktown Scramble',
     description:
-      'Complete a lap under 1:11 on Junktown Scramble (Forward) in Single Race.',
+      'Complete a lap under 1:11 on Junktown Scramble (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa3,
     lapTime: 71000 * 4,
@@ -953,7 +1077,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Storage Run',
     description:
-      'Complete a lap under 1:18 on Storage Run (Forward) in Single Race.',
+      'Complete a lap under 1:18 on Storage Run (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa4,
     lapTime: 78000 * 4,
@@ -961,7 +1085,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'East Tunnel',
     description:
-      'Complete a lap under 1:00 on East Tunnel (Forward) in Single Race.',
+      'Complete a lap under 1:00 on East Tunnel (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa5,
     lapTime: 60000 * 4,
@@ -969,15 +1093,15 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Inner City Run',
     description:
-      'Complete a lap under 1:11 on Inner City Run (Forward) in Single Race.',
+      'Complete a lap under 1:11 on Inner City Run (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa7,
     lapTime: 71000 * 4,
   },
   {
-    name: 'Big East Hwy. Forward',
+    name: 'Big East Hwy.',
     description:
-      'Complete a lap under 1:56 on Big East Hwy. (Forward) in Single Race.',
+      'Complete a lap under 1:56 on Big East Hwy. (Forward) in Single Event.',
     points: 5,
     trackId: 0xfaa,
     lapTime: 116000 * 4,
@@ -985,7 +1109,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Urban Technical',
     description:
-      'Complete a lap under 1:37 on Urban Technical (Forward) in Single Race.',
+      'Complete a lap under 1:37 on Urban Technical (Forward) in Single Event.',
     points: 5,
     trackId: 0xfab,
     lapTime: 97000 * 4,
@@ -993,7 +1117,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Crossover',
     description:
-      'Complete a lap under 1:46 on Crossover (Forward) in Single Race.',
+      'Complete a lap under 1:46 on Crossover (Forward) in Single Event.',
     points: 5,
     trackId: 0xfac,
     lapTime: 106000 * 4,
@@ -1001,7 +1125,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Factory Circuit',
     description:
-      'Complete a lap under 1:20 on Factory Circuit (Forward) in Single Race.',
+      'Complete a lap under 1:20 on Factory Circuit (Forward) in Single Event.',
     points: 5,
     trackId: 0xfad,
     lapTime: 80000 * 4,
@@ -1009,7 +1133,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Junkyard Blitz',
     description:
-      'Complete a lap under 1:00 on Junkyard Blitz (Forward) in Single Race.',
+      'Complete a lap under 1:00 on Junkyard Blitz (Forward) in Single Event.',
     points: 5,
     trackId: 0xfae,
     lapTime: 60000 * 4,
@@ -1017,7 +1141,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Centrifugal',
     description:
-      'Complete a lap under 0:52 on Centrifugal (Forward) in Single Race.',
+      'Complete a lap under 0:52 on Centrifugal (Forward) in Single Event.',
     points: 5,
     trackId: 0xfaf,
     lapTime: 52000 * 4,
@@ -1025,7 +1149,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Bridge City',
     description:
-      'Complete a lap under 1:17 on Bridge City (Forward) in Single Race.',
+      'Complete a lap under 1:17 on Bridge City (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb0,
     lapTime: 77000 * 4,
@@ -1033,7 +1157,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Skyscraper Circuit',
     description:
-      'Complete a lap under 0:45 on Skyscraper Circuit (Forward) in Single Race.',
+      'Complete a lap under 0:45 on Skyscraper Circuit (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb1,
     lapTime: 45000 * 4,
@@ -1041,7 +1165,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Two Bridge Circuit',
     description:
-      'Complete a lap under 1:06 on Two Bridge Circuit (Forward) in Single Race.',
+      'Complete a lap under 1:06 on Two Bridge Circuit (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb2,
     lapTime: 66000 * 4,
@@ -1049,7 +1173,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Homes and Towers',
     description:
-      'Complete a lap under 1:02 on Homes and Towers (Forward) in Single Race.',
+      'Complete a lap under 1:02 on Homes and Towers (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb3,
     lapTime: 62000 * 4,
@@ -1057,7 +1181,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'South Side',
     description:
-      'Complete a lap under 2:25 on South Side (Forward) in Single Race.',
+      'Complete a lap under 2:25 on South Side (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb4,
     lapTime: 145000 * 4,
@@ -1065,7 +1189,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Figure Eight',
     description:
-      'Complete a lap under 1:14 on Figure Eight (Forward) in Single Race.',
+      'Complete a lap under 1:14 on Figure Eight (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb5,
     lapTime: 74000 * 4,
@@ -1073,7 +1197,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Westside Loop',
     description:
-      'Complete a lap under 1:28 on Westside Loop (Forward) in Single Race.',
+      'Complete a lap under 1:28 on Westside Loop (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb6,
     lapTime: 88000 * 4,
@@ -1081,7 +1205,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'University Drive',
     description:
-      'Complete a lap under 1:19 on University Drive (Forward) in Single Race.',
+      'Complete a lap under 1:19 on University Drive (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb7,
     lapTime: 79000 * 4,
@@ -1089,7 +1213,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Giant Loop',
     description:
-      'Complete a lap under 4:05 on Giant Loop (Forward) in Single Race.',
+      'Complete a lap under 4:05 on Giant Loop (Forward) in Single Event.',
     points: 10,
     trackId: 0xfb8,
     lapTime: 245000 * 4,

@@ -138,8 +138,16 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
       ['', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
     ),
+    ingameCareerFree: $(
+      ['', 'Mem', '32bit', addresses.loadedRacers, '=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
+    ),
     ingameCareerSimple: $(
       ['', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
+    ),
+    ingameCareerPursuit: $(
+      ['', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
+      ['', 'Mem', '32bit', addresses.pursuitPointer, '!=', 'Value', '', 0]
     ),
     ingameQuick: $(
       ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
@@ -159,11 +167,32 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
     ),
+    notInIntro: $(
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x6b8, '!=', 'Value', '', 4],
+    ),
+    inIntro: $(
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x6b8, '=', 'Value', '', 4],
+    ),
   };
 
   const playerMeasured = {
     car: $(['Measured', 'Mem', '32bit', addresses.currentCar]),
     cash: $(offsetPointers.rewards, ['Measured', 'Mem', '32bit', 0x2228]),
+    // prettier-ignore
+    eventCareer: $(offsetPointers.progression, ['Measured', 'Mem', '32bit', 0x2650]),
+    eventQuick: $(['Measured', 'Mem', '32bit', addresses.quickTrack]),
+    territories: $(
+      ...Object.values(territories).map((territory) =>
+        $(
+          offsetPointers.progression,
+          // prettier-ignore
+          ['AddHits', 'Mem', '32bit', territory.offset, '>=', 'Value', '', 2, 1],
+        ),
+      ),
+      ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 0],
+    ),
   };
 
   const finishedIntro = $(
@@ -696,6 +725,13 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.timerSnapshot, '<=', 'Value', '', time],
     );
 
+  const prestigeSprintStage = (stageOffset) =>
+    $(
+      offsetPointers.progression,
+      // prettier-ignore
+      ['', 'Mem', '32bit', stageOffset, '>=', 'Value', '', 1],
+    );
+
   return {
     addresses,
     offsetPointers,
@@ -752,6 +788,7 @@ const codeFor = () => {
     finishTimeUnder,
     quickPlayPrestigeTrack,
     lapTimeUnder,
+    prestigeSprintStage,
   };
 };
 
@@ -831,6 +868,7 @@ for (const territory of Object.values(territories)) {
       conditions: $(
         c.gameIs.started,
         c.playerIs.ingameCareer,
+        c.playerIs.notInIntro,
         c.beatenTerritory(territory.offset),
       ),
     });
@@ -842,7 +880,12 @@ set.addAchievement({
   description: 'Defeat EX at the Rock Quarry.',
   points: 10,
   type: 'progression',
-  conditions: $(c.gameIs.started, c.playerIs.ingameCareer, c.defeatedEX),
+  conditions: $(
+    c.gameIs.started,
+    c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
+    c.defeatedEX,
+  ),
 });
 
 set.addAchievement({
@@ -853,6 +896,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.beatenTerritory(territories.rockQuarry.offset),
   ),
 });
@@ -865,6 +909,7 @@ for (const crew of Object.values(crews)) {
     conditions: $(
       c.gameIs.started,
       c.playerIs.ingameCareer,
+      c.playerIs.notInIntro,
       c.completedTerritory(crew.eventOffsets),
     ),
   });
@@ -874,7 +919,12 @@ set.addAchievement({
   title: 'Box Cutter',
   description: 'Open 15 bonus crates in Coast City.',
   points: 5,
-  conditions: $(c.gameIs.started, c.playerIs.ingameCareer, c.cratesOpened(15)),
+  conditions: $(
+    c.gameIs.started,
+    c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
+    c.cratesOpened(15),
+  ),
 });
 
 set.addAchievement({
@@ -884,6 +934,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.cratesOpenedMeasured(30),
   ),
 });
@@ -895,6 +946,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.artUnlockedMeasured(40),
   ),
 });
@@ -905,7 +957,12 @@ set.addAchievement({
     'Complete all Career events, open all bonus crates and unlock all Game Art Gallery artworks.',
   points: 50,
   conditions: {
-    core: $(c.gameIs.started, c.playerIs.ingameCareer, c.hundredPercentState),
+    core: $(
+      c.gameIs.started,
+      c.playerIs.ingameCareer,
+      c.playerIs.notInIntro,
+      c.hundredPercentState,
+    ),
     alt1: c.hundredPercentCrates(30),
     alt2: c.hundredPercentArt(40),
     alt3: c.hundredPercentRacing,
@@ -917,10 +974,12 @@ for (const territory of Object.values(territories)) {
     title: territory.noUpgradesTitle,
     description: `Defeat ${territory.boss} without performance upgrades.`,
     points: territory.noUpgradesPoints,
+    type: 'missable',
     conditions: noUpgradeGroups(
       $(
         c.gameIs.started,
         c.playerIs.ingameCareerSimple,
+        c.playerIs.notInIntro,
         c.notInCrewChallenge,
         c.inBossRace(territory),
         c.beatenTerritoryTrigger(territory.offset),
@@ -958,6 +1017,7 @@ set.addAchievement({
     core: $(
       c.gameIs.started,
       c.playerIs.ingameCareerSimple,
+      c.playerIs.notInIntro,
       c.isRivalCrewChallenge,
     ),
     alt1: c.escapeWon,
@@ -972,6 +1032,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
+    c.playerIs.notInIntro,
     c.escapeArtist,
   ),
 });
@@ -983,6 +1044,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
+    c.playerIs.notInIntro,
     c.fastDelivery,
   ),
 });
@@ -991,7 +1053,12 @@ set.addAchievement({
   title: 'You Provoked a Crew War',
   description: 'Takedown 25 rival cars in a Crew Takedown event.',
   points: 10,
-  conditions: $(c.gameIs.started, c.playerIs.ingameCareer, c.takedown25),
+  conditions: $(
+    c.gameIs.started,
+    c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
+    c.takedown25,
+  ),
 });
 
 set.addAchievement({
@@ -1001,6 +1068,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.takedownsTotal(50),
   ),
 });
@@ -1012,6 +1080,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.takedownsTotalMeasured(100),
   ),
 });
@@ -1022,7 +1091,12 @@ set.addAchievement({
     "Finish a Crew Takedown event with your car using the rival crew's vinyl.",
   points: 2,
   conditions: crewVinylGroups(
-    $(c.gameIs.started, c.playerIs.ingameCareerSimple, c.takedownWonTrigger),
+    $(
+      c.gameIs.started,
+      c.playerIs.ingameCareerSimple,
+      c.playerIs.notInIntro,
+      c.takedownWonTrigger,
+    ),
     c.offsetPointers,
   ),
 });
@@ -1034,6 +1108,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.pursuit30s,
     c.pursuitEvaded,
   ),
@@ -1046,6 +1121,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.pursuit8Takedowns,
     c.pursuitEvadedTrigger,
   ),
@@ -1058,6 +1134,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     ...crewMembers.map((member) =>
       c.isActiveCrewMemberMaxed(member.id, member.skillOffset),
     ),
@@ -1073,6 +1150,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.gainedSkillPoints(32),
   ),
 });
@@ -1097,6 +1175,7 @@ set.addAchievement({
     core: $(
       c.gameIs.started,
       c.playerIs.ingameCareer,
+      c.playerIs.notInIntro,
       c.crewMemberSkillsUsed(10),
     ),
     alt1: c.drafterInSlot(0x1368),
@@ -1129,6 +1208,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
+    c.playerIs.notInIntro,
     c.opponentsDisabled5Times,
   ),
 });
@@ -1140,6 +1220,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
+    c.playerIs.notInIntro,
     c.opponentsDisabled5Times,
   ),
 });
@@ -1151,6 +1232,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.cashReached(100000),
   ),
 });
@@ -1162,6 +1244,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.cashReached(250000),
   ),
 });
@@ -1173,6 +1256,7 @@ set.addAchievement({
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
+    c.playerIs.notInIntro,
     c.cashReached(500000),
   ),
 });
@@ -1185,6 +1269,7 @@ for (const achievement of starterAchievements) {
     conditions: $(
       c.gameIs.started,
       c.playerIs.ingameCareerSimple,
+      c.playerIs.notInIntro,
       c.isStarterCar,
       c.eventIs(achievement.events),
       c.raceWonTrigger,
@@ -1222,11 +1307,13 @@ set.addAchievement({
 
 set.addAchievement({
   title: 'Prestige Mode: Mountains to Shipyard',
-  description: 'Complete Mountains to Shipyard in under 1:26 in Career.',
+  description:
+    'Complete Mountains to Shipyard in under 1:26 in Commercial City, Airport, or Shipyard in Career.',
   points: 5,
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
+    c.prestigeSprintStage(0x6cc),
     c.eventIs(prestigeSprint1Events),
     c.finishTimeUnder(344000),
     c.raceWon,
@@ -1235,11 +1322,12 @@ set.addAchievement({
 
 set.addAchievement({
   title: 'Prestige Mode: High to Low',
-  description: 'Complete High to Low in under 1:23 in Career.',
+  description: 'Complete High to Low in under 1:23 in Rock Quarry in Career.',
   points: 5,
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
+    c.prestigeSprintStage(0x6a8),
     c.eventIs(prestigeSprint2Events),
     c.finishTimeUnder(332000),
     c.raceWon,
@@ -1248,7 +1336,7 @@ set.addAchievement({
 
 for (const achievement of prestigeCircuitAchievements) {
   set.addAchievement({
-    title: achievement.name,
+    title: `Prestige Mode: ${achievement.name}`,
     description: achievement.description,
     points: achievement.points,
     conditions: $(
@@ -1265,28 +1353,61 @@ export const rich = RichPresence({
   lookupDefaultParameters: { keyFormat: 'hex' },
   lookup: {
     Car: { values: richPresenceValues.car },
+    CareerTrack: { values: richPresenceValues.careerTrack },
+    QuickTrack: { values: richPresenceValues.quickTrack },
   },
   displays: ({ lookup, format }) => {
     const display = () => {
       const car = lookup.Car.at(c.playerMeasured.car);
       const cash = format.Value.at(c.playerMeasured.cash);
+      const eventCareer = lookup.CareerTrack.at(c.playerMeasured.eventCareer);
+      const eventQuick = lookup.QuickTrack.at(c.playerMeasured.eventQuick);
+      const territories = format.Value.at(c.playerMeasured.territories);
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
-          $(c.gameIs.started, c.playerIs.ingameCareer),
-          `In Career 🚗 ${car} 💰 $${cash}`,
+          $(
+            c.gameIs.started,
+            c.playerIs.ingameCareerFree,
+            c.playerIs.notInIntro,
+          ),
+          `[Career] In free roam 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
+        ],
+        [
+          $(
+            c.gameIs.started,
+            c.playerIs.ingameCareerPursuit,
+            c.playerIs.notInIntro,
+          ),
+          `[Career] In a police pursuit 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
+        ],
+        [
+          $(c.gameIs.started, c.playerIs.ingameCareer, c.playerIs.notInIntro),
+          `[Career] ${eventCareer} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
+        ],
+        [
+          $(c.gameIs.started, c.playerIs.ingameCareer, c.playerIs.inIntro),
+          `[Career] Getting back in action 🚗 ${car} 💰 $${cash} 🗺 0/14`,
+        ],
+        [
+          $(c.gameIs.started, c.playerIs.ingameInstant, c.playerIs.inIntro),
+          `[Instant race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
+        ],
+        [
+          $(c.gameIs.started, c.playerIs.ingameQuick, c.playerIs.inIntro),
+          `[Single race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
         ],
         [
           $(c.gameIs.started, c.playerIs.ingameInstant),
-          `In Instant Race 🚗 ${car}`,
+          `[Instant race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
         [
           $(c.gameIs.started, c.playerIs.ingameQuick),
-          `In Quick Race 🚗 ${car}`,
+          `[Single race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
         [
           $(c.gameIs.started, c.playerIs.inMenus),
-          `Navigating the menus 💰 $${cash}`,
+          `Navigating the menus 💰 $${cash} 🗺 ${territories}/14`,
         ],
       ]);
     };
