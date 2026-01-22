@@ -204,6 +204,8 @@ const codeFor = () => {
       ),
       ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 0],
     ),
+    // prettier-ignore
+    lapTime: $(['Measured', 'Mem', '32bit', addresses.timerSnapshot, '/', 'Value', '', 40]),
   };
 
   const finishedIntro = $(
@@ -431,19 +433,26 @@ const codeFor = () => {
     ['ResetIf', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Value', '', 0x42c80000],
   );
 
-  // prettier-ignore
   const isRivalCrewChallenge = $(
-    ['', 'Mem', '32bit', addresses.loadedRacers, '=', 'Value', '', 4],
+    ['AndNext', 'Delta', '32bit', addresses.loadedRacers, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 2, 1],
+    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
     ...escapeEvents.map((event) =>
       $(
         offsetPointers.progression,
-        ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', event.id],
+        ['AndNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
+        offsetPointers.progression,
+        // prettier-ignore
+        ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
       ),
     ),
     ...takedownEvents.map((event) =>
       $(
         offsetPointers.progression,
-        ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', event.id],
+        ['AndNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
+        offsetPointers.progression,
+        // prettier-ignore
+        ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
       ),
     ),
   );
@@ -747,6 +756,12 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.quickDirection, '=', 'Value', '', 0],
     );
 
+  const quickPlayPrestigeTrackReverse = (trackId) =>
+    $(
+      ['', 'Mem', '32bit', addresses.quickTrack, '=', 'Value', '', trackId],
+      ['', 'Mem', '32bit', addresses.quickDirection, '=', 'Value', '', 1],
+    );
+
   const lapTimeUnder = (time) =>
     $(
       ['', 'Delta', '32bit', addresses.timerSnapshot, '>', 'Value', '', time],
@@ -759,6 +774,11 @@ const codeFor = () => {
       // prettier-ignore
       ['', 'Mem', '32bit', stageOffset, '>=', 'Value', '', 1],
     );
+
+  const bestLapChanged = $(
+    // prettier-ignore
+    ['', 'Mem', '32bit', addresses.timerSnapshot, '<', 'Delta', '32bit', addresses.timerSnapshot],
+  );
 
   return {
     addresses,
@@ -815,9 +835,11 @@ const codeFor = () => {
     quickPlayHardTrack,
     finishTimeUnder,
     quickPlayPrestigeTrack,
+    quickPlayPrestigeTrackReverse,
     lapTimeUnder,
     prestigeSprintStage,
     allOponentsDisabled,
+    bestLapChanged,
   };
 };
 
@@ -1045,7 +1067,7 @@ set.addAchievement({
   conditions: {
     core: $(
       c.gameIs.started,
-      c.playerIs.ingameCareerSimple,
+      c.playerIs.ingameCareer,
       c.playerIs.notInIntro,
       c.isRivalCrewChallenge,
     ),
@@ -1251,7 +1273,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Assassin Supreme',
   description: 'Have 3 rivals taken down by your Crew at the same time.',
-  points: 5,
+  points: 10,
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareer,
@@ -1380,6 +1402,50 @@ for (const achievement of prestigeCircuitAchievements) {
       c.quickPlayPrestigeTrack(achievement.trackId),
       c.lapTimeUnder(achievement.lapTime),
     ),
+  });
+}
+
+for (const leaderboard of prestigeCircuitAchievements) {
+  set.addLeaderboard({
+    title: `${leaderboard.name} (Forward)`,
+    description: `Best lap time in Single Event.`,
+    lowerIsBetter: true,
+    type: 'MILLISECS',
+    conditions: {
+      start: $(
+        c.gameIs.started,
+        c.playerIs.ingameQuick,
+        c.quickPlayPrestigeTrack(leaderboard.trackId),
+        c.bestLapChanged,
+      ),
+      cancel: '0=1',
+      submit: '1=1',
+      value: {
+        core: c.playerMeasured.lapTime,
+      },
+    },
+  });
+}
+
+for (const leaderboard of prestigeCircuitAchievements) {
+  set.addLeaderboard({
+    title: `${leaderboard.name} (Reverse)`,
+    description: `Best lap time in Single Event.`,
+    lowerIsBetter: true,
+    type: 'MILLISECS',
+    conditions: {
+      start: $(
+        c.gameIs.started,
+        c.playerIs.ingameQuick,
+        c.quickPlayPrestigeTrackReverse(leaderboard.trackId),
+        c.bestLapChanged,
+      ),
+      cancel: '0=1',
+      submit: '1=1',
+      value: {
+        core: c.playerMeasured.lapTime,
+      },
+    },
   });
 }
 

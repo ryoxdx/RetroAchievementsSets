@@ -681,46 +681,57 @@ export const escapeEvents = [
   {
     name: 'Junkyard - Event 3',
     id: 0x06,
+    territoryId: 0x01,
   },
   {
     name: 'Industrial - Event 6',
     id: 0x12,
+    territoryId: 0x02,
   },
   {
     name: 'Perimeter HWY - Event 6',
     id: 0x1a,
+    territoryId: 0x03,
   },
   {
     name: 'Mountains -  Event 5',
     id: 0x20,
+    territoryId: 0x04,
   },
   {
     name: 'Inner City - Event 4',
     id: 0x26,
+    territoryId: 0x05,
   },
   {
     name: 'Storage - Event 3',
     id: 0x2c,
+    territoryId: 0x06,
   },
   {
     name: 'Shipyard - Event 4',
     id: 0x4e,
+    territoryId: 0x0a,
   },
   {
     name: 'Airport - Event 8',
     id: 0x5b,
+    territoryId: 0x0b,
   },
   {
     name: 'Campus - Event 5',
     id: 0x61,
+    territoryId: 0x0c,
   },
   {
     name: 'High Residential - Event 6',
     id: 0x6b,
+    territoryId: 0x0d,
   },
   {
     name: 'High Residential - Event 7',
     id: 0x6c,
+    territoryId: 0x0d,
   },
 ];
 
