@@ -31,3 +31,1067 @@ export const richPresenceValues = {
     0x2a: 'Pontiac Firebird',
   },
 };
+
+export const territories = {
+  mountains: {
+    id: 0x04,
+    name: 'Mountains',
+    boss: 'Marcus',
+    progressionTitle: 'Piece of the Action',
+    progressionPoints: 3,
+    progressionDescription: 'Defeat Marcus and take over the Mountains.',
+    noUpgradesTitle: 'Marking Your Territory',
+    noUpgradesPoints: 5,
+    offset: 0x6b8,
+    eventOffsets: [0x390, 0x394, 0x398, 0x39c, 0x3a0, 0x3a4, 0x3a8],
+    eventIds: [0x1c, 0x1d, 0x1e, 0x1f, 0x20, 0x21, 0x22],
+  },
+  innerCity: {
+    id: 0x05,
+    name: 'Inner City',
+    boss: 'Striker',
+    progressionTitle: 'Own the Inner City',
+    progressionDescription: 'Defeat Striker and take over the Inner City.',
+    progressionPoints: 3,
+    noUpgradesTitle: 'Strategic Strike',
+    noUpgradesPoints: 5,
+    offset: 0x6bc,
+    eventOffsets: [0x3ac, 0x3b0, 0x3b4, 0x3b8, 0x3bc, 0x3c0, 0x3c4],
+    eventIds: [0x23, 0x24, 0x25, 0x26, 0x27, 0x28, 0x29],
+  },
+  perimeterHWY: {
+    id: 0x03,
+    name: 'Perimeter HWY',
+    boss: 'Sly',
+    progressionTitle: 'My Slyce of the Highway',
+    progressionDescription: 'Defeat Sly and take over Perimeter HWY.',
+    progressionPoints: 3,
+    noUpgradesTitle: 'Sly Deal',
+    noUpgradesPoints: 5,
+    offset: 0x6b4,
+    eventOffsets: [0x374, 0x378, 0x37c, 0x380, 0x384, 0x388, 0x38c],
+    eventIds: [0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b],
+  },
+  industrial: {
+    id: 0x02,
+    name: 'Industrial',
+    boss: 'Poorboy',
+    progressionTitle: "Ain't No Stoolie",
+    progressionDescription: 'Defeat Poorboy and take over Industrial.',
+    progressionPoints: 3,
+    noUpgradesTitle: 'Embarassing Eddie',
+    noUpgradesPoints: 5,
+    offset: 0x6b0,
+    eventOffsets: [0x354, 0x358, 0x35c, 0x360, 0x364, 0x368, 0x36c, 0x370],
+    eventIds: [0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14],
+  },
+  bridges: {
+    id: 0x07,
+    name: 'Bridges',
+    boss: 'Layla 3',
+    progressionTitle: 'Blooming Bridges',
+    progressionDescription: 'Defeat Layla 3 and take over the Bridges.',
+    progressionPoints: 5,
+    noUpgradesTitle: 'Lady Mallows',
+    noUpgradesPoints: 5,
+    offset: 0x6c4,
+    eventOffsets: [0x3f0, 0x3f4, 0x3f8, 0x3fc, 0x400, 0x404, 0x408],
+    eventIds: [0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3a],
+  },
+  residential: {
+    id: 0x08,
+    name: 'Residential',
+    boss: 'Layla',
+    progressionTitle: 'The Real Layla',
+    progressionDescription: 'Defeat Layla and take over Residential.',
+    progressionPoints: 5,
+    noUpgradesTitle: 'Lady Malvaceae',
+    noUpgradesPoints: 5,
+    offset: 0x6c8,
+    eventOffsets: [0x40c, 0x410, 0x414, 0x418, 0x41c, 0x420, 0x424, 0x428],
+    eventIds: [0x3b, 0x3c, 0x3d, 0x3e, 0x3f, 0x40, 0x41, 0x42],
+  },
+  highResidential: {
+    id: 0x0d,
+    name: 'High Residential',
+    boss: 'Steve',
+    progressionTitle: 'Switching Lanes, Switching Sides',
+    progressionDescription: 'Defeat Steve and take over High Residential.',
+    progressionPoints: 5,
+    noUpgradesTitle: 'Stevie Wondering What Went Wrong',
+    noUpgradesPoints: 5,
+    offset: 0x6dc,
+    eventOffsets: [0x4b8, 0x4bc, 0x4c0, 0x4c4, 0x4c8, 0x4cc, 0x4d0, 0x4d4],
+    eventIds: [0x66, 0x67, 0x68, 0x69, 0x6a, 0x6b, 0x6c, 0x6d],
+  },
+  campus: {
+    id: 0x0c,
+    name: 'Campus',
+    boss: 'Buddy',
+    progressionTitle: "A Master's Degree in Street Racing",
+    progressionDescription: 'Defeat Buddy and take over the Campus.',
+    progressionPoints: 5,
+    noUpgradesTitle: 'Empty Ride Scholarship',
+    noUpgradesPoints: 5,
+    offset: 0x6d8,
+    eventOffsets: [
+      0x494, 0x498, 0x49c, 0x4a0, 0x4a4, 0x4a8, 0x4ac, 0x4b0, 0x4b4,
+    ],
+    eventIds: [0x5d, 0x5e, 0x5f, 0x60, 0x61, 0x62, 0x63, 0x64, 0x65],
+  },
+  commercial: {
+    id: 0x09,
+    name: 'Commercial City',
+    boss: 'Daemon',
+    progressionTitle: 'Daemon Darhk',
+    progressionDescription: 'Defeat Daemon and take over Commercial City.',
+    progressionPoints: 10,
+    noUpgradesTitle: 'Commercial City Conquer',
+    noUpgradesPoints: 10,
+    offset: 0x6cc,
+    eventOffsets: [0x42c, 0x430, 0x434, 0x438, 0x43c, 0x440, 0x444, 0x448],
+    eventIds: [0x43, 0x44, 0x45, 0x46, 0x47, 0x48, 0x49, 0x4a],
+  },
+  airport: {
+    id: 0x0b,
+    name: 'Airport',
+    boss: 'Jenna',
+    progressionTitle: 'First Place in First Class',
+    progressionDescription: 'Defeat Jenna and take over the Airport.',
+    progressionPoints: 10,
+    noUpgradesTitle: 'First Place in Economy',
+    noUpgradesPoints: 10,
+    offset: 0x6d4,
+    eventOffsets: [
+      0x470, 0x474, 0x478, 0x47c, 0x480, 0x484, 0x488, 0x48c, 0x490,
+    ],
+    eventIds: [0x54, 0x55, 0x56, 0x57, 0x58, 0x59, 0x5a, 0x5b, 0x5c],
+  },
+  shipyard: {
+    id: 0x0a,
+    name: 'Shipyard',
+    boss: 'MK',
+    progressionTitle: 'Undercover Brother',
+    progressionDescription: 'Defeat MK and take over the Shipyard.',
+    progressionPoints: 10,
+    noUpgradesTitle: 'Unmarked Vehicle',
+    noUpgradesPoints: 10,
+    offset: 0x6d0,
+    eventOffsets: [
+      0x44c, 0x450, 0x454, 0x458, 0x45c, 0x460, 0x464, 0x468, 0x46c,
+    ],
+    eventIds: [0x4b, 0x4c, 0x4d, 0x4e, 0x4f, 0x50, 0x51, 0x52, 0x53],
+  },
+  storage: {
+    id: 0x06,
+    name: 'Storage',
+    boss: 'Scotty',
+    progressionTitle: 'Does Scotty Know?',
+    progressionDescription: 'Defeat Scotty and take over Storage.',
+    progressionPoints: 10,
+    noUpgradesTitle: "Scotty Doesn't Know",
+    noUpgradesPoints: 10,
+    offset: 0x6c0,
+    eventOffsets: [
+      0x3c8, 0x3cc, 0x3d0, 0x3d4, 0x3d8, 0x3dc, 0x3e0, 0x3e4, 0x3e8, 0x3ec,
+    ],
+    eventIds: [0x2a, 0x2b, 0x2c, 0x2d, 0x2e, 0x2f, 0x30, 0x31, 0x32, 0x33],
+  },
+  junkyard: {
+    id: 0x01,
+    name: 'Junkyard',
+    boss: 'Clutch',
+    progressionTitle: 'Double Clutching',
+    progressionDescription: 'Defeat Clutch and take over the Junkyard.',
+    progressionPoints: 10,
+    noUpgradesTitle: 'Granny Shifting',
+    noUpgradesPoints: 10,
+    offset: 0x6ac,
+    eventOffsets: [
+      0x330, 0x334, 0x338, 0x33c, 0x340, 0x344, 0x348, 0x34c, 0x350,
+    ],
+    eventIds: [0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c],
+  },
+  rockQuarry: {
+    id: 0x00,
+    name: 'Rock Quarry',
+    boss: 'the final boss',
+    progressionTitle: 'Rock Hard Justice',
+    progressionDescription: 'Defeat EX at the Rock Quarry.',
+    progressionPoints: 10,
+    noUpgradesTitle: 'Royal Flush',
+    noUpgradesPoints: 10,
+    offset: 0x6a8,
+    eventOffsets: [0x320, 0x324, 0x328, 0x32c],
+    eventIds: [0x00, 0x01, 0x02, 0x03],
+  },
+};
+
+export const crews = {
+  berserkers: {
+    name: 'Berserkers',
+    completionName: 'Make Your Name',
+    completionPoints: 10,
+    eventOffsets: [
+      0x390, 0x394, 0x398, 0x39c, 0x3a0, 0x3a4, 0x3a8, 0x3ac, 0x3b0, 0x3b4,
+      0x3b8, 0x3bc, 0x3c0, 0x3c4,
+    ],
+  },
+  eastsiders: {
+    name: 'Eastsiders',
+    completionName: 'Olympic All over Again',
+    completionPoints: 10,
+    eventOffsets: [
+      0x354, 0x358, 0x35c, 0x360, 0x364, 0x368, 0x36c, 0x370, 0x374, 0x378,
+      0x37c, 0x380, 0x384, 0x388, 0x38c,
+    ],
+  },
+  syrens: {
+    name: 'Syrens',
+    completionName: 'Sounds of the Syrens',
+    completionPoints: 10,
+    eventOffsets: [
+      0x3f0, 0x3f4, 0x3f8, 0x3fc, 0x400, 0x404, 0x408, 0x40c, 0x410, 0x414,
+      0x418, 0x41c, 0x420, 0x424, 0x428,
+    ],
+  },
+  mega: {
+    name: 'Mega',
+    completionName: 'Mega Score!',
+    completionPoints: 10,
+    eventOffsets: [
+      0x494, 0x498, 0x49c, 0x4a0, 0x4a4, 0x4a8, 0x4ac, 0x4b0, 0x4b4, 0x4b8,
+      0x4bc, 0x4c0, 0x4c4, 0x4c8, 0x4cc, 0x4d0, 0x4d4,
+    ],
+  },
+  corps: {
+    name: 'Corps',
+    completionName: 'Perfect Service Announcement',
+    completionPoints: 25,
+    eventOffsets: [
+      0x42c, 0x430, 0x434, 0x438, 0x43c, 0x440, 0x444, 0x448, 0x44c, 0x450,
+      0x454, 0x458, 0x45c, 0x460, 0x464, 0x468, 0x46c, 0x470, 0x474, 0x478,
+      0x47c, 0x480, 0x484, 0x488, 0x48c, 0x490,
+    ],
+  },
+  krimsonCrew: {
+    name: 'Krimson Crew',
+    completionName: 'Krimson Dynamite',
+    completionPoints: 25,
+    eventOffsets: [
+      0x320, 0x324, 0x328, 0x32c, 0x330, 0x334, 0x338, 0x33c, 0x340, 0x344,
+      0x348, 0x34c, 0x350, 0x3c8, 0x3cc, 0x3d0, 0x3d4, 0x3d8, 0x3dc, 0x3e0,
+      0x3e4, 0x3e8, 0x3ec,
+    ],
+  },
+};
+
+export const crateOffsets = [
+  0x1ef8, 0x1f00, 0x1f08, 0x1f10, 0x1f18, 0x1f20, 0x1f28, 0x1f30, 0x1f38,
+  0x1f40, 0x1f48, 0x1f50, 0x1f58, 0x1f60, 0x1f68, 0x1f70, 0x1f78, 0x1f80,
+  0x1f88, 0x1f90, 0x1f98, 0x1fa0, 0x1fa8, 0x1fb0, 0x1fb8, 0x1fc0, 0x1fc8,
+  0x1fd0, 0x1fd8, 0x1fe0,
+];
+
+export const artOffsets = [
+  0x1f00, 0x1f18, 0x1f20, 0x1f38, 0x1f40, 0x1f58, 0x1f70, 0x1f80, 0x1f98,
+  0x1fa0, 0x1fb0, 0x1fc0, 0x1fd0, 0x1fe8, 0x1ff0, 0x1ff8, 0x2000, 0x2008,
+  0x2010, 0x2018, 0x2020, 0x2028, 0x2030, 0x2038, 0x2040, 0x2048, 0x2050,
+  0x2058, 0x2060, 0x2068, 0x2070, 0x2078, 0x2080, 0x2088, 0x2090, 0x2098,
+  0x20a0, 0x20a8, 0x20b0, 0x20b8,
+];
+
+export const wingmenOffsets = [
+  0x1398, 0x13a8, 0x13b8, 0x13d8, 0x13e8, 0x13f8, 0x1438, 0x1448, 0x1458,
+  0x14a8, 0x14b8, 0x1518, 0x1528, 0x1538, 0x1548, 0x15a8, 0x15b8, 0x1618,
+];
+
+export const cars = [
+  {
+    id: 0x0e,
+    name: 'Mitsubishi Eclipse GT',
+    handling: 0x3e800000,
+    chassis: 0x404eb21d,
+    engine: 0x40800000,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x0f,
+    name: 'Mitsubishi Lancer Evolution IX',
+    handling: 0x3e75c28f,
+    chassis: 0x403c543c,
+    engine: 0x4089999a,
+    turbo: 0x3c3fb15b,
+  },
+  {
+    id: 0x10,
+    name: 'VW Golf GTI',
+    handling: 0x3e99999a,
+    chassis: 0x4011bb44,
+    engine: 0x40800000,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x11,
+    name: 'Chevrolet Corvette Z06',
+    handling: 0x3e4ccccd,
+    chassis: 0x402da0c9,
+    engine: 0x408ccccd,
+    turbo: 0x3cdd2f1b,
+  },
+  {
+    id: 0x12,
+    name: 'Chevrolet Cobalt SS',
+    handling: 0x3e91eb85,
+    chassis: 0x40223c2b,
+    engine: 0x4089999a,
+    turbo: 0x3c656042,
+  },
+  {
+    id: 0x13,
+    name: 'Porsche Carrera GT',
+    handling: 0x3e333333,
+    chassis: 0x4033364d,
+    engine: 0x408b3333,
+    turbo: 0x3d14af4f,
+  },
+  {
+    id: 0x14,
+    name: 'Lamborghini Gallardo',
+    handling: 0x3e666666,
+    chassis: 0x402810ed,
+    engine: 0x4079999a,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x15,
+    name: 'Ford GT',
+    handling: 0x3e4ccccd,
+    chassis: 0x4048e834,
+    engine: 0x40800000,
+    turbo: 0x3d954c98,
+  },
+  {
+    id: 0x16,
+    name: 'Ford Mustang GT',
+    handling: 0x3e4ccccd,
+    chassis: 0x4052970d,
+    engine: 0x404ccccd,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x17,
+    name: 'Subaru WRX STI',
+    handling: 0x3e828f5c,
+    chassis: 0x403a28fb,
+    engine: 0x4084cccd,
+    turbo: 0x3d0adaba,
+  },
+  {
+    id: 0x18,
+    name: 'Audi TT 3.2 Quattro',
+    handling: 0x3e75c28f,
+    chassis: 0x402258f6,
+    engine: 0x40766666,
+    turbo: 0x3cf1a9fc,
+  },
+  {
+    id: 0x19,
+    name: 'Mazda RX-8',
+    handling: 0x3e800000,
+    chassis: 0x40355abb,
+    engine: 0x4099999a,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x1a,
+    name: 'Porsche 911 Carrera S',
+    handling: 0x3e800000,
+    chassis: 0x406a58f8,
+    engine: 0x40733333,
+    turbo: 0x3d6978d5,
+  },
+  {
+    id: 0x1b,
+    name: 'Mazdaspeed 3',
+    handling: 0x3e800000,
+    chassis: 0x401f2783,
+    engine: 0x4089999a,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x1c,
+    name: 'Toyota Supra',
+    handling: 0x3e669ad4,
+    chassis: 0x404572b4,
+    engine: 0x4079999a,
+    turbo: 0x3cf837b5,
+  },
+  {
+    id: 0x1d,
+    name: 'Pontiac Sostice',
+    handling: 0x3e75c28f,
+    chassis: 0x40081c11,
+    engine: 0x40866666,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x1e,
+    name: 'Mazda RX-7',
+    handling: 0x3e8f5c29,
+    chassis: 0x4036734b,
+    engine: 0x40733333,
+    turbo: 0x3ce3150e,
+  },
+  {
+    id: 0x1f,
+    name: '1999 Nissan Skyline R34 GTR',
+    handling: 0x3e666666,
+    chassis: 0x404d65b0,
+    engine: 0x4076147b,
+    turbo: 0x3cc63f14,
+  },
+  {
+    id: 0x20,
+    name: 'Nissan 240 SX',
+    handling: 0x3e75c28f,
+    chassis: 0x4019bb0e,
+    engine: 0x40800000,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x21,
+    name: 'Toyota MR2',
+    handling: 0x3e75c28f,
+    chassis: 0x4003faef,
+    engine: 0x40766666,
+    turbo: 0x3c656042,
+  },
+  {
+    id: 0x22,
+    name: 'Nissan 350Z',
+    handling: 0x3e800000,
+    chassis: 0x40330788,
+    engine: 0x40666666,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x23,
+    name: 'Pontiac GTO',
+    handling: 0x3e800000,
+    chassis: 0x4062696f,
+    engine: 0x40833333,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x24,
+    name: '1967 Ford Mustang',
+    handling: 0x3e9eb852,
+    chassis: 0x40353800,
+    engine: 0x404b3333,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x25,
+    name: 'Chrisler® 300C SRT8',
+    handling: 0x3e75c28f,
+    chassis: 0x408f2d59,
+    engine: 0x40600000,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x26,
+    name: 'Lamborghini Murciélago',
+    handling: 0x3e99999a,
+    chassis: 0x407d4f7d,
+    engine: 0x40766666,
+    turbo: 0x3d2c0831,
+  },
+  {
+    id: 0x27,
+    name: 'Aston Martin DB9',
+    handling: 0x3e4ccccd,
+    chassis: 0x4067e6ef,
+    engine: 0x40700000,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x28,
+    name: 'Lotus Elise',
+    handling: 0x3e666666,
+    chassis: 0x3ffb9d33,
+    engine: 0x408e6666,
+    turbo: 0x00000000,
+  },
+  {
+    id: 0x29,
+    name: 'Mercedes-Benz SL65 AMG',
+    handling: 0x3e800000,
+    chassis: 0x4073a191,
+    engine: 0x40400000,
+    turbo: 0x3e23d70a,
+  },
+  {
+    id: 0x2a,
+    name: 'Pontiac Firebird',
+    handling: 0x3e8d4fdf,
+    chassis: 0x406d223c,
+    engine: 0x40366666,
+    turbo: 0x00000000,
+  },
+];
+
+export const escapeEvents = [
+  {
+    name: 'Junkyard - Race 3',
+    id: 0x06,
+  },
+  {
+    name: 'Industrial - Race 6',
+    id: 0x12,
+  },
+  {
+    name: 'Perimeter HWY - Race 6',
+    id: 0x1a,
+  },
+  {
+    name: 'Mountains -  Race 5',
+    id: 0x20,
+  },
+  {
+    name: 'Inner City - Race 4',
+    id: 0x26,
+  },
+  {
+    name: 'Storage - Race 3',
+    id: 0x2c,
+  },
+  {
+    name: 'Shipyard - Race 4',
+    id: 0x4e,
+  },
+  {
+    name: 'Airport - Race 8',
+    id: 0x5b,
+  },
+  {
+    name: 'Campus - Race 5',
+    id: 0x61,
+  },
+  {
+    name: 'High Residential - Race 6',
+    id: 0x6b,
+  },
+  {
+    name: 'High Residential - Race 7',
+    id: 0x6c,
+  },
+];
+
+export const takedownEvents = [
+  {
+    name: 'Industrial - Race 8',
+    id: 0x14,
+    territoryId: 0x02,
+    crew: 'Eastsiders',
+    crewVinylId: 0x0914717c,
+  },
+  {
+    name: 'Perimeter HWY - Race 4',
+    id: 0x18,
+    territoryId: 0x03,
+    crew: 'Eastsiders',
+    crewVinylId: 0x0914717c,
+  },
+  {
+    name: 'Mountains - Race 7',
+    id: 0x22,
+    territoryId: 0x04,
+    crew: 'Berserkers',
+    crewVinylId: 0x091470ec,
+  },
+  {
+    name: 'Inner City - Race 7',
+    id: 0x29,
+    territoryId: 0x05,
+    crew: 'Berserkers',
+    crewVinylId: 0x091470ec,
+  },
+  {
+    name: 'Storage - Race 8',
+    id: 0x31,
+    territoryId: 0x06,
+    crew: 'Krimson Crew',
+    crewVinylId: 0x0914714c,
+  },
+  {
+    name: 'Bridges - Race 5',
+    id: 0x38,
+    territoryId: 0x07,
+    crew: 'Syrens',
+    crewVinylId: 0x0914720c,
+  },
+  {
+    name: 'Bridges - Race 6',
+    id: 0x39,
+    territoryId: 0x07,
+    crew: 'Syrens',
+    crewVinylId: 0x0914720c,
+  },
+  {
+    name: 'Shipyard - Race 8',
+    id: 0x52,
+    territoryId: 0x0a,
+    crew: 'Corps',
+    crewVinylId: 0x0914711c,
+  },
+  {
+    name: 'Airport - Race 1',
+    id: 0x54,
+    territoryId: 0x0b,
+    crew: 'Corps',
+    crewVinylId: 0x0914711c,
+  },
+  {
+    name: 'Campus - Race 7',
+    id: 0x63,
+    territoryId: 0x0c,
+    crew: 'Mega',
+    crewVinylId: 0x091471dc,
+  },
+  {
+    name: 'High Residential - Race 4',
+    id: 0x69,
+    territoryId: 0x0d,
+    crew: 'Mega',
+    crewVinylId: 0x091471dc,
+  },
+  {
+    name: 'High Residential - Race 5',
+    id: 0x6a,
+    territoryId: 0x0d,
+    crew: 'Mega',
+    crewVinylId: 0x091471dc,
+  },
+];
+
+export const crewMembers = [
+  {
+    id: 0x02,
+    name: 'Carter',
+    skillOffset: 0x13a0,
+    class: 'Brawler',
+  },
+  {
+    id: 0x03,
+    name: 'Kita',
+    skillOffset: 0x13b0,
+    class: 'Brawler',
+  },
+  {
+    id: 0x04,
+    name: 'Dylan',
+    useOffset: 0x13b8,
+    skillOffset: 0x13c0,
+    class: 'Drafter',
+  },
+  {
+    id: 0x06,
+    name: 'Marcus',
+    skillOffset: 0x13e0,
+    class: 'Brawler',
+  },
+  {
+    id: 0x07,
+    name: 'Arjen',
+    useOffset: 0x13e8,
+    skillOffset: 0x13f0,
+    class: 'Drafter',
+  },
+  {
+    id: 0x08,
+    name: 'Crunch',
+    skillOffset: 0x1400,
+    class: 'Brawler',
+  },
+  {
+    id: 0x0c,
+    name: 'West',
+    skillOffset: 0x1440,
+    class: 'Brawler',
+  },
+  {
+    id: 0x0d,
+    name: 'Juice',
+    skillOffset: 0x1450,
+    class: 'Brawler',
+  },
+  {
+    id: 0x0e,
+    name: 'Sly',
+    useOffset: 0x1458,
+    skillOffset: 0x1460,
+    class: 'Drafter',
+  },
+  {
+    id: 0x13,
+    name: 'Layla1',
+    skillOffset: 0x14b0,
+    class: 'Brawler',
+  },
+  {
+    id: 0x14,
+    name: 'Layla2',
+    useOffset: 0x14b8,
+    skillOffset: 0x14c0,
+    class: 'Drafter',
+  },
+  {
+    id: 0x1a,
+    name: 'Steve',
+    skillOffset: 0x1520,
+    class: 'Brawler',
+  },
+  {
+    id: 0x1b,
+    name: 'Pip',
+    useOffset: 0x1528,
+    skillOffset: 0x1530,
+    class: 'Drafter',
+  },
+  {
+    id: 0x1c,
+    name: 'Buckster',
+    skillOffset: 0x1540,
+    class: 'Brawler',
+  },
+  {
+    id: 0x1d,
+    name: 'Turtle',
+    skillOffset: 0x1550,
+    class: 'Brawler',
+  },
+  {
+    id: 0x23,
+    name: 'Jenna',
+    useOffset: 0x15a8,
+    skillOffset: 0x15b0,
+    class: 'Drafter',
+  },
+  {
+    id: 0x24,
+    name: 'Daemon',
+    skillOffset: 0x15c0,
+    class: 'Brawler',
+  },
+  {
+    id: 0x2a,
+    name: 'Clutch',
+    skillOffset: 0x1620,
+    class: 'Brawler',
+  },
+];
+
+export const starterAchievements = [
+  {
+    name: 'Iron Man',
+    description:
+      'Win Crossover in Storage using any of the starter cars in Career.',
+    points: 10,
+    events: [
+      {
+        id: 0x2a,
+        territoryId: 0x06,
+      },
+    ],
+  },
+  {
+    name: 'War Machine',
+    description:
+      'Win South Side in Storage or Rock Quarry using any of the starter cars in Career.',
+    points: 10,
+    events: [
+      {
+        id: 0x2b,
+        territoryId: 0x06,
+      },
+      {
+        id: 0x01,
+        territoryId: 0x00,
+      },
+    ],
+  },
+  {
+    name: 'Hell or High Horsepower',
+    description:
+      'Win Big East Hwy. in Junkyard or Rock Quarry using any of the starter cars in Career.',
+    points: 10,
+    events: [
+      {
+        id: 0x0c,
+        territoryId: 0x01,
+      },
+      {
+        id: 0x00,
+        territoryId: 0x00,
+      },
+    ],
+  },
+  {
+    name: 'Homegrown Rides',
+    description:
+      'Win High to Low in Rock Quarry using any of the starter cars in Career.',
+    points: 10,
+    events: [
+      {
+        id: 0x02,
+        territoryId: 0x00,
+      },
+    ],
+  },
+  {
+    name: 'The Mad Dash',
+    description:
+      'Win Cross Town Sprint in Junkyard or Rock Quarry using any of the starter cars in Career.',
+    points: 10,
+    events: [
+      {
+        id: 0x0b,
+        territoryId: 0x01,
+      },
+      {
+        id: 0x03,
+        territoryId: 0x00,
+      },
+    ],
+  },
+  {
+    name: 'Knockout King',
+    description:
+      'Win a Lap Knockout in Storage or Junkyard using any of the starter cars in Career.',
+    points: 25,
+    events: [
+      {
+        id: 0x08,
+        territoryId: 0x01,
+      },
+      {
+        id: 0x09,
+        territoryId: 0x01,
+      },
+      {
+        id: 0x2e,
+        territoryId: 0x06,
+      },
+      {
+        id: 0x2f,
+        territoryId: 0x06,
+      },
+    ],
+  },
+];
+
+export const prestigeSprint1Events = [
+  {
+    id: 0x27,
+    territoryId: 0x05,
+  },
+  {
+    id: 0x30,
+    territoryId: 0x06,
+  },
+  {
+    id: 0x4c,
+    territoryId: 0x0a,
+  },
+  {
+    id: 0x56,
+    territoryId: 0x0b,
+  },
+  {
+    id: 0x48,
+    territoryId: 0x09,
+  },
+];
+
+export const prestigeSprint2Events = [
+  {
+    id: 0x02,
+    territoryId: 0x00,
+  },
+  {
+    id: 0x3e,
+    territoryId: 0x08,
+  },
+];
+
+export const prestigeCircuitAchievements = [
+  {
+    name: 'Perimeter',
+    description:
+      'Complete a lap under 0:43 on Perimeter (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfa1,
+    lapTime: 43000 * 4,
+  },
+  {
+    name: 'Reactor Loop',
+    description:
+      'Complete a lap under 1:13 on Reactor Loop (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfa2,
+    lapTime: 73000 * 4,
+  },
+  {
+    name: 'Junktown Scramble',
+    description:
+      'Complete a lap under 1:11 on Junktown Scramble (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfa3,
+    lapTime: 71000 * 4,
+  },
+  {
+    name: 'Storage Run',
+    description:
+      'Complete a lap under 1:18 on Storage Run (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfa4,
+    lapTime: 78000 * 4,
+  },
+  {
+    name: 'East Tunnel',
+    description:
+      'Complete a lap under 1:00 on East Tunnel (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfa5,
+    lapTime: 60000 * 4,
+  },
+  {
+    name: 'Inner City Run',
+    description:
+      'Complete a lap under 1:11 on Inner City Run (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfa7,
+    lapTime: 71000 * 4,
+  },
+  {
+    name: 'Big East Hwy. Forward',
+    description:
+      'Complete a lap under 1:56 on Big East Hwy. (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfaa,
+    lapTime: 116000 * 4,
+  },
+  {
+    name: 'Urban Technical',
+    description:
+      'Complete a lap under 1:37 on Urban Technical (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfab,
+    lapTime: 97000 * 4,
+  },
+  {
+    name: 'Crossover',
+    description:
+      'Complete a lap under 1:46 on Crossover (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfac,
+    lapTime: 106000 * 4,
+  },
+  {
+    name: 'Factory Circuit',
+    description:
+      'Complete a lap under 1:20 on Factory Circuit (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfad,
+    lapTime: 80000 * 4,
+  },
+  {
+    name: 'Junkyard Blitz',
+    description:
+      'Complete a lap under 1:00 on Junkyard Blitz (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfae,
+    lapTime: 60000 * 4,
+  },
+  {
+    name: 'Centrifugal',
+    description:
+      'Complete a lap under 0:52 on Centrifugal (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfaf,
+    lapTime: 52000 * 4,
+  },
+  {
+    name: 'Bridge City',
+    description:
+      'Complete a lap under 1:17 on Bridge City (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb0,
+    lapTime: 77000 * 4,
+  },
+  {
+    name: 'Skyscraper Circuit',
+    description:
+      'Complete a lap under 0:45 on Skyscraper Circuit (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb1,
+    lapTime: 45000 * 4,
+  },
+  {
+    name: 'Two Bridge Circuit',
+    description:
+      'Complete a lap under 1:06 on Two Bridge Circuit (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb2,
+    lapTime: 66000 * 4,
+  },
+  {
+    name: 'Homes and Towers',
+    description:
+      'Complete a lap under 1:02 on Homes and Towers (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb3,
+    lapTime: 62000 * 4,
+  },
+  {
+    name: 'South Side',
+    description:
+      'Complete a lap under 2:25 on South Side (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb4,
+    lapTime: 145000 * 4,
+  },
+  {
+    name: 'Figure Eight',
+    description:
+      'Complete a lap under 1:14 on Figure Eight (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb5,
+    lapTime: 74000 * 4,
+  },
+  {
+    name: 'Westside Loop',
+    description:
+      'Complete a lap under 1:28 on Westside Loop (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb6,
+    lapTime: 88000 * 4,
+  },
+  {
+    name: 'University Drive',
+    description:
+      'Complete a lap under 1:19 on University Drive (Forward) in Single Race.',
+    points: 5,
+    trackId: 0xfb7,
+    lapTime: 79000 * 4,
+  },
+  {
+    name: 'Giant Loop',
+    description:
+      'Complete a lap under 4:05 on Giant Loop (Forward) in Single Race.',
+    points: 10,
+    trackId: 0xfb8,
+    lapTime: 245000 * 4,
+  },
+];
