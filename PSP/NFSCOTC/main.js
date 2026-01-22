@@ -37,7 +37,7 @@ const codeFor = () => {
   const addresses = {
     racePointer: 0xbe13f8,
     currentCar: 0xbecc5c,
-    opponentPointer: 0xbd4fcc,
+    opponentPointer: 0xbf0ccc,
     rewardsPointer: 0xbdce70,
     ingame: 0xbdd5a8,
     gameStarted: 0xbe9528,
@@ -115,8 +115,19 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.pursuitPointer, '&', 'Value', '', 0x1ffffff],
       ['AddAddress', 'Mem', '32bit', 0x00, '&', 'Value', '', 0x1ffffff],
     ),
-    opponent: $(
+    opponent1: $(
       ['AddAddress', 'Mem', '32bit', addresses.opponentPointer, '&', 'Value', '', 0x1ffffff],
+      ['AddAddress', 'Mem', '32bit', 0x08, '&', 'Value', '', 0x1ffffff],
+      ['AddAddress', 'Mem', '32bit', 0x34, '&', 'Value', '', 0x1ffffff],
+    ),
+    opponent2: $(
+      ['AddAddress', 'Mem', '32bit', addresses.opponentPointer, '&', 'Value', '', 0x1ffffff],
+      ['AddAddress', 'Mem', '32bit', 0xc8, '&', 'Value', '', 0x1ffffff],
+      ['AddAddress', 'Mem', '32bit', 0x34, '&', 'Value', '', 0x1ffffff],
+    ),
+    opponent3: $(
+      ['AddAddress', 'Mem', '32bit', addresses.opponentPointer, '&', 'Value', '', 0x1ffffff],
+      ['AddAddress', 'Mem', '32bit', 0xe0, '&', 'Value', '', 0x1ffffff],
       ['AddAddress', 'Mem', '32bit', 0x34, '&', 'Value', '', 0x1ffffff],
     ),
   };
@@ -639,21 +650,38 @@ const codeFor = () => {
   );
 
   const opponentsDisabled5Times = $(
-    offsetPointers.opponent,
-    ['AndNext', 'Delta', '32bit', 0x210, '=', 'Value', '', 0],
-    offsetPointers.opponent,
-    ['AddHits', 'Mem', '32bit', 0x210, '=', 'Value', '', 0x10001],
-    offsetPointers.opponent,
-    ['AndNext', 'Delta', '32bit', 0x3290, '=', 'Value', '', 0],
-    offsetPointers.opponent,
-    ['AddHits', 'Mem', '32bit', 0x3290, '=', 'Value', '', 0x10001],
-    offsetPointers.opponent,
-    ['AndNext', 'Delta', '32bit', 0x6310, '=', 'Value', '', 0],
-    offsetPointers.opponent,
-    ['AddHits', 'Mem', '32bit', 0x6310, '=', 'Value', '', 0x10001],
-    ['', 'Value', '', 0, '=', 'Value', '', 1, 5],
+    offsetPointers.opponent1,
+    ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
+    offsetPointers.opponent1,
+    ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    offsetPointers.opponent2,
+    ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
+    offsetPointers.opponent2,
+    ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    offsetPointers.opponent3,
+    ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
+    offsetPointers.opponent3,
+    ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 5],
     ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
     ['ResetIf', 'Mem', '32bit', addresses.globalTimer, '=', 'Value', '', 0],
+  );
+
+  const allOponentsDisabled = $(
+    offsetPointers.opponent1,
+    ['AddSource', 'Delta', '8bit', 0x210],
+    offsetPointers.opponent2,
+    ['AddSource', 'Delta', '8bit', 0x210],
+    offsetPointers.opponent3,
+    ['AddSource', 'Delta', '8bit', 0x210],
+    emptyValueLower(3),
+    offsetPointers.opponent1,
+    ['AddSource', 'Mem', '8bit', 0x210],
+    offsetPointers.opponent2,
+    ['AddSource', 'Mem', '8bit', 0x210],
+    offsetPointers.opponent3,
+    ['AddSource', 'Mem', '8bit', 0x210],
+    emptyValueEqual(3),
   );
 
   const cashReached = (amount) =>
@@ -789,6 +817,7 @@ const codeFor = () => {
     quickPlayPrestigeTrack,
     lapTimeUnder,
     prestigeSprintStage,
+    allOponentsDisabled,
   };
 };
 
@@ -1188,7 +1217,12 @@ set.addAchievement({
   description: 'Keep your drafter activated for a full lap.',
   points: 3,
   conditions: {
-    core: $(c.gameIs.started, c.playerIs.ingame, c.resetRace),
+    core: $(
+      c.gameIs.started,
+      c.playerIs.ingame,
+      c.playerIs.notInIntro,
+      c.resetRace,
+    ),
     alt1: $(
       c.drafterInSlot(0x1368),
       c.crewMateInUseFullLap(c.addresses.crewMateEnergy1),
@@ -1210,6 +1244,7 @@ set.addAchievement({
     c.playerIs.ingameCareerSimple,
     c.playerIs.notInIntro,
     c.opponentsDisabled5Times,
+    c.raceWonTrigger,
   ),
 });
 
@@ -1219,9 +1254,9 @@ set.addAchievement({
   points: 5,
   conditions: $(
     c.gameIs.started,
-    c.playerIs.ingameCareerSimple,
+    c.playerIs.ingameCareer,
     c.playerIs.notInIntro,
-    c.opponentsDisabled5Times,
+    c.allOponentsDisabled,
   ),
 });
 
