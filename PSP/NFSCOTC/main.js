@@ -174,6 +174,11 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
     ),
+    ingameInstantMeasuredIf: $(
+      ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
+      ['MeasuredIf', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
+    ),
     ingameInstantSimple: $(
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
@@ -434,7 +439,7 @@ const codeFor = () => {
   );
 
   const isRivalCrewChallenge = $(
-    ['AndNext', 'Delta', '32bit', addresses.loadedRacers, '=', 'Value', '', 0],
+    ['AndNext', 'Delta', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
     ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 2, 1],
     ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
     ...escapeEvents.map((event) =>
@@ -659,20 +664,26 @@ const codeFor = () => {
   );
 
   const opponentsDisabled5Times = $(
+    // prettier-ignore
+    ['AndNext', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
     offsetPointers.opponent1,
     ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
     offsetPointers.opponent1,
     ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    // prettier-ignore
+    ['AndNext', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
     offsetPointers.opponent2,
     ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
     offsetPointers.opponent2,
     ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    // prettier-ignore
+    ['AndNext', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
     offsetPointers.opponent3,
     ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
     offsetPointers.opponent3,
     ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
     ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 5],
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
+    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<', 'Value', '', 6],
     ['ResetIf', 'Mem', '32bit', addresses.globalTimer, '=', 'Value', '', 0],
   );
 
@@ -691,6 +702,11 @@ const codeFor = () => {
     offsetPointers.opponent3,
     ['AddSource', 'Mem', '8bit', 0x210],
     emptyValueEqual(3),
+  );
+
+  // prettier-ignore
+  const raceNotFinished = $(
+    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
   );
 
   const cashReached = (amount) =>
@@ -840,6 +856,7 @@ const codeFor = () => {
     prestigeSprintStage,
     allOponentsDisabled,
     bestLapChanged,
+    raceNotFinished,
   };
 };
 
@@ -1057,7 +1074,11 @@ set.addAchievement({
   title: 'Playlist Mix Master',
   description: 'Win 5 Instant Races in a row.',
   points: 10,
-  conditions: $(c.gameIs.started, c.playerIs.ingameInstant, c.raceWon5Hits),
+  conditions: $(
+    c.gameIs.started,
+    c.playerIs.ingameInstantMeasuredIf,
+    c.raceWon5Hits,
+  ),
 });
 
 set.addAchievement({
@@ -1278,6 +1299,7 @@ set.addAchievement({
     c.gameIs.started,
     c.playerIs.ingameCareer,
     c.playerIs.notInIntro,
+    c.raceNotFinished,
     c.allOponentsDisabled,
   ),
 });
