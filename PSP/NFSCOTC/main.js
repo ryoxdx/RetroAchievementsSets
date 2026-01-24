@@ -392,11 +392,24 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
       offsetPointers.progression,
       ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', territory.id],
-      ...territory.eventIds.map((territoryId) =>
+      ...territory.eventIds.map((eventId) =>
         $(
           offsetPointers.progression,
           // prettier-ignore
-          ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', territoryId],
+          ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', eventId],
+        ),
+      ),
+    );
+
+  const inBoss = (territory) =>
+    $(
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', territory.id],
+      ...territory.eventIds.map((eventId) =>
+        $(
+          offsetPointers.progression,
+          // prettier-ignore
+          ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', eventId],
         ),
       ),
     );
@@ -817,6 +830,7 @@ const codeFor = () => {
     noUpgrades,
     notInCrewChallenge,
     inBossRace,
+    inBoss,
     beatenTerritoryTrigger,
     reachedSpeed,
     raceWon,
@@ -1049,7 +1063,9 @@ for (const territory of Object.values(territories)) {
         c.playerIs.ingameCareerSimple,
         c.playerIs.notInIntro,
         c.notInCrewChallenge,
-        c.inBossRace(territory),
+        ...(territory.id === 0x00
+          ? c.inBoss(territory)
+          : c.inBossRace(territory)),
         c.beatenTerritoryTrigger(territory.offset),
       ),
     ),
