@@ -43,6 +43,7 @@ const codeFor = () => {
     gameStarted: 0xbe9528,
     playerInfoPointer: 0xbeb4fc,
     pursuitPointer: 0xbed99c,
+    bonusPointer: 0xbee808,
     progressionPointer: 0xbf53d0,
     finishTime: 0xc32718,
     deliveryPosition: 0xc328d4,
@@ -68,6 +69,8 @@ const codeFor = () => {
     timerSnapshot: 0xc8bdd8,
     loadedRacers: 0xc8bdf4,
     loadedRacersFinished: 0xc8bdf8,
+    crewMember1Pointer: 0x00c8be10,
+    crewMember2Pointer: 0x00c8be14,
   };
 
   const emptyValueEqual = (value) =>
@@ -129,6 +132,16 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.opponentPointer, '&', 'Value', '', 0x1ffffff],
       ['AddAddress', 'Mem', '32bit', 0xe0, '&', 'Value', '', 0x1ffffff],
       ['AddAddress', 'Mem', '32bit', 0x34, '&', 'Value', '', 0x1ffffff],
+    ),
+    bonus: $(
+      ['AddAddress', 'Mem', '32bit', addresses.bonusPointer, '&', 'Value', '', 0x1ffffff],
+      ['AddAddress', 'Mem', '32bit', 0x898, '&', 'Value', '', 0x1ffffff],
+    ),
+    crew1: $(
+      ['AddAddress', 'Mem', '32bit', addresses.crewMember1Pointer, '&', 'Value', '', 0x1ffffff],
+    ),
+    crew2: $(
+      ['AddAddress', 'Mem', '32bit', addresses.crewMember2Pointer, '&', 'Value', '', 0x1ffffff],
     ),
   };
 
@@ -608,12 +621,17 @@ const codeFor = () => {
 
   const gainedSkillPoints = (points) =>
     $(
-      ['AddSource', 'Delta', '32bit', addresses.skillPoints1],
-      ['AddSource', 'Delta', '32bit', addresses.skillPoints2],
-      emptyValueLower(points),
-      ['AddSource', 'Mem', '32bit', addresses.skillPoints1],
-      ['AddSource', 'Mem', '32bit', addresses.skillPoints2],
-      emptyValueEqual(points),
+      offsetPointers.bonus,
+      ['AddSource', 'Mem', '32bit', 0xd4, '*', 'Value', '', 2],
+      offsetPointers.bonus,
+      ['AddSource', 'Mem', '32bit', 0xd8, '*', 'Value', '', 2],
+      offsetPointers.bonus,
+      ['AddSource', 'Mem', '32bit', 0xdc, '*', 'Value', '', 2],
+      offsetPointers.crew1,
+      ['AddSource', 'Mem', '32bit', 0x138, '/', 'Mem', '32bit', 0x138],
+      offsetPointers.crew2,
+      ['AddSource', 'Mem', '32bit', 0x138, '/', 'Mem', '32bit', 0x138],
+      emptyValueHigherOrEqual(points - 10),
     );
 
   const wingmenTotalMeasured = (total) => {
@@ -1237,9 +1255,10 @@ set.addAchievement({
   points: 5,
   conditions: $(
     c.gameIs.started,
-    c.playerIs.ingameCareer,
+    c.playerIs.ingameCareerSimple,
     c.playerIs.notInIntro,
     c.gainedSkillPoints(32),
+    c.raceWon,
   ),
 });
 
