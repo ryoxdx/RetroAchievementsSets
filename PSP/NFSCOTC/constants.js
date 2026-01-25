@@ -1064,10 +1064,10 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Perimeter',
     description:
-      'Complete a lap under 0:43 on Perimeter (Forward) in Single Event.',
+      'Complete a lap under 0:42 on Perimeter (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa1,
-    lapTime: 43000 * 4,
+    lapTime: 42000 * 4,
   },
   {
     name: 'Reactor Loop',
