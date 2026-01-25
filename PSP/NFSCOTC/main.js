@@ -673,7 +673,7 @@ const codeFor = () => {
 
   // prettier-ignore
   const resetRace = $(
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
+    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<', 'Value', '', 5],
   );
 
   const opponentsDisabled5Times = $(
@@ -1280,6 +1280,7 @@ set.addAchievement({
       c.gameIs.started,
       c.playerIs.ingame,
       c.playerIs.notInIntro,
+      c.playerIs.ingameCareerSimple,
       c.resetRace,
     ),
     alt1: $(
