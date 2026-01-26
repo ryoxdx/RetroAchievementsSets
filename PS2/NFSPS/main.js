@@ -139,11 +139,55 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', 0x0],
       ['Measured', 'Mem', '32bit', 0x10],
     ),
+    cheats: $(
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit0', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit1', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit2', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit3', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit4', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit5', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit6', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit7', 0x468],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit0', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit1', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit2', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit3', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit4', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit5', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['AddSource', 'Mem', 'Bit6', 0x469],
+      ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+      ['Measured', 'Mem', 'Bit7', 0x469],
+    ),
   };
 
   const codeEntryDetection = $(
     ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
     ['', 'Mem', '32bit', 0x468, '=', 'Value', '', 0],
+  );
+
+  const cheatsDetected = $(
+    ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+    ['', 'Mem', '32bit', 0x468, '!=', 'Value', '', 0],
+  );
+
+  const codeEntered = $(
+    ['AddAddress', 'Mem', '32bit', addresses.careerPointer],
+    ['', 'Mem', '32bit', 0x468, '!=', 'Delta', '32bit', 0x468],
   );
 
   const currentRaceDay = (id) =>
@@ -939,6 +983,8 @@ const codeFor = () => {
     playerMeasured,
     cash,
     codeEntryDetection,
+    cheatsDetected,
+    codeEntered,
     currentRaceDay,
     measuredIfCurrentRaceDay,
     raceDayDominated,
@@ -1850,6 +1896,27 @@ for (const leaderboard of raceDayLeaderboards) {
   });
 }
 
+set.addLeaderboard({
+  title: 'Achievements Disabled (Codes Entered)',
+  description:
+    'Do not save game after entering a code or you will not be able to earn achievements on that save file or any other career save you make on the same alias.',
+  lowerIsBetter: false,
+  type: 'VALUE',
+  conditions: {
+    start: $(
+      c.gameIs.booted,
+      c.gameIs.loadedIn,
+      c.cheatsDetected,
+      c.codeEntered,
+    ),
+    cancel: '0=1',
+    submit: '1=1',
+    value: {
+      core: c.playerMeasured.cheats,
+    },
+  },
+});
+
 export const rich = RichPresence({
   format: { Value: 'VALUE' },
   lookupDefaultParameters: { keyFormat: 'hex' },
@@ -1870,8 +1937,13 @@ export const rich = RichPresence({
       const mode = lookup.Mode.at(c.playerMeasured.mode);
       const modeLoaner = lookup.ModeLoaner.at(c.playerMeasured.modeLoaner);
       const cash = format.Value.at(c.cash);
+      const cheats = format.Value.at(c.playerMeasured.cheats);
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
+        [
+          $(c.gameIs.booted, c.gameIs.loadedIn, c.cheatsDetected),
+          `⚠ Achievements disabled (codes entered: ${cheats}) ⚠`,
+        ],
         [
           $(
             c.gameIs.booted,
