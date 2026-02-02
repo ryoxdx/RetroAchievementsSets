@@ -497,17 +497,17 @@ const codeFor = () => {
   const takedownsTotal = (total) =>
     $(
       offsetPointers.rewards,
-      ['', 'Delta', '32bit', 0x2288, '=', 'Value', '', total - 1],
+      ['', 'Delta', '32bit', 0x2288, '<', 'Value', '', total],
       offsetPointers.rewards,
-      ['', 'Mem', '32bit', 0x2288, '=', 'Value', '', total],
+      ['', 'Mem', '32bit', 0x2288, '>=', 'Value', '', total],
     );
 
   const takedownsTotalMeasured = (total) =>
     $(
       offsetPointers.rewards,
-      ['', 'Delta', '32bit', 0x2288, '=', 'Value', '', total - 1],
+      ['', 'Delta', '32bit', 0x2288, '<', 'Value', '', total],
       offsetPointers.rewards,
-      ['Measured', 'Mem', '32bit', 0x2288, '=', 'Value', '', total],
+      ['Measured', 'Mem', '32bit', 0x2288, '>=', 'Value', '', total],
     );
 
   // prettier-ignore
