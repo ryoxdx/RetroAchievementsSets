@@ -44,6 +44,7 @@ const codeFor = () => {
     playerInfoPointer: 0xbeb4fc,
     pursuitPointer: 0xbed99c,
     bonusPointer: 0xbee808,
+    loadedRacersPointer: 0xbeeae0,
     progressionPointer: 0xbf53d0,
     finishTime: 0xc32718,
     deliveryPosition: 0xc328d4,
@@ -65,12 +66,8 @@ const codeFor = () => {
     quickSkill: 0xc7b22c,
     crewMateEnergy1: 0xc87424,
     crewMateEnergy2: 0xc87428,
-    globalTimer: 0xc8bdd4,
-    timerSnapshot: 0xc8bdd8,
-    loadedRacers: 0xc8bdf4,
-    loadedRacersFinished: 0xc8bdf8,
-    crewMember1Pointer: 0x00c8be10,
-    crewMember2Pointer: 0x00c8be14,
+    crewMember1Pointer: 0xc8be10,
+    crewMember2Pointer: 0xc8be14,
   };
 
   const emptyValueEqual = (value) =>
@@ -143,6 +140,9 @@ const codeFor = () => {
     crew2: $(
       ['AddAddress', 'Mem', '32bit', addresses.crewMember2Pointer, '&', 'Value', '', 0x1ffffff],
     ),
+    loadedRacers: $(
+      ['AddAddress', 'Mem', '32bit', addresses.loadedRacersPointer, '&', 'Value', '', 0x1ffffff],
+    ),
   };
 
   // prettier-ignore
@@ -153,17 +153,23 @@ const codeFor = () => {
   // prettier-ignore
   const playerIs = {
     inMenus: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '=', 'Value', '', 0],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '=', 'Value', '', 0],
     ),
     ingame: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 1],
     ),
     ingameCareer: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 1],
       ['', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
     ),
     ingameCareerFree: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '=', 'Value', '', 1],
       ['', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
     ),
     ingameCareerSimple: $(
@@ -174,7 +180,9 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.pursuitPointer, '!=', 'Value', '', 0]
     ),
     ingameQuick: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 0],
     ),
@@ -182,13 +190,25 @@ const codeFor = () => {
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 0],
     ),
+    ingameCrew: $(
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
+      ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 0],
+      ['', 'Mem', '32bit', addresses.quickOpponents, '=', 'Value', '', 0]
+    ),
     ingameInstant: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
     ),
     ingameInstantMeasuredIf: $(
-      ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 1],
       ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 3],
       ['MeasuredIf', 'Mem', '32bit', addresses.instantRace, '=', 'Value', '', 1],
     ),
@@ -223,7 +243,10 @@ const codeFor = () => {
       ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 0],
     ),
     // prettier-ignore
-    lapTime: $(['Measured', 'Mem', '32bit', addresses.timerSnapshot, '/', 'Value', '', 40]),
+    lapTime: $(
+      offsetPointers.loadedRacers,
+      ['Measured', 'Mem', '32bit', 0x18, '/', 'Value', '', 40],
+    ),
   };
 
   const finishedIntro = $(
@@ -409,29 +432,42 @@ const codeFor = () => {
   const raceWon = $(
     offsetPointers.racePosition,
     ['', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
-    ['', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   // prettier-ignore
   const raceWon5Hits = $(
     offsetPointers.racePosition,
     ['AndNext', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
-    ['AndNext', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
-    ['AndNext', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['Measured', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers, 5],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['Measured', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34, 5],
     ['ResetIf', 'Mem', '32bit', addresses.instantRaceLoaded, '=', 'Value', '', 0x1f],
-    ['AndNext', 'Delta', '32bit', addresses.loadedRacersFinished, '=', 'Value', '', 6],
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Value', '', 0],
-    ['AndNext', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Value', '', 6],
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Value', '', 0x42c80000],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Delta', '32bit', 0x38, '=', 'Value', '', 6],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x38, '=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Delta', '32bit', 0x38, '<', 'Value', '', 6],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x38, '=', 'Value', '', 0x42c80000],
   );
 
   const isRivalCrewChallenge = $(
-    ['AndNext', 'Delta', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
-    ['', 'Mem', '32bit', addresses.loadedRacers, '>=', 'Value', '', 2, 1],
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<=', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Delta', '32bit', 0x34, '<=', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 2, 1],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x34, '<=', 'Value', '', 1],
     ...escapeEvents.map((event) =>
       $(
         offsetPointers.progression,
@@ -456,42 +492,54 @@ const codeFor = () => {
   const escapeWon = $(
     ['', 'Mem', '32bit', addresses.escapeTimer, '>', 'Value', '', 0],
     ['', 'Mem', '32bit', addresses.escapeFail, '=', 'Value', '', 0],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   // prettier-ignore
   const takedownWon = $(
     ['', 'Mem', '32bit', addresses.crewTakedownTotal, '>', 'Value', '', 0],
     ['', 'Mem', '32bit', addresses.crewTakedownSuccess, '=', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   // prettier-ignore
   const escapeArtist = $(
     ['', 'Mem', '32bit', addresses.escapeTimer, '>=', 'Value', '', 120000],
     ['', 'Mem', '32bit', addresses.escapeFail, '=', 'Value', '', 0],
-    ['', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   // prettier-ignore
   const fastDelivery = $(
     ['', 'Mem', '32bit', addresses.deliveryTime, '<=', 'Value', '', 180000],
     ['', 'Mem', '32bit', addresses.deliveryPosition, '=', 'Value', '', 1],
-    ['', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   // prettier-ignore
   const takedown25 = $(
     ['Measured', 'Mem', '32bit', addresses.crewTakedownTotal, '>=', 'Value', '', 25],
     ['MeasuredIf', 'Mem', '32bit', addresses.crewTakedownSuccess, '=', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   const takedownsTotal = (total) =>
@@ -514,9 +562,12 @@ const codeFor = () => {
   const takedownWonTrigger = $(
     ['Trigger', 'Mem', '32bit', addresses.crewTakedownTotal, '>', 'Value', '', 0],
     ['Trigger', 'Mem', '32bit', addresses.crewTakedownSuccess, '=', 'Value', '', 1],
-    ['', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['Trigger', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['Trigger', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   const pursuitEvaded = $(
@@ -539,7 +590,16 @@ const codeFor = () => {
   );
 
   const pursuitEvadedTrigger = $(
-    ['', 'Mem', '32bit', addresses.pursuitPointer, '!=', 'Value', '', 0],
+    [
+      'MeasuredIf',
+      'Mem',
+      '32bit',
+      addresses.pursuitPointer,
+      '!=',
+      'Value',
+      '',
+      0,
+    ],
     offsetPointers.pursuit,
     ['Trigger', 'Delta', 'Float', 0x5c, '=', 'Float', '', 1.0],
     offsetPointers.pursuit,
@@ -649,37 +709,44 @@ const codeFor = () => {
     $(
       ['ResetNextIf', 'Mem', 'Float', slotAddress, '>', 'Float', '', 0],
       ['AndNext', 'Mem', 'Float', slotAddress, '=', 'Float', '', 0],
+      ['AndNext', 'Mem', '32bit', addresses.ingame, '<=', 'Value', '', 2],
       offsetPointers.raceLap,
       ['', 'Mem', '32bit', 0x350, '>', 'Delta', '32bit', 0x350, 2],
     );
 
   // prettier-ignore
   const resetRace = $(
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<', 'Value', '', 5],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x34, '<', 'Value', '', 5],
   );
 
   const opponentsDisabled5Times = $(
+    offsetPointers.loadedRacers,
     // prettier-ignore
-    ['AndNext', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
+    ['AndNext', 'Mem', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
     offsetPointers.opponent1,
     ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
     offsetPointers.opponent1,
     ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    offsetPointers.loadedRacers,
     // prettier-ignore
-    ['AndNext', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
+    ['AndNext', 'Mem', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
     offsetPointers.opponent2,
     ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
     offsetPointers.opponent2,
     ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
+    offsetPointers.loadedRacers,
     // prettier-ignore
-    ['AndNext', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
+    ['AndNext', 'Mem', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
     offsetPointers.opponent3,
     ['AndNext', 'Delta', '8bit', 0x210, '=', 'Value', '', 0],
     offsetPointers.opponent3,
     ['AddHits', 'Mem', '8bit', 0x210, '=', 'Value', '', 1],
     ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 5],
-    ['ResetIf', 'Mem', '32bit', addresses.loadedRacers, '<', 'Value', '', 6],
-    ['ResetIf', 'Mem', '32bit', addresses.globalTimer, '=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x34, '<', 'Value', '', 6],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x14, '=', 'Value', '', 0],
   );
 
   const allOponentsDisabled = $(
@@ -701,7 +768,8 @@ const codeFor = () => {
 
   // prettier-ignore
   const raceNotFinished = $(
-    ['', 'Mem', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
   );
 
   const cashReached = (amount) =>
@@ -744,9 +812,12 @@ const codeFor = () => {
   const raceWonTrigger = $(
     offsetPointers.racePosition,
     ['Trigger', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
-    ['', 'Mem', '32bit', addresses.loadedRacers, '>', 'Value', '', 1],
-    ['', 'Delta', '32bit', addresses.loadedRacersFinished, '<', 'Mem', '32bit', addresses.loadedRacers],
-    ['Trigger', 'Mem', '32bit', addresses.loadedRacersFinished, '=', 'Mem', '32bit', addresses.loadedRacers],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['Trigger', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   const quickPlayHardTrack = (trackId) =>
@@ -775,8 +846,10 @@ const codeFor = () => {
 
   const lapTimeUnder = (time) =>
     $(
-      ['', 'Delta', '32bit', addresses.timerSnapshot, '>', 'Value', '', time],
-      ['', 'Mem', '32bit', addresses.timerSnapshot, '<=', 'Value', '', time],
+      offsetPointers.loadedRacers,
+      ['', 'Delta', '32bit', 0x18, '>', 'Value', '', time],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x18, '<=', 'Value', '', time],
     );
 
   const prestigeSprintStage = (stageOffset) =>
@@ -787,8 +860,9 @@ const codeFor = () => {
     );
 
   const bestLapChanged = $(
+    offsetPointers.loadedRacers,
     // prettier-ignore
-    ['', 'Mem', '32bit', addresses.timerSnapshot, '<', 'Delta', '32bit', addresses.timerSnapshot],
+    ['', 'Mem', '32bit', 0x18, '<', 'Delta', '32bit', 0x18],
   );
 
   return {
@@ -1511,6 +1585,9 @@ export const rich = RichPresence({
           `[Instant race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
         ],
         [
+          $(c.gameIs.started, c.playerIs.ingameCrew, c.playerIs.inIntro),
+          `[Crew race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
+        ],[
           $(c.gameIs.started, c.playerIs.ingameQuick, c.playerIs.inIntro),
           `[Single race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
         ],
@@ -1519,6 +1596,9 @@ export const rich = RichPresence({
           `[Instant race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
         [
+          $(c.gameIs.started, c.playerIs.ingameCrew),
+          `[Crew race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
+        ],[
           $(c.gameIs.started, c.playerIs.ingameQuick),
           `[Single race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
