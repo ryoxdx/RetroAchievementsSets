@@ -31,7 +31,6 @@ export const richPresenceValues = {
     0x2a: 'Pontiac Firebird',
   },
   careerTrack: {
-    '*': 'Crew rival challenge',
     0x00: 'Big East Hwy. (Circuit)',
     0x01: 'South Side (Circuit)',
     0x02: 'High to Low (Sprint)',

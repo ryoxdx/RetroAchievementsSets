@@ -224,6 +224,10 @@ const codeFor = () => {
       offsetPointers.progression,
       ['', 'Mem', '32bit', 0x6b8, '=', 'Value', '', 4],
     ),
+    inCircuit: $(
+      offsetPointers.raceLap,
+      ['', 'Mem', '32bit', 0x360, '!=', 'Value', '', 0xffffffff],
+    ),
   };
 
   const playerMeasured = {
@@ -1332,6 +1336,7 @@ set.addAchievement({
       c.playerIs.ingame,
       c.playerIs.notInIntro,
       c.playerIs.ingameCareerSimple,
+      c.playerIs.inCircuit,
       c.resetRace,
     ),
     alt1: $(
@@ -1573,6 +1578,15 @@ export const rich = RichPresence({
           `[Career] In a police pursuit 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
         [
+          $(
+            c.gameIs.started,
+            c.playerIs.ingameCareer,
+            c.playerIs.notInIntro,
+            c.isRivalCrewChallenge,
+          ),
+          `[Career] Rival crew challenge 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
+        ],
+        [
           $(c.gameIs.started, c.playerIs.ingameCareer, c.playerIs.notInIntro),
           `[Career] ${eventCareer} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
@@ -1587,7 +1601,8 @@ export const rich = RichPresence({
         [
           $(c.gameIs.started, c.playerIs.ingameCrew, c.playerIs.inIntro),
           `[Crew race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
-        ],[
+        ],
+        [
           $(c.gameIs.started, c.playerIs.ingameQuick, c.playerIs.inIntro),
           `[Single race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 0/14`,
         ],
@@ -1598,7 +1613,8 @@ export const rich = RichPresence({
         [
           $(c.gameIs.started, c.playerIs.ingameCrew),
           `[Crew race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
-        ],[
+        ],
+        [
           $(c.gameIs.started, c.playerIs.ingameQuick),
           `[Single race] ${eventQuick} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
