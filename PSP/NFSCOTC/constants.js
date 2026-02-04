@@ -1063,7 +1063,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Perimeter',
     description:
-      'Complete a lap under 0:42 on Perimeter (Forward) in Single Event.',
+      'Complete a lap in under 0:42 on Perimeter (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa1,
     lapTime: 42000 * 4,
@@ -1071,7 +1071,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Reactor Loop',
     description:
-      'Complete a lap under 1:13 on Reactor Loop (Forward) in Single Event.',
+      'Complete a lap in under 1:13 on Reactor Loop (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa2,
     lapTime: 73000 * 4,
@@ -1079,7 +1079,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Junktown Scramble',
     description:
-      'Complete a lap under 1:11 on Junktown Scramble (Forward) in Single Event.',
+      'Complete a lap in under 1:11 on Junktown Scramble (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa3,
     lapTime: 71000 * 4,
@@ -1087,7 +1087,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Storage Run',
     description:
-      'Complete a lap under 1:18 on Storage Run (Forward) in Single Event.',
+      'Complete a lap in under 1:18 on Storage Run (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa4,
     lapTime: 78000 * 4,
@@ -1095,7 +1095,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'East Tunnel',
     description:
-      'Complete a lap under 1:00 on East Tunnel (Forward) in Single Event.',
+      'Complete a lap in under 1:00 on East Tunnel (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa5,
     lapTime: 60000 * 4,
@@ -1103,7 +1103,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Inner City Run',
     description:
-      'Complete a lap under 1:11 on Inner City Run (Forward) in Single Event.',
+      'Complete a lap in under 1:11 on Inner City Run (Forward) in Single Event.',
     points: 5,
     trackId: 0xfa7,
     lapTime: 71000 * 4,
@@ -1111,7 +1111,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Big East Hwy.',
     description:
-      'Complete a lap under 1:56 on Big East Hwy. (Forward) in Single Event.',
+      'Complete a lap in under 1:56 on Big East Hwy. (Forward) in Single Event.',
     points: 5,
     trackId: 0xfaa,
     lapTime: 116000 * 4,
@@ -1119,7 +1119,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Urban Technical',
     description:
-      'Complete a lap under 1:37 on Urban Technical (Forward) in Single Event.',
+      'Complete a lap in under 1:37 on Urban Technical (Forward) in Single Event.',
     points: 5,
     trackId: 0xfab,
     lapTime: 97000 * 4,
@@ -1127,7 +1127,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Crossover',
     description:
-      'Complete a lap under 1:46 on Crossover (Forward) in Single Event.',
+      'Complete a lap in under 1:46 on Crossover (Forward) in Single Event.',
     points: 5,
     trackId: 0xfac,
     lapTime: 106000 * 4,
@@ -1135,7 +1135,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Factory Circuit',
     description:
-      'Complete a lap under 1:20 on Factory Circuit (Forward) in Single Event.',
+      'Complete a lap in under 1:20 on Factory Circuit (Forward) in Single Event.',
     points: 5,
     trackId: 0xfad,
     lapTime: 80000 * 4,
@@ -1143,7 +1143,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Junkyard Blitz',
     description:
-      'Complete a lap under 1:00 on Junkyard Blitz (Forward) in Single Event.',
+      'Complete a lap in under 1:00 on Junkyard Blitz (Forward) in Single Event.',
     points: 5,
     trackId: 0xfae,
     lapTime: 60000 * 4,
@@ -1151,7 +1151,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Centrifugal',
     description:
-      'Complete a lap under 0:52 on Centrifugal (Forward) in Single Event.',
+      'Complete a lap in under 0:52 on Centrifugal (Forward) in Single Event.',
     points: 5,
     trackId: 0xfaf,
     lapTime: 52000 * 4,
@@ -1159,7 +1159,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Bridge City',
     description:
-      'Complete a lap under 1:17 on Bridge City (Forward) in Single Event.',
+      'Complete a lap in under 1:17 on Bridge City (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb0,
     lapTime: 77000 * 4,
@@ -1167,7 +1167,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Skyscraper Circuit',
     description:
-      'Complete a lap under 0:45 on Skyscraper Circuit (Forward) in Single Event.',
+      'Complete a lap in under 0:45 on Skyscraper Circuit (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb1,
     lapTime: 45000 * 4,
@@ -1175,7 +1175,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Two Bridge Circuit',
     description:
-      'Complete a lap under 1:06 on Two Bridge Circuit (Forward) in Single Event.',
+      'Complete a lap in under 1:06 on Two Bridge Circuit (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb2,
     lapTime: 66000 * 4,
@@ -1183,7 +1183,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Homes and Towers',
     description:
-      'Complete a lap under 1:02 on Homes and Towers (Forward) in Single Event.',
+      'Complete a lap in under 1:02 on Homes and Towers (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb3,
     lapTime: 62000 * 4,
@@ -1191,7 +1191,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'South Side',
     description:
-      'Complete a lap under 2:25 on South Side (Forward) in Single Event.',
+      'Complete a lap in under 2:25 on South Side (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb4,
     lapTime: 145000 * 4,
@@ -1199,7 +1199,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Figure Eight',
     description:
-      'Complete a lap under 1:14 on Figure Eight (Forward) in Single Event.',
+      'Complete a lap in under 1:14 on Figure Eight (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb5,
     lapTime: 74000 * 4,
@@ -1207,7 +1207,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Westside Loop',
     description:
-      'Complete a lap under 1:28 on Westside Loop (Forward) in Single Event.',
+      'Complete a lap in under 1:28 on Westside Loop (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb6,
     lapTime: 88000 * 4,
@@ -1215,7 +1215,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'University Drive',
     description:
-      'Complete a lap under 1:19 on University Drive (Forward) in Single Event.',
+      'Complete a lap in under 1:19 on University Drive (Forward) in Single Event.',
     points: 5,
     trackId: 0xfb7,
     lapTime: 79000 * 4,
@@ -1223,7 +1223,7 @@ export const prestigeCircuitAchievements = [
   {
     name: 'Giant Loop',
     description:
-      'Complete a lap under 4:05 on Giant Loop (Forward) in Single Event.',
+      'Complete a lap in under 4:05 on Giant Loop (Forward) in Single Event.',
     points: 10,
     trackId: 0xfb8,
     lapTime: 245000 * 4,
