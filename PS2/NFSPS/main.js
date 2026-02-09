@@ -21,6 +21,7 @@ import {
   timeTrialAchievements,
   raceDayLeaderboards,
   richPresenceValues,
+  careerRaceDays,
 } from './constants.js';
 
 /**
@@ -61,7 +62,6 @@ const codeFor = () => {
     carLotPointer: 0x6e7e48,
     menuCarPointer: 0x704358,
     gameStartedPointer: 0x704eec,
-    careerRaceDayPointer: 0x735430,
   };
 
   const gameIs = {
@@ -205,6 +205,10 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', 0x0],
       ['MeasuredIf', 'Mem', '32bit', 0x10, '=', 'Value', '', id],
     );
+
+  const isCareerRaceDay = orNext(
+    ...careerRaceDays.map((id) => currentRaceDay(id)),
+  );
 
   const heatWon = $(
     ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
@@ -505,11 +509,6 @@ const codeFor = () => {
 
   const measuredEmptyValueComparison = (value) =>
     $(['Measured', 'Value', '', 0, '=', 'Value', '', value]);
-
-  const isCareerRaceDay = $(
-    ['AddAddress', 'Mem', '32bit', addresses.careerRaceDayPointer],
-    ['', 'Mem', '32bit', 0x22c, '!=', 'Value', '', 0],
-  );
 
   const isCleanRace = $(
     ['AddAddress', 'Mem', '32bit', addresses.eventSummaryPointer],
@@ -1328,9 +1327,9 @@ for (const achievement of orgAchievements) {
       c.codeEntryDetection,
       c.playerIs.inRaceDay,
       !achievement.raceDayOffsets &&
-        c.orgCompletion(achievement.recordOffset, achievement.totalRaceDays),
+      c.orgCompletion(achievement.recordOffset, achievement.totalRaceDays),
       achievement.raceDayOffsets &&
-        c.bossOrgMastery(achievement.raceDayOffsets),
+      c.bossOrgMastery(achievement.raceDayOffsets),
     ),
   });
 }
@@ -1374,7 +1373,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.grip,
     c.isNotPracticeMode,
@@ -1391,7 +1389,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.grip,
     c.isNotPracticeMode,
@@ -1406,7 +1403,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
     c.isNotPracticeMode,
@@ -1421,7 +1417,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
     c.isNotPracticeMode,
@@ -1436,7 +1431,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
     c.isNotPracticeMode,
@@ -1452,7 +1446,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drift,
     c.isNotPracticeMode,
@@ -1467,7 +1460,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.speed,
     c.isNotPracticeMode,
@@ -1483,7 +1475,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.grip,
     c.isSectorShootout,
@@ -1499,7 +1490,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
     c.isNotPracticeMode,
@@ -1517,7 +1507,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
     c.isWheelieCompetition,
@@ -1534,7 +1523,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.playerIs.racing,
     c.currentRaceModeIs.drift,
     c.isNotPracticeMode,
@@ -1643,7 +1631,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.currentCarModel(carModels.DodgeChallengerRT),
     c.currentRaceModeIs.drag,
     c.isWheelieCompetition,
@@ -1706,7 +1693,6 @@ set.addAchievement({
     core: $(
       c.gameIs.booted,
       c.codeEntryDetection,
-      c.isCareerRaceDay,
       c.currentCarModel(carModels.ToyotaSupra),
       c.currentRaceModeIs.drag,
       c.playerIs.racing,
@@ -1748,7 +1734,6 @@ set.addAchievement({
   conditions: $(
     c.gameIs.booted,
     c.codeEntryDetection,
-    c.isCareerRaceDay,
     c.currentCarModel(carModels.Nissan350ZZ33),
     c.playerIs.racing,
     c.currentRaceModeIs.drift,
