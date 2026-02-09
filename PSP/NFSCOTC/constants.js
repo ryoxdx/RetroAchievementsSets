@@ -821,6 +821,84 @@ export const takedownEvents = [
   },
 ];
 
+export const deliveryEvents = [
+  {
+    name: 'Junkyard Delivery #1',
+    id: 0x05,
+    territoryId: 0x01,
+  },
+  {
+    name: 'Junkyard Delivery #2',
+    id: 0x0a,
+    territoryId: 0x01,
+  },
+  {
+    name: 'Industrial Delivery #1',
+    id: 0x13,
+    territoryId: 0x02,
+  },
+  {
+    name: 'Perimeter Hwy Delivery #1',
+    id: 0x1b,
+    territoryId: 0x03,
+  },
+  {
+    name: 'Mountains Delivery #1',
+    id: 0x21,
+    territoryId: 0x04,
+  },
+  {
+    name: 'Storage Delivery #1',
+    id: 0x2d,
+    territoryId: 0x06,
+  },
+  {
+    name: 'Storage Delivery #2',
+    id: 0x32,
+    territoryId: 0x06,
+  },
+  {
+    name: 'Bridges Delivery #1',
+    id: 0x3a,
+    territoryId: 0x07,
+  },
+  {
+    name: 'Residential Delivery #1',
+    id: 0x41,
+    territoryId: 0x08,
+  },
+  {
+    name: 'Residential Delivery #2',
+    id: 0x42,
+    territoryId: 0x08,
+  },
+  {
+    name: 'Commercial City Delivery #1',
+    id: 0x43,
+    territoryId: 0x09,
+  },
+  {
+    name: 'Commercial City Delivery #2',
+    id: 0x44,
+    territoryId: 0x09,
+  },
+  {
+    name: 'Shipyard Delivery #1',
+    id: 0x4d,
+    territoryId: 0x0a,
+  },
+  {
+    name: 'Airport Delivery #1',
+    id: 0x5c,
+    territoryId: 0x0b,
+  },
+  {
+    name: 'Campus Delivery #1',
+    id: 0x62,
+    territoryId: 0x0c,
+  },
+];
+
 export const crewMembers = [
   {
     id: 0x02,

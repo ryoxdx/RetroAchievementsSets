@@ -16,6 +16,7 @@ import {
   cars,
   escapeEvents,
   takedownEvents,
+  deliveryEvents,
   crewMembers,
   starterAchievements,
   prestigeSprint1Events,
@@ -47,8 +48,6 @@ const codeFor = () => {
     loadedRacersPointer: 0xbeeae0,
     progressionPointer: 0xbf53d0,
     finishTime: 0xc32718,
-    deliveryPosition: 0xc328d4,
-    deliveryTime: 0xc328e0,
     skillPoints1: 0xc327bc,
     skillPoints2: 0xc327c0,
     instantRace: 0xc376e4,
@@ -490,6 +489,15 @@ const codeFor = () => {
         ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
       ),
     ),
+    ...deliveryEvents.map((event) =>
+      $(
+        offsetPointers.progression,
+        ['AndNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
+        offsetPointers.progression,
+        // prettier-ignore
+        ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
+      ),
+    ),
   );
 
   // prettier-ignore
@@ -526,8 +534,8 @@ const codeFor = () => {
 
   // prettier-ignore
   const fastDelivery = $(
-    ['', 'Mem', '32bit', addresses.deliveryTime, '<=', 'Value', '', 180000],
-    ['', 'Mem', '32bit', addresses.deliveryPosition, '=', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x14, '<=', 'Value', '', 45000 * 4],
     offsetPointers.loadedRacers,
     ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
     offsetPointers.loadedRacers,
@@ -535,6 +543,14 @@ const codeFor = () => {
     offsetPointers.loadedRacers,
     ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
+
+  const isDeliveryEvent = (event) =>
+    $(
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
+    );
 
   // prettier-ignore
   const takedown25 = $(
@@ -897,6 +913,7 @@ const codeFor = () => {
     takedownWon,
     escapeArtist,
     fastDelivery,
+    isDeliveryEvent,
     takedown25,
     takedownsTotal,
     takedownsTotalMeasured,
@@ -984,6 +1001,18 @@ const crewVinylGroups = (core, offsetPointers) => {
       orNext(isCrewTerritory),
       isCrewVinyl,
     );
+  });
+
+  return groups;
+};
+
+/**
+ * @param {ConditionBuilder} core
+ */
+const deliveryGroups = (core) => {
+  const groups = { core };
+  deliveryEvents.forEach((event, index) => {
+    groups[`alt${index + 1}`] = $(c.isDeliveryEvent(event));
   });
 
   return groups;
@@ -1183,11 +1212,14 @@ set.addAchievement({
   title: 'Same-Second Shipping',
   description: 'Finish any Delivery event in 45 seconds or less.',
   points: 5,
-  conditions: $(
-    c.gameIs.started,
-    c.playerIs.ingameCareerSimple,
-    c.playerIs.notInIntro,
-    c.fastDelivery,
+  conditions: deliveryGroups(
+    $(
+      c.gameIs.started,
+      c.playerIs.ingameCareerSimple,
+      c.playerIs.notInIntro,
+      c.notInCrewChallenge,
+      c.fastDelivery,
+    ),
   ),
 });
 
