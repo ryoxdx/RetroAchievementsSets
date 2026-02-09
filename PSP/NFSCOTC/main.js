@@ -444,6 +444,16 @@ const codeFor = () => {
   );
 
   // prettier-ignore
+  const raceWonSimple = $(
+    offsetPointers.racePosition,
+    ['', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
+  );
+
+  // prettier-ignore
   const raceWon5Hits = $(
     offsetPointers.racePosition,
     ['AndNext', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
@@ -665,6 +675,8 @@ const codeFor = () => {
 
   const gainedSkillPoints = (points) =>
     $(
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '=', 'Value', '', 6],
       offsetPointers.bonus,
       ['AddSource', 'Mem', '32bit', 0xd4, '*', 'Value', '', 2],
       offsetPointers.bonus,
@@ -907,6 +919,7 @@ const codeFor = () => {
     notInCrewChallenge,
     reachedSpeed,
     raceWon,
+    raceWonSimple,
     raceWon5Hits,
     isRivalCrewChallenge,
     escapeWon,
@@ -1325,8 +1338,9 @@ set.addAchievement({
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
     c.playerIs.notInIntro,
+    c.playerIs.inCircuit,
     c.gainedSkillPoints(32),
-    c.raceWon,
+    c.raceWonSimple,
   ),
 });
 

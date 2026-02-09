@@ -23,7 +23,7 @@ export const richPresenceValues = {
     0x22: 'Nissan 350Z',
     0x23: 'Pontiac GTO',
     0x24: '1967 Ford Mustang',
-    0x25: 'Chrisler® 300C SRT8',
+    0x25: 'Chrysler® 300C SRT8',
     0x26: 'Lamborghini Murciélago',
     0x27: 'Aston Martin DB9',
     0x28: 'Lotus Elise',
@@ -628,7 +628,7 @@ export const cars = [
   },
   {
     id: 0x25,
-    name: 'Chrisler® 300C SRT8',
+    name: 'Chrysler® 300C SRT8',
     handling: 0x3e75c28f,
     chassis: 0x408f2d59,
     engine: 0x40600000,
