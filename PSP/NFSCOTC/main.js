@@ -53,6 +53,7 @@ const codeFor = () => {
     instantRace: 0xc376e4,
     instantRaceLoaded: 0xc3d488,
     currentSpeed: 0xc3dca8,
+    rivalCrewChallenge: 0xc67f50,
     crewTakedownTimer: 0xc680a8,
     crewTakedownTotal: 0xc680b0,
     crewTakedownSuccess: 0xc680c0,
@@ -475,12 +476,9 @@ const codeFor = () => {
   );
 
   const isRivalCrewChallenge = $(
+    ['', 'Mem', '32bit', addresses.rivalCrewChallenge, '=', 'Value', '', 1],
     offsetPointers.loadedRacers,
-    ['AndNext', 'Delta', '32bit', 0x34, '<=', 'Value', '', 1],
-    offsetPointers.loadedRacers,
-    ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 2, 1],
-    offsetPointers.loadedRacers,
-    ['ResetIf', 'Mem', '32bit', 0x34, '<=', 'Value', '', 1],
+    ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 2],
     ...escapeEvents.map((event) =>
       $(
         offsetPointers.progression,
