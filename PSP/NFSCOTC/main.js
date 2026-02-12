@@ -246,10 +246,15 @@ const codeFor = () => {
       ),
       ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 0],
     ),
-    // prettier-ignore
     lapTime: $(
       offsetPointers.loadedRacers,
+      // prettier-ignore
       ['Measured', 'Mem', '32bit', 0x18, '/', 'Value', '', 40],
+    ),
+    raceTime: $(
+      offsetPointers.loadedRacers,
+      // prettier-ignore
+      ['Measured', 'Mem', '32bit', 0x14, '/', 'Value', '', 40],
     ),
   };
 
@@ -479,33 +484,6 @@ const codeFor = () => {
     ['', 'Mem', '32bit', addresses.rivalCrewChallenge, '=', 'Value', '', 1],
     offsetPointers.loadedRacers,
     ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 2],
-    ...escapeEvents.map((event) =>
-      $(
-        offsetPointers.progression,
-        ['AndNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
-        offsetPointers.progression,
-        // prettier-ignore
-        ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
-      ),
-    ),
-    ...takedownEvents.map((event) =>
-      $(
-        offsetPointers.progression,
-        ['AndNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
-        offsetPointers.progression,
-        // prettier-ignore
-        ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
-      ),
-    ),
-    ...deliveryEvents.map((event) =>
-      $(
-        offsetPointers.progression,
-        ['AndNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', event.id],
-        offsetPointers.progression,
-        // prettier-ignore
-        ['ResetIf', 'Mem', '32bit', 0x2654, '=', 'Value', '', event.territoryId],
-      ),
-    ),
   );
 
   // prettier-ignore
@@ -860,18 +838,16 @@ const codeFor = () => {
     );
 
   const finishTimeUnder = (time) =>
-    $(['', 'Mem', '32bit', addresses.finishTime, '<=', 'Value', '', time]);
+    $(
+      offsetPointers.loadedRacers,
+      // prettier-ignore
+      ['', 'Mem', '32bit', 0x14, '<=', 'Value', '', time],
+    );
 
   const quickPlayPrestigeTrack = (trackId) =>
     $(
       ['', 'Mem', '32bit', addresses.quickTrack, '=', 'Value', '', trackId],
       ['', 'Mem', '32bit', addresses.quickDirection, '=', 'Value', '', 0],
-    );
-
-  const quickPlayPrestigeTrackReverse = (trackId) =>
-    $(
-      ['', 'Mem', '32bit', addresses.quickTrack, '=', 'Value', '', trackId],
-      ['', 'Mem', '32bit', addresses.quickDirection, '=', 'Value', '', 1],
     );
 
   const lapTimeUnder = (time) =>
@@ -893,6 +869,17 @@ const codeFor = () => {
     offsetPointers.loadedRacers,
     // prettier-ignore
     ['', 'Mem', '32bit', 0x18, '<', 'Delta', '32bit', 0x18],
+  );
+
+  const raceFinishedLeaderboard = $(
+    offsetPointers.racePosition,
+    ['', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.loadedRacers,
+    ['', 'Delta', '32bit', 0x38, '<', 'Mem', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x38, '=', 'Mem', '32bit', 0x34],
   );
 
   return {
@@ -950,12 +937,12 @@ const codeFor = () => {
     quickPlayHardTrack,
     finishTimeUnder,
     quickPlayPrestigeTrack,
-    quickPlayPrestigeTrackReverse,
     lapTimeUnder,
     prestigeSprintStage,
     allOponentsDisabled,
     bestLapChanged,
     raceNotFinished,
+    raceFinishedLeaderboard,
   };
 };
 
@@ -1566,27 +1553,49 @@ for (const leaderboard of prestigeCircuitAchievements) {
   });
 }
 
-for (const leaderboard of prestigeCircuitAchievements) {
-  set.addLeaderboard({
-    title: `${leaderboard.name} (Reverse)`,
-    description: `Best lap time in Single Event.`,
-    lowerIsBetter: true,
-    type: 'MILLISECS',
-    conditions: {
-      start: $(
-        c.gameIs.started,
-        c.playerIs.ingameQuick,
-        c.quickPlayPrestigeTrackReverse(leaderboard.trackId),
-        c.bestLapChanged,
-      ),
-      cancel: '0=1',
-      submit: '1=1',
-      value: {
-        core: c.playerMeasured.lapTime,
-      },
+set.addLeaderboard({
+  title: 'The EA Games 250',
+  description:
+    'Best time in Centrifugal (Forward) in Single Race on hard with 5 laps and 5 opponents.',
+  lowerIsBetter: true,
+  type: 'MILLISECS',
+  conditions: {
+    start: $(
+      c.gameIs.started,
+      c.playerIs.ingameQuickSimple,
+      c.quickPlayHardTrack(0xfaf),
+      c.finishTimeUnder(1060000),
+      c.raceFinishedLeaderboard,
+    ),
+    cancel: '0=1',
+    submit: '1=1',
+    value: {
+      core: c.playerMeasured.raceTime,
     },
-  });
-}
+  },
+});
+
+set.addLeaderboard({
+  title: 'The EA Games 500',
+  description:
+    'Best time in Big East Hwy. (Forward) in Single Race on hard with 5 laps and 5 opponents.',
+  lowerIsBetter: true,
+  type: 'MILLISECS',
+  conditions: {
+    start: $(
+      c.gameIs.started,
+      c.playerIs.ingameQuickSimple,
+      c.quickPlayHardTrack(0xfaa),
+      c.finishTimeUnder(2400000),
+      c.raceFinishedLeaderboard,
+    ),
+    cancel: '0=1',
+    submit: '1=1',
+    value: {
+      core: c.playerMeasured.raceTime,
+    },
+  },
+});
 
 export const rich = RichPresence({
   format: { Value: 'VALUE' },
