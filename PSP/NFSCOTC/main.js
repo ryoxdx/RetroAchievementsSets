@@ -14,7 +14,6 @@ import {
   artOffsets,
   wingmenOffsets,
   cars,
-  escapeEvents,
   takedownEvents,
   deliveryEvents,
   crewMembers,
