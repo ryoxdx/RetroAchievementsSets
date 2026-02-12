@@ -428,7 +428,45 @@ const codeFor = () => {
   const notInCrewChallenge = $(
     ['', 'Mem', '32bit', addresses.crewTakedownTimer, '=', 'Value', '', 0],
     ['', 'Mem', '32bit', addresses.escapeTimer, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.rivalCrewChallenge, '=', 'Value', '', 0],
   );
+
+  const inBossRace = (territory) =>
+    $(
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', territory.id],
+      ...territory.eventIds.map((eventId) =>
+        $(
+          offsetPointers.progression,
+          // prettier-ignore
+          ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', eventId],
+        ),
+      ),
+    );
+
+  const inBoss = (territory) =>
+    $(
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', territory.id],
+      ...territory.eventIds.map((eventId) =>
+        $(
+          offsetPointers.progression,
+          // prettier-ignore
+          ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', eventId],
+        ),
+      ),
+    );
+
+  const beatenTerritoryTrigger = (offset) =>
+    $(
+      offsetPointers.progression,
+      ['', 'Delta', '32bit', offset, '=', 'Value', '', 1],
+      offsetPointers.progression,
+      ['Trigger', 'Mem', '32bit', offset, '>=', 'Value', '', 2],
+    );
 
   const reachedSpeed = (speed) =>
     $(
@@ -901,6 +939,9 @@ const codeFor = () => {
     hundredPercentArt,
     noUpgrades,
     notInCrewChallenge,
+    inBossRace,
+    inBoss,
+    beatenTerritoryTrigger,
     reachedSpeed,
     raceWon,
     raceWonSimple,
@@ -1143,10 +1184,13 @@ for (const territory of Object.values(territories)) {
     conditions: noUpgradeGroups(
       $(
         c.gameIs.started,
-        c.playerIs.ingameCareer,
+        c.playerIs.ingameCareerSimple,
         c.playerIs.notInIntro,
         c.notInCrewChallenge,
-        c.beatenTerritory(territory.offset),
+        ...(territory.id === 0x00
+          ? c.inBoss(territory)
+          : c.inBossRace(territory)),
+        c.beatenTerritoryTrigger(territory.offset),
       ),
     ),
   });
@@ -1184,7 +1228,7 @@ set.addAchievement({
   conditions: {
     core: $(
       c.gameIs.started,
-      c.playerIs.ingameCareer,
+      c.playerIs.ingameCareerSimple,
       c.playerIs.notInIntro,
       c.isRivalCrewChallenge,
     ),
