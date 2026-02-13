@@ -52,7 +52,7 @@ const codeFor = () => {
     instantRace: 0xc376e4,
     instantRaceLoaded: 0xc3d488,
     currentSpeed: 0xc3dca8,
-    rivalCrewChallenge: 0xc67f50,
+    rivalCrewChallengePointer: 0xbee054,
     crewTakedownTimer: 0xc680a8,
     crewTakedownTotal: 0xc680b0,
     crewTakedownSuccess: 0xc680c0,
@@ -63,6 +63,7 @@ const codeFor = () => {
     quickDirection: 0xc7b224,
     quickLaps: 0xc7b228,
     quickSkill: 0xc7b22c,
+    mapLoaded: 0xc87390,
     crewMateEnergy1: 0xc87424,
     crewMateEnergy2: 0xc87428,
     crewMember1Pointer: 0xc8be10,
@@ -141,6 +142,9 @@ const codeFor = () => {
     ),
     loadedRacers: $(
       ['AddAddress', 'Mem', '32bit', addresses.loadedRacersPointer, '&', 'Value', '', 0x1ffffff],
+    ),
+    rivalCrewChallenge: $(
+      ['AddAddress', 'Mem', '32bit', addresses.rivalCrewChallengePointer, '&', 'Value', '', 0x1ffffff],
     ),
   };
 
@@ -425,17 +429,13 @@ const codeFor = () => {
       ['', 'Mem', '32bit', 0x3f8, '=', 'Value', '', 0],
     );
 
-  const notInCrewChallenge = $(
-    ['', 'Mem', '32bit', addresses.crewTakedownTimer, '=', 'Value', '', 0],
-    ['', 'Mem', '32bit', addresses.escapeTimer, '=', 'Value', '', 0],
-    ['', 'Mem', '32bit', addresses.rivalCrewChallenge, '=', 'Value', '', 0],
-  );
-
   const inBossRace = (territory) =>
     $(
       ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
       offsetPointers.loadedRacers,
       ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2658, '=', 'Value', '', 0],
       offsetPointers.progression,
       ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', territory.id],
       ...territory.eventIds.map((eventId) =>
@@ -517,10 +517,29 @@ const codeFor = () => {
     ['ResetIf', 'Mem', '32bit', 0x38, '=', 'Value', '', 0x42c80000],
   );
 
+  // prettier-ignore
+  const notInCrewChallenge = $(
+    ['', 'Mem', '32bit', addresses.crewTakedownTimer, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.crewTakedownSuccess, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.crewTakedownTotal, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.escapeTimer, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.escapeFail, '=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x14, '>', 'Value', '', 0],
+  );
+
+  // prettier-ignore
   const isRivalCrewChallenge = $(
-    ['', 'Mem', '32bit', addresses.rivalCrewChallenge, '=', 'Value', '', 1],
     offsetPointers.loadedRacers,
     ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 2],
+    ['AndNext', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+    ['AndNext', 'Mem', '32bit', addresses.rivalCrewChallengePointer, '!=', 'Value', '', 0],
+    offsetPointers.rivalCrewChallenge,
+    ['', 'Mem', '8bit', 0x1d, '=', 'Value', '', 1, 1],
+    ['AndNext', 'Mem', '32bit', addresses.rivalCrewChallengePointer, '!=', 'Value', '', 0],
+    offsetPointers.rivalCrewChallenge,
+    ['ResetIf', 'Mem', '8bit', 0x1d, '=', 'Value', '', 0],
+    ['ResetIf', 'Mem', '32bit', addresses.mapLoaded, '=', 'Value', '', 1],
   );
 
   // prettier-ignore
