@@ -85,6 +85,9 @@ const codeFor = () => {
   const emptyValueEqualMeasured = (value) =>
     $(['Measured', 'Value', '', 0, '=', 'Value', '', value]);
 
+  const emptyValueHigherOrEqualMeasured = (value) =>
+    $(['Measured', 'Value', '', 0, '>=', 'Value', '', value]);
+
   const emptyFloatEqual = (value) =>
     $(['', 'Float', '', 0, '=', 'Float', '', value]);
 
@@ -259,6 +262,11 @@ const codeFor = () => {
       // prettier-ignore
       ['Measured', 'Mem', '32bit', 0x14, '/', 'Value', '', 40],
     ),
+    territory: $(
+      offsetPointers.progression,
+      // prettier-ignore
+      ['Measured', 'Mem', '32bit', 0x2654],
+    ),
   };
 
   const finishedIntro = $(
@@ -429,6 +437,14 @@ const codeFor = () => {
       ['', 'Mem', '32bit', 0x3f8, '=', 'Value', '', 0],
     );
 
+  const inAnyBossRace = $(
+    ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+    offsetPointers.progression,
+    ['', 'Mem', '32bit', 0x2658, '=', 'Value', '', 0],
+  );
+
   const inBossRace = (territory) =>
     $(
       ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
@@ -449,15 +465,17 @@ const codeFor = () => {
 
   const inBoss = (territory) =>
     $(
+      ['', 'Mem', '32bit', addresses.loadedRacersPointer, '!=', 'Value', '', 0],
+      offsetPointers.loadedRacers,
+      ['', 'Mem', '32bit', 0x34, '>', 'Value', '', 1],
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2658, '=', 'Value', '', 0],
       offsetPointers.progression,
       ['', 'Mem', '32bit', 0x2654, '=', 'Value', '', territory.id],
-      ...territory.eventIds.map((eventId) =>
-        $(
-          offsetPointers.progression,
-          // prettier-ignore
-          ['', 'Mem', '32bit', 0x2650, '!=', 'Value', '', eventId],
-        ),
-      ),
+      offsetPointers.progression,
+      ['OrNext', 'Mem', '32bit', 0x2650, '=', 'Value', '', 0],
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', 0x2650, '=', 'Value', '', 1],
     );
 
   const beatenTerritoryTrigger = (offset) =>
@@ -734,7 +752,7 @@ const codeFor = () => {
       ...deltas,
       emptyValueLower(total),
       ...mems,
-      emptyValueEqualMeasured(total),
+      emptyValueHigherOrEqualMeasured(total),
     );
   };
 
@@ -781,7 +799,7 @@ const codeFor = () => {
   // prettier-ignore
   const resetRace = $(
     offsetPointers.loadedRacers,
-    ['ResetIf', 'Mem', '32bit', 0x34, '<', 'Value', '', 5],
+    ['ResetIf', 'Mem', '32bit', 0x34, '<', 'Value', '', 6],
   );
 
   const opponentsDisabled5Times = $(
@@ -1002,6 +1020,7 @@ const codeFor = () => {
     bestLapChanged,
     raceNotFinished,
     raceFinishedLeaderboard,
+    inAnyBossRace,
   };
 };
 
@@ -1666,12 +1685,14 @@ export const rich = RichPresence({
     Car: { values: richPresenceValues.car },
     CareerTrack: { values: richPresenceValues.careerTrack },
     QuickTrack: { values: richPresenceValues.quickTrack },
+    BossRace: { values: richPresenceValues.territoryBosses },
   },
   displays: ({ lookup, format }) => {
     const display = () => {
       const car = lookup.Car.at(c.playerMeasured.car);
       const cash = format.Value.at(c.playerMeasured.cash);
       const eventCareer = lookup.CareerTrack.at(c.playerMeasured.eventCareer);
+      const eventBossRace = lookup.BossRace.at(c.playerMeasured.territory);
       const eventQuick = lookup.QuickTrack.at(c.playerMeasured.eventQuick);
       const territories = format.Value.at(c.playerMeasured.territories);
 
@@ -1700,6 +1721,15 @@ export const rich = RichPresence({
             c.isRivalCrewChallenge,
           ),
           `[Career] Rival crew challenge 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
+        ],
+        [
+          $(
+            c.gameIs.started,
+            c.playerIs.ingameCareer,
+            c.playerIs.notInIntro,
+            c.inAnyBossRace,
+          ),
+          `[Career] ${eventBossRace} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/14`,
         ],
         [
           $(c.gameIs.started, c.playerIs.ingameCareer, c.playerIs.notInIntro),
