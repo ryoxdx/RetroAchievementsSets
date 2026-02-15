@@ -699,6 +699,7 @@ export const takedownEvents = [
     territoryId: 0x02,
     crew: 'Eastsiders',
     crewVinylId: 0x0914717c,
+    crewVinylIdInt: 0x091470fc,
   },
   {
     name: 'Perimeter HWY - Event 4',
@@ -706,6 +707,7 @@ export const takedownEvents = [
     territoryId: 0x03,
     crew: 'Eastsiders',
     crewVinylId: 0x0914717c,
+    crewVinylIdInt: 0x091470fc,
   },
   {
     name: 'Mountains - Event 7',
@@ -713,6 +715,7 @@ export const takedownEvents = [
     territoryId: 0x04,
     crew: 'Berserkers',
     crewVinylId: 0x091470ec,
+    crewVinylIdInt: 0x0914706c,
   },
   {
     name: 'Inner City - Event 7',
@@ -720,6 +723,7 @@ export const takedownEvents = [
     territoryId: 0x05,
     crew: 'Berserkers',
     crewVinylId: 0x091470ec,
+    crewVinylIdInt: 0x0914706c,
   },
   {
     name: 'Storage - Event 8',
@@ -727,6 +731,7 @@ export const takedownEvents = [
     territoryId: 0x06,
     crew: 'Krimson Crew',
     crewVinylId: 0x0914714c,
+    crewVinylIdInt: 0x091470cc,
   },
   {
     name: 'Bridges - Event 5',
@@ -734,6 +739,7 @@ export const takedownEvents = [
     territoryId: 0x07,
     crew: 'Syrens',
     crewVinylId: 0x0914720c,
+    crewVinylIdInt: 0x0914718c,
   },
   {
     name: 'Bridges - Event 6',
@@ -741,6 +747,7 @@ export const takedownEvents = [
     territoryId: 0x07,
     crew: 'Syrens',
     crewVinylId: 0x0914720c,
+    crewVinylIdInt: 0x0914718c,
   },
   {
     name: 'Shipyard - Event 8',
@@ -748,6 +755,7 @@ export const takedownEvents = [
     territoryId: 0x0a,
     crew: 'Corps',
     crewVinylId: 0x0914711c,
+    crewVinylIdInt: 0x0914709c,
   },
   {
     name: 'Airport - Event 1',
@@ -755,6 +763,7 @@ export const takedownEvents = [
     territoryId: 0x0b,
     crew: 'Corps',
     crewVinylId: 0x0914711c,
+    crewVinylIdInt: 0x0914709c,
   },
   {
     name: 'Campus - Event 7',
@@ -762,6 +771,7 @@ export const takedownEvents = [
     territoryId: 0x0c,
     crew: 'Mega',
     crewVinylId: 0x091471dc,
+    crewVinylIdInt: 0x0914715c,
   },
   {
     name: 'High Residential - Event 4',
@@ -769,6 +779,7 @@ export const takedownEvents = [
     territoryId: 0x0d,
     crew: 'Mega',
     crewVinylId: 0x091471dc,
+    crewVinylIdInt: 0x0914715c,
   },
   {
     name: 'High Residential - Event 5',
@@ -776,6 +787,7 @@ export const takedownEvents = [
     territoryId: 0x0d,
     crew: 'Mega',
     crewVinylId: 0x091471dc,
+    crewVinylIdInt: 0x0914715c,
   },
 ];
 

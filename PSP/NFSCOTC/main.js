@@ -1070,7 +1070,10 @@ const crewVinylGroups = (core, offsetPointers) => {
     const isCrewVinyl = $(
       offsetPointers.carParts,
       // prettier-ignore
-      ['', 'Mem', '32bit', 0x56c, '=', 'Value', '', crewEvents[0].crewVinylId],
+      ['OrNext', 'Mem', '32bit', 0x56c, '=', 'Value', '', crewEvents[0].crewVinylId],
+      offsetPointers.carParts,
+      // prettier-ignore
+      ['', 'Mem', '32bit', 0x56c, '=', 'Value', '', crewEvents[0].crewVinylIdInt],
     );
     groups[`alt${index + 1}`] = $(
       orNext(isCrewEvent),
