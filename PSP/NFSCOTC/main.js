@@ -360,7 +360,7 @@ const codeFor = () => {
 
     return $(
       ...deltas,
-      emptyValueEqual(artworks - 1),
+      emptyValueLower(artworks),
       ...mems,
       emptyValueEqualMeasured(artworks),
     );
@@ -419,7 +419,7 @@ const codeFor = () => {
       $(offsetPointers.rewards, ['AddSource', 'Delta', '32bit', offset]),
     );
 
-    return $(...deltas, emptyValueEqual(artworks - 1));
+    return $(...deltas, emptyValueLower(artworks));
   };
 
   const noUpgrades = (car) =>
