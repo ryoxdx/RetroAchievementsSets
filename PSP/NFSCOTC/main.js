@@ -531,8 +531,19 @@ const codeFor = () => {
     ['ResetIf', 'Mem', '32bit', 0x38, '=', 'Value', '', 0],
     offsetPointers.loadedRacers,
     ['AndNext', 'Delta', '32bit', 0x38, '<', 'Value', '', 6],
+    ['ResetIf', 'Mem', '32bit', addresses.loadedRacersPointer, '=', 'Value', '', 0x00],
     offsetPointers.loadedRacers,
-    ['ResetIf', 'Mem', '32bit', 0x38, '=', 'Value', '', 0x42c80000],
+    ['AndNext', 'Mem', '32bit', 0x38, '=', 'Value', '', 6],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Mem', '32bit', 0x38, '=', 'Value', '', 6],
+    offsetPointers.racePosition,
+    ['ResetIf', 'Mem', '32bit', 0x64, '!=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Delta', '32bit', 0x38, '<', 'Delta', '32bit', 0x34],
+    offsetPointers.loadedRacers,
+    ['AndNext', 'Delta', '32bit', 0x14, '>', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['ResetIf', 'Mem', '32bit', 0x14, '=', 'Value', '', 0],
   );
 
   // prettier-ignore
