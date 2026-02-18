@@ -547,6 +547,12 @@ const codeFor = () => {
   );
 
   // prettier-ignore
+  const inFirst = $(
+    offsetPointers.racePosition,
+    ['', 'Mem', '32bit', 0x64, '=', 'Value', '', 0],
+  );
+
+  // prettier-ignore
   const notInCrewChallenge = $(
     ['', 'Mem', '32bit', addresses.crewTakedownTimer, '=', 'Value', '', 0],
     ['', 'Mem', '32bit', addresses.crewTakedownSuccess, '=', 'Value', '', 0],
@@ -843,6 +849,13 @@ const codeFor = () => {
   );
 
   const allOponentsDisabled = $(
+    ['', 'Mem', '32bit', addresses.crewTakedownTimer, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.crewTakedownSuccess, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.crewTakedownTotal, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.escapeTimer, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.escapeFail, '=', 'Value', '', 0],
+    offsetPointers.loadedRacers,
+    ['', 'Mem', '32bit', 0x34, '>=', 'Value', '', 5],
     offsetPointers.opponent1,
     ['AddSource', 'Delta', '8bit', 0x210],
     offsetPointers.opponent2,
@@ -994,6 +1007,7 @@ const codeFor = () => {
     raceWon,
     raceWonSimple,
     raceWon5Hits,
+    inFirst,
     isRivalCrewChallenge,
     escapeWon,
     takedownWon,
@@ -1445,6 +1459,7 @@ set.addAchievement({
       c.gameIs.started,
       c.playerIs.ingameCareer,
       c.playerIs.notInIntro,
+      c.inFirst,
       c.crewMemberSkillsUsed(10),
     ),
     alt1: c.drafterInSlot(0x1368),
@@ -1496,7 +1511,7 @@ set.addAchievement({
   points: 10,
   conditions: $(
     c.gameIs.started,
-    c.playerIs.ingameCareer,
+    c.playerIs.ingameCareerSimple,
     c.playerIs.notInIntro,
     c.raceNotFinished,
     c.allOponentsDisabled,
