@@ -1587,7 +1587,7 @@ set.addAchievement({
   title: 'Prestige Mode: Mountains to Shipyard',
   description:
     'Complete Mountains to Shipyard in under 1:26 in Commercial City, Airport, or Shipyard in Career.',
-  points: 5,
+  points: 10,
   conditions: $(
     c.gameIs.started,
     c.playerIs.ingameCareerSimple,
