@@ -29,14 +29,13 @@ const codeFor = () => {
     timeDisplay: 0x77b4b0,
     regularTime: 0x7a38c8,
     stoppageTime: 0x7a38cc,
-    homeTeamAbbreviated: 0x7a3958,
-    awayTeamAbbreviated: 0x7a399c,
+    homeTeamAbb: 0x7a3958,
+    awayTeamAbb: 0x7a399c,
   };
 
   const gameIs = {
-    // prettier-ignore
-    booted: $(['', 'Mem', '32bit', addresses.gameStartedPointer, '!=', 'Value', '', 0]),
     started: $(
+      ['', 'Mem', '32bit', addresses.gameStartedPointer, '!=', 'Value', '', 0],
       ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
       ['', 'Mem', '32bit', 0x08, '=', 'Value', '', 1],
     ),
@@ -55,17 +54,13 @@ const codeFor = () => {
     ),
     mode: $(['Measured', 'Mem', '8bit', addresses.homeTeam]),
     homeScore: $(['Measured', 'Mem', '32bit', addresses.homeScore]),
-    homeTeamA: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbbreviated]),
-    // prettier-ignore
-    homeTeamB: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbbreviated + 1]),
-    // prettier-ignore
-    homeTeamC: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbbreviated + 2]),
+    homeTeamA: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbb]),
+    homeTeamB: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbb + 1]),
+    homeTeamC: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbb + 2]),
     awayScore: $(['Measured', 'Mem', '32bit', addresses.awayScore]),
-    awayTeamA: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbbreviated]),
-    // prettier-ignore
-    awayTeamB: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbbreviated + 1]),
-    // prettier-ignore
-    awayTeamC: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbbreviated + 2]),
+    awayTeamA: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbb]),
+    awayTeamB: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbb + 1]),
+    awayTeamC: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbb + 2]),
     regularTimeA: $(['Measured', 'Mem', '8bit', addresses.timeDisplay]),
     regularTimeB: $(['Measured', 'Mem', '8bit', addresses.timeDisplay + 1]),
     regularTimeC: $(['Measured', 'Mem', '8bit', addresses.timeDisplay + 2]),
@@ -76,13 +71,19 @@ const codeFor = () => {
   };
 
   // prettier-ignore
-  const isPast100Min = $(['', 'Mem', '32bit', addresses.regularTime, '>=', 'Value', '', 6000]);
+  const isPast100Min = $(
+    ['', 'Mem', '32bit', addresses.regularTime, '>=', 'Value', '', 6000],
+  );
 
   // prettier-ignore
-  const isStoppage = $(['', 'Mem', '32bit', addresses.stoppageTime, '>', 'Value', '', 0]);
+  const isStoppage = $(
+    ['', 'Mem', '32bit', addresses.stoppageTime, '>', 'Value', '', 0],
+  );
 
   // prettier-ignore
-  const isPreGame = $(['', 'Mem', '32bit', addresses.timeDisplay, '=', 'Value', '', 0x2d]);
+  const isPreGame = $(
+    ['', 'Mem', '32bit', addresses.timeDisplay, '=', 'Value', '', 0x2d],
+  );
 
   return {
     addresses,
@@ -128,26 +129,20 @@ export const rich = RichPresence({
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
-          $(c.gameIs.booted, c.gameIs.started, c.playerIs.ingame, c.isPreGame),
+          $(c.gameIs.started, c.playerIs.ingame, c.isPreGame),
           `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} - ${awayTeamA}${awayTeamB}${awayTeamC}`,
         ],
         [
-          $(
-            c.gameIs.booted,
-            c.gameIs.started,
-            c.playerIs.ingame,
-            c.isPast100Min,
-            c.isStoppage,
-          ),
+          $(c.gameIs.started, c.playerIs.ingame, c.isPast100Min, c.isStoppage),
           `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${extraTime} + ${stoppageTime}`,
         ],
         [
-          $(c.gameIs.booted, c.gameIs.started, c.playerIs.ingame, c.isStoppage),
+          $(c.gameIs.started, c.playerIs.ingame, c.isStoppage),
           `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${regularTime} + ${stoppageTime}`,
         ],
         [
           $(
-            c.gameIs.booted,
+            c.gameIs.started,
             c.gameIs.started,
             c.playerIs.ingame,
             c.isPast100Min,
@@ -155,13 +150,10 @@ export const rich = RichPresence({
           `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${extraTime}`,
         ],
         [
-          $(c.gameIs.booted, c.gameIs.started, c.playerIs.ingame),
+          $(c.gameIs.started, c.playerIs.ingame),
           `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${regularTime}`,
         ],
-        [
-          $(c.gameIs.booted, c.gameIs.started),
-          `${language} Navigating the menus`,
-        ],
+        [$(c.gameIs.started), `${language} Navigating the menus`],
       ]);
     };
 
