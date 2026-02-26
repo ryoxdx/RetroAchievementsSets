@@ -1,12 +1,15 @@
 import { AchievementSet, define as $ } from '@cruncheevos/core';
 
 const set = new AchievementSet({
-  gameId: 37786,
+  gameId: 2772,
+  id: 37776,
   title: 'Grand Theft Auto: San Andreas [Subset - Master Save]',
 });
 
 const codeFor = () => {
   const addresses = {
+    girfriendCheat: 0x66b460,
+    wantedLevel: 0x66bc80,
     tagsSprayed: 0x66c540,
     taxiFares: 0x6b22c0,
     girlfriendStatus: 0x6b2648,
@@ -37,6 +40,7 @@ const codeFor = () => {
     ITBhorse4: 0x6f3bd0,
     ITBhorse5: 0x6f3bd4,
     ITBCashWon: 0x6f97cc,
+    pedestrianPointer: 0x7095d0,
     cash: 0x7096b4,
     playTime: 0x7096c8,
     progressMade: 0x802160,
@@ -521,6 +525,33 @@ const codeFor = () => {
     ['', 'Mem', 'Bit3', addresses.santaMariaGarage4Proof, '=', 'Value', '', 1],
   );
 
+  const hasCheated = $(
+    ['', 'Mem', '32bit', addresses.girfriendCheat, '=', 'Value', '', 1, 1],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['ResetIf', 'Mem', '8bit', 0x568, '=', 'Value', '', 0x37],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['ResetIf', 'Mem', '8bit', 0x568, '=', 'Value', '', 0x3f],
+  );
+
+  const hasDrivenBarbarasCar = $(
+    ['AndNext', 'Mem', '32bit', addresses.wantedLevel, '=', 'Value', '', 4],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['AddAddress', 'Mem', '32bit', 0x5cc],
+    ['AndNext', 'Mem', '16bit', 0x22, '=', 'Value', '', 599],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['AddAddress', 'Mem', '32bit', 0x5cc],
+    ['AndNext', 'Mem', 'Bit2', 0x42, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['AddAddress', 'Mem', '32bit', 0x5cc],
+    ['AndNext', 'Mem', 'Bit3', 0x42, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['AddAddress', 'Mem', '32bit', 0x5cc],
+    ['AndNext', 'Mem', 'Bit4', 0x42, '=', 'Value', '', 1],
+    ['AddAddress', 'Mem', '32bit', addresses.pedestrianPointer],
+    ['AddAddress', 'Mem', '32bit', 0x5cc],
+    ['', 'Mem', 'Bit7', 0x42, '=', 'Value', '', 1, 1],
+  );
+
   return {
     addresses,
     isInGame,
@@ -581,6 +612,8 @@ const codeFor = () => {
     barbarasRangerInSantaMariaGarage2,
     barbarasRangerInSantaMariaGarage3,
     barbarasRangerInSantaMariaGarage4,
+    hasCheated,
+    hasDrivenBarbarasCar,
   };
 };
 
@@ -1101,10 +1134,16 @@ set.addAchievement({
 set.addAchievement({
   title: 'The Ultimate Law Enforcer',
   description:
-    "Store Barbara's All-Proof Ranger in the garage at the Santa Maria Beach Safe House before clearing the first story mission.",
+    "Steal Barbara's All-Proof Ranger and store it in the garage at the Santa Maria Beach Safe House in one sitting before clearing the first story mission.",
   points: 50,
   conditions: {
-    core: $(c.isInGame, c.cheatDetection, c.noStoryMissionsCompleted),
+    core: $(
+      c.isInGame,
+      c.cheatDetection,
+      c.noStoryMissionsCompleted,
+      c.hasCheated,
+      c.hasDrivenBarbarasCar,
+    ),
     alt1: c.barbarasRangerInSantaMariaGarage1,
     alt2: c.barbarasRangerInSantaMariaGarage2,
     alt3: c.barbarasRangerInSantaMariaGarage3,
