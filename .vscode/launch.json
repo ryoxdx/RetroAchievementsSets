@@ -32,7 +32,8 @@
       "envFile": "${fileDirname}/../.env",
       "env": {
         "FORCE_COLOR": "1"
-      }
+      },
+      "console": "integratedTerminal"
     },
     {
       "type": "node",
