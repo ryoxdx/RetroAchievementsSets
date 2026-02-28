@@ -495,7 +495,7 @@ export const cars = [
     name: 'Chevrolet Cobalt SS',
     handling: 0x3e91eb85,
     chassis: 0x40223c2b,
-    engine: 0x4089999a,
+    engine: 0x40733333,
     turbo: 0x3c656042,
   },
   {
