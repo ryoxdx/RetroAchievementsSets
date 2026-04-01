@@ -279,9 +279,13 @@ const codeFor = () => {
   const beatenTerritory = (offset) =>
     $(
       offsetPointers.progression,
-      ['', 'Delta', '32bit', offset, '=', 'Value', '', 1],
+      ['OrNext', 'Delta', '32bit', offset, '=', 'Value', '', 1],
       offsetPointers.progression,
-      ['', 'Mem', '32bit', offset, '>=', 'Value', '', 2],
+      ['', 'Delta', '32bit', offset, '=', 'Value', '', 4],
+      offsetPointers.progression,
+      ['OrNext', 'Mem', '32bit', offset, '=', 'Value', '', 2],
+      offsetPointers.progression,
+      ['', 'Mem', '32bit', offset, '=', 'Value', '', 3],
     );
 
   const defeatedEX = $(
@@ -481,9 +485,13 @@ const codeFor = () => {
   const beatenTerritoryTrigger = (offset) =>
     $(
       offsetPointers.progression,
-      ['', 'Delta', '32bit', offset, '=', 'Value', '', 1],
+      ['OrNext', 'Delta', '32bit', offset, '=', 'Value', '', 1],
       offsetPointers.progression,
-      ['Trigger', 'Mem', '32bit', offset, '>=', 'Value', '', 2],
+      ['', 'Delta', '32bit', offset, '=', 'Value', '', 4],
+      offsetPointers.progression,
+      ['OrNext', 'Mem', '32bit', offset, '=', 'Value', '', 2],
+      offsetPointers.progression,
+      ['Trigger', 'Mem', '32bit', offset, '=', 'Value', '', 3],
     );
 
   const reachedSpeed = (speed) =>
