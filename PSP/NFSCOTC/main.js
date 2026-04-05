@@ -290,7 +290,7 @@ const codeFor = () => {
 
   const defeatedEX = $(
     offsetPointers.progression,
-    ['', 'Delta', '32bit', 0x640, '=', 'Value', '', 7],
+    ['', 'Delta', '32bit', 0x640, '>', 'Value', '', 0],
     offsetPointers.progression,
     ['', 'Mem', '32bit', 0x640, '=', 'Value', '', 0],
   );
