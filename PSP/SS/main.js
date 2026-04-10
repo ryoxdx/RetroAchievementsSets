@@ -249,7 +249,6 @@ for (const rival of rivals) {
       conditions: multiRegionalConditions((c) =>
         $(
           c.regionCheck,
-          c.gameIs.started,
           c.gameIs.teamRumble,
           c.playerIs.ingame,
           c.recruitedRival(rival.teamAddress),
@@ -265,12 +264,7 @@ set.addAchievement({
   points: 25,
   type: 'missable',
   conditions: multiRegionalConditions((c) =>
-    $(
-      c.regionCheck,
-      c.gameIs.started,
-      c.gameIs.teamRumble,
-      c.recruitedAllWanderers,
-    ),
+    $(c.regionCheck, c.gameIs.teamRumble, c.recruitedAllWanderers),
   ),
 });
 
@@ -279,7 +273,7 @@ set.addAchievement({
   description: 'Beat every rival.',
   points: 25,
   conditions: multiRegionalConditions((c) =>
-    $(c.regionCheck, c.gameIs.started, c.gameIs.teamRumble, c.beatEveryRival),
+    $(c.regionCheck, c.gameIs.teamRumble, c.beatEveryRival),
   ),
 });
 
@@ -291,7 +285,6 @@ set.addAchievement({
   conditions: multiRegionalConditions((c) =>
     $(
       c.regionCheck,
-      c.gameIs.started,
       c.gameIs.teamRumble,
       c.recruitedEveryRival,
     ),
@@ -306,7 +299,6 @@ set.addAchievement({
   conditions: multiRegionalConditions((c) =>
     $(
       c.regionCheck,
-      c.gameIs.started,
       c.gameIs.teamRumble,
       c.playerIs.ingame,
       c.teamBattleAlone,
@@ -331,7 +323,6 @@ for (const track of timeAttackTracks) {
     conditions: multiRegionalConditions((c) =>
       $(
         c.regionCheck,
-        c.gameIs.started,
         c.gameIs.timeAttack,
         c.playerIs.ingame,
         c.notInReplay,
@@ -353,7 +344,6 @@ for (const track of timeAttackTracks) {
       start: multiRegionalConditions((c) =>
         $(
           c.regionCheck,
-          c.gameIs.started,
           c.gameIs.timeAttack,
           c.playerIs.ingame,
           c.notInReplay,
@@ -395,7 +385,6 @@ export const rich = RichPresence({
         [
           $(
             c.regionCheck,
-            c.gameIs.started,
             c.playerIs.ingame,
             c.gameIs.replayMode,
           ),
@@ -404,7 +393,6 @@ export const rich = RichPresence({
         [
           $(
             c.regionCheck,
-            c.gameIs.started,
             c.playerIs.ingame,
             c.gameIs.timeAttack,
           ),
@@ -413,14 +401,13 @@ export const rich = RichPresence({
         [
           $(
             c.regionCheck,
-            c.gameIs.started,
             c.playerIs.ingame,
             c.gameIs.teamRumble,
           ),
           `[Team Rumble] ${team} 📍 ${area} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/15`,
         ],
         [
-          $(c.regionCheck, c.gameIs.started, c.playerIs.inMenus),
+          $(c.regionCheck, c.playerIs.inMenus),
           'Navigating the menus',
         ],
       ]);

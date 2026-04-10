@@ -1543,22 +1543,22 @@ export const rivals = [
 export const timeAttackTracks = [
   {
     name: 'C1 Inside',
-    target: 0,
+    target: 250,
     id: 0x00,
   },
   {
     name: 'C1 Outside',
-    target: 0,
+    target: 250,
     id: 0x01,
   },
   {
     name: 'Ring Road R.',
-    target: 0,
+    target: 285,
     id: 0x02,
   },
   {
     name: 'Ring Road L.',
-    target: 0,
+    target: 285,
     id: 0x03,
   },
   {
@@ -1573,22 +1573,22 @@ export const timeAttackTracks = [
   },
   {
     name: 'Y.R.Road Right',
-    target: 0,
+    target: 230,
     id: 0x06,
   },
   {
     name: 'Y.R.Road Left',
-    target: 0,
+    target: 230,
     id: 0x07,
   },
   {
     name: 'Yokohane Down',
-    target: 0,
+    target: 265,
     id: 0x08,
   },
   {
     name: 'Yokohane Up',
-    target: 0,
+    target: 265,
     id: 0x09,
   },
 ];
