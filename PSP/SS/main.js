@@ -32,8 +32,16 @@ const codeFor = (region) => {
     return region === 'europe' ? address : address - 0x650;
   };
 
+  /**
+   * @param {number} address
+   */
+  const altOffset = (address) => {
+    return region === 'europe' ? address : address - 0x640;
+  };
+
   const addresses = {
-    gameStarted: offset(0xa23ed0),
+    gameStarted: altOffset(0xa23ed0),
+    opponentId: offset(0xa30b98),
     areas: {
       kandaTeam: offset(0xa30fec),
       ginzaTeam: offset(0xa31178),
@@ -90,6 +98,10 @@ const codeFor = (region) => {
       ['', 'Mem', '32bit', addresses.teamBattle1, '!=', 'Value', '', 0xc9],
       ['', 'Mem', '32bit', addresses.ingameMode, '<=', 'Value', '', 1],
     ),
+    teamRumbleSimple: $(
+      ['OrNext', 'Mem', '32bit', addresses.liveMonitor, '!=', 'Value', '', 0xc9],
+      ['', 'Mem', '32bit', addresses.teamBattle1, '!=', 'Value', '', 0xc9],
+    ),
     timeAttack: $(
       ['', 'Mem', '32bit', addresses.liveMonitor, '=', 'Value', '', 0xc9],
       ['', 'Mem', '32bit', addresses.teamBattle1, '=', 'Value', '', 0xc9],
@@ -135,6 +147,8 @@ const codeFor = (region) => {
     );
 
   const recruitedAllWanderers = $(
+    ['MeasuredIf', 'Mem', '32bit', addresses.lapTime, '>', 'Value', '', 0],
+    ['MeasuredIf', 'Mem', '32bit', addresses.opponentId, '>=', 'Value', '', 113],
     ['ResetIf', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 0],
     ...rivals.map((rival) => {
       if (rival.team === 'Wanderers') {
@@ -148,7 +162,7 @@ const codeFor = (region) => {
     ['ResetIf', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 0],
     // prettier-ignore
     ...rivals.map((rival) => $(['AddHits', 'Mem', '32bit', offset(rival.beatAddress), '=', 'Value', '', 1, 1])),
-    ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 200],
+    ['', 'Value', '', 0, '=', 'Value', '', 1, 200],
   );
 
   const recruitedEveryRival = $(
@@ -181,7 +195,7 @@ const codeFor = (region) => {
     ['AddAddress', 'Mem', '32bit', addresses.teamBattleArea, '*', 'Value', '', 0x18c],
     ['', 'Delta', '32bit', addresses.areas.kandaTeam, '!=', 'Recall', '', 0],
     ['AddAddress', 'Mem', '32bit', addresses.teamBattleArea, '*', 'Value', '', 0x18c],
-    ['', 'Mem', '32bit', addresses.areas.kandaTeam, '=', 'Recall', '', 0],
+    ['Trigger', 'Mem', '32bit', addresses.areas.kandaTeam, '=', 'Recall', '', 0],
   );
 
   // prettier-ignore
@@ -190,18 +204,18 @@ const codeFor = (region) => {
   // prettier-ignore
   const trackIs = (track) =>
     $(
-      ['', 'Mem', '32bit', offset(addresses.timeAttackTrack), '=', 'Value', '', track.id],
+      ['', 'Mem', '32bit', addresses.timeAttackTrack, '=', 'Value', '', track.id],
     );
 
   const eventFinished = $(
-    ['', 'Delta', '32bit', offset(addresses.eventActive), '>', 'Value', '', 0],
-    ['', 'Mem', '32bit', offset(addresses.eventActive), '=', 'Value', '', 0],
+    ['', 'Delta', '32bit', addresses.eventActive, '>', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.eventActive, '=', 'Value', '', 0],
   );
 
   // prettier-ignore
   const beatTimeTarget = (track) =>
     $(
-      ['', 'Mem', '32bit', offset(addresses.lapTime), '<=', 'Value', '', track.target * 30],
+      ['', 'Mem', '32bit', addresses.lapTime, '<=', 'Value', '', track.target * 30],
     );
 
   return {
@@ -267,7 +281,7 @@ set.addAchievement({
   points: 25,
   type: 'missable',
   conditions: multiRegionalConditions((c) =>
-    $(c.regionCheck, c.gameIs.teamRumble, c.recruitedAllWanderers),
+    $(c.regionCheck, c.gameIs.teamRumbleSimple, c.recruitedAllWanderers),
   ),
 });
 
@@ -276,7 +290,7 @@ set.addAchievement({
   description: 'Beat every rival.',
   points: 25,
   conditions: multiRegionalConditions((c) =>
-    $(c.regionCheck, c.gameIs.teamRumble, c.beatEveryRival),
+    $(c.regionCheck, c.gameIs.teamRumbleSimple, c.beatEveryRival),
   ),
 });
 
