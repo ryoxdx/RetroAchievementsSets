@@ -61,6 +61,7 @@ const codeFor = (region) => {
     liveMonitor: offset(0xa422c0),
     area: offset(0xa42e30),
     team: offset(0xa42e6c),
+    teamRank: offset(0xa42e7c),
     money: offset(0xa46078),
     teamBattleArea: offset(0xa4f440),
     teamBattle1: offset(0xa4f444),
@@ -100,6 +101,7 @@ const codeFor = (region) => {
   const playerIs = {
     inMenus: $(['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 0]),
     ingame: $(['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 1]),
+    leader: $(['', 'Mem', '32bit', addresses.teamRank, '=', 'Value', '', 0]),
   };
 
   // prettier-ignore
@@ -244,13 +246,14 @@ for (const rival of rivals) {
   if (rival.team === 'Wanderers') {
     set.addAchievement({
       title: rival.name,
-      description: `Recruit wanderer ${rival.name} to your team.`,
+      description: `Recruit wanderer ${rival.name} as team leader.`,
       points: rival.points,
       conditions: multiRegionalConditions((c) =>
         $(
           c.regionCheck,
           c.gameIs.teamRumble,
           c.playerIs.ingame,
+          c.playerIs.leader,
           c.recruitedRival(rival.teamAddress),
         ),
       ),
@@ -260,7 +263,7 @@ for (const rival of rivals) {
 
 set.addAchievement({
   title: 'Wander No More',
-  description: 'Recruit every Wanderer to your team.',
+  description: 'Have every Wanderer in your team.',
   points: 25,
   type: 'missable',
   conditions: multiRegionalConditions((c) =>
@@ -279,15 +282,11 @@ set.addAchievement({
 
 set.addAchievement({
   title: 'Full Crew',
-  description: 'Recruit every rival to your team.',
+  description: 'Have every rival in your team.',
   points: 50,
   type: 'missable',
   conditions: multiRegionalConditions((c) =>
-    $(
-      c.regionCheck,
-      c.gameIs.teamRumble,
-      c.recruitedEveryRival,
-    ),
+    $(c.regionCheck, c.gameIs.teamRumble, c.recruitedEveryRival),
   ),
 });
 
@@ -383,33 +382,18 @@ export const rich = RichPresence({
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
-          $(
-            c.regionCheck,
-            c.playerIs.ingame,
-            c.gameIs.replayMode,
-          ),
+          $(c.regionCheck, c.playerIs.ingame, c.gameIs.replayMode),
           '[Replay Mode] Watching a replay',
         ],
         [
-          $(
-            c.regionCheck,
-            c.playerIs.ingame,
-            c.gameIs.timeAttack,
-          ),
+          $(c.regionCheck, c.playerIs.ingame, c.gameIs.timeAttack),
           `[Time Attack] ${track} 🚗 ${car}`,
         ],
         [
-          $(
-            c.regionCheck,
-            c.playerIs.ingame,
-            c.gameIs.teamRumble,
-          ),
+          $(c.regionCheck, c.playerIs.ingame, c.gameIs.teamRumble),
           `[Team Rumble] ${team} 📍 ${area} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/15`,
         ],
-        [
-          $(c.regionCheck, c.playerIs.inMenus),
-          'Navigating the menus',
-        ],
+        [$(c.regionCheck, c.playerIs.inMenus), 'Navigating the menus'],
       ]);
     };
 
