@@ -147,15 +147,13 @@ const codeFor = (region) => {
     );
 
   const recruitedAllWanderers = $(
-    ['MeasuredIf', 'Mem', '32bit', addresses.lapTime, '>', 'Value', '', 0],
-    ['MeasuredIf', 'Mem', '32bit', addresses.opponentId, '>=', 'Value', '', 113],
     ['ResetIf', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 0],
     ...rivals.map((rival) => {
       if (rival.team === 'Wanderers') {
         return playerTeamOwnsHits(offset(rival.teamAddress));
       }
     }),
-    ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 87],
+    ['', 'Value', '', 0, '=', 'Value', '', 1, 87],
   );
 
   const beatEveryRival = $(
