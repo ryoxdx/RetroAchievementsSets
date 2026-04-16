@@ -1,10 +1,10 @@
 {
   "type": "module",
   "dependencies": {
-    "@cruncheevos/cli": "0.1.0",
-    "@cruncheevos/core": "0.1.0"
+    "@cruncheevos/cli": "0.2.0",
+    "@cruncheevos/core": "0.2.0"
   },
   "devDependencies": {
-    "prettier": "3.8.1"
+    "prettier": "3.8.3"
   }
 }
