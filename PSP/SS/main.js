@@ -124,7 +124,8 @@ const codeFor = (region) => {
     area: $(['Measured', 'Mem', '32bit', addresses.area]),
     team: $(['Measured', 'Mem', '32bit', addresses.team]),
     track: $(['Measured', 'Mem', '32bit', addresses.timeAttackTrack]),
-    cash: $(['Measured', 'Mem', '32bit', addresses.money]),
+    // prettier-ignore
+    cash: $(['Measured', 'Mem', '32bit', addresses.money, '*', 'Value', '', 1000]),
     territories: $(
       ['ResetIf', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 0],
       ...Object.values(addresses.areas).map((area) =>
@@ -395,17 +396,20 @@ export const rich = RichPresence({
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
           $(c.regionCheck, c.playerIs.ingame, c.gameIs.replayMode),
-          '[Replay Mode] Watching a replay',
+          `${region === 'usa' ? '🇺🇸' : '🇪🇺'} [Replay Mode] Watching a replay`,
         ],
         [
           $(c.regionCheck, c.playerIs.ingame, c.gameIs.timeAttack),
-          `[Time Attack] ${track} 🚗 ${car}`,
+          `${region === 'usa' ? '🇺🇸' : '🇪🇺'} [Time Attack] ${track} 🚗 ${car}`,
         ],
         [
           $(c.regionCheck, c.playerIs.ingame, c.gameIs.teamRumble),
-          `[Team Rumble] ${team} 📍 ${area} 🚗 ${car} 💰 $${cash} 🗺 ${territories}/15`,
+          `${region === 'usa' ? '🇺🇸' : '🇪🇺'} [Team Rumble] ${team} 📍 ${area} 🚗 ${car} 💰 ${cash} CP 🗺 ${territories}/15`,
         ],
-        [$(c.regionCheck, c.playerIs.inMenus), 'Navigating the menus'],
+        [
+          $(c.regionCheck, c.playerIs.inMenus),
+          `${region === 'usa' ? '🇺🇸' : '🇪🇺'} Navigating the menus`,
+        ],
       ]);
     };
 
