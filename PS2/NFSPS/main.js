@@ -645,7 +645,7 @@ const codeFor = () => {
   const isWheelieCompetition = $(
     ['AddAddress', 'Mem', '32bit', addresses.currentHeatPointer],
     ['AddAddress', 'Mem', '32bit', 0x50],
-    ['', 'Mem', 'Float', 0x6c, '!=', 'Float', '', 0.0],
+    ['', 'Mem', 'Float', 0x6c, '!=', 'Float', '', 0.0, 1],
   );
 
   const isNotPracticeMode = $(
@@ -1510,6 +1510,7 @@ set.addAchievement({
     c.playerIs.racing,
     c.currentRaceModeIs.drag,
     c.isWheelieCompetition,
+    c.raceReset,
     c.isNotPracticeMode,
     c.isHeatOverOrEqualScore(402.336),
   ),
@@ -1634,6 +1635,7 @@ set.addAchievement({
     c.currentCarModel(carModels.DodgeChallengerRT),
     c.currentRaceModeIs.drag,
     c.isWheelieCompetition,
+    c.raceReset,
     c.playerIs.racing,
     c.isNotPracticeMode,
     c.multiHeatRaceWon,
