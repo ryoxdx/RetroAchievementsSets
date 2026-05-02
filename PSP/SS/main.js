@@ -14,7 +14,7 @@ import { richPresenceValues, rivals, timeAttackTracks } from './constants.js';
 
 /** @typedef {CodeCallbackTemplate<ConditionBuilder | Condition>} CodeCallback */
 
-/** @typedef {'usa' | 'europe'} Region */
+/** @typedef {'europe' | 'usa'} Region */
 
 const set = new AchievementSet({
   gameId: 19427,
@@ -248,8 +248,8 @@ const multiRegionalConditions = (cb, options = 1, singleOptions) => {
   const permutations = singleOptions ? options : options ** 2;
 
   for (let i = 1; i <= permutations; i++) {
-    groups[`alt${i}`] = cb(codeFor('usa', i));
-    groups[`alt${i + permutations}`] = cb(codeFor('europe', i));
+    groups[`alt${i}`] = cb(codeFor('europe', i));
+    groups[`alt${i + permutations}`] = cb(codeFor('usa', i));
   }
 
   return groups;
@@ -414,8 +414,8 @@ export const rich = RichPresence({
     };
 
     return [
-      ...displayForRegion('usa'),
       ...displayForRegion('europe'),
+      ...displayForRegion('usa'),
       'Playing Street Supremacy',
     ];
   },
