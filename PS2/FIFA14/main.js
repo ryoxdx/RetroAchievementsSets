@@ -21,8 +21,12 @@ const codeFor = () => {
   const addresses = {
     gameStartedPointer: 0x6d65e4,
     ingame: 0x6d65f0,
+    careerPointer: 0x6e3a40,
     homeScore: 0x814328,
     awayScore: 0x81bce0,
+    homeTeamIdPointer: 0x733bf0,
+    stadiumIdPointer: 0x734590,
+    awayTeamIdPointer: 0x734e94,
     language: 0x735240,
     homeTeam: 0x73a2d0,
     awayTeam: 0x73a2e8,
@@ -39,6 +43,9 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
       ['', 'Mem', '32bit', 0x08, '=', 'Value', '', 1],
     ),
+    careerMode: $(
+      ['', 'Mem', '32bit', addresses.careerPointer, '!=', 'Value', '', 0],
+    ),
   };
 
   const playerIs = {
@@ -54,13 +61,22 @@ const codeFor = () => {
     ),
     mode: $(['Measured', 'Mem', '8bit', addresses.homeTeam]),
     homeScore: $(['Measured', 'Mem', '32bit', addresses.homeScore]),
-    homeTeamA: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbb]),
-    homeTeamB: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbb + 1]),
-    homeTeamC: $(['Measured', 'Mem', '8bit', addresses.homeTeamAbb + 2]),
+    homeTeamId: $(
+      ['AddAddress', 'Mem', '32bit', addresses.homeTeamIdPointer],
+      ['AddAddress', 'Mem', '32bit', 0x04],
+      ['Measured', 'Mem', '32bit', 0x04],
+    ),
     awayScore: $(['Measured', 'Mem', '32bit', addresses.awayScore]),
-    awayTeamA: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbb]),
-    awayTeamB: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbb + 1]),
-    awayTeamC: $(['Measured', 'Mem', '8bit', addresses.awayTeamAbb + 2]),
+    awayTeamId: $(
+      ['AddAddress', 'Mem', '32bit', addresses.awayTeamIdPointer],
+      ['AddAddress', 'Mem', '32bit', 0x04],
+      ['Measured', 'Mem', '32bit', 0x04],
+    ),
+    stadiumId: $(
+      ['AddAddress', 'Mem', '32bit', addresses.stadiumIdPointer],
+      ['AddAddress', 'Mem', '32bit', 0x04],
+      ['Measured', 'Mem', '32bit', 0x04],
+    ),
     regularTimeA: $(['Measured', 'Mem', '8bit', addresses.timeDisplay]),
     regularTimeB: $(['Measured', 'Mem', '8bit', addresses.timeDisplay + 1]),
     regularTimeC: $(['Measured', 'Mem', '8bit', addresses.timeDisplay + 2]),
@@ -82,7 +98,7 @@ const codeFor = () => {
 
   // prettier-ignore
   const isPreGame = $(
-    ['', 'Mem', '32bit', addresses.timeDisplay, '=', 'Value', '', 0x2d],
+    ['', 'Mem', '8bit', addresses.timeDisplay, '=', 'Value', '', 0x2d],
   );
 
   return {
@@ -104,19 +120,18 @@ export const rich = RichPresence({
   lookup: {
     Language: { values: richPresenceValues.language },
     Mode: { values: richPresenceValues.mode },
+    Team: { values: richPresenceValues.team },
+    Stadium: { values: richPresenceValues.stadium },
   },
   displays: ({ lookup, format, macro }) => {
     const display = () => {
       const language = lookup.Language.at(c.playerMeasured.language);
       const mode = lookup.Mode.at(c.playerMeasured.mode);
       const homeScore = format.Value.at(c.playerMeasured.homeScore);
-      const homeTeamA = macro.ASCIIChar.at(c.playerMeasured.homeTeamA);
-      const homeTeamB = macro.ASCIIChar.at(c.playerMeasured.homeTeamB);
-      const homeTeamC = macro.ASCIIChar.at(c.playerMeasured.homeTeamC);
+      const homeTeam = lookup.Team.at(c.playerMeasured.homeTeamId);
       const awayScore = format.Value.at(c.playerMeasured.awayScore);
-      const awayTeamA = macro.ASCIIChar.at(c.playerMeasured.awayTeamA);
-      const awayTeamB = macro.ASCIIChar.at(c.playerMeasured.awayTeamB);
-      const awayTeamC = macro.ASCIIChar.at(c.playerMeasured.awayTeamC);
+      const awayTeam = lookup.Team.at(c.playerMeasured.awayTeamId);
+      const stadium = lookup.Stadium.at(c.playerMeasured.stadiumId);
       const regularTimeA = macro.ASCIIChar.at(c.playerMeasured.regularTimeA);
       const regularTimeB = macro.ASCIIChar.at(c.playerMeasured.regularTimeB);
       const regularTimeC = macro.ASCIIChar.at(c.playerMeasured.regularTimeC);
@@ -130,15 +145,15 @@ export const rich = RichPresence({
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
           $(c.gameIs.started, c.playerIs.ingame, c.isPreGame),
-          `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} - ${awayTeamA}${awayTeamB}${awayTeamC}`,
+          `${language} [${mode}] ${homeTeam} - ${awayTeam} 🏟️ ${stadium}`,
         ],
         [
           $(c.gameIs.started, c.playerIs.ingame, c.isPast100Min, c.isStoppage),
-          `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${extraTime} + ${stoppageTime}`,
+          `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${extraTime} + ${stoppageTime} 🏟️ ${stadium}`,
         ],
         [
           $(c.gameIs.started, c.playerIs.ingame, c.isStoppage),
-          `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${regularTime} + ${stoppageTime}`,
+          `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${regularTime} + ${stoppageTime} 🏟️ ${stadium}`,
         ],
         [
           $(
@@ -147,11 +162,11 @@ export const rich = RichPresence({
             c.playerIs.ingame,
             c.isPast100Min,
           ),
-          `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${extraTime}`,
+          `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${extraTime} 🏟️ ${stadium}`,
         ],
         [
           $(c.gameIs.started, c.playerIs.ingame),
-          `${language} [${mode}] ${homeTeamA}${homeTeamB}${homeTeamC} ${homeScore} - ${awayScore} ${awayTeamA}${awayTeamB}${awayTeamC} 🕘 ${regularTime}`,
+          `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${regularTime} 🏟️ ${stadium}`,
         ],
         [$(c.gameIs.started), `${language} Navigating the menus`],
       ]);
