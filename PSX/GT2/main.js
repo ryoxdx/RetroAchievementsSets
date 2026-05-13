@@ -1,5 +1,188 @@
-import { AchievementSet, define as $ } from '@cruncheevos/core'
-const set = new AchievementSet({ gameId: 11278, title: 'Gran Turismo 2' })
+import {
+  AchievementSet,
+  define as $,
+  RichPresence,
+  resetIf,
+} from '@cruncheevos/core';
+
+import { richPresenceValues } from './constants.js';
+
+/**
+ * @template T
+ * @typedef {(c: typeof codeFor extends (...args: any[]) => infer U ? U : any) => T} CodeCallbackTemplate
+ */
+
+/** @typedef {CodeCallbackTemplate<ConditionBuilder | Condition>} CodeCallback */
+
+/** @typedef {'ntsc_u' | 'pal'} Region */
+
+const set = new AchievementSet({ gameId: 11278, title: 'Gran Turismo 2' });
+
+/**
+ * @param {Region} region
+ */
+const codeFor = (region) => {
+  /**
+   * @param {number} address
+   */
+  const offset = (address) => {
+    switch (region) {
+      case 'ntsc_u':
+        return address;
+      case 'pal':
+        return address + 0x40;
+    }
+  };
+
+  const addresses = {
+    serialDistinctBytes: offset(0x91c96),
+    replay: offset(0xa951c),
+    currentLap: offset(0xa9cbc),
+    ingame: offset(0x19df1b),
+    inEvent: offset(0x1c6c02),
+    days: offset(0x1c99d8),
+    licenseCompletion: offset(0x1cacf9),
+    slot1Id: offset(0x1cd558),
+    credits: offset(0x1d1568),
+    garageSlot: offset(0x1d156c),
+    license: offset(0x1d5867),
+    licenseTest: offset(0x1d5868),
+    eventString: offset(0x1d586c),
+    track: offset(0x1d589c),
+    event: offset(0x1d5dd8),
+    totalLaps: offset(0x1d586b),
+    lapsCompleted: offset(0x1d5e8a),
+    gameLoaded: offset(0x1ef5f0),
+    gameMode1: offset(0x1ef5f1),
+    gameMode2: offset(0x1ef5f2),
+  };
+
+  // prettier-ignore
+  const regionCheck = $(
+    region === 'ntsc_u' && ['PauseIf', 'Mem', '32bit', addresses.serialDistinctBytes, '!=', 'Value', '', 0x53554353],
+    region === 'pal' && ['PauseIf', 'Mem', '32bit', addresses.serialDistinctBytes, '!=', 'Value', '', 0x53454353],
+  );
+
+  const gameIs = {
+    loaded: $(['', 'Mem', '8bit', addresses.gameLoaded, '=', 'Value', '', 1]),
+  };
+
+  const playerIs = {
+    inMenus: $(
+      ['', 'Mem', '8bit', addresses.gameMode1, '=', 'Value', '', 0],
+      ['', 'Mem', '8bit', addresses.gameMode2, '=', 'Value', '', 0],
+    ),
+    inArcade: $(
+      ['', 'Mem', '8bit', addresses.gameMode1, '=', 'Value', '', 1],
+      ['', 'Mem', '8bit', addresses.gameMode2, '=', 'Value', '', 1],
+    ),
+    inReplayTheater: $(
+      ['', 'Mem', '8bit', addresses.gameMode1, '=', 'Value', '', 2],
+      ['', 'Mem', '8bit', addresses.gameMode2, '=', 'Value', '', 2],
+    ),
+    inSimulation: $(
+      ['', 'Mem', '8bit', addresses.gameMode1, '=', 'Value', '', 4],
+      ['', 'Mem', '8bit', addresses.gameMode2, '=', 'Value', '', 3],
+    ),
+    inEvent: $(['', 'Mem', '8bit', addresses.inEvent, '=', 'Value', '', 1]),
+    ingame: $(['', 'Mem', '8bit', addresses.ingame, '=', 'Value', '', 1]),
+    inReplay: $(
+      ['', 'Mem', '8bit', addresses.replay, '=', 'Value', '', 1],
+      ['', 'Mem', '8bit', addresses.inEvent, '=', 'Value', '', 1],
+    ),
+    // prettier-ignore
+    inTestRun: $(['', 'Mem', '8bit', addresses.totalLaps, '=', 'Value', '', 0x64]),
+    inLicense: $(
+      ['', 'Mem', '8bit', addresses.eventString, '=', 'Value', '', 0x4c],
+      ['', 'Mem', '32bit', addresses.event, '=', 'Value', '', 0xffff],
+    ),
+    inMachine: $(
+      ['', 'Mem', '8bit', addresses.eventString, '=', 'Value', '', 0x47],
+      ['', 'Mem', '32bit', addresses.event, '=', 'Value', '', 0xffff],
+    ),
+  };
+
+  /**
+   * This structure is used to get a pointer to the current car slot using an index
+   * at addresses.garageSlot and some arithmetic. This is necessary because the game does not store
+   * a direct pointer to a car slot in the garage, only an index of the slot and
+   * the array of slots that starts at addresses.slot1Id.
+   */
+  const currentCarSlotMakeshiftPointer = $(
+    ['Remember', 'Mem', '16bit', addresses.garageSlot, '*', 'Value', '', 0xa4],
+    ['AddAddress', 'Value', '', addresses.slot1Id, '+', 'Recall'],
+  );
+
+  const playerMeasured = {
+    car: $(currentCarSlotMakeshiftPointer, ['Measured', 'Mem', '32bit', 0x00]),
+    event: $(['Measured', 'Mem', '32bit', addresses.event]),
+    track: $(['Measured', 'Mem', '32bit', addresses.track]),
+    credits: $(['Measured', 'Mem', '32bit', addresses.credits]),
+    days: $(['Measured', 'Mem', '8bit', addresses.days]),
+    totalLaps: $(['Measured', 'Mem', '8bit', addresses.totalLaps]),
+    currentLap: $(['Measured', 'Mem', '8bit', addresses.currentLap]),
+    license: $(['Measured', 'Mem', '8bit', addresses.license]),
+    licenseTest: $(['Measured', 'Mem', '8bit', addresses.licenseTest]),
+    machineTest: $(['Measured', 'Mem', '8bit', addresses.eventString + 1]),
+  };
+
+  // prettier-ignore
+  const raceOver = $(
+    ['', 'Mem', '8bit', addresses.lapsCompleted, '=', 'Mem', '8bit', addresses.totalLaps],
+  );
+
+  const hasLicense = (licenseLevel) => {
+    const tests = [];
+    for (let i = 0; i < 60; i++) {
+      // prettier-ignore
+      tests.push($(
+        ['AddHits', 'Mem', '8bit', addresses.licenseCompletion + i * 0xa4, '>', 'Value', '', 0, 1]
+      ));
+    }
+
+    return $(
+      ...tests,
+      // prettier-ignore
+      ['', 'Value', '', 0, '>=', 'Value', '', 1, licenseLevel * 10],
+    );
+  };
+
+  const highestLicenseMeasured = () => {
+    const tests = [];
+    for (let i = 0; i < 6; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (j !== 9) {
+          // prettier-ignore
+          tests.push($(
+            ['AndNext', 'Mem', '8bit', addresses.licenseCompletion + ((i * 10 + j) * 0xa4), '>', 'Value', '', 0]
+          ));
+        } else {
+          // prettier-ignore
+          tests.push($(
+            ['AddHits', 'Mem', '8bit', addresses.licenseCompletion + ((i * 10 + j) * 0xa4), '>', 'Value', '', 0, 1]
+          ));
+        }
+      }
+    }
+
+    return $(
+      ...tests,
+      resetIf(playerIs.inMenus),
+      // prettier-ignore
+      ['Measured', 'Value', '', 0, '=', 'Value', '', 1, 0],
+    );
+  };
+
+  return {
+    addresses,
+    regionCheck,
+    gameIs,
+    playerIs,
+    playerMeasured,
+    raceOver,
+    highestLicenseMeasured,
+  };
+};
 
 set.addAchievement({
   id: 97347,
@@ -14,7 +197,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5e88, '=', 'Value', '', 1],
     ['', 'Mem', '8bit', 0xa951c, '=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 97129,
@@ -57,7 +240,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97130,
@@ -87,7 +270,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 5000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97131,
@@ -120,7 +303,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 5000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97132,
@@ -164,7 +347,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97133,
@@ -208,7 +391,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97134,
@@ -252,7 +435,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97135,
@@ -296,7 +479,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97136,
@@ -340,7 +523,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97235,
@@ -359,7 +542,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5e7c, '>=', 'Mem', '8bit', 0x1d5e80],
     ['', 'Mem', '8bit', 0x1d5e7c, '>=', 'Mem', '8bit', 0x1d5e81],
   ),
-})
+});
 
 set.addAchievement({
   id: 97236,
@@ -401,7 +584,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 5000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97237,
@@ -443,7 +626,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97238,
@@ -485,7 +668,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97239,
@@ -527,7 +710,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97240,
@@ -569,7 +752,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 15000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97241,
@@ -611,7 +794,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 15000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97242,
@@ -653,7 +836,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97243,
@@ -695,7 +878,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 4000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97244,
@@ -737,7 +920,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97245,
@@ -779,7 +962,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97246,
@@ -821,7 +1004,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 15000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97247,
@@ -863,7 +1046,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 8000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97248,
@@ -905,7 +1088,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 7000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97249,
@@ -971,7 +1154,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97250,
@@ -1013,7 +1196,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 30000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97251,
@@ -1055,7 +1238,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97252,
@@ -1097,7 +1280,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 50000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97253,
@@ -1139,7 +1322,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 50000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97254,
@@ -1205,7 +1388,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 50000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97255,
@@ -1271,7 +1454,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 15000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97256,
@@ -1289,7 +1472,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5e7c, '>=', 'Mem', '8bit', 0x1d5e80],
     ['', 'Mem', '8bit', 0x1d5e7c, '>=', 'Mem', '8bit', 0x1d5e81],
   ),
-})
+});
 
 set.addAchievement({
   id: 97257,
@@ -1307,7 +1490,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5e7c, '>=', 'Mem', '8bit', 0x1d5e80],
     ['', 'Mem', '8bit', 0x1d5e7c, '>=', 'Mem', '8bit', 0x1d5e81],
   ),
-})
+});
 
 set.addAchievement({
   id: 97258,
@@ -1349,7 +1532,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97259,
@@ -1391,7 +1574,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97280,
@@ -1433,7 +1616,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97281,
@@ -1475,7 +1658,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97282,
@@ -1517,7 +1700,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97283,
@@ -1559,7 +1742,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97284,
@@ -1601,7 +1784,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 25000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97285,
@@ -1643,7 +1826,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97286,
@@ -1685,7 +1868,7 @@ set.addAchievement({
       ['', 'Mem', '32bit', 0x1b70c8, '=', 'Value', '', 10000, 1],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97287,
@@ -1698,7 +1881,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 61],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97288,
@@ -1711,7 +1894,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 66],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97289,
@@ -1724,7 +1907,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 69],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97290,
@@ -1737,7 +1920,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 62],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97291,
@@ -1750,7 +1933,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 67],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97292,
@@ -1763,7 +1946,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 70],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97293,
@@ -1776,7 +1959,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 68],
     ['', 'Mem', '8bit', 0x1d5e7c, '=', 'Value', '', 8],
   ),
-})
+});
 
 set.addAchievement({
   id: 97294,
@@ -1842,7 +2025,7 @@ set.addAchievement({
       ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 137],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97344,
@@ -2309,7 +2492,7 @@ set.addAchievement({
       ['', 'Delta', 'Upper4', 0x1c9a71, '=', 'Value', '', 73],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97345,
@@ -2384,7 +2567,7 @@ set.addAchievement({
       ['', 'Delta', 'Upper4', 0x1c9a13, '=', 'Value', '', 28],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97346,
@@ -2461,7 +2644,7 @@ set.addAchievement({
       ['', 'Mem', '8bit', 0x1d5dd8, '=', 'Value', '', 70],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97404,
@@ -2640,7 +2823,7 @@ set.addAchievement({
       ['', 'Delta', 'Lower4', 0x1c9a6d, '=', 'Value', '', 28],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97405,
@@ -2959,7 +3142,7 @@ set.addAchievement({
       ['', 'Delta', 'Upper4', 0x1c9a73, '=', 'Value', '', 51],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97406,
@@ -3042,7 +3225,7 @@ set.addAchievement({
       ['', 'Delta', 'Lower4', 0x1c9a16, '=', 'Value', '', 14],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97407,
@@ -3147,7 +3330,7 @@ set.addAchievement({
       ['', 'Delta', 'Lower4', 0x1c9a4a, '=', 'Value', '', 17],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96949,
@@ -3221,7 +3404,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '8bit', 0x1d5868, '!=', 'Value', '', 9],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96950,
@@ -3295,7 +3478,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '8bit', 0x1d5868, '!=', 'Value', '', 9],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96951,
@@ -3369,7 +3552,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '8bit', 0x1d5868, '!=', 'Value', '', 9],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96952,
@@ -3443,7 +3626,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '8bit', 0x1d5868, '!=', 'Value', '', 9],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96953,
@@ -3517,7 +3700,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '8bit', 0x1d5868, '!=', 'Value', '', 9],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96954,
@@ -3590,7 +3773,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '8bit', 0x1d5868, '!=', 'Value', '', 9],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 96889,
@@ -3608,7 +3791,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96890,
@@ -3626,7 +3809,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96891,
@@ -3644,7 +3827,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96892,
@@ -3662,7 +3845,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96893,
@@ -3680,7 +3863,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96894,
@@ -3698,7 +3881,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96895,
@@ -3716,7 +3899,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96896,
@@ -3734,7 +3917,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96897,
@@ -3752,7 +3935,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96898,
@@ -3770,7 +3953,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96899,
@@ -3788,7 +3971,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96900,
@@ -3806,7 +3989,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96901,
@@ -3824,7 +4007,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96902,
@@ -3842,7 +4025,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96903,
@@ -3860,7 +4043,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96904,
@@ -3878,7 +4061,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96905,
@@ -3896,7 +4079,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96906,
@@ -3914,7 +4097,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96907,
@@ -3932,7 +4115,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96908,
@@ -3950,7 +4133,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96909,
@@ -3968,7 +4151,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96910,
@@ -3986,7 +4169,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96911,
@@ -4004,7 +4187,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96912,
@@ -4022,7 +4205,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96913,
@@ -4040,7 +4223,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96914,
@@ -4058,7 +4241,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96915,
@@ -4076,7 +4259,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96916,
@@ -4094,7 +4277,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96917,
@@ -4112,7 +4295,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96918,
@@ -4130,7 +4313,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96919,
@@ -4148,7 +4331,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96920,
@@ -4166,7 +4349,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96921,
@@ -4184,7 +4367,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96922,
@@ -4202,7 +4385,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96923,
@@ -4220,7 +4403,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96924,
@@ -4238,7 +4421,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96925,
@@ -4256,7 +4439,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96926,
@@ -4274,7 +4457,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96927,
@@ -4292,7 +4475,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96928,
@@ -4310,7 +4493,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96929,
@@ -4328,7 +4511,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96930,
@@ -4346,7 +4529,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96931,
@@ -4364,7 +4547,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96932,
@@ -4382,7 +4565,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96933,
@@ -4400,7 +4583,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96934,
@@ -4418,7 +4601,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96935,
@@ -4436,7 +4619,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96936,
@@ -4454,7 +4637,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96937,
@@ -4472,7 +4655,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96938,
@@ -4491,7 +4674,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96939,
@@ -4509,7 +4692,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96940,
@@ -4527,7 +4710,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96941,
@@ -4545,7 +4728,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96942,
@@ -4563,7 +4746,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96943,
@@ -4581,7 +4764,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96944,
@@ -4600,7 +4783,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96945,
@@ -4618,7 +4801,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96946,
@@ -4636,7 +4819,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96947,
@@ -4654,7 +4837,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96948,
@@ -4673,7 +4856,7 @@ set.addAchievement({
     ['', 'Mem', '8bit', 0xa951c, '!=', 'Value', '', 1],
     ['', 'Mem', '32bit', 0x46f64, '!=', 'Value', '', 0],
   ),
-})
+});
 
 set.addAchievement({
   id: 96955,
@@ -5123,7 +5306,7 @@ set.addAchievement({
       ['PauseIf', 'Mem', '16bit', 0x1d5866, '!=', 'Value', '', 3],
     ),
   },
-})
+});
 
 set.addAchievement({
   id: 97128,
@@ -6505,7 +6688,7 @@ set.addAchievement({
       ['', 'Delta', 'Upper4', 0x1c9a73, '=', 'Value', '', 224],
     ),
   },
-})
+});
 
 set.addLeaderboard({
   id: 18781,
@@ -6526,7 +6709,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32578,
@@ -6547,7 +6730,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32579,
@@ -6568,7 +6751,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32580,
@@ -6589,7 +6772,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32581,
@@ -6610,7 +6793,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32582,
@@ -6631,7 +6814,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32583,
@@ -6652,7 +6835,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32584,
@@ -6673,7 +6856,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32585,
@@ -6694,7 +6877,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32586,
@@ -6715,7 +6898,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32587,
@@ -6736,7 +6919,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32588,
@@ -6757,7 +6940,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32589,
@@ -6778,7 +6961,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32590,
@@ -6799,7 +6982,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32591,
@@ -6820,7 +7003,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32592,
@@ -6841,7 +7024,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32593,
@@ -6862,7 +7045,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32594,
@@ -6883,7 +7066,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32595,
@@ -6904,7 +7087,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32596,
@@ -6925,7 +7108,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32597,
@@ -6946,7 +7129,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32598,
@@ -6967,7 +7150,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32599,
@@ -6988,7 +7171,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32600,
@@ -7009,7 +7192,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32601,
@@ -7030,7 +7213,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32602,
@@ -7051,7 +7234,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32603,
@@ -7072,7 +7255,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32604,
@@ -7093,7 +7276,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32605,
@@ -7114,7 +7297,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32606,
@@ -7135,7 +7318,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32607,
@@ -7156,7 +7339,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32608,
@@ -7177,7 +7360,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32609,
@@ -7198,7 +7381,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32610,
@@ -7219,7 +7402,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32611,
@@ -7240,7 +7423,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32612,
@@ -7261,7 +7444,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32613,
@@ -7282,7 +7465,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32614,
@@ -7303,7 +7486,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32615,
@@ -7324,7 +7507,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32616,
@@ -7345,7 +7528,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32617,
@@ -7366,7 +7549,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32618,
@@ -7387,7 +7570,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32619,
@@ -7408,7 +7591,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32620,
@@ -7429,7 +7612,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32621,
@@ -7450,7 +7633,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32622,
@@ -7471,7 +7654,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32623,
@@ -7492,7 +7675,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32624,
@@ -7513,7 +7696,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32625,
@@ -7534,7 +7717,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32626,
@@ -7556,7 +7739,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32627,
@@ -7577,7 +7760,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32628,
@@ -7598,7 +7781,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32629,
@@ -7619,7 +7802,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32630,
@@ -7640,7 +7823,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32631,
@@ -7661,7 +7844,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32632,
@@ -7683,7 +7866,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32633,
@@ -7704,7 +7887,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32634,
@@ -7725,7 +7908,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32635,
@@ -7746,7 +7929,7 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
 set.addLeaderboard({
   id: 32636,
@@ -7768,6 +7951,190 @@ set.addLeaderboard({
     submit: '1=1',
     value: $(['Measured', 'Mem', '32bit', 0x1d5e90, '*', 'Float', '', 0.1]),
   },
-})
+});
 
-export default set
+export const rich = RichPresence({
+  format: { Value: 'VALUE' },
+  lookupDefaultParameters: { keyFormat: 'hex' },
+  lookup: {
+    Car: { values: richPresenceValues.car },
+    Event: { values: richPresenceValues.event },
+    Track: { values: richPresenceValues.track },
+    License: { values: richPresenceValues.license },
+    LicenseLevel: { values: richPresenceValues.licenseLevel },
+    MachineTest: { values: richPresenceValues.machineTest },
+  },
+  displays: ({ lookup, format }) => {
+    /** @param {Region} region */
+    const displayForRegion = (region) => {
+      const c = codeFor(region);
+
+      const car = lookup.Car.at($(c.playerMeasured.car));
+      const event = lookup.Event.at($(c.playerMeasured.event));
+      const track = lookup.Track.at($(c.playerMeasured.track));
+      const days = format.Value.at($(c.playerMeasured.days));
+      const currentLap = format.Value.at($(c.playerMeasured.currentLap));
+      const totalLaps = format.Value.at($(c.playerMeasured.totalLaps));
+      const license = lookup.License.at($(c.playerMeasured.license));
+      const licenseTest = format.Value.at(
+        $(
+          c.playerMeasured.licenseTest.withLast({
+            cmp: '+',
+            rvalue: ['Value', '', 1],
+          }),
+        ),
+      );
+      const highestLicense = lookup.LicenseLevel.at(
+        $(c.highestLicenseMeasured()),
+      );
+      const machineTest = lookup.MachineTest.at(
+        $(c.playerMeasured.machineTest),
+      );
+
+      return /** @type Array<[ConditionBuilder, string]> */ ([
+        [
+          $(c.regionCheck, c.gameIs.loaded, c.playerIs.inArcade),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [Arcade Mode] Menu`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inReplayTheater,
+            c.playerIs.inReplay,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [Replay Theater] 🎥 Replay`,
+        ],
+        [
+          $(c.regionCheck, c.gameIs.loaded, c.playerIs.inReplayTheater),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [Replay Theater] 🎥 Menu`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.inMachine,
+            c.playerIs.ingame,
+            c.playerIs.inReplay,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [Machine Test] ⏱️ ${track}${machineTest} 🎥 Replay 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.inMachine,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [Machine Test] ⏱️ ${track}${machineTest} 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.inLicense,
+            c.playerIs.ingame.withLast({ rvalue: { value: 0 } }),
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [License Test] 🔰 Lobby 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.inLicense,
+            c.playerIs.ingame,
+            c.playerIs.inReplay,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [License Test] 🔰 ${license}-${licenseTest} 🎥 Replay 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.inLicense,
+            c.playerIs.ingame,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [License Test] 🔰 ${license}-${licenseTest} 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.ingame.withLast({ rvalue: { value: 0 } }),
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [${event}] 📍 ${track} 🏁 Lobby 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.ingame,
+            c.playerIs.inReplay,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [${event}] 📍 ${track} 🎥 Replay 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.ingame,
+            c.playerIs.inTestRun,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [${event}] 📍 ${track} 🔧 Test Run 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.ingame,
+            c.raceOver,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [${event}] 📍 ${track} 🏁 Results 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(
+            c.regionCheck,
+            c.gameIs.loaded,
+            c.playerIs.inSimulation,
+            c.playerIs.inEvent,
+            c.playerIs.ingame,
+          ),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [${event}] 📍 ${track} 🏁 Lap ${currentLap}/${totalLaps} 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(c.regionCheck, c.gameIs.loaded, c.playerIs.inSimulation),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} [Simulation Mode] 🚗 ${car} 📅 ${days} days 🔰 ${highestLicense}`,
+        ],
+        [
+          $(c.regionCheck, c.gameIs.loaded, c.playerIs.inMenus),
+          `${region === 'ntsc_u' ? '🇺🇸' : '🇪🇺'} Main menu`,
+        ],
+      ]);
+    };
+
+    return [
+      ...displayForRegion('ntsc_u'),
+      ...displayForRegion('pal'),
+      'Playing Gran Turismo 2',
+    ];
+  },
+});
+
+export default set;
