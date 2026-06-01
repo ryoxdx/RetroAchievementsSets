@@ -30,6 +30,7 @@ const codeFor = () => {
     language: 0x735240,
     homeTeam: 0x73a2d0,
     awayTeam: 0x73a2e8,
+    mode: 0x7344d4,
     timeDisplay: 0x77b4b0,
     regularTime: 0x7a38c8,
     stoppageTime: 0x7a38cc,
@@ -43,9 +44,8 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
       ['', 'Mem', '32bit', 0x08, '=', 'Value', '', 1],
     ),
-    careerMode: $(
-      ['', 'Mem', '32bit', addresses.careerPointer, '!=', 'Value', '', 0],
-    ),
+    // prettier-ignore
+    careerMode: $(['', 'Mem', '32bit', addresses.careerPointer, '!=', 'Value', '', 0]),
   };
 
   const playerIs = {
@@ -59,7 +59,11 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', 0x04],
       ['Measured', 'Mem', '24bit', 0x00],
     ),
-    mode: $(['Measured', 'Mem', '8bit', addresses.homeTeam]),
+    mode: $(
+      ['AddAddress', 'Mem', '32bit', addresses.mode],
+      ['AddAddress', 'Mem', '32bit', 0x04],
+      ['Measured', 'Mem', '32bit', 0x04],
+    ),
     homeScore: $(['Measured', 'Mem', '32bit', addresses.homeScore]),
     homeTeamId: $(
       ['AddAddress', 'Mem', '32bit', addresses.homeTeamIdPointer],
@@ -101,6 +105,11 @@ const codeFor = () => {
     ['', 'Mem', '8bit', addresses.timeDisplay, '=', 'Value', '', 0x2d],
   );
 
+  const isPractice = $(
+    ['', 'Mem', '8bit', addresses.mode, '=', 'Value', '', 0],
+    ['', 'Mem', '8bit', addresses.ingame, '=', 'Value', '', 1],
+  );
+
   return {
     addresses,
     gameIs,
@@ -109,6 +118,7 @@ const codeFor = () => {
     isPast100Min,
     isStoppage,
     isPreGame,
+    isPractice,
   };
 };
 
@@ -144,6 +154,10 @@ export const rich = RichPresence({
 
       return /** @type Array<[ConditionBuilder, string]> */ ([
         [
+          $(c.gameIs.started, c.isPractice),
+          `${language} [Practice] ${homeTeam} - ${awayTeam} 🏟️ ${stadium}`,
+        ],
+        [
           $(c.gameIs.started, c.playerIs.ingame, c.isPreGame),
           `${language} [${mode}] ${homeTeam} - ${awayTeam} 🏟️ ${stadium}`,
         ],
@@ -168,7 +182,7 @@ export const rich = RichPresence({
           $(c.gameIs.started, c.playerIs.ingame),
           `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${regularTime} 🏟️ ${stadium}`,
         ],
-        [$(c.gameIs.started), `${language} Navigating the menus`],
+        [$(c.gameIs.started), `${language} [${mode}] Getting ready to play`],
       ]);
     };
 
