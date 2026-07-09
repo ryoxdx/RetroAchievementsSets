@@ -772,19 +772,19 @@ export const careerAccomplishments = [
   {
     title: 'Killer Instinct',
     description: 'Finish a season as League Top Scorer in Player Career.',
-    points: 5,
+    points: 10,
     offset: 0x2674,
   },
   {
     title: 'Treble',
     description: 'Finish a season with 3 trophies in Career Mode.',
-    points: 5,
+    points: 10,
     offset: 0x26d0,
   },
   {
     title: 'Quadruple',
     description: 'Finish a season with 4 trophies in Career Mode.',
-    points: 10,
+    points: 25,
     offset: 0x272c,
   },
   {
@@ -797,7 +797,7 @@ export const careerAccomplishments = [
     title: 'Maxed Out',
     description:
       'Upgrade a training skill to its maximum potential in Player Coach Career.',
-    points: 3,
+    points: 5,
     offset: 0x27e4,
   },
   {
@@ -815,13 +815,13 @@ export const careerAccomplishments = [
   {
     title: 'European Champions',
     description: 'Win the Champions Cup tournament in Manager Career.',
-    points: 5,
+    points: 10,
     offset: 0x28f8,
   },
   {
     title: 'Invincible',
     description: 'Achieve an undefeated season in Manager Career.',
-    points: 10,
+    points: 25,
     offset: 0x2954,
   },
 ];
@@ -840,7 +840,7 @@ export const UKAccomplishments = [
     title: 'Hat Trick: United Kingdom',
     description:
       'Score a Hat Trick against any club from the United Kingdom in Professional difficulty or above.',
-    points: 3,
+    points: 10,
     offset: 0x5c,
   },
   {
@@ -911,14 +911,14 @@ export const westernEuropeAccomplishments = [
     title: 'Possession: Western Europe',
     description:
       'Achieve 75%+ Possession in Professional difficulty or above against a club from Western Europe.',
-    points: 3,
+    points: 4,
     offset: 0x450,
   },
   {
     title: 'Late Goal: Western Europe',
     description:
       'Score with a player subbed in after 85+ minutes against a club from Western Europe in Semi-Pro difficulty or above.',
-    points: 3,
+    points: 4,
     offset: 0x4ac,
   },
   {
@@ -1141,7 +1141,7 @@ export const americasAccomplishments = [
     title: 'Passing: The Americas',
     description:
       'Achieve 75%+ Passing in Professional difficulty or above against a club from the Americas and win.',
-    points: 3,
+    points: 4,
     offset: 0x1140,
   },
   {
@@ -1193,7 +1193,7 @@ export const scandinaviaAccomplishments = [
     title: 'Scandinavian Accuracy',
     description:
       'Achieve 90% Shots on Target in Semi-Pro difficulty or above against a Scandinavian club.',
-    points: 2,
+    points: 3,
     offset: 0x14d8,
   },
   {
@@ -1214,7 +1214,7 @@ export const scandinaviaAccomplishments = [
     title: 'Passing: Scandinavia',
     description:
       'Achieve 85%+ in Passing in Amateur difficulty or above against a Scandinavian club.',
-    points: 2,
+    points: 3,
     offset: 0x15ec,
   },
   {
@@ -1267,7 +1267,7 @@ export const restOfWorldAccomplishments = [
     title: 'Distribution Challenge',
     description:
       'Score 3 goals with 3 different players in Semi-Pro difficulty or above against a Rest of World club.',
-    points: 2,
+    points: 3,
     offset: 0x1984,
   },
   {
@@ -1332,7 +1332,7 @@ export const masterAccomplishments = [
     title: 'Offside Master',
     description:
       'Win without getting offsides in World Class difficulty or above.',
-    points: 3,
+    points: 4,
     offset: 0x20b4,
   },
   {
@@ -1351,20 +1351,20 @@ export const masterAccomplishments = [
     title: 'Distribution Master',
     description:
       'Score 5 goals with 5 different players in Professional difficulty or above.',
-    points: 3,
+    points: 5,
     offset: 0x21c8,
   },
   {
     title: 'Fair Play Master',
     description:
       'Win a match without any bookings in World Class difficulty or above.',
-    points: 3,
+    points: 4,
     offset: 0x2224,
   },
   {
     title: 'Hat Trick Master',
     description: 'Score a Hat Trick in World Class difficulty or above.',
-    points: 5,
+    points: 10,
     offset: 0x2280,
   },
   {
@@ -1377,7 +1377,7 @@ export const masterAccomplishments = [
   {
     title: 'Master Goalkeeper',
     description: 'Record 10 Clean Sheets in Be a Keeper.',
-    points: 3,
+    points: 5,
     offset: 0x2394,
   },
 ];
@@ -1401,7 +1401,7 @@ export const scenarioAccomplishments = [
     title: 'III',
     description:
       'Use Scenario settings to start a 0-0 match in the 2nd half and win by 3 goals.',
-    points: 2,
+    points: 3,
     offset: 0x9b4,
   },
   {
@@ -1443,14 +1443,14 @@ export const scenarioAccomplishments = [
     title: 'IX',
     description:
       'Use Scenario settings to assign your opponent a 3-0 lead. Win the match.',
-    points: 2,
+    points: 3,
     offset: 0x16a4,
   },
   {
     title: 'X',
     description:
       'Use Scenario settings to assign your opponent a 5-0 lead in the 10th minute in Professional difficulty or above and win.',
-    points: 4,
+    points: 5,
     offset: 0x2338,
   },
 ];

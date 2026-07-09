@@ -196,8 +196,8 @@ const codeFor = () => {
   );
 
   const isPractice = $(
-    ['', 'Mem', '8bit', addresses.mode, '=', 'Value', '', 0],
-    ['', 'Mem', '8bit', addresses.ingame, '=', 'Value', '', 1],
+    ['', 'Mem', '32bit', addresses.mode, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 1],
   );
 
   // prettier-ignore
@@ -736,7 +736,7 @@ set.addAchievement({
   title: 'Choose Your Own Fate',
   description:
     'Win a match in Career Mode after intervening in a losing simulation in Professional difficulty or above.',
-  points: 3,
+  points: 4,
   conditions: {
     core: $(
       c.gameIs.started,
@@ -798,7 +798,7 @@ set.addAchievement({
   title: 'Star Factory',
   description:
     'Score a goal with a player signed from your youth academy in Manager Career in Professional difficulty or above.',
-  points: 3,
+  points: 4,
   conditions: getEachPlayerGroups(
     $(
       c.gameIs.started,
@@ -1176,7 +1176,7 @@ set.addAchievement({
   title: 'What If Scenarios: Taça de Portugal',
   description:
     'Use Scenario settings to start a match in the 20th minute down 0-1 vs SL Benfica as Rio Ave FC. Win the match in Legendary difficulty.',
-  points: 5,
+  points: 10,
   conditions: $(
     c.gameIs.started,
     c.defaultSettings,
@@ -1706,7 +1706,7 @@ set.addAchievement({
   title: 'What If Scenarios: Golden Generation',
   description:
     'Use Scenario settings to start a match in the 10th minute down 1-0 vs Argentina as Belgium. Win the match in Legendary difficulty.',
-  points: 5,
+  points: 10,
   conditions: $(
     c.gameIs.started,
     c.defaultSettings,
