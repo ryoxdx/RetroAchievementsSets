@@ -707,3 +707,840 @@ export const richPresenceValues = {
     0x0b: 'Career - Coach',
   },
 };
+
+export const progressionAchievements = [
+  {
+    title: 'A Star in the Making',
+    description: 'Finish your first season in Player Career.',
+    modeId: 0x04,
+  },
+  {
+    title: 'Taking on the Responsibility',
+    description: 'Finish your first season in Player Coach Career.',
+    modeId: 0x0b,
+  },
+  {
+    title: 'Total Football Control',
+    description: 'Finish your first season in Manager Career.',
+    modeId: 0x02,
+  },
+];
+
+export const careerAccomplishments = [
+  {
+    title: 'Hat Trick Hero',
+    description: 'Score a hat trick with your pro in Career Mode.',
+    points: 3,
+    offset: 0x23f0,
+  },
+  {
+    title: 'Elite Performance',
+    description: 'Achieve a 10.0 match rating in Career Mode.',
+    points: 3,
+    offset: 0x244c,
+  },
+  {
+    title: 'International Debut',
+    description: 'Make the national team starting 11 in Player Career.',
+    points: 3,
+    offset: 0x24a8,
+  },
+  {
+    title: 'Established Position',
+    description: 'Win 5 national team matches in Player Career.',
+    points: 4,
+    offset: 0x2504,
+  },
+  {
+    title: 'National Scorer',
+    description: 'Score 10 goals for your country in Player Career.',
+    points: 5,
+    offset: 0x2560,
+  },
+  {
+    title: 'National Hero',
+    description: 'Captain your country in Player Career.',
+    points: 5,
+    offset: 0x25bc,
+  },
+  {
+    title: 'National Legend',
+    description: 'Reach "Legend" national level status in Player Career.',
+    points: 10,
+    offset: 0x2618,
+  },
+  {
+    title: 'Killer Instinct',
+    description: 'Finish a season as League Top Scorer in Player Career.',
+    points: 5,
+    offset: 0x2674,
+  },
+  {
+    title: 'Treble',
+    description: 'Finish a season with 3 trophies in Career Mode.',
+    points: 5,
+    offset: 0x26d0,
+  },
+  {
+    title: 'Quadruple',
+    description: 'Finish a season with 4 trophies in Career Mode.',
+    points: 10,
+    offset: 0x272c,
+  },
+  {
+    title: 'The Other Side',
+    description: 'Play a season as a defender in Player Career.',
+    points: 3,
+    offset: 0x2788,
+  },
+  {
+    title: 'Maxed Out',
+    description:
+      'Upgrade a training skill to its maximum potential in Player Coach Career.',
+    points: 3,
+    offset: 0x27e4,
+  },
+  {
+    title: 'Certified Legend',
+    description: 'Achieve Legendary Fame in any Career Mode.',
+    points: 25,
+    offset: 0x2840,
+  },
+  {
+    title: 'European Winners',
+    description: 'Win the Euro League tournament in Manager Career.',
+    points: 5,
+    offset: 0x289c,
+  },
+  {
+    title: 'European Champions',
+    description: 'Win the Champions Cup tournament in Manager Career.',
+    points: 5,
+    offset: 0x28f8,
+  },
+  {
+    title: 'Invincible',
+    description: 'Achieve an undefeated season in Manager Career.',
+    points: 10,
+    offset: 0x2954,
+  },
+];
+
+export const difficulties = {
+  easy: 0x00,
+  amateur: 0x01,
+  semiPro: 0x02,
+  professional: 0x03,
+  worldClass: 0x04,
+  legendary: 0x05,
+};
+
+export const UKAccomplishments = [
+  {
+    title: 'Hat Trick: United Kingdom',
+    description:
+      'Score a Hat Trick against any club from the United Kingdom in Professional difficulty or above.',
+    points: 3,
+    offset: 0x5c,
+  },
+  {
+    title: 'Underdog: United Kingdom',
+    description:
+      'Defeat a 4+ star club from the United Kingdom with any 2 star club in Semi-Pro difficulty or above.',
+    points: 3,
+    offset: 0xb8,
+  },
+  {
+    title: 'Barclays Premier League',
+    description: 'Win the Barclays Premier League.',
+    points: 5,
+    offset: 0x114,
+  },
+  {
+    title: 'Football League Championship',
+    description: 'Win the Football League Championship.',
+    points: 3,
+    offset: 0x170,
+  },
+  {
+    title: 'Football League 1',
+    description: 'Win the Football League 1.',
+    points: 3,
+    offset: 0x1cc,
+  },
+  {
+    title: 'Football League 2',
+    description: 'Win the Football League 2.',
+    points: 3,
+    offset: 0x228,
+  },
+  {
+    title: 'FA Cup',
+    description: 'Win the FA Cup.',
+    points: 3,
+    offset: 0x284,
+  },
+  {
+    title: 'Capital One Cup',
+    description: 'Win the Capital One Cup.',
+    points: 2,
+    offset: 0x2e0,
+  },
+  {
+    title: "Johnstone's Paint Trophy",
+    description: "Win the Johnstone's Paint Trophy.",
+    points: 2,
+    offset: 0x33c,
+  },
+  {
+    title: 'Scottish Premiership',
+    description: 'Win the Scottish Premiership.',
+    points: 3,
+    offset: 0x398,
+  },
+  {
+    title: 'Scottish Cup',
+    description: 'Win the Scottish Cup.',
+    points: 2,
+    offset: 0x3f4,
+  },
+];
+
+export const westernEuropeAccomplishments = [
+  {
+    title: 'Possession: Western Europe',
+    description:
+      'Achieve 75%+ Possession in Professional difficulty or above against a club from Western Europe.',
+    points: 3,
+    offset: 0x450,
+  },
+  {
+    title: 'Late Goal: Western Europe',
+    description:
+      'Score with a player subbed in after 85+ minutes against a club from Western Europe in Semi-Pro difficulty or above.',
+    points: 3,
+    offset: 0x4ac,
+  },
+  {
+    title: '5 Minutes: Western Europe',
+    description:
+      'Score in under 5 minutes against a club from Western Europe in Semi-Pro difficulty or above.',
+    points: 3,
+    offset: 0x508,
+  },
+  {
+    title: 'Ligue 1',
+    description: 'Win the Ligue 1.',
+    points: 5,
+    offset: 0x5c0,
+  },
+  {
+    title: 'Ligue 2',
+    description: 'Win the Ligue 2.',
+    points: 3,
+    offset: 0x61c,
+  },
+  {
+    title: 'Coupe Nationale',
+    description: 'Win the Coupe Nationale.',
+    points: 3,
+    offset: 0x678,
+  },
+  {
+    title: 'Coupe de la Ligue',
+    description: 'Win the Coupe de la Ligue.',
+    points: 2,
+    offset: 0x6d4,
+  },
+  {
+    title: 'Eredivisie',
+    description: 'Win the Eredivisie.',
+    points: 3,
+    offset: 0x730,
+  },
+  {
+    title: 'Dutch Cup',
+    description: 'Win the Dutch Cup.',
+    points: 2,
+    offset: 0x78c,
+  },
+  {
+    title: 'Belgium Pro League',
+    description: 'Win the Belgium Pro League.',
+    points: 3,
+    offset: 0x7e8,
+  },
+  {
+    title: 'Coupe de Belgique',
+    description: 'Win the Coupe de Belgique.',
+    points: 2,
+    offset: 0x844,
+  },
+];
+
+export const ligue1Clubs = [
+  0x266, 0x45, 0x3b, 0x3e, 0x1b2a7, 0xd9, 0x47, 0xe2, 0x41, 0xdb, 0x46, 0x48,
+  0x42, 0x71b, 0x3a, 0x17b, 0x4a, 0x711, 0x1af78,
+];
+
+export const eredivisieClubs = [
+  0x28a, 0x772, 0x77b, 0x774, 0x76f, 0xf6, 0x18918, 0x1891a, 0x776, 0x770,
+  0x77a, 0xf7, 0x771, 0x76e, 0x287, 0x779, 0x775,
+];
+
+export const southernEuropeAccomplishments = [
+  {
+    title: 'Shoot-Out: Southern Europe',
+    description:
+      'Win a penalty kick shootout in Semi-Pro difficulty or above against a club from Southern Europe.',
+    points: 2,
+    offset: 0x8a0,
+  },
+  {
+    title: 'Possession: Southern Europe',
+    description:
+      'Achieve over 75% Possession in Amateur difficulty or above against a club from Southern Europe.',
+    points: 2,
+    offset: 0x8fc,
+  },
+  {
+    title: '5 Goals: Southern Europe',
+    description:
+      'Win by 5 goals or more in Amateur difficulty or above against a club from Southern Europe.',
+    points: 3,
+    offset: 0x958,
+  },
+  {
+    title: 'Liga BBVA',
+    description: 'Win the Liga BBVA.',
+    points: 5,
+    offset: 0xa10,
+  },
+  {
+    title: 'Liga Adelante',
+    description: 'Win the Liga Adelante.',
+    points: 3,
+    offset: 0xa6c,
+  },
+  {
+    title: 'Spanish Cup',
+    description: 'Win the Spanish Cup.',
+    points: 3,
+    offset: 0xac8,
+  },
+  {
+    title: 'Serie A',
+    description: 'Win the Serie A Italia.',
+    points: 5,
+    offset: 0xb24,
+  },
+  {
+    title: 'Serie B',
+    description: 'Win the Serie B Italia.',
+    points: 3,
+    offset: 0xb80,
+  },
+  {
+    title: 'Coppa Nazionale',
+    description: 'Win the Coppa Nazionale.',
+    points: 3,
+    offset: 0xbdc,
+  },
+  {
+    title: 'Liga Portugal',
+    description: 'Win the Liga Portuguesa.',
+    points: 5,
+    offset: 0xc38,
+  },
+  {
+    title: 'Taça de Portugal',
+    description: 'Win the Taça de Portugal.',
+    points: 3,
+    offset: 0xc94,
+  },
+];
+
+export const serieAClubs = [
+  0x27, 0xbd, 0x732, 0x1af1c, 0xc0, 0x1af26, 0x1afdc, 0xce, 0x2c, 0x2e, 0x734,
+  0x2f, 0x30, 0x32, 0x34, 0x72d, 0x1b566, 0x36, 0x37,
+];
+
+export const centralEuropeAccomplishments = [
+  {
+    title: 'Shoot-Out: Central Europe',
+    description:
+      'Win a penalty kick shootout in World Class difficulty or above against a club from Central Europe.',
+    points: 3,
+    offset: 0xcf0,
+  },
+  {
+    title: '5 Minutes: Central Europe',
+    description:
+      'Score in under 5 minutes against a club from Central Europe in Professional difficulty or above',
+    points: 4,
+    offset: 0xd4c,
+  },
+  {
+    title: 'Bundesliga',
+    description: 'Win the German Bundesliga.',
+    points: 5,
+    offset: 0xe60,
+  },
+  {
+    title: '2. Bundesliga',
+    description: 'Win the German 2. Bundesliga.',
+    points: 3,
+    offset: 0xebc,
+  },
+  {
+    title: 'DFB Pokal',
+    description: 'Win the Deutscher Pokal.',
+    points: 3,
+    offset: 0xf18,
+  },
+  {
+    title: 'Raiffeisen Super League',
+    description: 'Win the Raiffeisen Super League.',
+    points: 3,
+    offset: 0xf74,
+  },
+  {
+    title: 'Swiss Cup',
+    description: 'Win the Swiss Cup.',
+    points: 2,
+    offset: 0xfd0,
+  },
+  {
+    title: 'Austrian Bundesliga',
+    description: 'Win the Austrian Bundesliga.',
+    points: 3,
+    offset: 0x102c,
+  },
+  {
+    title: 'ÖFB-Samsung-Cup',
+    description: 'Win the ÖFB-Samsung-Cup.',
+    points: 2,
+    offset: 0x1088,
+  },
+];
+
+export const bundesligaClubs = [
+  0xab, 0xa9, 0x272d, 0x20, 0x16, 0x17, 0x1afa4, 0x720, 0x18839, 0x22, 0x1c,
+  0x1e5, 0xa6, 0x19, 0x24, 0xaf, 0x26,
+];
+
+export const americasAccomplishments = [
+  {
+    title: 'Stay Ahead: The Americas',
+    description:
+      'Score and maintain a 2 goal lead in Semi-Pro difficulty or above against a club from the Americas.',
+    points: 3,
+    offset: 0x10e4,
+  },
+  {
+    title: 'Passing: The Americas',
+    description:
+      'Achieve 75%+ Passing in Professional difficulty or above against a club from the Americas and win.',
+    points: 3,
+    offset: 0x1140,
+  },
+  {
+    title: 'MLS Cup',
+    description: 'Win the MLS Cup.',
+    points: 3,
+    offset: 0x1254,
+  },
+  {
+    title: 'US Open Cup',
+    description: 'Win the US Open Cup.',
+    points: 2,
+    offset: 0x12b0,
+  },
+  {
+    title: 'Clausura',
+    description: 'Win the LIGA Bancomer MX: Clausura.',
+    points: 3,
+    offset: 0x130c,
+  },
+  {
+    title: 'Apertura',
+    description: 'Win the LIGA Bancomer MX: Apertura.',
+    points: 3,
+    offset: 0x1368,
+  },
+  {
+    title: 'Liga do Brasil',
+    description: 'Win the Liga do Brasil.',
+    points: 5,
+    offset: 0x13c4,
+  },
+  {
+    title: 'Copa do Brasil',
+    description: 'Win the Copa do Brasil.',
+    points: 3,
+    offset: 0x1420,
+  },
+  {
+    title: 'Americas Club Championship',
+    description: 'Win the Americas Club Championship.',
+    points: 5,
+    offset: 0x147c,
+  },
+];
+
+export const scandinaviaAccomplishments = [
+  {
+    title: 'Scandinavian Accuracy',
+    description:
+      'Achieve 90% Shots on Target in Semi-Pro difficulty or above against a Scandinavian club.',
+    points: 2,
+    offset: 0x14d8,
+  },
+  {
+    title: 'Clean Sheet: Scandinavia',
+    description:
+      'Win a match with a clean sheet against a club from Scandinavia in Semi-Pro difficulty.',
+    points: 2,
+    offset: 0x1534,
+  },
+  {
+    title: 'Fair Play: Scandinavia',
+    description:
+      'Win a match without bookings in Professional difficulty or above against a Scandinavian club.',
+    points: 3,
+    offset: 0x1590,
+  },
+  {
+    title: 'Passing: Scandinavia',
+    description:
+      'Achieve 85%+ in Passing in Amateur difficulty or above against a Scandinavian club.',
+    points: 2,
+    offset: 0x15ec,
+  },
+  {
+    title: 'Allsvenskan',
+    description: 'Win the Allsvenskan.',
+    points: 3,
+    offset: 0x1700,
+  },
+  {
+    title: 'Swedish Cup',
+    description: 'Win the Swedish Cup.',
+    points: 2,
+    offset: 0x175c,
+  },
+  {
+    title: 'Tippeligaen',
+    description: 'Win the Tippeligaen.',
+    points: 3,
+    offset: 0x17b8,
+  },
+  {
+    title: 'NM SAS Braathens Cup',
+    description: 'Win the NM SAS Braathens Cup.',
+    points: 2,
+    offset: 0x1814,
+  },
+  {
+    title: 'Superliga',
+    description: 'Win the Superliga.',
+    points: 3,
+    offset: 0x1870,
+  },
+  {
+    title: 'DBU Pokalen',
+    description: 'Win the DBU Pokalen.',
+    points: 2,
+    offset: 0x18cc,
+  },
+];
+
+export const restOfWorldAccomplishments = [
+  {
+    title: 'Benchwarmers Challenge',
+    description:
+      'Never substitute and win in Professional difficulty or above against a Rest of World club.',
+    points: 2,
+    offset: 0x1928,
+  },
+  {
+    title: 'Distribution Challenge',
+    description:
+      'Score 3 goals with 3 different players in Semi-Pro difficulty or above against a Rest of World club.',
+    points: 2,
+    offset: 0x1984,
+  },
+  {
+    title: 'Late Goal: Rest of World',
+    description:
+      'Score with a player subbed in after 75+ minutes in Professional difficulty or above.',
+    points: 3,
+    offset: 0x19e0,
+  },
+  {
+    title: 'Ekstraklasa',
+    description: 'Win the Ekstraklasa.',
+    points: 3,
+    offset: 0x1a3c,
+  },
+  {
+    title: 'Polska Puchar',
+    description: 'Win the Puchar Polski.',
+    points: 2,
+    offset: 0x1a98,
+  },
+  {
+    title: 'K-League Classic',
+    description: 'Win the K-League.',
+    points: 3,
+    offset: 0x1af4,
+  },
+  {
+    title: 'A-League',
+    description: 'Win the A-League.',
+    points: 3,
+    offset: 0x1b50,
+  },
+  {
+    title: 'Airtricity League',
+    description: 'Win the Airtricity League.',
+    points: 3,
+    offset: 0x1bac,
+  },
+  {
+    title: 'International Club Championship',
+    description: 'Win the International Club Championship.',
+    points: 3,
+    offset: 0x1c08,
+  },
+  {
+    title: 'Russian League',
+    description: 'Win the Russian League.',
+    points: 3,
+    offset: 0x1c64,
+  },
+  {
+    title: 'Russian Cup',
+    description: 'Win the Russian Cup.',
+    points: 2,
+    offset: 0x1cc0,
+  },
+];
+
+export const masterAccomplishments = [
+  {
+    title: 'Offside Master',
+    description:
+      'Win without getting offsides in World Class difficulty or above.',
+    points: 3,
+    offset: 0x20b4,
+  },
+  {
+    title: 'Goalscorer Keeper',
+    description: 'Score with a goalie in Professional difficulty or above.',
+    points: 3,
+    offset: 0x2110,
+  },
+  {
+    title: 'Quickdraw Master',
+    description: 'Score within 15 minutes in World Class difficulty or above.',
+    points: 3,
+    offset: 0x216c,
+  },
+  {
+    title: 'Distribution Master',
+    description:
+      'Score 5 goals with 5 different players in Professional difficulty or above.',
+    points: 3,
+    offset: 0x21c8,
+  },
+  {
+    title: 'Fair Play Master',
+    description:
+      'Win a match without any bookings in World Class difficulty or above.',
+    points: 3,
+    offset: 0x2224,
+  },
+  {
+    title: 'Hat Trick Master',
+    description: 'Score a Hat Trick in World Class difficulty or above.',
+    points: 5,
+    offset: 0x2280,
+  },
+  {
+    title: 'Clean Sheet Master',
+    description:
+      'Win a match with a clean sheet in World Class difficulty or above.',
+    points: 4,
+    offset: 0x22dc,
+  },
+  {
+    title: 'Master Goalkeeper',
+    description: 'Record 10 Clean Sheets in Be a Keeper.',
+    points: 3,
+    offset: 0x2394,
+  },
+];
+
+export const scenarioAccomplishments = [
+  {
+    title: 'I',
+    description:
+      'Use Scenario settings to assign your club 0 subs available. Win the match against a club from the United Kingdom.',
+    points: 2,
+    offset: 0x00,
+  },
+  {
+    title: 'II',
+    description:
+      'Use Scenario settings to assign your club 0 subs and 2 injuries. Win the match.',
+    points: 2,
+    offset: 0x564,
+  },
+  {
+    title: 'III',
+    description:
+      'Use Scenario settings to start a 0-0 match in the 2nd half and win by 3 goals.',
+    points: 2,
+    offset: 0x9b4,
+  },
+  {
+    title: 'IV',
+    description:
+      'Use Scenario settings to start a 0-0 match in the 85th minute. You must win.',
+    points: 3,
+    offset: 0xda8,
+  },
+  {
+    title: 'V',
+    description:
+      'Use Scenario settings to start a match in the 1st half of extra time down 1-2 and win.',
+    points: 3,
+    offset: 0xe04,
+  },
+  {
+    title: 'VI',
+    description:
+      'Use Scenario settings to assign your opponent a 1-0 lead. Win the match.',
+    points: 2,
+    offset: 0x119c,
+  },
+  {
+    title: 'VII',
+    description:
+      'Use Scenario settings to start a match in the 2nd half of extra time, score tied and win.',
+    points: 2,
+    offset: 0x11f8,
+  },
+  {
+    title: 'VIII',
+    description:
+      'Use Scenario settings to assign your club 1 red card. Win against a club from Scandinavia.',
+    points: 2,
+    offset: 0x1648,
+  },
+  {
+    title: 'IX',
+    description:
+      'Use Scenario settings to assign your opponent a 3-0 lead. Win the match.',
+    points: 2,
+    offset: 0x16a4,
+  },
+  {
+    title: 'X',
+    description:
+      'Use Scenario settings to assign your opponent a 5-0 lead in the 10th minute in Professional difficulty or above and win.',
+    points: 4,
+    offset: 0x2338,
+  },
+];
+
+export const scenarioSettings = {
+  ball: {
+    kickoff: 0x00,
+    throwInDef: 0x01,
+    throwInAtt: 0x02,
+    freeKickDef: 0x03,
+    freeKickAtt: 0x04,
+    cornerLeft: 0x05,
+    cornerRight: 0x06,
+    penaltyKick: 0x07,
+    goalKick: 0x08,
+  },
+  half: {
+    firstHalf: 0x00,
+    secondHalf: 0x01,
+    extraTimeFirstHalf: 0x02,
+    extraTimeSecondHalf: 0x03,
+  },
+  extraTime: {
+    classic: 0x00,
+    silverGoal: 0x01,
+    goldenGoal: 0x02,
+    penaltyShootout: 0x03,
+    none: 0x04,
+  },
+};
+
+export const enduranceAccomplishments = [
+  {
+    title: 'Beginner Streaker',
+    description: 'Achieve a 5 game winning streak in any difficulty level.',
+    points: 2,
+    offset: 0x1d1c,
+  },
+  {
+    title: 'Intermediate Streaker',
+    description: 'Achieve a 10 game winning streak in any difficulty level.',
+    points: 5,
+    offset: 0x1d78,
+  },
+  {
+    title: 'Master Streaker',
+    description: 'Achieve a 20 game winning streak in any difficulty level.',
+    points: 10,
+    offset: 0x1dd4,
+  },
+  {
+    title: 'Beginner Scorer',
+    description: 'Score a total of 10 goals in any difficulty level.',
+    points: 2,
+    offset: 0x1e30,
+  },
+  {
+    title: 'Intermediate Scorer',
+    description: 'Score a total of 50 goals in any difficulty level.',
+    points: 5,
+    offset: 0x1e8c,
+  },
+  {
+    title: 'Master Scorer',
+    description: 'Score a total of 100 goals in any difficulty level.',
+    points: 10,
+    offset: 0x1ee8,
+  },
+  {
+    title: 'Beginner Winner',
+    description: 'Win a total of 10 games in any difficulty level.',
+    points: 2,
+    offset: 0x1f44,
+  },
+  {
+    title: 'Intermediate Winner',
+    description: 'Win a total of 25 games in any difficulty level.',
+    points: 5,
+    offset: 0x1fa0,
+  },
+  {
+    title: 'Experienced Winner',
+    description: 'Win a total of 50 games in any difficulty level.',
+    points: 10,
+    offset: 0x1ffc,
+  },
+  {
+    title: 'Master Winner',
+    description: 'Win a total of 100 games in any difficulty level.',
+    points: 25,
+    offset: 0x2058,
+  },
+];
