@@ -196,7 +196,9 @@ const codeFor = () => {
   );
 
   const isPractice = $(
-    ['', 'Mem', '32bit', addresses.mode, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.mode],
+    ['AddAddress', 'Mem', '32bit', 0x04],
+    ['', 'Mem', '32bit', 0x04, '=', 'Value', '', 0],
     ['', 'Mem', '32bit', addresses.ingame, '=', 'Value', '', 1],
   );
 
@@ -431,6 +433,15 @@ const codeFor = () => {
     ['', 'Mem', '32bit', 0x00, '=', 'Value', '', 0],
   );
 
+  const modifiedSquads = $(
+    ['AddAddress', 'Mem', '32bit', addresses.mode],
+    ['AddAddress', 'Mem', '32bit', 0x04],
+    ['', 'Mem', '32bit', 0x04, '=', 'Value', '', 0],
+    ['AddAddress', 'Mem', '32bit', addresses.editPointer],
+    ['AddAddress', 'Mem', '32bit', 0x14],
+    ['', 'Mem', '32bit', 0x00, '>', 'Value', '', 0],
+  );
+
   const accomplishmentProtection = $(
     ['AddAddress', 'Mem', '32bit', addresses.mode],
     ['AddAddress', 'Mem', '32bit', 0x04],
@@ -659,6 +670,7 @@ const codeFor = () => {
     awayTeamIs,
     sideSelectIntact,
     vanillaSquads,
+    modifiedSquads,
     accomplishmentProtection,
     scenarioOff,
     scenarioApply,
@@ -1893,6 +1905,10 @@ export const rich = RichPresence({
         [
           $(c.gameIs.started, c.playerIs.ingame),
           `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${regularTime} 🏟️ ${stadium}`,
+        ],
+        [
+          $(c.gameIs.started, c.modifiedSquads),
+          `${language} [${mode}] Getting ready to play ⚠ Squads modification detected ⚠`,
         ],
         [$(c.gameIs.started), `${language} [${mode}] Getting ready to play`],
       ]);
