@@ -1486,7 +1486,7 @@ export const enduranceAccomplishments = [
   {
     title: 'Beginner Streaker',
     description: 'Achieve a 5 game winning streak in any difficulty level.',
-    points: 2,
+    points: 3,
     offset: 0x1d1c,
   },
   {
@@ -1504,7 +1504,7 @@ export const enduranceAccomplishments = [
   {
     title: 'Beginner Scorer',
     description: 'Score a total of 10 goals in any difficulty level.',
-    points: 2,
+    points: 3,
     offset: 0x1e30,
   },
   {
@@ -1522,7 +1522,7 @@ export const enduranceAccomplishments = [
   {
     title: 'Beginner Winner',
     description: 'Win a total of 10 games in any difficulty level.',
-    points: 2,
+    points: 3,
     offset: 0x1f44,
   },
   {
