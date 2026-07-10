@@ -72,6 +72,7 @@ const codeFor = () => {
     bookingsPointer: 0x735110,
     scenarioAwayRedsPointer: 0x7351c0,
     language: 0x735240,
+    halfLengthPointer: 0x735290,
     offsidesPointer: 0x7352a0,
     homeTeam: 0x73a2d0,
     awayTeam: 0x73a2e8,
@@ -89,6 +90,7 @@ const codeFor = () => {
     ballOnPlay: 0x7a38c4,
     regularTime: 0x7a38c8,
     stoppageTime: 0x7a38cc,
+    totalTime: 0x7a38d0,
     homeTeamAbb: 0x7a3958,
     awayTeamAbb: 0x7a399c,
     simulationPointer: 0x800fc8,
@@ -170,6 +172,7 @@ const codeFor = () => {
     regularTimeE: $(['Measured', 'Mem', '8bit', addresses.timeDisplay + 4]),
     regularTimeF: $(['Measured', 'Mem', '8bit', addresses.timeDisplay + 5]),
     stoppageTime: $(['Measured', 'Mem', '32bit', addresses.stoppageTime]),
+    totalTime: $(['Measured', 'Mem', '32bit', addresses.totalTime]),
   };
 
   // prettier-ignore
@@ -263,6 +266,36 @@ const codeFor = () => {
     ['', 'Mem', '32bit', addresses.controller8, '=', 'Value', '', 15],
   );
 
+  const homePlayerMeasured = $(
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller1, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller2, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller3, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller4, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller5, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller6, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller7, '!=', 'Value', '', 1],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller8, '!=', 'Value', '', 1],
+    ['AddSource', 'Mem', '32bit', addresses.controller1],
+    ['AddSource', 'Mem', '32bit', addresses.controller2],
+    ['AddSource', 'Mem', '32bit', addresses.controller3],
+    ['AddSource', 'Mem', '32bit', addresses.controller4],
+    ['AddSource', 'Mem', '32bit', addresses.controller5],
+    ['AddSource', 'Mem', '32bit', addresses.controller6],
+    ['AddSource', 'Mem', '32bit', addresses.controller7],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller8, '=', 'Value', '', 14],
+  );
+
+  const awayPlayerMeasured = $(
+    ['AddSource', 'Mem', '32bit', addresses.controller1],
+    ['AddSource', 'Mem', '32bit', addresses.controller2],
+    ['AddSource', 'Mem', '32bit', addresses.controller3],
+    ['AddSource', 'Mem', '32bit', addresses.controller4],
+    ['AddSource', 'Mem', '32bit', addresses.controller5],
+    ['AddSource', 'Mem', '32bit', addresses.controller6],
+    ['AddSource', 'Mem', '32bit', addresses.controller7],
+    ['MeasuredIf', 'Mem', '32bit', addresses.controller8, '=', 'Value', '', 15],
+  );
+
   // prettier-ignore
   const homeWinning = $(
     ['', 'Mem', '32bit', addresses.homeGoals, '>', 'Mem', '32bit', addresses.awayGoals],
@@ -309,6 +342,16 @@ const codeFor = () => {
 
   const awayScored = (goals) =>
     $(['', 'Mem', '32bit', addresses.awayGoals, '=', 'Value', '', goals]);
+
+  const homeScoredFirst = $(
+    ['', 'Delta', '32bit', addresses.homeGoals, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.homeGoals, '=', 'Value', '', 1],
+  );
+
+  const awayScoredFirst = $(
+    ['', 'Delta', '32bit', addresses.awayGoals, '=', 'Value', '', 0],
+    ['', 'Mem', '32bit', addresses.awayGoals, '=', 'Value', '', 1],
+  );
 
   const matchOver = $(
     ['AddAddress', 'Mem', '32bit', addresses.ingameMenuStringPointer],
@@ -592,6 +635,12 @@ const codeFor = () => {
     ['', 'Mem', '32bit', 0x04, '=', 'Value', '', 1],
   );
 
+  const defaultHalfLength = $(
+    ['AddAddress', 'Mem', '32bit', addresses.halfLengthPointer],
+    ['AddAddress', 'Mem', '32bit', 0x04],
+    ['', 'Mem', '32bit', 0x04, '=', 'Value', '', 6],
+  );
+
   const homePenNoMissed = $(
     ['', 'Delta', '32bit', addresses.penaltyHome1, '=', 'Value', '', 0],
     ['', 'Mem', '32bit', addresses.penaltyHome1, '!=', 'Value', '', 0, 1],
@@ -629,6 +678,30 @@ const codeFor = () => {
       ['', 'Mem', '32bit', 0x1ac, '>', 'Delta', '32bit', 0x1ac, 1],
     );
 
+  const playerRedCard = (playerAddress) =>
+    $(
+      ['AddAddress', 'Mem', '32bit', playerAddress],
+      ['', 'Mem', '32bit', 0x1d8, '>', 'Delta', '32bit', 0x1d8],
+    );
+
+  const noRedsHome = $(
+    ...addresses.homePlayerPointers.map((pointer) =>
+      $(
+        ['AddAddress', 'Mem', '32bit', pointer],
+        ['', 'Delta', '32bit', 0x1d8, '=', 'Value', '', 0],
+      ),
+    ),
+  );
+
+  const noRedsAway = $(
+    ...addresses.awayPlayerPointers.map((pointer) =>
+      $(
+        ['AddAddress', 'Mem', '32bit', pointer],
+        ['', 'Delta', '32bit', 0x1d8, '=', 'Value', '', 0],
+      ),
+    ),
+  );
+
   return {
     addresses,
     gameIs,
@@ -645,6 +718,8 @@ const codeFor = () => {
     accomplishmentFlip,
     homePlayer,
     awayPlayer,
+    homePlayerMeasured,
+    awayPlayerMeasured,
     homeWinning,
     homeWinningAllPens,
     awayWinning,
@@ -654,6 +729,8 @@ const codeFor = () => {
     awayWinningScored,
     homeScored,
     awayScored,
+    homeScoredFirst,
+    awayScoredFirst,
     matchOver,
     matchOverTrigger,
     currentDifficultyIsAtLeast,
@@ -691,9 +768,13 @@ const codeFor = () => {
     godinScoredCheckpoint,
     ramosScoredCheckpoint,
     defaultSettings,
+    defaultHalfLength,
     homePenNoMissed,
     rodriguezScoredCheckpoint,
     gotzeScoredCheckpoint,
+    playerRedCard,
+    noRedsHome,
+    noRedsAway,
   };
 };
 
@@ -712,6 +793,31 @@ const getEachPlayerGroups = (core, playerFunction) => {
   c.addresses.awayPlayerPointers.forEach(
     (pointer, index) =>
       (groups[`alt${index + 12}`] = $(c.awayPlayer, playerFunction(pointer))),
+  );
+  return groups;
+};
+
+/**
+ * @param {ConditionBuilder} core
+ * @param {ConditionBuilder} playerFunction
+ */
+const getEachPlayerRedCardGroups = (core, playerFunction) => {
+  const groups = { core };
+  c.addresses.homePlayerPointers.forEach(
+    (pointer, index) =>
+      (groups[`alt${index + 1}`] = $(
+        c.homePlayer,
+        c.noRedsHome,
+        playerFunction(pointer),
+      )),
+  );
+  c.addresses.awayPlayerPointers.forEach(
+    (pointer, index) =>
+      (groups[`alt${index + 12}`] = $(
+        c.awayPlayer,
+        c.noRedsAway,
+        playerFunction(pointer),
+      )),
   );
   return groups;
 };
@@ -1833,6 +1939,88 @@ for (const achievement of enduranceAccomplishments) {
     ),
   });
 }
+
+set.addLeaderboard({
+  title: 'Goal%',
+  description: 'Fastest goal scored in match clock time (6 mins Half Length).',
+  lowerIsBetter: true,
+  type: 'SECS',
+  conditions: {
+    start: {
+      core: $(
+        c.gameIs.started,
+        c.defaultSettings,
+        c.defaultHalfLength,
+        c.playerIs.ingame,
+        c.sideSelectIntact,
+        c.vanillaSquads,
+        c.scenarioOff,
+      ),
+      alt1: $(c.homePlayer, c.homeScoredFirst),
+      alt2: $(c.awayPlayer, c.awayScoredFirst),
+    },
+    cancel: '0=1',
+    submit: '1=1',
+    value: {
+      core: c.playerMeasured.totalTime,
+    },
+  },
+});
+
+set.addLeaderboard({
+  title: 'Red%',
+  description:
+    'Fastest red card received in match clock time (6 mins Half Length).',
+  lowerIsBetter: true,
+  type: 'SECS',
+  conditions: {
+    start: getEachPlayerRedCardGroups(
+      $(
+        c.gameIs.started,
+        c.defaultSettings,
+        c.defaultHalfLength,
+        c.playerIs.ingame,
+        c.sideSelectIntact,
+        c.vanillaSquads,
+        c.scenarioOff,
+        c.noReds,
+      ),
+      c.playerRedCard,
+    ),
+    cancel: '0=1',
+    submit: '1=1',
+    value: {
+      core: c.playerMeasured.totalTime,
+    },
+  },
+});
+
+set.addLeaderboard({
+  title: 'Most Goals',
+  description: 'Most goals scored in a single match (6 mins Half Length).',
+  lowerIsBetter: false,
+  type: 'VALUE',
+  conditions: {
+    start: {
+      core: $(
+        c.gameIs.started,
+        c.defaultSettings,
+        c.defaultHalfLength,
+        c.playerIs.ingame,
+        c.sideSelectIntact,
+        c.vanillaSquads,
+        c.scenarioOff,
+        c.matchOver,
+      ),
+    },
+    cancel: '0=1',
+    submit: '1=1',
+    value: {
+      core: $(c.homePlayerMeasured, c.playerMeasured.homeScore),
+      alt1: $(c.awayPlayerMeasured, c.playerMeasured.awayScore),
+    },
+  },
+});
 
 export const rich = RichPresence({
   format: { Value: 'VALUE', Secs: 'SECS' },
