@@ -298,7 +298,8 @@ const codeFor = () => {
 
   // prettier-ignore
   const homeWinning = $(
-    ['', 'Mem', '32bit', addresses.homeGoals, '>', 'Mem', '32bit', addresses.awayGoals],
+    ['OrNext', 'Mem', '32bit', addresses.homeGoals, '>', 'Mem', '32bit', addresses.awayGoals],
+    ['', 'Mem', '32bit', addresses.homeGoalsPens, '>', 'Mem', '32bit', addresses.awayGoalsPens],
   );
 
   // prettier-ignore
@@ -309,7 +310,8 @@ const codeFor = () => {
 
   // prettier-ignore
   const awayWinning = $(
-    ['', 'Mem', '32bit', addresses.homeGoals, '<', 'Mem', '32bit', addresses.awayGoals],
+    ['OrNext', 'Mem', '32bit', addresses.homeGoals, '<', 'Mem', '32bit', addresses.awayGoals],
+    ['', 'Mem', '32bit', addresses.homeGoalsPens, '<', 'Mem', '32bit', addresses.awayGoalsPens],
   );
 
   // prettier-ignore
