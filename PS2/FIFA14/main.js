@@ -1705,7 +1705,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'What If Scenarios: No Era Penal',
   description:
-    'Use Scenario settings to start a 1-1 match in the first half of extra time vs Netherlands as Mexico. Win the match before time runs out in Legendary difficulty.',
+    'Use Scenario settings to start a 1-1 match in the first half of extra time vs Netherlands as Mexico. Win the match in Legendary difficulty.',
   points: 10,
   conditions: $(
     c.gameIs.started,
@@ -1917,7 +1917,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Classic Scenarios: Super Mario',
   description:
-    'Use Scenario settings to start a 0-0 match in the second half of extra time as Germany against Argentina. Win the match before time runs out in Legendary difficulty.',
+    'Use Scenario settings to start a 0-0 match in the second half of extra time as Germany against Argentina. Score with Mario Götze then win the match in Legendary difficulty.',
   points: 10,
   conditions: getEachPlayerGroups(
     $(
