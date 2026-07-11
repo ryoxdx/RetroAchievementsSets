@@ -305,7 +305,6 @@ const codeFor = () => {
   const homeWinningAllPens = $(
     ['', 'Mem', '32bit', addresses.homeGoals, '=', 'Mem', '32bit', addresses.awayGoals],
     ['', 'Mem', '32bit', addresses.homeGoalsPens, '>', 'Mem', '32bit', addresses.awayGoalsPens],
-    ['', 'Mem', '32bit', addresses.homeGoalsPens, '=', 'Value', '', 5],
   );
 
   // prettier-ignore
