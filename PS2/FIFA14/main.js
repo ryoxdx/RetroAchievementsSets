@@ -68,6 +68,7 @@ const codeFor = () => {
     injuriesPointer: 0x734c44,
     scenarioAwayInjuriesPointer: 0x734df8,
     awayTeamIdPointer: 0x734e94,
+    memcardPointer: 0x734edc,
     scenarioAwayScorePointer: 0x734fc4,
     bookingsPointer: 0x735110,
     scenarioAwayRedsPointer: 0x7351c0,
@@ -122,9 +123,10 @@ const codeFor = () => {
 
   const gameIs = {
     started: $(
-      ['', 'Mem', '32bit', addresses.gameStartedPointer, '!=', 'Value', '', 0],
-      ['AddAddress', 'Mem', '32bit', addresses.gameStartedPointer],
-      ['', 'Mem', '32bit', 0x08, '=', 'Value', '', 1],
+      ['', 'Mem', '32bit', addresses.memcardPointer, '!=', 'Value', '', 0],
+      ['AddAddress', 'Mem', '32bit', addresses.memcardPointer],
+      ['AddAddress', 'Mem', '32bit', 0x04],
+      ['', 'Mem', '32bit', 0x04, '=', 'Value', '', 1],
     ),
     // prettier-ignore
     careerMode: $(['', 'Mem', '32bit', addresses.careerPointer, '!=', 'Value', '', 0]),
@@ -2123,7 +2125,6 @@ export const rich = RichPresence({
         ],
         [
           $(
-            c.gameIs.started,
             c.gameIs.started,
             c.playerIs.ingame,
             c.isPast100Min,
