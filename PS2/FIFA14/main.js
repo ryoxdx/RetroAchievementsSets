@@ -78,6 +78,7 @@ const codeFor = () => {
     awayTeam: 0x73a2e8,
     editPointer: 0x75b168,
     careerProgression: 0x75b888,
+    menuGeometryPointer: 0x75f148,
     controller1: 0x0076b310,
     controller2: 0x0076b314,
     controller3: 0x0076b318,
@@ -495,7 +496,19 @@ const codeFor = () => {
   const accomplishmentProtection = $(
     ['AddAddress', 'Mem', '32bit', addresses.mode],
     ['AddAddress', 'Mem', '32bit', 0x04],
-    ['', 'Mem', '32bit', 0x04, '!=', 'Value', '', 0],
+    ['', 'Mem', '32bit', 0x04, '!=', 'Value', '', 0, 1],
+    ['AddAddress', 'Mem', '32bit', addresses.menuGeometryPointer],
+    ['AddAddress', 'Mem', '32bit', 0x158],
+    ['AddAddress', 'Mem', '32bit', 0x04],
+    ['AddAddress', 'Mem', '32bit', 0x44],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['OrNext', 'Mem', 'Float', 0x20, '=', 'Float', '', 146.5],
+    ['AddAddress', 'Mem', '32bit', addresses.menuGeometryPointer],
+    ['AddAddress', 'Mem', '32bit', 0x158],
+    ['AddAddress', 'Mem', '32bit', 0x04],
+    ['AddAddress', 'Mem', '32bit', 0x44],
+    ['AddAddress', 'Mem', '32bit', 0x50],
+    ['ResetIf', 'Mem', 'Float', 0x20, '=', 'Float', '', 204.5],
   );
 
   const scenarioOff = $(
@@ -1971,7 +1984,7 @@ set.addLeaderboard({
   title: 'Goal%',
   description: 'Fastest goal scored in match clock time (6 mins Half Length).',
   lowerIsBetter: true,
-  type: 'SECS',
+  type: 'TIMESECS',
   conditions: {
     start: {
       core: $(
@@ -1999,7 +2012,7 @@ set.addLeaderboard({
   description:
     'Fastest red card received in match clock time (6 mins Half Length).',
   lowerIsBetter: true,
-  type: 'SECS',
+  type: 'TIMESECS',
   conditions: {
     start: getEachPlayerRedCardGroups(
       $(
