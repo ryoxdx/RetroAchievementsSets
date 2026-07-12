@@ -1393,42 +1393,42 @@ export const scenarioAccomplishments = [
   {
     title: 'II',
     description:
-      'Use Scenario settings to assign your club 0 subs and 2 injuries. Win the match.',
+      'Use Scenario settings to assign your club 0 subs and 2 injuries. Win the match against a club from Western Europe.',
     points: 2,
     offset: 0x564,
   },
   {
     title: 'III',
     description:
-      'Use Scenario settings to start a 0-0 match in the 2nd half and win by 3 goals.',
+      'Use Scenario settings to start a 0-0 match in the 2nd half and win by 3 goals against a club from Southern Europe.',
     points: 3,
     offset: 0x9b4,
   },
   {
     title: 'IV',
     description:
-      'Use Scenario settings to start a 0-0 match in the 85th minute. You must win.',
+      'Use Scenario settings to start a 0-0 match in the 85th minute against a club from Central Europe. You must win.',
     points: 3,
     offset: 0xda8,
   },
   {
     title: 'V',
     description:
-      'Use Scenario settings to start a match in the 1st half of extra time down 1-2 and win.',
+      'Use Scenario settings to start a match in the 1st half of extra time down 1-2 and win against a club from Central Europe.',
     points: 3,
     offset: 0xe04,
   },
   {
     title: 'VI',
     description:
-      'Use Scenario settings to assign your opponent a 1-0 lead. Win the match.',
+      'Use Scenario settings to assign your opponent a 1-0 lead. Win the match against a club from The Americas.',
     points: 2,
     offset: 0x119c,
   },
   {
     title: 'VII',
     description:
-      'Use Scenario settings to start a match in the 2nd half of extra time, score tied and win.',
+      'Use Scenario settings to start a match in the 2nd half of extra time, score tied and win against a club from The Americas.',
     points: 2,
     offset: 0x11f8,
   },
@@ -1442,7 +1442,7 @@ export const scenarioAccomplishments = [
   {
     title: 'IX',
     description:
-      'Use Scenario settings to assign your opponent a 3-0 lead. Win the match.',
+      'Use Scenario settings to assign your opponent a 3-0 lead. Win the match against a club from Scandinavia.',
     points: 3,
     offset: 0x16a4,
   },
