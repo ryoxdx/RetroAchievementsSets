@@ -306,15 +306,27 @@ const codeFor = () => {
   );
 
   // prettier-ignore
+  const homeWinningTrigger = $(
+    ['OrNext', 'Mem', '32bit', addresses.homeGoals, '>', 'Mem', '32bit', addresses.awayGoals],
+    ['Trigger', 'Mem', '32bit', addresses.homeGoalsPens, '>', 'Mem', '32bit', addresses.awayGoalsPens],
+  );
+
+  // prettier-ignore
   const homeWinningAllPens = $(
-    ['', 'Mem', '32bit', addresses.homeGoals, '=', 'Mem', '32bit', addresses.awayGoals],
-    ['', 'Mem', '32bit', addresses.homeGoalsPens, '>', 'Mem', '32bit', addresses.awayGoalsPens],
+    ['Trigger', 'Mem', '32bit', addresses.homeGoals, '=', 'Mem', '32bit', addresses.awayGoals],
+    ['Trigger', 'Mem', '32bit', addresses.homeGoalsPens, '>', 'Mem', '32bit', addresses.awayGoalsPens],
   );
 
   // prettier-ignore
   const awayWinning = $(
     ['OrNext', 'Mem', '32bit', addresses.homeGoals, '<', 'Mem', '32bit', addresses.awayGoals],
     ['', 'Mem', '32bit', addresses.homeGoalsPens, '<', 'Mem', '32bit', addresses.awayGoalsPens],
+  );
+
+  // prettier-ignore
+  const awayWinningTrigger = $(
+    ['OrNext', 'Mem', '32bit', addresses.homeGoals, '<', 'Mem', '32bit', addresses.awayGoals],
+    ['Trigger', 'Mem', '32bit', addresses.homeGoalsPens, '<', 'Mem', '32bit', addresses.awayGoalsPens],
   );
 
   // prettier-ignore
@@ -327,6 +339,13 @@ const codeFor = () => {
     ['', 'Mem', '32bit', addresses.homeGoals, '>', 'Value', '', 0],
     ['', 'Delta', '32bit', addresses.homeGoals, '<', 'Mem', '32bit', addresses.awayGoals],
     ['', 'Mem', '32bit', addresses.homeGoals, '=', 'Mem', '32bit', addresses.awayGoals],
+  );
+
+  // prettier-ignore
+  const homeTiedTrigger = $(
+    ['Trigger', 'Mem', '32bit', addresses.homeGoals, '>', 'Value', '', 0],
+    ['', 'Delta', '32bit', addresses.homeGoals, '<', 'Mem', '32bit', addresses.awayGoals],
+    ['Trigger', 'Mem', '32bit', addresses.homeGoals, '=', 'Mem', '32bit', addresses.awayGoals],
   );
 
   // prettier-ignore
@@ -636,7 +655,7 @@ const codeFor = () => {
 
   const godinScoredCheckpoint = (playerAddress) =>
     $(
-      ['AndNext', 'Delta', '32bit', addresses.homeGoals, '=', 'Value', '', 0],
+      ['AndNext', 'Delta', '32bit', addresses.awayGoals, '=', 'Value', '', 0],
       ['AddAddress', 'Mem', '32bit', playerAddress],
       ['AndNext', 'Mem', '32bit', 0x4c, '=', 'Value', '', 0x2c8dd],
       ['AddAddress', 'Mem', '32bit', playerAddress],
@@ -665,7 +684,17 @@ const codeFor = () => {
 
   const homePenNoMissed = $(
     ['', 'Delta', '32bit', addresses.penaltyHome1, '=', 'Value', '', 0],
-    ['', 'Mem', '32bit', addresses.penaltyHome1, '!=', 'Value', '', 0, 1],
+    [
+      'Trigger',
+      'Mem',
+      '32bit',
+      addresses.penaltyHome1,
+      '!=',
+      'Value',
+      '',
+      0,
+      1,
+    ],
     ['ResetIf', 'Mem', '32bit', addresses.penaltyHome1, '=', 'Value', '', 1],
     ['ResetIf', 'Mem', '32bit', addresses.penaltyHome2, '=', 'Value', '', 1],
     ['ResetIf', 'Mem', '32bit', addresses.penaltyHome3, '=', 'Value', '', 1],
@@ -743,10 +772,13 @@ const codeFor = () => {
     homePlayerMeasured,
     awayPlayerMeasured,
     homeWinning,
+    homeWinningTrigger,
     homeWinningAllPens,
     awayWinning,
+    awayWinningTrigger,
     awayNoFouls,
     homeTied,
+    homeTiedTrigger,
     homeWinningScored,
     awayWinningScored,
     homeScored,
@@ -1274,8 +1306,8 @@ set.addAchievement({
     c.homeTeamIs(0x01),
     c.awayTeamIs(0x7a0),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1309,15 +1341,15 @@ set.addAchievement({
     c.homeTeamIs(0x413),
     c.awayTeamIs(0x40f),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
 set.addAchievement({
   title: 'What If Scenarios: Taça de Portugal',
   description:
-    'Use Scenario settings to start a match in the 20th minute down 0-1 vs SL Benfica as Rio Ave FC. Win the match in Legendary difficulty.',
+    'Use Scenario settings to start a match in the 20th minute down 1-0 vs SL Benfica as Rio Ave FC. Win the match in Legendary difficulty.',
   points: 10,
   conditions: $(
     c.gameIs.started,
@@ -1328,7 +1360,7 @@ set.addAchievement({
     c.sideSelectIntact,
     c.vanillaSquads,
     c.scenarioApply,
-    c.scenarioScore(0, 1),
+    c.scenarioScore(1, 0),
     c.scenarioBall(scenarioSettings.ball.kickoff),
     c.scenarioHalf(scenarioSettings.half.firstHalf),
     c.scenarioTimeLeft(25),
@@ -1344,8 +1376,8 @@ set.addAchievement({
     c.homeTeamIs(0xea),
     c.awayTeamIs(0x2e8),
     c.awayPlayer,
-    c.awayWinning,
-    c.matchOver,
+    c.awayWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1379,15 +1411,15 @@ set.addAchievement({
     c.homeTeamIs(0x16),
     c.awayTeamIs(0x15),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
 set.addAchievement({
   title: 'Classic Scenarios: La Liga',
   description:
-    "Use Scenario settings to start a match in the 50th minute down 0-1 with Extra Time Format set to None vs Barcelona as Atlético Madrid. Score with Godín and don't concede any more goals in Legendary difficulty. Ball Location may be set to a Corner.",
+    "Use Scenario settings to start a match in the 50th minute down 1-0 with Extra Time Format set to None vs Barcelona as Atlético Madrid. Score with Godín and don't concede any more goals in Legendary difficulty. Ball Location may be set to a Corner.",
   points: 10,
   conditions: getEachPlayerGroups(
     $(
@@ -1399,7 +1431,7 @@ set.addAchievement({
       c.sideSelectIntact,
       c.vanillaSquads,
       c.scenarioApply,
-      c.scenarioScore(0, 1),
+      c.scenarioScore(1, 0),
       orNext(
         c.scenarioBall(scenarioSettings.ball.kickoff),
         c.scenarioBall(scenarioSettings.ball.cornerLeft),
@@ -1416,10 +1448,10 @@ set.addAchievement({
       c.scenarioAwayInjuries(0),
       c.scenarioHomeSubs(3),
       c.scenarioAwaySubs(3),
-      c.homeTeamIs(0xf0),
-      c.awayTeamIs(0xf1),
-      c.homePlayer,
-      c.awayScored(1),
+      c.homeTeamIs(0xf1),
+      c.awayTeamIs(0xf0),
+      c.awayPlayer,
+      c.homeScored(1),
       c.matchOverTrigger,
       c.matchReset,
     ),
@@ -1457,8 +1489,8 @@ set.addAchievement({
     c.homeTeamIs(0x09),
     c.awayTeamIs(0x05),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1491,7 +1523,7 @@ set.addAchievement({
     c.homeTeamIs(0x707),
     c.awayTeamIs(0x09),
     c.homePlayer,
-    c.homeTied,
+    c.homeTiedTrigger,
   ),
 });
 
@@ -1526,7 +1558,7 @@ set.addAchievement({
     c.homePlayer,
     c.homeWinningAllPens,
     c.homePenNoMissed,
-    c.matchOver,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1560,15 +1592,15 @@ set.addAchievement({
     c.homeTeamIs(0x40b),
     c.awayTeamIs(0x1af3c),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
 set.addAchievement({
   title: 'Classic Scenarios: Champions League',
   description:
-    'Use Scenario settings to start a match in the 85th minute down 0-1 with 0 subs left as Real Madrid against Athlético Madrid. Score with Sergio Ramos then win the match in Legendary difficulty. Ball Location may be set to a Corner.',
+    'Use Scenario settings to start a match in the 85th minute down 0-1 with 0 subs left on both sides as Real Madrid against Athlético Madrid. Score with Sergio Ramos then win the match in Legendary difficulty. Ball Location may be set to a Corner.',
   points: 25,
   conditions: getEachPlayerGroups(
     $(
@@ -1600,7 +1632,7 @@ set.addAchievement({
       c.homeTeamIs(0xf3),
       c.awayTeamIs(0xf0),
       c.homePlayer,
-      c.homeWinning,
+      c.homeWinningTrigger,
       c.matchOverTrigger,
       c.matchReset,
     ),
@@ -1638,8 +1670,8 @@ set.addAchievement({
     c.homeTeamIs(0x552),
     c.awayTeamIs(0x1b420),
     c.awayPlayer,
-    c.awayWinning,
-    c.matchOver,
+    c.awayWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1673,8 +1705,8 @@ set.addAchievement({
     c.homeTeamIs(0x53f),
     c.awayTeamIs(0x561),
     c.awayPlayer,
-    c.awayWinning,
-    c.matchOver,
+    c.awayWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1709,7 +1741,7 @@ set.addAchievement({
       c.homeTeamIs(0x1b205),
       c.awayTeamIs(0x561),
       c.homePlayer,
-      c.homeWinning,
+      c.homeWinningTrigger,
       c.matchOverTrigger,
       c.matchReset,
     ),
@@ -1747,8 +1779,8 @@ set.addAchievement({
     c.homeTeamIs(0x1b420),
     c.awayTeamIs(0x56a),
     c.awayPlayer,
-    c.awayWinning,
-    c.matchOver,
+    c.awayWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1782,8 +1814,8 @@ set.addAchievement({
     c.homeTeamIs(0x55a),
     c.awayTeamIs(0x1b363),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1817,9 +1849,9 @@ set.addAchievement({
     c.homeTeamIs(0x52d),
     c.awayTeamIs(0x56b),
     c.awayPlayer,
-    c.awayWinning,
+    c.awayWinningTrigger,
     c.homeScored(0),
-    c.matchOver,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1853,9 +1885,9 @@ set.addAchievement({
     c.homeTeamIs(0x55a),
     c.awayTeamIs(0x1b205),
     c.awayPlayer,
-    c.awayWinning,
+    c.awayWinningTrigger,
     c.awayNoFouls,
-    c.matchOver,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1889,8 +1921,8 @@ set.addAchievement({
     c.homeTeamIs(0x559),
     c.awayTeamIs(0x52d),
     c.awayPlayer,
-    c.awayWinning,
-    c.matchOver,
+    c.awayWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1924,8 +1956,8 @@ set.addAchievement({
     c.homeTeamIs(0x55a),
     c.awayTeamIs(0x539),
     c.homePlayer,
-    c.homeWinning,
-    c.matchOver,
+    c.homeWinningTrigger,
+    c.matchOverTrigger,
   ),
 });
 
@@ -1960,7 +1992,7 @@ set.addAchievement({
       c.homeTeamIs(0x539),
       c.awayTeamIs(0x559),
       c.homePlayer,
-      c.homeWinning,
+      c.homeWinningTrigger,
       c.matchOverTrigger,
       c.matchReset,
     ),
@@ -2124,11 +2156,7 @@ export const rich = RichPresence({
           `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${regularTime} + ${stoppageTime} 🏟️ ${stadium}`,
         ],
         [
-          $(
-            c.gameIs.started,
-            c.playerIs.ingame,
-            c.isPast100Min,
-          ),
+          $(c.gameIs.started, c.playerIs.ingame, c.isPast100Min),
           `${language} [${mode}] ${homeTeam} ${homeScore} - ${awayScore} ${awayTeam} 🕘 ${extraTime} 🏟️ ${stadium}`,
         ],
         [
