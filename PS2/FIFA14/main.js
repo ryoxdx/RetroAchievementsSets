@@ -407,6 +407,9 @@ const codeFor = () => {
       ['AddAddress', 'Mem', '32bit', addresses.difficultyPointer],
       ['AddAddress', 'Mem', '32bit', 0x04],
       ['', 'Mem', '32bit', 0x04, '>=', 'Value', '', difficulty],
+      ['AddAddress', 'Mem', '32bit', addresses.keeperDiffPointer],
+      ['AddAddress', 'Mem', '32bit', 0x04],
+      ['', 'Mem', '32bit', 0x04, '>=', 'Value', '', difficulty - 1],
     );
 
   // prettier-ignore
