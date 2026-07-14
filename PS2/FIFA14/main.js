@@ -1770,7 +1770,7 @@ set.addAchievement({
     c.scenarioAwayInjuries(0),
     c.scenarioHomeSubs(3),
     c.scenarioAwaySubs(3),
-    c.homeTeamIs(0x1b420),
+    c.homeTeamIs(0x19a4b),
     c.awayTeamIs(0x56a),
     c.awayPlayer,
     c.awayWinningTrigger,
