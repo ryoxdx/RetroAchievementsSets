@@ -685,19 +685,10 @@ const codeFor = () => {
     ['', 'Mem', '32bit', 0x04, '=', 'Value', '', 6],
   );
 
+  // prettier-ignore
   const homePenNoMissed = $(
-    ['', 'Delta', '32bit', addresses.penaltyHome1, '=', 'Value', '', 0],
-    [
-      'Trigger',
-      'Mem',
-      '32bit',
-      addresses.penaltyHome1,
-      '!=',
-      'Value',
-      '',
-      0,
-      1,
-    ],
+    ['AndNext', 'Delta', '32bit', addresses.penaltyHome1, '=', 'Value', '', 0],
+    ['Trigger', 'Mem', '32bit', addresses.penaltyHome1, '!=', 'Value', '', 0, 1],
     ['ResetIf', 'Mem', '32bit', addresses.penaltyHome1, '=', 'Value', '', 1],
     ['ResetIf', 'Mem', '32bit', addresses.penaltyHome2, '=', 'Value', '', 1],
     ['ResetIf', 'Mem', '32bit', addresses.penaltyHome3, '=', 'Value', '', 1],
