@@ -1559,7 +1559,7 @@ set.addAchievement({
 set.addAchievement({
   title: 'Classic Scenarios: Copa Libertadores',
   description:
-    "Use Scenario settings to start a match down 0-2 as Atl. Mineiro against Newell's. Win the match in Legendary difficulty.",
+    "Use Scenario settings to start a match in the 5th minute down 0-2 as Atl. Mineiro against Newell's. Win the match in Legendary difficulty.",
   points: 10,
   conditions: $(
     c.gameIs.started,
@@ -1573,7 +1573,7 @@ set.addAchievement({
     c.scenarioScore(0, 2),
     c.scenarioBall(scenarioSettings.ball.kickoff),
     c.scenarioHalf(scenarioSettings.half.firstHalf),
-    c.scenarioTimeLeft(45),
+    c.scenarioTimeLeft(40),
     c.scenarioExtraTime(scenarioSettings.extraTime.classic),
     c.scenarioHomeYellows(0),
     c.scenarioAwayYellows(0),
