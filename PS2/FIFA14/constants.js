@@ -269,7 +269,7 @@ export const richPresenceValues = {
     0x53f: 'Italy',
     0x3ce: 'Korea Republic',
     0x56a: 'Mexico',
-    0x1b420: 'Netherlands',
+    0x19a4b: 'Netherlands',
     0x1b371: 'New Zealand',
     0x1ae01: 'Northern Ireland',
     0x548: 'Norway',
